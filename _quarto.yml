@@ -6,7 +6,7 @@ project:
 website:
   title: "Portfolio - Alin Sever"
   navbar:
-    logo: assets/logo.png
+    logo: assets/alin.png
     title: "Alin Sever"
     left:
       - text: "Home"
