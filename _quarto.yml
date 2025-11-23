@@ -15,10 +15,9 @@ website:
     style: "floating"
     search: true
     contents:
-      - section: "ML Portfolio"
+      - text: "ML Portfolio"
+        href: ml-portfolio/index.qmd
         contents:
-          - text: "Overview"
-            href: ml-portfolio/index.qmd
 
           - text: "R Labs"
             href: ml-portfolio/01_labs_R/index.qmd
@@ -36,10 +35,9 @@ website:
           - text: "Diabetes Readmission - Python"
             href: ml-portfolio/03_diabetes_python/index.qmd
 
-      - section: "Standalone Projects"
+      - text: "Standalone Projects"
+        href: standalone-projects/index.qmd
         contents:
-          - text: "Overview"
-            href: standalone-projects/index.qmd
             
           - text: "Bitcoin Portfolio (R)"
             href: standalone-projects/bitcoin_portfolio_R/index.qmd
@@ -49,11 +47,8 @@ website:
             contents: 
               - standalone-projects/swiss_electricity_transition_R/Swiss_Electricity_Transition_Project.qmd
 
-
-      - section: "Courses & Certificates"
-        contents:
-          - text: "Overview"
-            href: courses/index.qmd
+      - text: "Courses & Certificates"
+        href: courses/index.qmd
 
 
 

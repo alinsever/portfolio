@@ -1,9 +1,19 @@
 ---
-title: "Swiss Electricity Transition (R)"
+title: "Swiss Electricity System Under Transition"
 ---
 
 
 
-This analysis joins Swiss energy-production data with solar radiation data from MeteoSwiss.
+## Tagline
+A data-driven assessment of whether Switzerland can maintain year-round electricity reliability as it transitions from nuclear power to a solar-dominant energy system.
 
-Content will be added soon.
+## Executive Summary
+
+- **Seasonal mismatch is the core challenge:** Solar can match nuclear generation annually, but winter production remains too low to reliably meet demand without additional balancing mechanisms.
+- **Hydropower and imports already stabilize the system:** Switzerland relies on hydro flexibility in summer and rising imports in winter; this reliance will grow as nuclear production declines.
+- **A successful transition requires more than solar expansion:** Long-term reliability depends on seasonal storage, flexible hydro, smart-grid upgrades, and coordinated cross-border electricity flows.
+
+## Introduction
+
+Switzerland is entering a decisive phase of its energy transition. With nuclear power gradually being phased out and solar capacity expanding rapidly, a central question emerges: can the country maintain a secure, balanced electricity system throughout the year? This project analyzes official Swiss energy and solar-radiation data (2020-2024) to evaluate whether photovoltaic power can realistically replace nuclear output. Using exploratory analysis, seasonal decomposition, correlation studies, and time-series forecasting, the findings show that although solar can match nuclear production in annual totals, it cannot address the winter supply gap on its own. Ensuring future reliability will require a system-level strategy combining imports, pumped-storage, flexible hydro, and emerging storage technologies.
+

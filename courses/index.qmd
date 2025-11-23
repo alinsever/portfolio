@@ -47,12 +47,15 @@ Additional MSc courses will be added as my degree progresses.
 
 
 ### AI in Healthcare - Standford Online (coursera)
+
 Courses:
+
     - Introduction to Heathcare
     - Introduction to Clinical Data
     - Fundamentals to Machine Learning in Healthcare
     - Evaluations of AI Applications in Healthcare
     - AI in Healthcare Capstone
+    
 [Verify Certificate](https://coursera.org/share/78dbffb0042b5edaf7de6454240161de)
 
 ### AI Fundamentals (datacamp)
