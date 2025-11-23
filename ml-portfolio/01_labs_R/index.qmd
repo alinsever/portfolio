@@ -6,4 +6,4 @@ title: "R Machine Learning Labs"
 
 This folder will include R-based ML labs such as SVM, logistic regression, clustering, and other course exercises.
 
-Content will be added soon.
+More content will be added soon.
