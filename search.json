@@ -352,7 +352,7 @@
     "href": "courses/index.html",
     "title": "Courses & Certificates",
     "section": "",
-    "text": "This page summarizes the academic coursework from my MSc in Applied Information & Data Science (HSLU) and any completed online certifications.\nOnly online courses include downloadable certificates when available.\n\n\n\nThe following courses are part of my ongoing Master’s program.\nThese do not include certificates, but they show the breadth of my academic training.\n\n\n\nComputer Concepts for Data Scientists\nCustomer Data Analytics\nDesign of Experiments\n\nStatistics\nAlgebra I & II\n\nTime Series in Finanace\nPython Programming\n\nR Bootcamp\n\n\n\n\n\nMachine Learning 1\n\nMachine Learning 2\nGenerative AI (RAG System Project)\nData Quality\nData Collection and Integration (Python)\nGit and Devops (GitHub, Jira, Scrum, Python)\nTime Series Analysis\nDatabase Systems (SQL)\nDatascience in Healthcare\nTableau\n\nAdditional MSc courses will be added as my degree progresses.\n\n\n\n\n\n\n\nCertificate: https://coursera.org/share/78dbffb0042b5edaf7de6454240161de\n\n\n\nCertificate: https://www.datacamp.com/skill-verification/AIF0027489612311\n\n\n\n\n\n\nDownload Certificate (PDF)\n\n\n\nDownload Certificate (PDF)\nMore certificates will be added as I complete external training.",
+    "text": "This page summarizes the academic coursework from my MSc in Applied Information & Data Science (HSLU) and any completed online certifications.\nOnly online courses include downloadable certificates when available.",
     "crumbs": [
       "Home",
       "Courses & Certificates",
@@ -363,8 +363,8 @@
     "objectID": "courses/index.html#msc-courses-applied-data-science-hslu",
     "href": "courses/index.html#msc-courses-applied-data-science-hslu",
     "title": "Courses & Certificates",
-    "section": "",
-    "text": "The following courses are part of my ongoing Master’s program.\nThese do not include certificates, but they show the breadth of my academic training.\n\n\n\nComputer Concepts for Data Scientists\nCustomer Data Analytics\nDesign of Experiments\n\nStatistics\nAlgebra I & II\n\nTime Series in Finanace\nPython Programming\n\nR Bootcamp\n\n\n\n\n\nMachine Learning 1\n\nMachine Learning 2\nGenerative AI (RAG System Project)\nData Quality\nData Collection and Integration (Python)\nGit and Devops (GitHub, Jira, Scrum, Python)\nTime Series Analysis\nDatabase Systems (SQL)\nDatascience in Healthcare\nTableau\n\nAdditional MSc courses will be added as my degree progresses.",
+    "section": "MSc Courses – Applied Data Science (HSLU)",
+    "text": "MSc Courses – Applied Data Science (HSLU)\nThe following courses are part of my ongoing Master’s program.\nThese do not include certificates, but they show the breadth of my academic training.\n\nSemester I\n\nComputer Concepts for Data Scientists\nCustomer Data Analytics\nDesign of Experiments\n\nStatistics\nAlgebra 1\nAlgebra 2\nTime Series in Finanace\nPython Programming\n\nR Bootcamp\n\n\n\nSemester II\n\nMachine Learning 1\n\nMachine Learning 2\nGenerative AI (RAG System Project)\nData Quality\nData Collection and Integration (Python)\nGit and Devops (GitHub, Jira, Scrum, Python)\nTime Series Analysis\nDatabase Systems (SQL)\nDatascience in Healthcare\nTableau\n\nAdditional MSc courses will be added as my degree progresses.",
     "crumbs": [
       "Home",
       "Courses & Certificates",
@@ -375,8 +375,8 @@
     "objectID": "courses/index.html#verified-certificates",
     "href": "courses/index.html#verified-certificates",
     "title": "Courses & Certificates",
-    "section": "",
-    "text": "Certificate: https://coursera.org/share/78dbffb0042b5edaf7de6454240161de\n\n\n\nCertificate: https://www.datacamp.com/skill-verification/AIF0027489612311",
+    "section": "Verified Certificates",
+    "text": "Verified Certificates\n\nAI in Healthcare - Standford Online (coursera)\nCourses: - Introduction to Heathcare - Introduction to Clinical Data - Fundamentals to Machine Learning in Healthcare - Evaluations of AI Applications in Healthcare - AI in Healthcare Capstone Verify Certificate\n\n\nAI Fundamentals (datacamp)\nVerify Certificate",
     "crumbs": [
       "Home",
       "Courses & Certificates",
@@ -387,8 +387,8 @@
     "objectID": "courses/index.html#skill-trackslearning-paths",
     "href": "courses/index.html#skill-trackslearning-paths",
     "title": "Courses & Certificates",
-    "section": "",
-    "text": "Download Certificate (PDF)\n\n\n\nDownload Certificate (PDF)\nMore certificates will be added as I complete external training.",
+    "section": "Skill Tracks/Learning Paths",
+    "text": "Skill Tracks/Learning Paths\n\nAI Business Fundamentals - Datacamp\nDownload Certificate (PDF)\n\n\nPower BI Fundamentals - Datacamp\nDownload Certificate (PDF)\nMore certificates will be added as I complete external training.",
     "crumbs": [
       "Home",
       "Courses & Certificates",
