@@ -24,20 +24,8 @@
     ]
   },
   {
-    "objectID": "ml-portfolio/labs_R/index.html",
-    "href": "ml-portfolio/labs_R/index.html",
-    "title": "R Machine Learning Labs",
-    "section": "",
-    "text": "This folder will include R-based ML labs such as SVM, logistic regression, clustering, and other course exercises.\nContent will be added soon.",
-    "crumbs": [
-      "Home",
-      "ML Portfolio",
-      "R Labs"
-    ]
-  },
-  {
-    "objectID": "ml-portfolio/diabetes_python/index.html",
-    "href": "ml-portfolio/diabetes_python/index.html",
+    "objectID": "ml-portfolio/03_diabetes_python/index.html",
+    "href": "ml-portfolio/03_diabetes_python/index.html",
     "title": "Diabetes Readmission (Python)",
     "section": "",
     "text": "This section will contain the Python-based machine learning project analyzing hospital readmission patterns for diabetes patients.\nContent will be added soon.",
@@ -48,11 +36,126 @@
     ]
   },
   {
+    "objectID": "ml-portfolio/01_labs_R/index.html",
+    "href": "ml-portfolio/01_labs_R/index.html",
+    "title": "R Machine Learning Labs",
+    "section": "",
+    "text": "This folder will include R-based ML labs such as SVM, logistic regression, clustering, and other course exercises.\nMore content will be added soon.",
+    "crumbs": [
+      "Home",
+      "ML Portfolio",
+      "R Labs"
+    ]
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Welcome",
     "section": "",
     "text": "Alin Sever – Data Analyst & MSc in Applied Data Science\nWelcome to my professional portfolio.\nThis website showcases selected analytical, machine learning, and data science projects developed during my MSc at the Lucerne University of Applied Sciences and through independent work.\nThe portfolio is divided into two main sections:\n\nML Portfolio — machine learning work in R and Python\n\nStandalone Projects — applied analysis, dashboards, data pipelines, and research projects\n\nUse the sidebar to navigate through the content."
+  },
+  {
+    "objectID": "ml-portfolio/01_labs_R/04_svm/svm_lab_iris.html",
+    "href": "ml-portfolio/01_labs_R/04_svm/svm_lab_iris.html",
+    "title": "SVM Lab – Iris Dataset",
+    "section": "",
+    "text": "#\nlibrary(tidyverse)\nlibrary(e1071) # package for SVM\nlibrary(caret) # helper functions",
+    "crumbs": [
+      "Home",
+      "ML Portfolio",
+      "R Labs",
+      "SVM Lab – Iris Dataset"
+    ]
+  },
+  {
+    "objectID": "ml-portfolio/01_labs_R/04_svm/svm_lab_iris.html#loading-packages",
+    "href": "ml-portfolio/01_labs_R/04_svm/svm_lab_iris.html#loading-packages",
+    "title": "SVM Lab – Iris Dataset",
+    "section": "",
+    "text": "#\nlibrary(tidyverse)\nlibrary(e1071) # package for SVM\nlibrary(caret) # helper functions",
+    "crumbs": [
+      "Home",
+      "ML Portfolio",
+      "R Labs",
+      "SVM Lab – Iris Dataset"
+    ]
+  },
+  {
+    "objectID": "ml-portfolio/01_labs_R/04_svm/svm_lab_iris.html#loading-the-data",
+    "href": "ml-portfolio/01_labs_R/04_svm/svm_lab_iris.html#loading-the-data",
+    "title": "SVM Lab – Iris Dataset",
+    "section": "2 Loading the data",
+    "text": "2 Loading the data\nInspect the structure of the data\n\ndata(iris)\nstr(iris)\n\n'data.frame':   150 obs. of  5 variables:\n $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...\n $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...\n $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...\n $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...\n $ Species     : Factor w/ 3 levels \"setosa\",\"versicolor\",..: 1 1 1 1 1 1 1 1 1 1 ...",
+    "crumbs": [
+      "Home",
+      "ML Portfolio",
+      "R Labs",
+      "SVM Lab – Iris Dataset"
+    ]
+  },
+  {
+    "objectID": "ml-portfolio/01_labs_R/04_svm/svm_lab_iris.html#view-the-data",
+    "href": "ml-portfolio/01_labs_R/04_svm/svm_lab_iris.html#view-the-data",
+    "title": "SVM Lab – Iris Dataset",
+    "section": "3 View the data",
+    "text": "3 View the data\nPlot the data by Sepal\n\niris |&gt; \n    ggplot(aes(x = Sepal.Length, y = Sepal.Width, color = Species))+\n    geom_point()\n\n\n\n\n\n\n\n\nPlot the data by petal\n\niris |&gt; \n    ggplot(aes(x = Petal.Length, y = Petal.Width, color = Species))+\n    geom_point()",
+    "crumbs": [
+      "Home",
+      "ML Portfolio",
+      "R Labs",
+      "SVM Lab – Iris Dataset"
+    ]
+  },
+  {
+    "objectID": "ml-portfolio/01_labs_R/04_svm/svm_lab_iris.html#prepare-for-trainig",
+    "href": "ml-portfolio/01_labs_R/04_svm/svm_lab_iris.html#prepare-for-trainig",
+    "title": "SVM Lab – Iris Dataset",
+    "section": "4 Prepare for Trainig",
+    "text": "4 Prepare for Trainig\nThis function creates a stratified split of data. It splits the dataset into training and testing p = 85 (85% training) while preserving the class proportion of the Species variable. In other words this makes sure the proportion of each class (setosa, versicolor, virginica) in the split is the same as in the original dataset. List = FALSE - when you want the vector as a row numbers not as a list\n\nset.seed(42)\nindices &lt;- createDataPartition(iris$Species, p = .85, list = FALSE)\n\nThen I use it like this:\n\ntrain = 85% rows\ntest_in = 15% (remainig) -indices\ntest_truth = actual labels for evaluating predictions\n\n\ntrain &lt;- iris %&gt;% slice(indices)\ntest_in &lt;- iris %&gt;% slice(-indices) %&gt;% select(-Species)\ntest_truth &lt;- iris %&gt;% slice(-indices) %&gt;% pull(Species)",
+    "crumbs": [
+      "Home",
+      "ML Portfolio",
+      "R Labs",
+      "SVM Lab – Iris Dataset"
+    ]
+  },
+  {
+    "objectID": "ml-portfolio/01_labs_R/04_svm/svm_lab_iris.html#train-the-svm---linear-kernel",
+    "href": "ml-portfolio/01_labs_R/04_svm/svm_lab_iris.html#train-the-svm---linear-kernel",
+    "title": "SVM Lab – Iris Dataset",
+    "section": "5 Train the SVM - Linear kernel",
+    "text": "5 Train the SVM - Linear kernel\nThe SVM function has the default cost of 10\n\nset.seed(42)\niris_svm &lt;- svm(Species ~ ., train, kernel = \"linear\", scale = TRUE, cost = 10)\nsummary(iris_svm)\n\n\nCall:\nsvm(formula = Species ~ ., data = train, kernel = \"linear\", cost = 10, \n    scale = TRUE)\n\n\nParameters:\n   SVM-Type:  C-classification \n SVM-Kernel:  linear \n       cost:  10 \n\nNumber of Support Vectors:  17\n\n ( 2 8 7 )\n\n\nNumber of Classes:  3 \n\nLevels: \n setosa versicolor virginica\n\n\nwe can visualize the SVM decision boundaries only in two dimensions, even though the model was trained in four dimensions (all iris features).\n\nplot(iris_svm, train, Petal.Length ~ Petal.Width)\n\n\n\n\n\n\n\n\nFor Sepal leaf Dimensions it is needed to be sliced the other dimenstions at a reasonable point\n\nplot(iris_svm, train, Sepal.Length ~ Sepal.Width,\n     slice = list(Petal.Length = 4.5, Petal.Width = 1.75))\n\n\n\n\n\n\n\n\nThe plots does not show the full SVM, only one projection at the time of the decision Surface into two dimensions\n\n5.1 Predictions\n\ntest_pred &lt;- predict(iris_svm, test_in)\ntable(test_pred)\n\ntest_pred\n    setosa versicolor  virginica \n         7          7          7 \n\n\n\n\n5.2 Results\n\nconf_matrix &lt;- confusionMatrix(test_pred, test_truth)\nconf_matrix\n\nConfusion Matrix and Statistics\n\n            Reference\nPrediction   setosa versicolor virginica\n  setosa          7          0         0\n  versicolor      0          7         0\n  virginica       0          0         7\n\nOverall Statistics\n                                     \n               Accuracy : 1          \n                 95% CI : (0.8389, 1)\n    No Information Rate : 0.3333     \n    P-Value [Acc &gt; NIR] : 9.56e-11   \n                                     \n                  Kappa : 1          \n                                     \n Mcnemar's Test P-Value : NA         \n\nStatistics by Class:\n\n                     Class: setosa Class: versicolor Class: virginica\nSensitivity                 1.0000            1.0000           1.0000\nSpecificity                 1.0000            1.0000           1.0000\nPos Pred Value              1.0000            1.0000           1.0000\nNeg Pred Value              1.0000            1.0000           1.0000\nPrevalence                  0.3333            0.3333           0.3333\nDetection Rate              0.3333            0.3333           0.3333\nDetection Prevalence        0.3333            0.3333           0.3333\nBalanced Accuracy           1.0000            1.0000           1.0000\n\n\nThe result is 100% accuracy\n\n\n5.3 Overfitting?\nDid the model overfit? even though we got 100% accuracy that might not mean overfitting because:\n\nsetosa is completely linearly separable.\nversicolor vs. virginica are also almost linearly separable in petal space.",
+    "crumbs": [
+      "Home",
+      "ML Portfolio",
+      "R Labs",
+      "SVM Lab – Iris Dataset"
+    ]
+  },
+  {
+    "objectID": "ml-portfolio/01_labs_R/04_svm/svm_lab_iris.html#train-the-dataset-on-radial-kernel",
+    "href": "ml-portfolio/01_labs_R/04_svm/svm_lab_iris.html#train-the-dataset-on-radial-kernel",
+    "title": "SVM Lab – Iris Dataset",
+    "section": "6 Train the dataset on radial kernel",
+    "text": "6 Train the dataset on radial kernel\n\nRadial kernel - allows complex curved boundaries\nHigh cost - tries to classify training points almost perfectly (risk of overfitting)\n\n\nset.seed(42)\n\niris_svm2 &lt;- svm(Species ~ ., train, kernel = \"radial\", scale = TRUE, cost = 100)\nsummary(iris_svm2)\n\n\nCall:\nsvm(formula = Species ~ ., data = train, kernel = \"radial\", cost = 100, \n    scale = TRUE)\n\n\nParameters:\n   SVM-Type:  C-classification \n SVM-Kernel:  radial \n       cost:  100 \n\nNumber of Support Vectors:  29\n\n ( 6 11 12 )\n\n\nNumber of Classes:  3 \n\nLevels: \n setosa versicolor virginica\n\n\n\n6.1 Plots\n\nplot(iris_svm2, train, Petal.Length ~ Petal.Width, slice = list(Sepal.Length = 6, Sepal.Width = 3))\n\n\n\n\n\n\n\n\n\n plot(iris_svm2, train, Sepal.Length ~ Sepal.Width, slice = list(Petal.Length = 4.5, Petal.Width = 1.75))\n\n\n\n\n\n\n\n\n\n\n6.2 Predictions\n\ntest_pred2 &lt;- predict(iris_svm2, test_in)\ntable(test_pred2)\n\ntest_pred2\n    setosa versicolor  virginica \n         7          8          6 \n\n\n\n\n6.3 Results\n\nconf_matrix2 &lt;- confusionMatrix(test_pred2, test_truth)\nconf_matrix2\n\nConfusion Matrix and Statistics\n\n            Reference\nPrediction   setosa versicolor virginica\n  setosa          7          0         0\n  versicolor      0          7         1\n  virginica       0          0         6\n\nOverall Statistics\n                                          \n               Accuracy : 0.9524          \n                 95% CI : (0.7618, 0.9988)\n    No Information Rate : 0.3333          \n    P-Value [Acc &gt; NIR] : 4.111e-09       \n                                          \n                  Kappa : 0.9286          \n                                          \n Mcnemar's Test P-Value : NA              \n\nStatistics by Class:\n\n                     Class: setosa Class: versicolor Class: virginica\nSensitivity                 1.0000            1.0000           0.8571\nSpecificity                 1.0000            0.9286           1.0000\nPos Pred Value              1.0000            0.8750           1.0000\nNeg Pred Value              1.0000            1.0000           0.9333\nPrevalence                  0.3333            0.3333           0.3333\nDetection Rate              0.3333            0.3333           0.2857\nDetection Prevalence        0.3333            0.3810           0.2857\nBalanced Accuracy           1.0000            0.9643           0.9286\n\n\nSetosa (perfect): Prediction = Truth in all 7 cases → flawless.\nVersicolor (1 mistake): One virginica was misclassified as versicolor.\nVirginica (1 mistake): The same misclassification reflects here → 6/7 correct.\nCost (C) controls how strictly the SVM tries to separate the classes.\n\n\n6.4 High cost (C = large)\nMeans:\n\nMisclassification is heavily punished\nSVM tries very hard to separate data perfectly\nMargin becomes narrow\nOnly the critical points (right on the boundary) stay as support vectors\nFewer points are allowed inside the margin Results in fewer support vectors Because the model becomes more rigid and pushes as many points as possible away from the margin.\n\n\n\n6.5 Low cost (C small)\nMeans:\n\nMisclassification is acceptable\nSVM allows violations\nMargin becomes wide\nMore points fall inside or on the margin\nMore points become support vectors\n\nResult in more support vectors Because the model becomes more tolerant, allowing many points to influence the boundary.",
+    "crumbs": [
+      "Home",
+      "ML Portfolio",
+      "R Labs",
+      "SVM Lab – Iris Dataset"
+    ]
+  },
+  {
+    "objectID": "ml-portfolio/02_nhanes_R/index.html",
+    "href": "ml-portfolio/02_nhanes_R/index.html",
+    "title": "NHANES Project (R)",
+    "section": "",
+    "text": "This section will host the NHANES health analysis project, including regression models, classification, and data exploration.\nContent will be added soon.",
+    "crumbs": [
+      "Home",
+      "ML Portfolio",
+      "NHANES - R Project"
+    ]
   },
   {
     "objectID": "ml-portfolio/index.html",
@@ -64,18 +167,6 @@
       "Home",
       "ML Portfolio",
       "Overview"
-    ]
-  },
-  {
-    "objectID": "ml-portfolio/nhanes_R/index.html",
-    "href": "ml-portfolio/nhanes_R/index.html",
-    "title": "NHANES Project (R)",
-    "section": "",
-    "text": "This section will host the NHANES health analysis project, including regression models, classification, and data exploration.\nContent will be added soon.",
-    "crumbs": [
-      "Home",
-      "ML Portfolio",
-      "NHANES - R Project"
     ]
   },
   {
