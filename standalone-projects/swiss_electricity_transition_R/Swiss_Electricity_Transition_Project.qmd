@@ -1,0 +1,1598 @@
+---
+title: "Swiss Electricity System Under Transition: From Nuclear to Solar Power"
+authors: 
+  - "Alin Sever"
+  - "Alkiviadis Lazaridis"
+date: 2025-09-16
+
+format:
+  html:
+    theme: styles.scss
+       #light: theme-light.scss
+       #dark:  theme-dark.scss
+    toc: true
+    toc-location: left
+    toc-depth: 3
+    page-layout: full
+
+output-file: "Swiss Electricity Under Transition.html"
+
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+editor: visual
+
+# navbar:
+#   tools:
+#     - appearance
+---
+
+```{r}
+#| label: load-packages
+#| include: false
+
+
+packages <- c("tidyverse",
+              "lubridate",
+              "readr",
+              "glue",
+              "httr",
+              "purrr",
+              "janitor",
+              "scales",
+              "anomalize",
+              "gt",
+              "patchwork",
+              "stringr",
+              "kableExtra",
+              "leaflet",
+              "htmltools",
+              "fable",
+              "tsibble",
+            "feasts")
+# 
+# lapply(packages, library, character.only = TRUE)
+
+for (pkg in packages){
+ if (!requireNamespace(pkg, quietly = TRUE)) {
+   install.packages(pkg)
+ }
+ lapply(packages, library, character.only = TRUE)
+}
+
+```
+
+## Preface
+
+Switzerland stands at a turning point in its energy transition. With a national policy to **phase out nuclear power by 2050**, and growing urgency around climate change, the country faces a critical challenge:
+
+> **Can it maintain energy security while transitioning to a renewable electricity system?**
+
+What began as a data-driven exploration of Swiss energy production soon evolved into a focused investigation of one key question:
+
+**Can solar photovoltaic (PV) energy scale enough to replace nuclear power?**
+
+This report combines exploratory data analysis, a study of solar output vs. radiation patterns, and a forward-looking scenario :
+
+> Will Switzerland be able to replace nuclear power with solar, or will it need to rely on imports, hydro expansion, and storage?
+
+## Introduction
+
+Switzerland’s electricity mix is unique in Europe, with a strong reliance on **hydropower** and a legacy of **nuclear energy**. This has enabled the country to maintain a **low-carbon electricity system** for decades.
+
+However, under the **Swiss Energy Strategy 2050**, the government plans to **phase out nuclear energy** and significantly **increase the share of renewables** - especially **solar power**.
+
+This report investigates whether this transition is technically feasible, focusing on three key questions:
+
+-   How does Switzerland currently produce electricity, and how does this vary seasonally?
+-   What is the real potential of **solar PV**, given seasonal variation in sunlight?
+-   Can solar realistically **replace nuclear capacity**, or will Switzerland depend on **imports and hydro**?
+
+We use data from **2020 to 2024** - the period when Switzerland began officially recording renewable production - to assess energy dynamics, simulate future scenarios, and evaluate feasibility.
+
+::: {.callout-note collapse = "true" title = "Why Start in 2020?"}
+
+Switzerland began **systematically reporting renewable energy production in monthly detail** starting in 2020. As such, this year marks the most reliable starting point for consistent renewable energy tracking in the Swiss energy system.
+
+:::
+
+::: {.callout-note collapse = "true" title = "Why We Focus on Solar and Nuclear"}
+
+Hydro power contributes over 50% of Switzerland’s electricity today, but expanding it further is challenging due to **ecological protections**, **geographic limitations**, and **social resistance** to large infrastructure projects.
+
+As a result, this analysis focuses on the evolving relationship between **solar energy** and **nuclear phase-out**, while treating hydro as a relatively **stable, non-expanding baseline**.
+
+:::
+
+## Energy Production (2020–2024)
+
+Switzerland began **consistently recording monthly renewable energy production** in 2020, providing a solid foundation for analyzing how the country generates electricity across sources and seasons.
+
+This section explores production from **hydroelectric, nuclear, solar, thermal (classic and renewable), and wind** sources using monthly data from 2020 to mid-2025. The goal is to understand:
+
+-   How electricity production is distributed across sources
+-   How **seasonality** affects each energy type
+-   What happens to **nuclear output** when renewables peak
+-   How **pumped storage** is used to balance the grid
+
+These dynamics set the stage for assessing whether solar energy can realistically scale to replace nuclear output in the coming decades.
+
+### Monthly Energy Production in Switzerland
+
+The chart below shows monthly electricity generation by energy type, from January 2020 to May 2025. Each color band represents a specific energy source.
+
+Additional features:
+
+-   A **red line** shows **net production** (after subtracting pumped storage use)
+-   **Grey bars below zero** represent **electricity used for pumped storage** (i.e., storing excess electricity by pumping water uphill)
+
+```{r}
+#| label: overview-plot
+#| echo: false
+#| fig-width: 11.3
+#| fig-asp: 0.6
+
+#saveRDS(d.monthly_prod, "RDS/d.monthly_prod.rds")
+d.monthly_prod <- readRDS("RDS/d.monthly_prod.rds")
+
+d.energy_source <- d.monthly_prod %>% 
+  select(- c(date_label, import, export,
+             export_import, losses,
+             country_consumtion, final_consumtion)) %>%  # <- removed `total` from here
+  filter(date_month >= as.Date("2020-01-01")) %>%
+  mutate(date_month = as.Date(date_month))
+
+
+
+d.energy_long <- d.energy_source %>% 
+  pivot_longer(
+    cols = c(hydroelectric, nuclear, thermic_clasique, thermic_renewable, wind_thurbine, photovoltaic),
+    names_to = "production_type",
+    values_to = "energy_mwh"
+  ) %>%
+  mutate(production_type = recode(production_type,
+                                  hydroelectric = "Hydroelectric",
+                                  nuclear = "Nuclear",
+                                  thermic_clasique = "Thermal (Classic)",
+                                  thermic_renewable = "Thermal (Renewable)",
+                                  wind_thurbine = "Wind",
+                                  photovoltaic = "Solar"
+  ))
+
+# Swiss Monthly Energy Production by Type--
+
+
+ggplot() +
+  geom_col(
+    data = d.energy_long,
+    aes(x = date_month, y = energy_mwh, fill = production_type),
+    position = "stack"
+  ) +
+  geom_col(
+    data = d.energy_source,
+    aes(x = date_month, y = -acumulation_pumping),  
+    fill = "black",
+    alpha = 0.5,
+    width = 20
+  ) +
+  geom_line(
+    data = d.energy_source,
+    aes(x = date_month, y = net_production),
+    color = "#BB4430",
+    linewidth = 1.2   
+  ) +
+  scale_y_continuous(labels = scales::comma) +
+  scale_x_date(date_labels = "%b\n%Y", date_breaks = "2 months") +
+  scale_fill_brewer(palette = "Set2") +
+  labs(
+    title = "Swiss Monthly Energy Production by Type",
+    subtitle = "Includes energy consumed by pumped storage (grey bars, negative)",
+    x = NULL,
+    y = "Energy (MWh)",
+    fill = "Energy Type"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 1),
+    plot.title = element_text(face = "bold", size = 16),
+     legend.position = c(0.02, 0.995),        
+    legend.justification = c(0, 1),         
+    legend.box.margin = margin(5, 5, 5, 5)
+  )
+
+
+
+```
+
+-   **Hydroelectric power** shows a strong seasonal pattern, peaking between **May and August** due to snowmelt and rainfall.
+-   **Nuclear energy** remains relatively stable but shows **regular dips around May–June**, corresponding with planned maintenance.
+-   **Solar output** is strongly seasonal, increasing during spring and peaking in summer.
+-   **Thermal production** (classic and renewable) remains steady throughout the year.
+-   **Wind power** contributes very little to the energy mix.
+-   **Pumped storage usage** (grey bars) increases during high-production periods - storing surplus electricity for later use.
+-   The **net production line** reflects how pumped storage smooths out seasonal volatility in supply.
+
+Together, these patterns highlight Switzerland’s ability to dynamically balance its energy system - a vital feature as the country phases out stable nuclear baseload.
+
+### Average Share of Energy Production (2020–2024)
+
+::::: columns
+::: {.column width="50%"}
+The table on the right shows the average share of each energy source in Switzerland’s electricity mix over the five-year period:
+
+Hydroelectric power is clearly dominant, providing over half of the country’s electricity. Nuclear remains significant at over a quarter, while **solar - despite rapid growth - still accounts for just 5.2%** of the total mix.
+
+Thermal sources together contribute around **15%**, and wind power remains negligible.
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| label: avg_share_prod_percentage
+
+d.share_by_year <- d.energy_long %>%
+  mutate(year = year(date_month)) %>%
+  group_by(year, production_type) %>%
+  summarise(yearly_mwh = sum(energy_mwh, na.rm = TRUE)) %>%
+  ungroup()
+
+
+d.share_by_year <- d.share_by_year %>%
+  group_by(year) %>%
+  mutate(total_mwh = sum(yearly_mwh),
+         share = 100 * yearly_mwh / total_mwh) %>%
+  ungroup()
+
+
+d.share_2020_2024 <- d.share_by_year %>%
+  filter(year >= 2020, year <= 2024) %>%
+  group_by(production_type) %>%
+  summarise(avg_share = mean(share, na.rm = TRUE)) %>%
+  arrange(desc(avg_share))
+  
+ 
+d.share_2020_2024 %>%
+  mutate(avg_share = round(avg_share, 1)) %>%
+  gt() %>%
+  tab_header(title = "Avg. Share of Production (2020–2024)") %>%
+  cols_label(
+    production_type = "Energy Type",
+    avg_share = "Avg. Share (%)"
+  )
+
+
+
+```
+:::
+:::::
+
+### Seasonality of Energy Production
+
+To better understand how Switzerland’s electricity mix changes over time, we visualize each energy source’s **monthly share of total production**, rather than absolute values.
+
+This approach helps uncover:
+
+-   **Seasonal trends**
+-   **Trade-offs** between energy types (e.g., hydro vs. nuclear)
+-   **Complementarity** between renewables
+
+The chart below shows monthly percentage shares for each production type from January 2020 to mid-2025.
+
+```{r}
+#| label: plot2
+#| echo: false
+#| fig-width: 10.5
+#| fig-height: 6
+
+
+# percentage - prduction share
+
+d.energy_pct <- d.energy_long %>%
+  group_by(date_month) %>%
+  mutate(total = sum(energy_mwh, na.rm = TRUE)) %>%
+  ungroup() %>%
+  mutate(share = 100 * energy_mwh / total)
+
+
+
+# Line plot 
+ggplot(d.energy_pct, aes(x = date_month, y = share, color = production_type)) +
+  geom_line(linewidth = 1) +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  scale_x_date(date_breaks = "3 months", date_labels = "%b\n%Y") +
+  labs(
+    title = "Monthly Share of Energy Production by Type",
+    y = "Share of Total Production (%)",
+    x = NULL,
+    color = "Energy Type"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(face = "bold", size = 16),
+    legend.position = "bottom"
+  )
+
+
+```
+
+The chart shows that:
+
+-   **Hydroelectric (red line)** shows a strong and consistent seasonal pattern:
+    -   Peaks in **late spring to early summer** (May–July)
+    -   Drops in **autumn and winter**, especially December–February
+-   **Nuclear (gold line)** behaves in an **inverse seasonal pattern**:
+    -   Most stable across months, but shows **predictable dips** in **May–June**, corresponding with **scheduled maintenance outages**
+    -   These dips are **well-aligned with hydro and solar peaks**, indicating planned coordination
+-   **Solar (cyan line)** rises steadily from March, **peaking in June–July**, then drops in autumn and nearly vanishes in December–January.
+-   **Thermal (classic and renewable)** sources remain relatively flat and **act as baseline supplements**, especially in winter.
+-   **Wind** contributes a **negligible share**, fluctuating around 0.2% with no clear seasonal pattern.
+
+Overall, the chart illustrates a **deliberate balancing strategy**:
+
+-   Switzerland **reduces nuclear output when renewable supply increases**, especially in summer.
+-   This modulation **enhances grid flexibility**, an essential feature as the country prepares to phase out nuclear energy
+
+### Correlation Between Energy Sources
+
+The seasonal analysis suggested that **nuclear production often declines when renewable output (hydro and solar) increases**. To test this relationship more formally, we calculate **Pearson correlation coefficients** between monthly shares of:
+
+-   Hydroelectric vs. Nuclear
+-   Solar vs. Nuclear
+
+Why do this?
+
+Correlation helps quantify the **degree of inverse movement** between sources. If two sources are strongly negatively correlated, it means when one rises, the other tends to fall - suggesting **substitution or balancing behavior**.
+
+For Switzerland, this matters because:
+
+-   If nuclear consistently **steps down when renewables rise**, it shows the grid is already designed to integrate renewables without overcapacity.\
+-   It also highlights how **nuclear provides flexibility** today, which will need to be replaced by other mechanisms (imports, storage, or flexible hydro) after the phase-out.
+
+```{r}
+#| label: correlation_energie_sources_table
+#| echo: false
+
+
+d.wide_pct <- d.energy_pct %>%
+  select(date_month, production_type, share) %>%
+  pivot_wider(names_from = production_type, values_from = share)
+
+cor_hydro_nuclear <- cor(d.wide_pct$Hydroelectric, d.wide_pct$Nuclear, use = "complete.obs")
+
+# strong negative correlation
+# As hydro production increases, nuclear production tends to decrease significantly, and vice versa.
+
+cor_solar_nuclear <- cor(d.wide_pct$Solar, d.wide_pct$Nuclear, use = "complete.obs")
+
+# moderate negative correlation, as solar rises, nuclear tends to fall. 
+# Likely because solar, while growing, is still a smaller part of Switzerland’s energy mix than hydro.
+
+
+
+tibble(
+  Relationship = c("Hydroelectric vs Nuclear", "Solar vs Nuclear"),
+  Correlation = c(cor_hydro_nuclear, cor_solar_nuclear)
+) %>%
+  gt() %>%
+  cols_label(
+    Relationship = "Source Pair",
+    Correlation = "Pearson Correlation"
+  ) %>%
+  fmt_number(
+    columns = Correlation,
+    decimals = 3
+  )
+
+```
+
+The results confirm our observations:
+
+-   **Hydroelectric vs. Nuclear**:\
+    A **strong negative correlation (r = -0.774)**.\
+    When hydro production increases in spring and summer, nuclear output reliably decreases - mainly due to **planned maintenance** and grid balancing.
+
+-   **Solar vs. Nuclear**:\
+    A **moderate negative correlation (r = -0.566)**.\
+    Solar output is still a smaller share of the mix than hydro, but the inverse relationship suggests nuclear is also adjusted downward during solar peaks.
+
+In short, Switzerland’s nuclear fleet already functions as a **flexible buffer** against seasonal renewable fluctuations.\
+Replacing this role will be a **major challenge post-2050**, as solar and hydro cannot “self-balance” without external support (imports, long-duration storage, or expanded hydro flexibility).
+
+::: {.callout-note collapse = "true" title = "Planned Nuclear Maintenance and Seasonal Renewables"}
+
+Swiss nuclear plants typically undergo annual inspections and fuel replacement in **late spring to early summer**. This timing aligns with **peak hydro and solar output**, allowing nuclear capacity to temporarily decrease without compromising grid stability. This synergy reflects how Switzerland already **leverages seasonal renewables to reduce nuclear reliance**. This pattern will become increasingly critical as the phase-out proceeds.
+
+[Source: ENSI – Operation of Nuclear Power Plants](https://ensi.admin.ch/en/ensi-is-the-national-regulatory-body-with-responsibility-for-the-nuclear-safety-and-security-of-swiss-nuclear-facilities/ensis-remit/?utm_source=chatgpt.com)
+
+:::
+
+### Nuclear Power Plants Overview
+
+Nuclear energy has been a cornerstone of Switzerland’s electricity system for decades, providing stable, low-carbon baseload power. Today, the country operates **four reactors across three sites**:
+
+-   **Beznau I & II** (Aargau) - the world’s oldest commercial reactors still in operation.
+-   **Gösgen** (Solothurn).
+-   **Leibstadt** (Aargau).
+
+The **Mühleberg plant (Bern)** was permanently decommissioned in **December 2019**, becoming the first Swiss nuclear reactor to shut down.
+
+```{r}
+#| label: nuclear_min_max_avg
+#| echo: false
+
+#write_rds(min_max_string, "RDS/min_max_string.rds")
+min_max_string <- readRDS("RDS/min_max_string.rds")
+
+#write_rds(avg_nuclear_prod, "RDS/avg_nuclear_prod.rds")
+avg_nuclear_prod <- readRDS("RDS/avg_nuclear_prod.rds")
+
+```
+
+Between 2020 and 2024, nuclear contributed on average `r format(avg_nuclear_prod, big.mark=",")` GWh, representing between `r min_max_string` of Switzerland’s total electricity production.
+
+Switzerland has decided on a gradual **nuclear phase-out**, meaning no new reactors will be built, but the existing plants can continue operating as long as they remain safe.
+
+### Geographic Overview
+
+The map below shows the locations and status of Swiss nuclear power plants.
+
+-   **Green markers**: operational reactors
+-   **Red markers**: decommissioned sites
+
+Hovering over a site displays details on average production (2020–2024), canton, and operational history.
+
+```{r}
+#| label: nuclear_map
+#| echo: false
+#| out-width: "90%"
+#| out-height: "400px"
+
+d.nuclear <- readRDS("RDS/d.nuclear.rds")
+
+avg_nuclear_plant <- d.nuclear %>% 
+  filter(year >= 2020 & year <= 2024) %>%
+  summarise(
+    Beznau_I     = mean(beznau1_production_gwh, na.rm = TRUE),
+    Beznau_II    = mean(beznau2_production_gwh, na.rm = TRUE),
+    Gösgen       = mean(gosgen_production_gwh, na.rm = TRUE),
+    Leibstadt    = mean(leibstadt_production_gwh, na.rm = TRUE)
+  ) %>%
+  pivot_longer(
+    cols = everything(),
+    names_to = "plant",
+    values_to = "avg_gwh"
+  )
+
+
+nuclear_plants <- tibble(
+  plant = c("Beznau_I", "Beznau_II", "Gösgen", "Leibstadt", "Mühleberg"),
+  display_name = c("Beznau I", "Beznau II", "Gösgen", "Leibstadt", "Mühleberg"),
+  canton = c("AG", "AG", "SO", "AG", "BE"),
+  status = c("Operational", "Operational", "Operational", "Operational", "Decommissioned"),
+  note   = c(
+    "Oldest commercial reactor worldwide (1969).",
+    "Twin reactor of Beznau I (1971).",
+    "In operation since 1979.",
+    "Largest Swiss reactor, in operation since 1984.",
+    "Decommissioned in December 2019."
+  ),
+  lat = c(47.552107, 47.552107, 47.3656, 47.6012, 46.9689),
+  lon = c(8.228492, 8.228492, 7.9671, 8.1845, 7.2684)
+)
+
+
+#Beznau I and II had the same coordinates so changed the coordinates slightly
+
+nuclear_plants <- nuclear_plants %>%
+  mutate(
+    lon = ifelse(plant == "Beznau_II", lon + 0.01, lon),  # shift longitude slightly
+    lat = ifelse(plant == "Beznau_II", lat + 0.01, lat)   # shift latitude slightly
+  )
+
+
+nuclear_plants <- nuclear_plants %>%
+  left_join(avg_nuclear_plant, by = "plant") %>%
+  mutate(
+    avg_gwh = ifelse(is.na(avg_gwh), 0, avg_gwh)
+  )
+
+nuclear_plants$popup <- paste0(
+  "<strong>", nuclear_plants$display_name, "</strong><br>",
+  "Canton: ", nuclear_plants$canton, "<br>",
+  "Status: ", nuclear_plants$status, "<br>",
+  "Average annual production (2020–2024): ",
+  ifelse(nuclear_plants$avg_gwh > 0,
+         paste0(format(round(nuclear_plants$avg_gwh, 0), big.mark=","), " GWh"),
+         "N/A (decommissioned)"),
+  "<br>", nuclear_plants$note
+)
+
+leaflet(nuclear_plants) %>%
+  addTiles() %>%
+  addCircleMarkers(
+    ~lon, ~lat,
+    label = ~lapply(popup, htmltools::HTML),   # this is to hover
+    radius = 5,
+    color = ~ifelse(status == "Operational", "green", "red"),
+    fillOpacity = 0.8
+  ) %>%
+  addLegend(
+    position = "bottomright",
+    colors = c("green", "red"),
+    labels = c("Operational", "Decommissioned"),
+    title = "Nuclear Plant Status"
+  )
+
+
+```
+
+*Note:* Coordinates for the nuclear power plants were obtained from public sources[^1]:
+
+[^1]: Coordinates for nuclear power plants in Switzerland: [Beznau](https://en.wikipedia.org/wiki/Beznau_Nuclear_Power_Plant), [Gösgen](https://en.wikipedia.org/wiki/Gösgen_Nuclear_Power_Plant), [Leibstadt](https://en.wikipedia.org/wiki/Leibstadt_Nuclear_Power_Plant), and [Mühleberg](https://en.wikipedia.org/wiki/Mühleberg_Nuclear_Power_Plant).
+
+::: {.callout-note collapse = "true" title="Nuclear Phase-Out Policy"}
+
+Under the **Swiss Energy Strategy 2050**, no new nuclear plants will be constructed.\
+Existing plants can continue operating **indefinitely**, provided safety is guaranteed.\
+This flexible phase-out contrasts with some countries (e.g., Germany), where **fixed shutdown dates** were set.
+
+:::
+
+## Photovoltaic Performance and Solar Radiation
+
+Switzerland has expanded its installed solar PV capacity rapidly in recent years. However, raw production values reflect both:
+
+-   **Growing infrastructure** (more panels installed)\
+-   **Natural variation in solar radiation** (seasonal cycles, weather)
+
+To isolate how much solar performance depends on **sunlight** rather than capacity growth,we compare **solar production** with **measured solar radiation** between 2020 and 2024.
+
+### Method: STL Decomposition
+
+We apply **STL decomposition (Seasonal-Trend decomposition using LOESS)** to photovoltaic production:
+
+-   **Trend**: captures the long-term growth in installed PV capacity
+-   **Seasonal**: captures regular annual cycles (sunlight availability)
+-   **Remainder**: captures short-term variation and anomalies
+
+By recombining the **seasonal + remainder components**, we obtain a **normalized PV output** — representing solar generation patterns independent of capacity growth.
+
+```{r}
+#| echo: false
+#| label: stl-decomposition-plot
+#| fig-width: 10
+#| fig.asp: 0.6
+#| fig-cap: STL decomposition of monthly photovoltaic production, showing trend, seasonal cycle, and remainder.
+#| fig-align: center
+
+
+
+d.radiation_ch <- readRDS("RDS/d.radiation_ch.rds")
+
+
+d.radiation_ch <- d.radiation_ch %>%
+  arrange(date_month) %>%
+  mutate(
+    radiation_lag1 = lag(global_radiation, 1)
+  )
+  
+
+#all the power sources + radiation -- inner join
+
+d.energy_solar <- d.monthly_prod %>%
+  select(date_month, photovoltaic, wind_thurbine, hydroelectric, nuclear) %>%
+  inner_join(d.radiation_ch, by = "date_month") %>%
+  select(
+    date_month,
+    photovoltaic,
+    wind_thurbine,
+    hydroelectric,
+    nuclear,
+    radiation_current = global_radiation,
+    radiation_lag1
+  )
+
+
+solar_stl <- d.energy_solar %>%
+  select(date_month, photovoltaic) %>%
+  time_decompose(photovoltaic, method = "stl", frequency = "auto", trend = "auto")
+
+
+solar_stl <- solar_stl %>%
+  mutate(normalized_photovoltaic = season + remainder)
+
+
+solar_stl %>%
+  select(date_month, observed, trend, season, remainder) %>%
+  pivot_longer(cols = -date_month, names_to = "component", values_to = "value") %>%
+  ggplot(aes(x = date_month, y = value, color = component)) +
+  geom_line() +
+  facet_wrap(~component, scales = "free_y", ncol = 1) +
+  labs(
+    title = "STL Decomposition of Photovoltaic Production between 2020 - 2024",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_minimal()
+
+
+
+```
+
+### Comparison: Solar Radiation vs Normalized PV Output
+
+The figure below compares normalized PV output (MWh) to measured solar radiation (MJ/m²). A dual-axis plot aligns the two series, making their seasonal co-movement visible.
+
+```{r}
+#| echo: false
+#| label: solar_vs_radiation
+#| fig-width: 10
+#| fig.asp: 0.6
+#| fig-align: center
+
+solar_compare <- solar_stl %>%
+  left_join(d.radiation_ch, by = "date_month") %>%
+  select(date_month, normalized_photovoltaic, global_radiation)
+
+
+scale_factor <- max(solar_compare$normalized_photovoltaic, na.rm = TRUE) /
+                max(solar_compare$global_radiation, na.rm = TRUE)
+
+solar_long <- solar_compare %>%
+  mutate(radiation_scaled = global_radiation * scale_factor) %>%
+  pivot_longer(
+    cols = c(normalized_photovoltaic, radiation_scaled),
+    names_to = "variable",
+    values_to = "value"
+  )
+
+ggplot(solar_long, aes(x = date_month, y = value, color = variable, linetype = variable)) +
+  geom_line(linewidth = 1.2) +
+  scale_y_continuous(
+    name = "Normalized Solar Production (MWh)",
+    sec.axis = sec_axis(~ . / scale_factor, name = "Solar Radiation (MJ/m²)")
+  ) +
+  scale_color_manual(
+    values = c(
+      normalized_photovoltaic = "#0D5C63",
+      radiation_scaled = "#BB4430"
+    ),
+    labels = c(
+      normalized_photovoltaic = "Normalized PV Output",
+      radiation_scaled = "Solar Radiation"
+    )
+  ) +
+  scale_linetype_manual(
+    values = c(
+      normalized_photovoltaic = "solid",
+      radiation_scaled = "dashed"
+    ),
+    labels = c(
+      normalized_photovoltaic = "Normalized PV Output",
+      radiation_scaled = "Solar Radiation"
+    )
+  ) +
+  labs(
+    title = "Normalized Solar Production vs Solar Radiation",
+    subtitle = "Trend-removed solar output closely follows radiation over time",
+    x = NULL,
+    color = "Legend",
+    linetype = "Legend"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 1),
+    plot.title = element_text(face = "bold", size = 14),
+    legend.position = "top"
+  )
+
+```
+
+### Correlation Analysis
+
+To quantify this relationship, we compute the Pearson correlation coefficient between:
+
+-   **Normalized PV output**, and
+-   **Measured solar radiation**
+
+```{r}
+#| echo: false
+
+
+cor_result <- cor(
+  solar_compare$global_radiation,
+  solar_compare$normalized_photovoltaic,
+  use = "complete.obs"
+)
+
+
+
+```
+
+> The resulting correlation is: `r round(cor_result, 3)`.
+
+As expected this indicates:\
+- This very strong positive correlation shows that solar PV production is tightly coupled to radiation availability.\
+- Seasonal radiation patterns, not infrastructure, explain the shape of PV output.\
+- Capacity growth only scales the curve upwards — it does not change the fundamental seasonal imbalance.
+
+### Seasonal Distribution of PV Energy Production
+
+When averaged across 2020–2024, the seasonal breakdown of PV output is:
+
+```{r}
+#| echo: false
+#| label: pv_avg_seasonal
+
+#saveRDS(pv_avg_seasonal, "RDS/pv_avg_seasonal.rds")
+pv_avg_seasonal <- readRDS("RDS/pv_avg_seasonal.rds")
+
+```
+
+-   **Winter (Dec–Feb):** `r paste0(pv_avg_seasonal$avg_winter_pct, "%")`\
+-   **Spring (Mar–May):** `r paste0(pv_avg_seasonal$avg_spring_pct, "%")`\
+-   **Summer (Jun–Aug):** `r paste0(pv_avg_seasonal$avg_summer_pct, "%")`\
+-   **Autumn (Sep–Nov):** `r paste0(pv_avg_seasonal$avg_autumn_pct, "%")`
+
+These numbers are telling us that:
+
+-   Production is heavily concentrated in summer (nearly half of annual PV output).
+-   Winter output is very limited, despite being the period of highest demand (heating + low daylight).
+-   This seasonal mismatch is the core structural challenge for replacing nuclear with solar.
+
+### PV Contribution Over Time
+
+::::: columns
+::: {.column width="55%"}
+Switzerland’s photovoltaic (PV) generation has grown rapidly in recent years.To illustrate this trend, we track **annual PV production (GWh)** and its share of total electricity production from 2020 to 2024.
+
+```{r}
+#| label: pv_Yearly
+#| echo: false
+
+
+#write_rds(pv_yearly, "RDS/pv_yearly.rds")
+pv_yearly <- readRDS("RDS/pv_yearly.rds")
+
+pv_growth_summary <- pv_yearly %>%
+  summarise(
+    pv_start = pv_total[year == 2020],
+    pv_end = pv_total[year == 2024],
+    pct_start = pv_share_pct[year == 2020],
+    pct_end = pv_share_pct[year == 2024],
+    pv_growth_abs = pv_end - pv_start,
+    pv_growth_pct = round(100 * pv_growth_abs / pv_start, 1),
+    share_diff_pct = round(pct_end - pct_start, 1)
+  )
+
+#pv_growth_summary
+
+# need to add the calculation for nuclear here:
+
+```
+
+The chart shows steady year-on-year growth, with no reversals.
+
+This suggests strong policy and market momentum supporting PV expansion.
+
+Yet, even with this rapid growth:
+
+-   PV accounted for only \~**`r pv_growth_summary$pct_end`%** of Switzerland’s electricity in 2024
+-   Nuclear, by contrast, still supplied \~28% over the same period
+:::
+
+::: {.column width="45%"}
+```{r}
+#| label: pv_plot
+#| echo: false
+
+pv_yearly %>%
+  ggplot(aes(x = factor(year), y = pv_total)) +
+  geom_col(fill = "#2E8B57", width = 0.6) +  # Seagreen
+  geom_text(
+    aes(label = round(pv_total)),
+    vjust = -0.3,
+    size = 3.5,
+    color = "black"
+  ) +
+  labs(
+    title = "Photovoltaic Production in Switzerland (2020–2024)",
+    x = "Year",
+    y = "Energy Produced (GWh)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
+    axis.title.y = element_text(margin = margin(r = 10)),
+    axis.text.y = element_text(size = 10),
+    axis.text.x = element_text(size = 10)
+  )
+
+```
+:::
+:::::
+
+### Forecasting Solar PV Production (2025–2030)
+
+In this section, we use time series modeling to forecast monthly solar PV production in Switzerland from **2025 to 2030**, based on trends observed between **2020 and mid-2025**.
+
+**Methodology**
+
+We use an **ARIMA (Auto-Regressive Integrated Moving Average)** model, a widely used statistical technique for modeling time series data. This model captures:
+
+-   **Trend** (long term increase in PV output due to growning Installations)
+-   **Seasonality** (cyclical patterns due to solar radiation patterns)
+-   **Short-term dependencies** (month to month autocorrelation in output)
+
+**Assumptions**
+
+This forecast is based on the critical assumptions that the PV capacity conitnues to grow at a similar pace as observed in 2020 to mid 2025.
+
+The model does not account for:
+
+-   Policy changes,
+-   Supply chain disruptions,
+-   Technological breakthroughs,
+-   Accelerated or stalled installation rates.
+
+It is a s trend projection, with no technical potential simulation or policy scenarios.
+
+::::: columns
+::: {.column width="45%"}
+**Interpretation:**
+
+-   The seasonality is clearly preserved in the forecast: output peaks in **summer** (May–July) and drops in **winter** (December–January).
+
+-   The amplitude of production increases over time, consistent with observed growth in installed capacity.
+
+-   by 2030 the PV production can peak to 1600 Ghw during the summer months, potentially being able to supply **over 10 TWh/year**.
+:::
+
+::: {.column width="55%"}
+```{r}
+#| label: arima
+#| echo: false
+
+
+#Foreacasting PV growth 2025-2030
+#Since this isa time series I will try to use an ARIMA model
+#first filter the data set and then do an adf test for stationarity
+
+d.pv_forecast <- d.energy_solar %>%
+  select(date_month, photovoltaic) %>%
+  filter(!is.na(photovoltaic)) %>%
+  as_tsibble(index = date_month)
+
+# create the vector with the intergers
+pv_vector <- d.pv_forecast$photovoltaic
+
+
+#run the adf test - 
+#adf.test(pv_vector)
+
+# we are testing if the vector is stationary 
+#null- hypothesis is not- stationary, alternative it is stationary 
+#when the test is negative = -8,74 => is good for stationarity
+#pvalue is 0.01
+#no differencingis required for an ARIMA model
+
+
+
+
+
+
+
+# Fit ARIMA and ETS models
+pv_models <- d.pv_forecast %>%
+  model(
+    ARIMA = ARIMA(photovoltaic))
+
+#Warning message:
+# there  are no gaps in the time columns 
+# used chatgpt
+
+v_tsibble <- d.pv_forecast %>%
+  mutate(month_index = yearmonth(date_month)) %>%   # new yearmonth column
+  select(month_index, photovoltaic) %>%
+  as_tsibble(index = month_index) %>%
+  fill_gaps()
+
+
+model_arima <- v_tsibble %>%
+  model(ARIMA = ARIMA(photovoltaic))
+
+forecast_arima <- model_arima %>%
+  forecast(h = "60 months")
+
+
+forecast_arima %>%
+  autoplot(v_tsibble, level = c(80, 95)) +
+  labs(
+    title = "ARIMA Forecast of Monthly Solar PV Production (2025–2030)",
+    x = "Date",
+    y = "Photovoltaic Output (GWh)"
+  ) +
+  theme_minimal(base_size = 13)
+```
+:::
+:::::
+
+::: {.callout-note collapse = "true" title="What Do the Confidence Intervals Mean?"}
+
+The shaded ribbons around the forecast represent confidence intervals:
+
+-   **80% interval** (darker blue): there's an 80% chance the true value falls inside.
+-   **95% interval** (lighter blue): there's a 95% chance the true value falls inside.
+
+These intervals **widen over time** to reflect increasing uncertainty in long-term forecasts.
+
+:::
+
+### Growth vs. Nuclear Comparison
+
+At the current pace (\~1 TWh added annually), Switzerland would need about **22 years** to scale PV production enough to match the **annual nuclear output** (≈22–23 TWh).
+
+However, this projection assumes:
+
+-   **Linear growth** (no acceleration or policy-driven scale-up)
+-   **No seasonal adjustment** (ignores the winter shortfall identified earlier)
+
+In reality, **scaling PV alone is insufficient**: seasonal storage, imports, and flexible hydro will be essential to cover winter deficits.
+
+::: {.callout-note collapse = "true" title = "Why Annual Growth is Misleading"}
+
+Annual growth rates can create the illusion that solar can fully replace nuclear. But electricity systems are **seasonal**, not annual.
+
+Even if PV reaches 22–23 TWh/year, the **winter contribution will remain very small**.\
+Thus, the transition challenge is not just about producing “enough” yearly solar - it’s about producing it **when it’s needed most**.
+
+:::
+
+## Electricity Imports, Exports & Grid Balance
+
+Switzerland operates one of Europe’s most reliable electricity systems. This reliability depends not only on domestic production but also on **cross-border electricity flows**, which help balance seasonal supply and demand.
+
+In this section, we examine how Switzerland balances its grid by looking at:
+
+-   The overall balance of production, imports, and consumption
+-   Seasonal patterns in imports and exports
+-   The implications of losing stable nuclear generation
+
+### Grid Balance Check
+
+We verify whether Switzerland’s electricity system is operationally balanced using the identity:
+
+**Grid Balance = (Net Production + Imports) – (Exports + Consumption)**
+
+The balance equals **zero in all months**, confirming that the Swiss grid is **consistently balanced** - total inflows match total outflows.
+
+This highlights Switzerland’s strong integration with the European grid and its ability to maintain operational stability.
+
+### Average Net Electricity Imports by Month (2020–2024)
+
+The figure below shows average monthly **net imports** (exports-imports), averaged across 2020–2024:
+
+-   **Positive values = Net Export**
+-   **Negative values = Net Import**
+
+::::: columns
+::: {.column width="40%"}
+**Winter (Dec–Feb)**: Switzerland is a net importer of electricity, reflecting higher demand and limited solar output.
+
+**Spring and Summer (Apr–Aug)**: The country becomes a net exporter, supported by strong hydroelectric flows and solar generation.
+
+**Autumn (Sep–Nov)**: The balance moves closer to zero, with mixed import/export activity.
+
+This seasonal pattern confirms Switzerland’s reliance on imports during winter deficits, while acting as a net exporter during periods of renewable abundance.
+:::
+
+::: {.column width="60%"}
+```{r}
+#| label: avg_import
+#| echo: false
+
+
+#write_rds(d.energy_source_all, "RDS/d.energy_source_all.rds")
+
+d.energy_source_all <- readRDS("RDS/d.energy_source_all.rds")
+
+d.import_export_monthly <- d.energy_source_all %>%
+  mutate(
+    net_import = import - export,
+    month = lubridate::month(date_month, label = TRUE, abbr = TRUE))
+
+
+
+monthly_avg_import <- d.import_export_monthly %>%
+  group_by(month) %>%
+  summarise(
+    avg_net_import = round(mean(net_import, na.rm = TRUE), 1)
+  ) %>%
+  arrange(match(month, month.abb))
+
+
+
+
+ggplot(monthly_avg_import, aes(x = month, y = -avg_net_import, fill = -avg_net_import > 0)) +
+  geom_col(show.legend = FALSE) +
+  scale_fill_manual(values = c("FALSE" = "#BB4430",
+                               "TRUE" = "#0D5C63")) +
+  labs(
+    title = "Average Net Electricity Import by Month (2020–2024)",
+    subtitle = "Positive = Net Export, Negative = Net Import",
+    x = "Month",
+    y = "Average Net Export (GWh)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    axis.text.x = element_text(size = 11),
+    axis.title.y = element_text(size = 12)
+  )
+
+```
+:::
+:::::
+
+### Why Imports Will Matter
+
+Today, nuclear power provides **stable year-round baseload**, covering winter demand when solar is minimal. With nuclear gradually phased out:
+
+-   **Winter deficits will deepen** (solar provides only \~`r paste0(pv_avg_seasonal$avg_winter_pct, "%")` of annual output in winter vs \~`r paste0(pv_avg_seasonal$avg_summer_pct, "%")` in summer).
+-   **Hydropower cannot fully compensate**, as its seasonal peaks align with summer.
+-   **Imports will become increasingly critical** for:
+    -   Security of supply
+    -   Grid stability
+    -   Market integration with neighboring countries
+
+## Replacing Nuclear with Solar: Feasibility and Limitations
+
+To test whether solar could fully replace nuclear energy, we simulate a **nuclear-free Swiss grid** where:
+
+-   Nuclear production (\~22–23 TWh/year) is removed.
+-   Solar PV is scaled up to \~28 TWh/year (≈ nuclear + current PV), distributed monthly based on real PV production profiles (2020–2024).
+-   Hydroelectric, thermal, and wind remain fixed at their 2020–2024 averages.
+-   Imports are excluded at first, to reveal the true domestic balance.
+
+This scenario represents a simple “**solar-for-nuclear substitution**” without assuming additional hydro expansion, storage, or demand-side flexibility, second and tertiary reserves, etc.
+
+### Winter Gaps Without Nuclear
+
+::::: columns
+::: {.column width="50%"}
+In this scenario, domestic production falls short of consumption by up to **2.1 TWh in December** and **1.7 TWh in January**. Across the winter months (Nov–Feb), the total deficit reaches \~5.7 TWh.
+
+By contrast, summer months (May–Aug) show large surpluses of \~13 TWh, underscoring the structural **seasonal mismatch**.
+
+The chart reinforces the conclusion:
+
+-   solar can match nuclear’s **annual output**,
+-   but not its **seasonal reliability**.
+:::
+
+::: {.column width="50%"}
+```{r}
+#| label: calculations
+#| echo: false
+
+#WINTER GAP
+
+
+#I change the order of the how i display the data and the easiest is to break the order ...
+
+
+#calculate avg nuclear prod by year
+avg_nuclear_2020_2024 <- d.energy_source %>%
+  filter(year(date_month) %in% 2020:2024) %>%
+  group_by(year = year(date_month)) %>%
+  summarise(annual_nuclear_gwh = sum(nuclear, na.rm = TRUE)) %>%
+  summarise(avg_nuclear_gwh = mean(annual_nuclear_gwh)) %>%
+  pull(avg_nuclear_gwh)
+
+#avg_nuclear_2020_2024
+
+avg_PV_2020_2024 <- d.energy_source %>%
+  filter(year(date_month) %in% 2020:2024) %>%
+  group_by(year = year(date_month)) %>%
+  summarise(annual_PV_gwh = sum(photovoltaic, na.rm = TRUE)) %>%
+  summarise(avg_photovoltaic_gwh = mean(annual_PV_gwh)) %>%
+  pull(avg_photovoltaic_gwh)
+
+#avg_PV_2020_2024
+
+
+
+#1. Average PV by month 2020 -2024
+monthly_pv_avg <- d.energy_source %>%
+  filter(year(date_month) %in% 2020:2024) %>%
+  mutate(month = month(date_month)) %>%
+  group_by(month) %>%
+  summarise(avg_pv = mean(photovoltaic, na.rm = TRUE), .groups = "drop")
+
+# monthly_pv_avg <- d.energy_source %>%
+#   filter(year(date_month) == 2024) %>%
+#   mutate(month = month(date_month)) %>%
+#   group_by(month) %>%
+#   summarise(avg_pv = mean(photovoltaic, na.rm = TRUE), .groups = "drop")
+
+
+
+
+#2. monthly distribution percentages of 
+
+monthly_pv_avg <- monthly_pv_avg %>%
+  mutate(
+    monthly_pct = avg_pv / sum(avg_pv),
+    scaled_pv_gwh = round(monthly_pct * (avg_nuclear_2020_2024 + avg_PV_2020_2024), 0) )
+
+
+
+#3. calculated scaled PV production, and will join with the other energy sources (-nuclear)
+monthly_pv_avg <- monthly_pv_avg %>%
+  mutate(month_label = month.abb[month]) %>%
+  select(month_label, scaled_pv_gwh)
+
+
+#4. other sources average including country_consumption
+
+
+monthly_power_other_avg <- d.energy_source_all %>%
+  filter(year(date_month) %in% 2020:2024) %>%
+  mutate(month = month(date_month)) %>%
+  group_by(month) %>%
+  summarise(avg_hydroelectric = mean((hydroelectric - acumulation_pumping), na.rm = TRUE),
+            avg_thermic_clasique = mean(thermic_clasique, na.rm = TRUE),
+            avg_thermic_renewable = mean(thermic_renewable, na.rm = TRUE),
+            avg_wind_thurbine = mean(wind_thurbine, na.rm = TRUE),
+           #avg_accumulation_pumping = mean(acumulation_pumping, na.rm = TRUE),
+            avg_country_consumption = mean(country_consumtion, na.rm = TRUE),
+            avg_import = mean(import, na.rm = TRUE),
+            .groups = "drop") %>% 
+  mutate(month_label = month.abb[month])
+
+# I removed accumulation pumping for now since this is a negative energy, 
+# I think the plot will be hard to read
+# and will add import (export does not matter bcz we are interested in deficit and we only export on surplus)
+  
+d.monthly_averages <- monthly_pv_avg %>% 
+  inner_join(monthly_power_other_avg, by = "month_label")
+
+
+#factor - orders the column bars
+d.monthly_averages$month_label <- factor(
+  d.monthly_averages$month_label,
+  levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun",
+             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+)
+
+```
+
+```{r}
+#| label: monthly_gap_plot
+#| fig-width: 8
+#| fig-height: 5
+#| echo: false
+# First, pivot the production sources for stacked bars
+d.energy_avg_long <- d.monthly_averages %>%
+  select(month_label,
+         scaled_pv_gwh,
+         avg_hydroelectric,
+         avg_thermic_clasique,
+         avg_thermic_renewable,
+         avg_wind_thurbine,
+         avg_import) %>%
+  pivot_longer(
+    cols = -month_label,
+    names_to = "source",
+    values_to = "gwh"
+  )
+
+d.energy_avg_long$month_label <- factor(
+  d.energy_avg_long$month_label,
+  levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun",
+             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+)
+
+
+
+
+
+
+d.monthly_averages <- d.monthly_averages %>%
+  mutate(total_production = scaled_pv_gwh +
+           avg_hydroelectric +
+           avg_thermic_clasique +
+           avg_thermic_renewable +
+           avg_wind_thurbine)
+
+#  monthly gap (production - consumption)
+# calculate what is the gap percentage of total 
+monthly_gap <- d.monthly_averages %>%
+  mutate(
+    gap_gwh = total_production - avg_country_consumption,
+    gap_pct = 100 * gap_gwh / sum(avg_country_consumption)
+  ) %>%
+  select(month_label, avg_country_consumption, total_production, gap_gwh, gap_pct)
+
+
+ggplot(monthly_gap, aes(x = month_label, y = gap_gwh, fill = gap_gwh > 0)) +
+  geom_col(show.legend = FALSE) +
+  scale_fill_manual(values = c("TRUE" = "#0D5C63", "FALSE" = "#BB4430")) +
+  geom_hline(yintercept = 0, color = "black") +
+  labs(
+    title = "Monthly Electricity Gap (Production – Consumption)",
+    subtitle = "Nuclear-free scenario with 28 TWh of solar (no imports)",
+    x = NULL,
+    y = "Gap (GWh)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    axis.text.x = element_text(face = "bold"),
+    plot.title = element_text(face = "bold", size = 15)
+  )
+```
+:::
+:::::
+
+### Imports as one of the Balancing Mechanism
+
+Switzerland already relies on **imports in winter** and **exports in summer** to balance its grid. In a nuclear-free system, this reliance would **increase sharply**, with imports becoming the **primary tool for covering winter deficits**.
+
+::::: columns
+::: {.column width="50%"}
+The chart on the right illustrates this point: imports (orange bars) rise steeply in **December–February**, while in **May–August** solar and hydro surpluses reduce the need for imports.
+
+While technically feasible thanks to Switzerland’s strong interconnections with neighboring countries, this dependence raises key risks:
+
+-   **Energy security**: reliance on France, Germany, and Italy during critical months.
+-   **Market volatility**: higher price exposure if Europe faces simultaneous winter shortages.
+-   **Geopolitical exposure**: reduced autonomy when neighboring systems are also under pressure.
+:::
+
+::: {.column width="50%"}
+```{r}
+#| label: replace_nuclear_w_solar
+#| echo: false
+
+#sources are already imported
+
+#calculate avg nuclear prod by year
+avg_nuclear_2020_2024 <- d.energy_source %>%
+  filter(year(date_month) %in% 2020:2024) %>%
+  group_by(year = year(date_month)) %>%
+  summarise(annual_nuclear_gwh = sum(nuclear, na.rm = TRUE)) %>%
+  summarise(avg_nuclear_gwh = mean(annual_nuclear_gwh)) %>%
+  pull(avg_nuclear_gwh)
+
+#avg_nuclear_2020_2024
+
+avg_PV_2020_2024 <- d.energy_source %>%
+  filter(year(date_month) %in% 2020:2024) %>%
+  group_by(year = year(date_month)) %>%
+  summarise(annual_PV_gwh = sum(photovoltaic, na.rm = TRUE)) %>%
+  summarise(avg_photovoltaic_gwh = mean(annual_PV_gwh)) %>%
+  pull(avg_photovoltaic_gwh)
+
+#avg_PV_2020_2024
+
+
+
+#1. Average PV by month 2020 -2024
+monthly_pv_avg <- d.energy_source %>%
+  filter(year(date_month) %in% 2020:2024) %>%
+  mutate(month = month(date_month)) %>%
+  group_by(month) %>%
+  summarise(avg_pv = mean(photovoltaic, na.rm = TRUE), .groups = "drop")
+
+# monthly_pv_avg <- d.energy_source %>%
+#   filter(year(date_month) == 2024) %>%
+#   mutate(month = month(date_month)) %>%
+#   group_by(month) %>%
+#   summarise(avg_pv = mean(photovoltaic, na.rm = TRUE), .groups = "drop")
+
+
+
+
+#2. monthly distribution percentages of 
+
+monthly_pv_avg <- monthly_pv_avg %>%
+  mutate(
+    monthly_pct = avg_pv / sum(avg_pv),
+    scaled_pv_gwh = round(monthly_pct * (avg_nuclear_2020_2024 + avg_PV_2020_2024), 0) )
+
+
+
+#3. calculated scaled PV production, and will join with the other energy sources (-nuclear)
+monthly_pv_avg <- monthly_pv_avg %>%
+  mutate(month_label = month.abb[month]) %>%
+  select(month_label, scaled_pv_gwh)
+
+
+#4. other sources average including country_consumption
+
+
+monthly_power_other_avg <- d.energy_source_all %>%
+  filter(year(date_month) %in% 2020:2024) %>%
+  mutate(month = month(date_month)) %>%
+  group_by(month) %>%
+  summarise(avg_hydroelectric = mean((hydroelectric - acumulation_pumping), na.rm = TRUE),
+            avg_thermic_clasique = mean(thermic_clasique, na.rm = TRUE),
+            avg_thermic_renewable = mean(thermic_renewable, na.rm = TRUE),
+            avg_wind_thurbine = mean(wind_thurbine, na.rm = TRUE),
+           #avg_accumulation_pumping = mean(acumulation_pumping, na.rm = TRUE),
+            avg_country_consumption = mean(country_consumtion, na.rm = TRUE),
+            avg_import = mean(import, na.rm = TRUE),
+            .groups = "drop") %>% 
+  mutate(month_label = month.abb[month])
+
+# I removed accumulation pumping for now since this is a negative energy, 
+# I think the plot will be hard to read
+# and will add import (export does not matter bcz we are interested in deficit and we only export on surplus)
+  
+d.monthly_averages <- monthly_pv_avg %>% 
+  inner_join(monthly_power_other_avg, by = "month_label")
+
+
+#factor - orders the column bars
+d.monthly_averages$month_label <- factor(
+  d.monthly_averages$month_label,
+  levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun",
+             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+)
+
+
+
+
+# First, pivot the production sources for stacked bars
+d.energy_avg_long <- d.monthly_averages %>%
+  select(month_label,
+         scaled_pv_gwh,
+         avg_hydroelectric,
+         avg_thermic_clasique,
+         avg_thermic_renewable,
+         avg_wind_thurbine,
+         avg_import) %>%
+  pivot_longer(
+    cols = -month_label,
+    names_to = "source",
+    values_to = "gwh"
+  )
+
+d.energy_avg_long$month_label <- factor(
+  d.energy_avg_long$month_label,
+  levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun",
+             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+)
+
+# Plot 1
+ggplot() +
+  geom_col(
+    data = d.energy_avg_long,
+    aes(x = month_label, y = gwh, fill = source),
+    position = "stack"
+  ) +
+
+  # geom_col(
+  #   data = d.monthly_averages,
+  #   aes(x = month_label, y = -avg_accumulation_pumping),
+  #   fill = "black",
+  #   alpha = 0.5,
+  #   width = 0.6
+  # ) +
+  
+  geom_line(
+    data = d.monthly_averages,
+    aes(x = month_label, y = avg_country_consumption, group = 1),
+    color = "#BB4430",
+    linewidth = 1.4
+  ) +
+  
+  scale_fill_brewer(palette = "Set2", name = "Energy Source",
+                    labels = c(
+                      "scaled_pv_gwh" = "Solar (Scaled)",
+                      "avg_hydroelectric" = "Hydroelectric",
+                      "avg_thermic_clasique" = "Thermic Classic",
+                      "avg_thermic_renewable" = "Thermic Renewable",
+                      "avg_wind_thurbine" = "Wind",
+                      "avg_import" = "Import"
+                    )) +
+  labs(
+    title = "Monthly Average Electricity Production vs. Consumption",
+    subtitle = "Simulated scenario: Replacing nuclear with 28 TWh of solar (scaled monthly)",
+    x = NULL,
+    y = "Energy (GWh)",
+    #caption = "Negative black bars = pumping storage use\nRed line = average country consumption (2020–2024)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    axis.text.x = element_text(face = "bold"),
+    plot.title = element_text(face = "bold", size = 15),
+    legend.position = "top"
+  )
+
+
+```
+:::
+:::::
+
+## Conclusion
+
+This analysis shows that while **solar can replace nuclear in annual totals**, it cannot guarantee **seasonal reliability**. Without nuclear, Switzerland faces **deficits of \~5–6 TWh in winter** (Nov–Feb) and **surpluses of \~13 TWh in summer**.
+
+Today, imports already bridge these gaps. In a nuclear-free future, however, **imports would become the backbone of winter security**. While technically feasible, this creates dependence on neighboring systems (France, Germany, Italy) and heightens exposure to **market volatility** and **geopolitical risks**.
+
+At the same time, Switzerland is investing in **domestic balancing solutions**:
+
+-   **Pumped-storage**: the 900 MW **Nant de Drance** plant came online in 2022[^2], offering capacity comparable to a nuclear reactor such as Gösgen. Further projects are under study in the **Grimsel region**[^3].
+-   **Battery storage**: projects such as **Alpiq’s Gondo and Lausanne batteries** demonstrate the growing role of short-term flexibility[^4].
+-   **Solar expansion**: according to *Energie Zukunft Schweiz*, Switzerland has a **technical PV potential of 9–11 GW**[^5]. Unlocking this potential requires stronger political and regulatory frameworks. In parallel, federal studies suggest that **\~6% of Swiss land area is suitable for PV**[^6], though deployment faces constraints from heritage protection and land-use policies.
+-   **Smart-grid upgrades**: ongoing digitalization projects aim to improve flexibility, demand management, and grid resilience[^7].
+
+[^2]: Nant de Drance SA – [The power plant](https://www.nant-de-drance.ch/en/the-power-plant/)
+
+[^3]: KWO (Kraftwerke Oberhasli AG) – [Projects](https://www.grimselstrom.ch/en/projekte/kraftwerk-handeck-4)
+
+[^4]: Alpiq – [Battery storage in Lausanne](https://www.alpiq.com/energy/assets/battery-energy-storage-systems)
+
+[^5]: [Potential PV](https://www.axpo.com/lt/en/newsroom/magazine/renewable-energy/technical-potential-of-9-to-11-gw.html)
+
+[^6]: [Article - New Federal Study](https://www.swissinfo.ch/eng/climate-solutions/around-6-per-cent-of-the-surface-area-in-switzerland-can-be-used-for-solar-installations/89959131)
+
+[^7]: SFOE – [Smart grid updates](https://www.bfe.admin.ch/bfe/en/home/supply/electricity-supply/electricity-networks/smart-grids.html)
+
+Switzerland’s energy transition is therefore not just about **adding solar capacity**. It is a **system challenge**: aligning seasonal production with demand, balancing imports with domestic flexibility, and integrating storage and smart-grid technology.
+
+The path forward will require a **portfolio approach**:
+
+-   Seasonal **imports** (short- to medium-term necessity)
+-   Expansion of **solar and flexible hydropower**
+-   **Long-duration storage** (pumped-hydro, future technologies)
+-   **Smart grids and efficiency gains**
+
+Ultimately, success will not be measured by annual generation totals, but by ensuring **secure electricity supply in winter**, when the system is under the greatest strain.
+
+## Chapter of Choice: Enhancing Reports with Custom Layout & Styling
+
+While most of this report focuses on data analysis and visualization, a key part of professional reporting is **presentation**. To make results **clearer and more accessible**, we extended standard R Markdown functionality with a few extra tools:
+
+-   **`janitor`**: for data cleaning and consistent variable names.
+-   **Quarto column layouts**: for side-by-side figures and explanations.
+-   **`htmltools`**: for scrollable boxes containing long metadata tables.
+
+Together, these approaches improve both the **readability** and **professional appearance** of the report.
+
+### 1. Data Cleaning with `janitor`
+
+The raw Swiss energy datasets came with inconsistent variable names (e.g., `Thermic_clasique`, `Hydroelectric Power`). Using `janitor::clean_names()`, we standardized all column names to **snake_case**:
+
+To avoid manual downloads, we wrote a custom R function `fetch_station()` that:
+
+-   Dynamically constructs the MeteoSwiss URL for each NBCN station
+-   Downloads the CSV file directly from the web
+-   Cleans and formats the data (dates, variables, filtering post-2020)
+
+This allowed us to **batch-compile radiation datasets** across multiple stations in a fast and reproducible way.
+
+### 2. Custom Layouts in Quarto
+
+To present figures and text side-by-side, we used Quarto’s column layout. This allows us to place, for example, a chart in one column and a written explanation in another:
+
+### 3. Scrollable Metadata Boxes with `htmltools`
+
+Some metadata tables (e.g., nuclear dataset descriptions) are too long to fit comfortably in the report. To keep the document compact, we wrapped them in **scrollable boxes** using `htmltools::div()`.
+
+This way, readers can scroll through details without breaking the overall flow of the report.
+
+### 4. Styling with CSS
+
+Beyond the analysis, we also customized the **look and feel** of the report.
+
+A dedicated stylesheet (`styles.scss`) was created to define onts, colors and layout globally, instead of customizing each plot or table individually, ensuring the document is readable in different viewing conditions.
+
+we also attempted to create a light and dark theme using .scss; however, we were not able to solve an issue with the background in the table rows (maybe by using another table package besides gt)
+
+## Use of Gen AI and Other Learning Resources
+
+During this project, we made selective use of **Generative AI (ChatGPT)**.
+
+-   AI did **not replace independent work**: simply “dropping data” and expecting for a solution does not really work.
+-   Instead, AI was most useful for:
+    -   Debugging code and finding mistakes faster
+    -   Suggesting alternative approaches when I already knew the structure of what I wanted
+    -   Saving time by pointing out small fixes (e.g., pivoting data, styling ggplot outputs, fixing Quarto CSS issues)
+    -   Explaining concepts: Clarifying forecasting model components or statistical tests (e.g., ADF test, ARIMA)
+
+While ChatGPT helped with writing sections of the report, it required me to provide the core ideas, structure, and analytical direction.
+
+In addition to AI, we also relied on **traditional learning resources**, such as:
+
+-   **YouTube tutorials** - e.g., *Albert Ralph* for CSS styling, and *David Keyes (R for the Rest of Us)* for Quarto report styling
+-   **Quarto documentation** on the official [quarto.org](https://quarto.org) site, particularly for themes, callouts, and advanced formatting
+
+## Appendix: Data Sources & Metadata
+
+This appendix provides detailed metadata for the datasets used in this analysis. Each table is shown in a **scrollable box** to keep the layout compact.
+
+-   [**Energy data (Swiss Federal Office of energy)**](https://www.bfe.admin.ch/bfe/en/home/supply/statistics-and-geodata/energy-statistics/electricity-statistics.html/#kw-96076): Monthly Energy Production (hydro, nuclear, solar, etc.).
+
+::: {.callout-note collapse="true" title="Click to expand: Metadata for Monthly Production Dataset"}
+```{r}
+#| label: monthly_prod_metadata
+#| echo: false
+#| warning: false
+
+monthly_prod_metadata <- readRDS("RDS/monthly_prod_metadata.rds")
+
+div(class = "scroll-box",
+    
+monthly_prod_metadata %>%
+  gt() %>%
+  tab_header(title = md("**Metadata: Monthly Energy Production (Switzerland)**")) %>%
+  cols_label(
+    variable_name = "Variable",
+    description = "Description",
+    unit = "Unit",
+    source = "Source"
+  )
+)
+
+```
+:::
+
+-   [**MeteoSwiss OGD-NBCN**](https://www.meteoswiss.admin.ch/services-and-publications/applications/ext/download-data-without-coding-skills.html#lang=en&mdt=homogenous&pgid=Radiation&sid=SAM&col=ch.meteoschweiz.ogd-nbcn&di=&tr=&hdr=): Monthly Solar Irradiation.
+
+::: {.callout-note collapse="true" title="Click to expand: Metadata for Monthly Solar Irradiation Dataset"}
+```{r}
+#| label: irradiation_metadata
+#| echo: false
+#| warning: false
+
+#saveRDS(radiation_metadata, "RDS/radiation_metadata.rds")
+radiation_metadata <- readRDS("RDS/radiation_metadata.rds")
+
+
+
+
+div(class = "scroll-box",
+    
+radiation_metadata %>%
+  gt() %>%
+  tab_header(title = md("**Metadata: Solar Radiation (MeteoSwiss Aggregated Data)**")) %>%
+  cols_label(
+    variable_name = "Variable",
+    description = "Description",
+    unit = "Unit",
+    source = "Source"
+  )
+)
+```
+:::
+
+> Both data sets are aggregated to **monthly** frequency and merged on a monthly date column.
+
+-   [**Energy data (Swiss Federal Office of energy)**](https://www.bfe.admin.ch/bfe/en/home/supply/statistics-and-geodata/energy-statistics/electricity-statistics.html/#kw-96076): Swiss Nuclear Power Plants Dataset.
+
+::: {.callout-note collapse="true" title="Click to expand: Metadata for Nuclear Production Dataset"}
+```{r}
+#| label: nuclear_metadata
+#| echo: false
+#| warning: false
+
+#write_rds(nuclear_metadata, "RDS/nuclear_metadata.rds")
+nuclear_metadata <- readRDS("RDS/nuclear_metadata.rds")
+
+div(class = "scroll-box",
+    
+nuclear_metadata %>%
+  gt() %>%
+  tab_header(title = md("**Metadata: Swiss Nuclear Power Plants Dataset**")) %>%
+  cols_label(
+    Variable_Name = "Variable",
+    Description = "Description"
+  )
+)
+```
+:::
