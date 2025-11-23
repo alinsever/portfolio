@@ -2,7 +2,7 @@
 title: "Standalone Projects"
 ---
 
-# Standalone Projects
+
 
 This section includes analytical projects that are not strictly machine learning models but still demonstrate data science and applied research skills.
 

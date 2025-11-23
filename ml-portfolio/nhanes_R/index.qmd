@@ -1,8 +1,8 @@
 ---
-title: "NHANES Project – R"
+title: "NHANES Project (R)"
 ---
 
-# NHANES Project (R)
+
 
 This section will host the NHANES health analysis project, including regression models, classification, and data exploration.
 

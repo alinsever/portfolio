@@ -1,8 +1,7 @@
 ---
-title: "ML Portfolio"
+title: "Machine Learning Portfolio"
 ---
 
-# Machine Learning Portfolio
 
 This section presents machine learning work developed in R and Python.
 
