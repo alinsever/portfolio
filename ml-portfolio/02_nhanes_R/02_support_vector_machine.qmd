@@ -69,7 +69,7 @@ Other than this change, no further manual preprocessing was applied. Instead, ce
 
 
 # selecting only the variables for BMI
-nh_raw1 <- readRDS(here("nhanes.rds"))
+nh_raw1 <- readRDS(here::here("ml-portfolio/02_nhanes_R/nhanes.rds"))
 
 nh_raw <- nh_raw1 %>% 
   filter(Age >= 18) %>%

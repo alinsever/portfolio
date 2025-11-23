@@ -1,7 +1,7 @@
 project:
   type: website
   output-dir: _site
-  freeze: auto
+  
 
 website:
   title: "Portfolio - Alin Sever"
@@ -52,6 +52,7 @@ format:
     toc-depth: 3
     code-fold: true
     code-summary: "Show code"
+    freeze: auto
   pdf:
     documentclass: scrreprt
     papersize: a4

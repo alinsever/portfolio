@@ -46,7 +46,8 @@ pkgs <- c("tidyverse",
           "broom",
           "car",
           "sandwich",
-          "lmtest"
+          "lmtest",
+          "here"
           )
 
 missing <- pkgs[!vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)]
@@ -119,7 +120,7 @@ Where:
 
 # selecting only the variables for BMI
 
-nh_raw1 <- readRDS("nhanes.rds")
+nh_raw1 <- readRDS(here::here("ml-portfolio/02_nhanes_R/nhanes.rds"))
 
 nh_raw <- nh_raw1 %>% 
   filter(Age >= 18) %>%

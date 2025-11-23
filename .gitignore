@@ -28,3 +28,13 @@ __pycache__/
 .DS_Store
 
 **/*.quarto_ipynb
+
+# Quarto caches and outputs
+*_cache/
+**/*_cache/
+execute-results/
+figure-html/
+_site/
+site_libs/
+.quarto/
+.quarto-cache/
