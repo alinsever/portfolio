@@ -1,0 +1,293 @@
+---
+title: "Predicting Obesity using Support Vector Machines"
+author: "Alin Sever"
+date: "2025-11-20"
+format:
+  html:
+    toc: true
+    toc-depth: 4
+    number-sections: true
+    code-fold: true
+  pdf:
+    toc: true
+    number-sections: true
+
+
+editor: source
+
+---
+
+
+```{r}
+#| label: cache
+#| echo: false
+
+knitr::opts_chunk$set(cache = TRUE)
+```
+
+
+
+```{r}
+#| label: setup
+#| include: false
+#| echo: false
+
+library(readr)
+library(here)
+library(tidyverse)
+library(caret)
+library(e1071)
+library(kernlab)
+
+
+getwd()
+list.files()
+
+```
+
+# Introduction
+
+In the previous chapter, we examined how demographic, socioeconomic, lifestyle, and clinical factors were linearly associated with BMI. While this offered insight into individual predictors, it also showed that BMI relationships are weak, complex, and often non-linear. Building on that foundation, the next step is to evaluate whether obesity can be predicted more effectively using machine learning methods that capture non-linear patterns.
+
+The goal of this chapter is to develop and assess Support Vector Machine (SVM) models for classifying individuals as obese (BMI ≥ 30 kg/m²) or not obese using the same cleaned NHANES dataset. Predictors include demographics, socioeconomic indicators, lifestyle behaviors, and clinical variables. Two SVM variants are considered: a linear SVM with a simple, interpretable boundary and a radial SVM (RBF) that can model non-linear relationships. Model performance is evaluated using repeated cross-validation and then tested on an independent test set.
+
+Together, these models allow us to explore whether moving from classical regression to non-linear machine learning improves predictive accuracy, and to compare the trade-offs between interpretability and flexibility when modelling obesity risk.
+
+# Data Cleaning and Preparation
+
+This analysis uses the same cleaned NHANES dataset prepared for the earlier linear regression models to ensure consistency across modelling approaches. The same demographic, socioeconomic, lifestyle, and clinical predictors are retained so that the SVM results can be meaningfully compared with the regression findings.
+
+For the SVM classification task, one additional preprocessing step was required: converting BMI from a continuous measure into a binary outcome. Using the standard clinical threshold, participants with BMI ≥ 30 kg/m² were labeled as “obese,” and all others as “not_obese.” This transformation frames the problem as a two-class prediction task suitable for SVMs.
+
+Other than this change, no further manual preprocessing was applied. Instead, centering, scaling, and factor encoding were handled automatically within the caret training pipeline, ensuring that all predictors are processed identically for both the linear and radial SVM models.
+
+
+```{r}
+#| label: load data _ deal with NA
+#| echo: false
+#| warning: false
+
+
+# selecting only the variables for BMI
+nh_raw1 <- readRDS(here("nhanes.rds"))
+
+nh_raw <- nh_raw1 %>% 
+  filter(Age >= 18) %>%
+  select(
+    BMI,                  # response
+    Age,
+    Race1,
+    Gender,
+    Education,
+    HHIncomeMid,
+    PhysActive,
+    SleepHrsNight,
+    AlcoholDay,
+    SmokeNow,
+    BPSysAve              # keep BP; TotChol removed
+  ) %>%
+  mutate(
+    # factor setup (treatment contrasts; readable refs)
+    Gender     = factor(Gender, levels = c("female","male")),
+    PhysActive = factor(PhysActive, levels = c("No","Yes")),
+    Race1      = fct_infreq(factor(Race1)),   # most common level becomes reference
+    Education  = factor(Education),
+    SmokeNow   = factor(SmokeNow, levels = c("No","Yes")),
+    log_income = log(HHIncomeMid)             # safe: HHIncomeMid min ~ 2500
+  )
+
+nh_cc <- nh_raw %>% drop_na()
+
+n0   <- nrow(nh_raw)
+n_cc <- nrow(nh_cc)
+retention_pct <- round(100 * n_cc / n0, 1)
+
+#retention_pct
+
+nh_cc <- nh_cc %>%
+  mutate(
+    obese = if_else(BMI >= 30, "obese", "not_obese"),
+    obese = factor(obese, levels = c("obese", "not_obese"))
+  )
+
+
+nhanes_svm <- nh_cc |> 
+  select(-BMI)
+
+
+# nhanes_svm %>%
+#   select(-obese) %>%
+#   summarise(across(where(is.numeric), ~ cor(.x, as.numeric(nhanes_svm$obese), use = "pairwise.complete.obs")))
+
+# for (col in names(nhanes_svm)) {
+#   print(col)
+#   print(table(nhanes_svm[[col]], nhanes_svm$obese))
+# }
+
+```
+
+# Modelling Framework
+
+An SVM is a supervised machine learning method that identifies the decision boundary which best separates classes in a feature space. For linearly separable data, it finds the hyperplane with the maximum margin between classes. For more complex, non-linear relationships, SVMs can project the data into a higher-dimensional space using kernel functions. This study evaluates two commonly used SVM variants:
+
+- Linear SVM - assumes a linear decision boundary.
+- RBF (Radial Basis Function) SVM - models non-linear separation through a Gaussian kernel, allowing flexible boundaries.
+
+Using both models enables a comparison between a simple, interpretable classifier and a more flexible, non-linear alternative.
+
+## Outcome Variable
+
+The prediction task is framed as a binary classification problem. Body Mass Index (BMI) was converted into a categorical variable:
+
+- “obese” for BMI ≥ 30 kg/m²
+- “not_obese” otherwise
+
+This aligns with standard clinical definitions and enables direct classification using SVM algorithms.
+
+## Predictor Variables
+
+The predictors used in this analysis are the same cleaned variables from the linear regression project:
+
+- Demographic: Age, Gender, Race/Ethnicity, Education
+- Socioeconomic: Log-transformed household income
+- Lifestyle: Physical activity, smoking status, sleep hours, alcohol consumption
+- Clinical: Average systolic blood pressure
+
+All predictors were selected based on theoretical relevance and completeness in the cleaned dataset.
+
+## Data Partitioning
+
+To fairly assess model performance, the dataset was split into:
+
+- Training set: 80% of the data
+- Testing set: 20% of the data
+
+The split was stratified by obesity status to preserve class proportions in both sets
+
+```{r}
+#| code-fold: false
+
+idx <- createDataPartition(nhanes_svm$obese, p = 0.8, list = FALSE)
+
+training <- nhanes_svm[idx, ]
+testing  <- nhanes_svm[-idx, ]
+
+# Ensure obese = positive class (otherwise can be non obese if R takes in alphabetical order...)
+training$obese <- relevel(training$obese, ref = "obese")
+testing$obese  <- relevel(testing$obese, ref = "obese")
+
+```
+
+## Cross-validation setup
+
+To ensure reliable model evaluation, both SVM models were tuned using repeated 10-fold cross-validation.
+
+```{r}
+#| code-fold: false
+trctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
+
+```
+
+## Linear SVM
+
+```{r svm_linear}
+#| code-fold: false
+
+set.seed(123)
+svm_linear <- train(obese ~ ., data = training, method = "svmLinear", trControl = trctrl,
+                    preProcess = c("center", "scale"), tuneLength = 10)
+
+```
+
+::: {.callout-note collapse = "true" title = "svm-linear summary"}
+```{r}
+#| code-fold: false
+svm_linear
+
+```
+
+:::
+
+**Linear SVM performance**
+
+```{r test_svm_linear}
+#| code-fold: false
+#| 
+set.seed(123)
+test_pred_linear <- predict(svm_linear, newdata = testing)
+
+```
+
+::: {.callout-note collapse = "true" title = "confusion matrix result"}
+```{r}
+#| code-fold: false
+confusionMatrix(test_pred_linear, testing$obese)
+```
+
+:::
+
+**Result:**
+
+The linear SVM performed poorly. It failed to identify any obese individuals (Sensitivity = 0), classifying all cases as not-obese. Although specificity was perfect (1.00), overall accuracy (66.7%) matched the no-information rate and Kappa was 0, indicating no predictive value beyond chance. These results show that obesity is not linearly separable using the available NHANES predictors; a single linear boundary cannot separate obese from non-obese individuals. This motivates the use of a non-linear model, such as the radial SVM, to capture more complex patterns.
+
+
+### Radial SVM
+
+```{r svm_radial}
+#| code-fold: false
+
+set.seed(46)
+
+svm_radial <- train(obese ~ ., data = training, method = "svmRadial", trControl = trctrl,
+                    preProcess = c("center", "scale"), tuneLength = 10)
+
+
+```
+
+::: {.callout-note collapse = "true" title = "svm-radial summary"}
+```{r}
+svm_radial
+```
+
+:::
+
+**Radial SVM Performance**
+
+
+```{r svm_radial_test}
+#| code-fold: false
+
+test_pred_radial <- predict(svm_radial, newdata = testing)
+
+```
+
+::: {.callout-note collapse = "true" title = "confusion matrix svm-radial"}
+```{r}
+
+confusionMatrix(test_pred_radial, testing$obese)
+
+```
+
+:::
+
+**Results:**
+
+The radial SVM outperformed the linear model across all metrics. The best model (C = 128, sigma = 0.0428) achieved a cross‐validated accuracy of 74.1% and a test accuracy of 77.9%. Sensitivity improved substantially to 63.5%, correctly identifying nearly two thirds of obese individuals. Specificity remained strong at 85.0%, and Kappa increased to 0.49, indicating moderate predictive agreement. These results demonstrate that obesity classification requires a nonlinear decision boundary, and the radial kernel is better suited to capture these complex relationships in the NHANES data.
+
+
+## Limitations
+
+Several limitations should be considered:
+
+1. Feature limitations: Many potential predictors of obesity are absent from the selected NHANES subset, limiting the model’s ability to fully capture the underlying patterns.
+
+1. Residual imbalance: Although the dataset is not highly imbalanced, obesity accounted for approximately one-third of the sample, which may still influence sensitivity.
+
+1. Model interpretability: While the radial SVM provided better predictive performance, it is less interpretable than the linear model. Understanding which variables drive obesity risk becomes more difficult.
+
+
+Overall, the results demonstrate that SVM models can classify obesity with moderate accuracy using standard NHANES variables, but performance remains limited without richer predictors.
+
+## Conclusion
+
+This project compared linear and radial SVM models for predicting obesity from NHANES data. The linear SVM performed poorly, indicating that a simple linear decision boundary cannot separate obese and non-obese individuals based on the available predictors. In contrast, the radial SVM achieved substantially better accuracy and sensitivity, demonstrating that obesity requires a non-linear classification approach. Although performance improved, it remained moderate overall, reflecting the complexity of obesity and the limitations of the included variables. These findings highlight the value of non-linear methods in health classification tasks, while also underscoring the need for richer predictors to achieve stronger performance.

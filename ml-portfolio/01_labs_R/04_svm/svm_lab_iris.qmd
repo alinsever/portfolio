@@ -1,5 +1,6 @@
 ---
-title: "SVM Lab – Iris Dataset"
+title: "Support Vector Machine (Lab)"
+sutitle: "Iris Dataset"
 author: "Alin Sever"
 date: "2025-11-15"
 format:

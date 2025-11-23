@@ -1,0 +1,1284 @@
+---
+title: "Linear Regression Analysis - Predicting Body Mass Index"
+author: "Alin Sever"
+date: "2025-10-16"
+format:
+  html:
+    toc: true
+    toc-depth: 4
+    number-sections: true
+    code-fold: true
+  pdf:
+    toc: true
+    number-sections: true
+
+
+editor: source
+---
+
+```{r}
+#| label: cache
+#| echo: false
+
+knitr::opts_chunk$set(cache = TRUE)
+```
+
+```{r}
+#| label: libraries
+#| echo: false
+#| message: false
+#| warning: false
+
+
+
+# Repos and packages
+if (is.null(getOption("repos")) ||
+    is.na(getOption("repos")["CRAN"]) ||
+    getOption("repos")["CRAN"] %in% c("", "@CRAN@")) {
+  options(repos = c(CRAN = "https://cloud.r-project.org"))
+}
+
+pkgs <- c("tidyverse",
+          "NHANES",
+          "moments",
+          "knitr",
+          "kableExtra",
+          "broom",
+          "car",
+          "sandwich",
+          "lmtest"
+          )
+
+missing <- pkgs[!vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)]
+
+if (length(missing)) install.packages(missing, dependencies = TRUE)
+
+invisible(lapply(pkgs, function(p) suppressPackageStartupMessages(library(p, character.only = TRUE))))
+
+
+
+```
+
+```{r}
+#| label: theme_seed_contrast
+#| echo: false
+
+theme_set(theme_minimal(base_size = 12))
+
+set.seed(42)
+
+options(contrasts = c("contr.treatment","contr.poly")) # default anyway
+# Treatment coding: “How much higher/lower is each level vs the reference?”
+# Polynomial coding (ordered): “Is there a linear (and/or curved) trend across the ordered levels?”
+
+```
+
+## Introduction to Linear Modeling
+
+**The goal is to explain wich factors are associated with BMI in US adults** (NHANES dataset), controling for demographics (age, gender, race, education), socio-economic indicators (education, income) and lifestyle (sleep, physical activity, alcohol, smoking). We will start simple and incrementally extend to a multiple linear regression, also adding multiple regression effects that are conditional on the other covariates in the model.
+
+### Linear Models for BMI
+
+Body Mass Index (BMI) is a continuous variable calculated as weight (kg) divided by height squared ($m^{2}$). BMI is a proxy for body fat and is strongly related to chronic diseases such as diabetes, cardiovascular disease and hypertension.
+
+In this analysis, we use NHANES adult participants (Age \>= 18) to examine how demographics, socioeconomic status and lifestyle behaviors are associated withBMI
+
+### Model Specifications
+
+We model BMI as a linear function of selected predictors:
+
+BMI = $\beta_0$ + $\beta_1$ \* Age + $\beta_2$ \* Gender + $\beta_3$ \* Race + $\beta_4$ \* Education + $\beta_5$ \* log(Income) + $\beta_6$ \* PhysActive + $\beta_7$ \* SleepHrs + $\beta_8$ \* SmokeNow + $\beta_8$ \* AlcoholDay + $\epsilon$
+
+Where:
+
+-   $\beta_0$ is the intercept (BMI)
+-   $\beta_1$...$\beta_8$ are the regression coefficients representing the effect on each predictor.
+-   $\epsilon$ represents the random error term (assumed that it is normally distributed)
+
+### Reasearch Questions
+
+-   After adjusting for covariates, how does BMI vary with Age?
+-   Do demographic factors (Gender, Race, Education) show overall association with BMI?
+-   Are lifestyle factors (PsyActive, AlcoholDay, SleepNight, SmokeNow) associated with BMI, and how much?
+-   How much variance is explained by the model?
+
+## Data processing
+
+-   Population: NHANES adults (Age $\geqslant$ 18).
+-   Variables: Age; Gender; Race1; Education; HHIncomeMid (we used log transform); PhysActive; SleepHrsNight; AlcoholDay; SmokeNow; BPSysAve. Factor coding: treatment contrasts (reference vs others).
+-   Missing data strategy (baseline): Complete-case analysis on these variables to keep the workflow transparent.
+
+::: {.callout-note collapse = "true" title = "Handling Missing Values"}
+
+```{r}
+#| label: load data _ deal with NA
+#| echo: false
+#| warning: false
+
+#?NHANES
+
+# selecting only the variables for BMI
+
+nh_raw1 <- readRDS("nhanes.rds")
+
+nh_raw <- nh_raw1 %>% 
+  filter(Age >= 18) %>%
+  select(
+    BMI,                  # response
+    Age,
+    Race1,
+    Gender,
+    Education,
+    HHIncomeMid,
+    PhysActive,
+    SleepHrsNight,
+    AlcoholDay,
+    SmokeNow,
+    BPSysAve              # keep BP; TotChol removed
+  ) %>%
+  mutate(
+    # factor setup (treatment contrasts; readable refs)
+    Gender     = factor(Gender, levels = c("female","male")),
+    PhysActive = factor(PhysActive, levels = c("No","Yes")),
+    Race1      = fct_infreq(factor(Race1)),   # most common level becomes reference
+    Education  = factor(Education),
+    SmokeNow   = factor(SmokeNow, levels = c("No","Yes")),
+    log_income = log(HHIncomeMid)             # safe: HHIncomeMid min ~ 2500
+  )
+
+nh_cc <- nh_raw %>% drop_na()
+
+n0   <- nrow(nh_raw)
+n_cc <- nrow(nh_cc)
+retention_pct <- round(100 * n_cc / n0, 1)
+
+#retention_pct
+
+nhanes_lm <- nh_cc
+
+```
+
+We included only adults (≥ 18 years). BMI in children is interpreted with age- and sex-specific percentiles, so combining adults and minors would yield non-comparable BMI categories and biased estimates. We created log_income = log(HHIncomeMid). We then used a complete-case dataset for baseline modeling (all variables observed), retaining `r retention_pct`% of the adult sample.
+
+AlcoholDay/SmokeNow are driving most most of the loss.
+
+```{r}
+#| label: missing_value_table
+#| echo: false
+
+miss_tbl <- nh_raw %>%
+  summarise(across(everything(), ~ mean(is.na(.))*100)) %>%
+  pivot_longer(everything(), names_to = "Variable", values_to = "Percent_Missing") %>%
+  arrange(desc(Percent_Missing))
+
+kable(miss_tbl, digits = 1, caption = "Percentage of Missing Values") %>%
+  kable_styling(full_width = FALSE,
+                bootstrap_options = c("striped","hover"))
+
+```
+
+:::
+
+## Exploratory Analysis (EDA)
+
+### Outcome distribution (BMI)
+
+::::: columns
+::: {.column width="50%"}
+**Summary statistics: mean, median, SD, quantiles:**
+
+The response variable, Body Mass Index (BMI), ranged from 15.0 to 81.2 kg/m² with a mean of 28.8 kg/m² (SD = 6.65, median = 27.8).
+
+Approximately 33% of participants were classified as overweight (25 ≤ BMI \< 30) and 33% as obese (BMI ≥ 30), reflecting the high prevalence of excess weight in the U.S. adult population.
+
+The distribution exhibited moderate right skewness (skewness = 1.2), indicating a longer tail with high BMI values
+:::
+
+::: {.column width="50%"}
+```{r}
+#| label: bmi_stats
+#| echo: false
+
+
+bmi_stats <- nhanes_lm %>%
+  summarise(
+    Mean = mean(BMI),
+    Median = median(BMI),
+    SD = sd(BMI),
+    Min = min(BMI),
+    Max = max(BMI),
+    Q1 = quantile(BMI, 0.25),
+    Q3 = quantile(BMI, 0.75),
+    IQR = IQR(BMI),
+    Skewness = moments::skewness(BMI),
+    #Kurtosis = moments::kurtosis(BMI)
+  )
+# 6.9, leptokurtic, that is well above 3, tells you that is very peaked in the center with
+# long tail, some extreme outlier. Most people are around the averrage BMI in the data, but some
+# have very high BMI
+
+kable(bmi_stats,
+      caption = "Descriptive Statistics for BMI",
+       digits = 1
+       )
+
+
+bmi_categories <- nhanes_lm %>%
+  mutate(BMI_Category = case_when(
+    BMI < 18.5 ~ "Underweight",
+    BMI < 25 ~ "Normal",
+    BMI < 30 ~ "Overweight",
+    BMI >= 30 ~ "Obese"
+  )) %>%
+  count(BMI_Category) %>%
+  mutate(Percentage = round(n / sum(n) * 100, 1)) %>%
+  # factor
+  mutate(BMI_Category = factor(
+    BMI_Category,
+    levels = c("Underweight", "Normal", "Overweight", "Obese")
+  )) %>%
+  arrange(BMI_Category)
+
+bmi_categories %>%
+  kable(
+    caption = "Distribution of BMI Categories",
+    col.names = c("BMI Category", "Patient Count", "Percentage (%)")
+  ) %>%
+  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover"))
+
+```
+
+:::
+:::::
+
+
+
+::: {.callout-note collapse = "true" title = "BMI Distribution plot and outlier detection"}
+
+
+
+**Distribution plot of BMI (histogram + density curve)**
+
+:::::: columns
+::: {.column width = "50%"}
+
+
+The distribution of the BMI variable is right-skweed as shown in the overview. This shows that most people are around the average BMI in the data; however, some have very high BMI
+:::
+
+::: {.column width = "50%"}
+
+```{r}
+#| label: distribution_BMI
+#| echo: false
+
+ggplot(nhanes_lm, aes(x = BMI)) +
+  geom_histogram(aes(y = after_stat(density)), 
+                 bins = 40, 
+                 fill = "steelblue", 
+                 alpha = 0.7,
+                 color = "white") +
+  geom_density(color = "red", linewidth = 1.2) +
+  geom_vline(xintercept = mean(nhanes_lm$BMI), 
+             color = "darkgreen", 
+             linetype = "dashed", 
+             linewidth = 1) +
+  geom_vline(xintercept = median(nhanes_lm$BMI), 
+             color = "orange", 
+             linetype = "dashed", 
+             linewidth = 1) +
+  labs(title = "Distribution of BMI",
+       subtitle = paste0("Green line = Mean (", round(mean(nhanes_lm$BMI), 1), 
+                        "), Orange line = Median (", round(median(nhanes_lm$BMI), 1), ")"),
+       x = "BMI (kg/m²)",
+       y = "Density") +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold", size = 14))
+
+```
+
+:::
+
+::::::
+
+
+
+
+
+
+
+
+
+::: columns
+::: {.column width = "50%"}
+
+```{r}
+#| label: box-plot_BMI
+#| echo: false
+
+p3 <- ggplot(nhanes_lm, aes(y = BMI, x = "")) +
+  geom_boxplot(fill = "lightblue", outlier.color = "red", outlier.size = 2) +
+  coord_flip() +
+  labs(title = "Boxplot of BMI (Outlier Detection)",
+       subtitle = "Red points are statistical outliers (> 1.5 × IQR from quartiles)",
+       y = "BMI (kg/m² *10,000)",
+       x = "") +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold", size = 14),
+        axis.text.y = element_blank())
+
+
+outlier_threshold_upper <- quantile(nhanes_lm$BMI, 0.75) + 1.5 * IQR(nhanes_lm$BMI)
+outlier_threshold_lower <- quantile(nhanes_lm$BMI, 0.25) - 1.5 * IQR(nhanes_lm$BMI)
+
+n_outliers_upper <- nhanes_lm$BMI > outlier_threshold_upper
+
+n_outliers <- sum(nhanes_lm$BMI > outlier_threshold_upper | 
+                  nhanes_lm$BMI < outlier_threshold_lower)
+n_outliers_upper <- sum(nhanes_lm$BMI > outlier_threshold_upper)
+
+n_outliers_pct <- paste0(round(n_outliers/nrow(nhanes_lm)*100, 1), "%")
+
+```
+
+The box plot indicates that there are no outliners in the lower part ofthe distribution. The lower threshold is at approximately `r round(outlier_threshold_lower)`, while the upper threshold is approximately at `r round(outlier_threshold_upper)`.
+
+In contrast the upper tail displays a substantial number of extreme values, with `r n_outliers_upper` observations identified as outliers.
+:::
+
+::: {.column width = "50%"}
+
+```{r}
+#| label: print_p3
+#| echo: false
+
+
+print(p3)
+
+```
+
+:::
+::::::
+
+Although the BMI distribution shows high-value observations, these values fall within plausible physiological ranges for the NHANES population. Therefore, no outliers were removed.
+
+:::
+
+### Summary of Exploratory Data Analysis BMI vs predictors
+
+Among all variables examined, physical activity, race/ethnicity, and education level showed the strongest associations with BMI. Physically active individuals had noticeably lower BMI on average, and several race and education groups displayed meaningful mean differences. In contrast, most continuous predictors such as age, income, sleep hours, blood pressure, and alcohol use—showed very weak correlations and offered limited linear explanatory power.
+Please see below in the collapsed section for the full EDA.
+
+::: {.callout-note collapse = "true" title = "Pairwise relationships with BMI"}
+
+### Pairwise relationships with BMI (continuous predictors)
+
+::: {.box style="background-color:#f9f9f9; padding:15px; border-radius:10px;"}
+**BMI vs Age**
+
+::: columns
+::: {.column width = "50%"}
+
+```{r}
+#| label: bmi_vs_age
+#| echo: false
+#| warning: false
+
+
+p_age <- ggplot(nhanes_lm, aes(x = Age, y = BMI)) +
+  geom_point(alpha = 0.3, size = 1.5, color = "gray40") +
+  geom_smooth(method = "loess", color = "red", linewidth = 1.5, se = TRUE) +
+  labs(title = "BMI vs Age",
+       subtitle = "Red curve = LOESS smoother (shows actual relationship pattern)",
+       x = "Age (years)",
+       y = "BMI (kg/m²)") +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold"))
+
+
+
+cor_age <- cor(nhanes_lm$Age, nhanes_lm$BMI)
+#cor_age
+
+# correlation is almost not existent. 
+variance_age <- cor_age^2
+#variance_age
+#format(variance_age, scientific = FALSE, digits = 4)
+
+```
+
+The scatterplot with a LOESS smoother shows that BMI remains largely consistent across age groups. The Pearson correlation coefficient (r = `r cor_age`) indicates virtually no linear association between age and BMI.
+
+The corresponding coefficient of determination ($R^{2}$ = `r format(variance_age, scientific = FALSE, digits = 4)`) confirms that age explains less than 0.02% of the variance in BMI. This suggests that BMI is not influenced by age in this sample, and other demographic or lifestyle variables likely play a more substantial role in determining BMI.
+:::
+::: {.column width = "50%"}
+```{r}
+#| label: bmi_vs_age_plot
+#| echo: false
+#| warning: false
+
+
+p_age
+#weak positive association between Age and BMI between 20 and 30, flat 30-60 and a mild decline after 60
+
+```
+
+:::
+
+::::::
+
+:::
+
+**BMI vs log(income)**
+
+:::::: columns
+::: {.column width = "50%"}
+
+```{r}
+#| label: bmi_vs_log_income
+#| echo: false
+#| warning: false
+
+p_income <- ggplot(nhanes_lm, aes(x = log_income, y = BMI)) +
+  geom_point(alpha = 0.3, size = 1.5, color = "gray40") +
+  geom_smooth(method = "loess", color = "red", linewidth = 1.5, se = TRUE) +
+  labs(title = "BMI vs Log(Household Income)",
+       subtitle = "Expectation: Negative relationship (higher income → lower BMI)",
+       x = "Log(Household Income Midpoint)",
+       y = "BMI (kg/m²)") +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold"))
+
+#p_income
+
+cor_income <- cor(nhanes_lm$log_income, nhanes_lm$BMI)
+#cor_income 
+
+r2_income <- cor_income^2
+#format(r2_income, scientific = FALSE, digits = 4)
+
+```
+
+The scatterplot with a LOESS smoother shows a weak negative association between BMI and the logarithm of household income.
+
+The Pearson correlation coefficient (r = `r cor_income`) confirms that higher income is associated with slightly lower BMI values. However, this relationship is very weak ($R^{2}$ = `r format(r2_income, scientific = FALSE, digits = 4)`), indicating that household income explains less than 1% of the variance in BMI.
+
+Although the direction aligns with the expected negative relationship for higher income, the effect size suggests that income has minimal influence on BMI in this sample.
+:::
+
+::: {.column width = "50%"}
+
+
+```{r}
+#| label: plot_incom
+#| echo: false
+#| warning: false
+
+p_income
+
+```
+
+:::
+::::::
+
+::: {.box style="background-color:#f9f9f9; padding:15px; border-radius:10px;"}
+**BMI vs Sleep**
+
+:::::: columns
+::: {.column width = "50%"}
+
+```{r}
+#| label: p_sleep1
+#| warning: false
+#| echo: false
+
+p_sleep <- ggplot(nhanes_lm, aes(x = SleepHrsNight, y = BMI)) +
+  geom_point(alpha = 0.3, size = 1.5, color = "gray40") +
+  geom_smooth(method = "loess", color = "red", linewidth = 1.5, se = TRUE) +
+  labs(title = "BMI vs Sleep Hours per Night",
+       subtitle = "Research suggests: Both too little and too much sleep → higher BMI",
+       x = "Sleep Hours per Night",
+       y = "BMI (kg/m²)") +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold"))
+
+
+
+cor_sleep <- cor(nhanes_lm$SleepHrsNight, nhanes_lm$BMI)
+#cor_sleep
+
+r2_sleep <- cor_sleep^2
+
+```
+
+BMI shows a negligible linear association with sleep duration (r = `r cor_sleep`; $R^{2}$ ≈ `r format(r2_sleep, scientific = FALSE, digits = 4)`).
+
+The LOESS smoother suggests a shallow U-shape, with the lowest BMI at approximately 7.5 hours of sleep and slightly higher BMI at both shorter and longer durations.
+:::
+
+::: {.column width = "50%"}
+
+```{r}
+#| label: plot_sleep
+#| warning: false
+#| echo: false
+
+print(p_sleep)
+```
+
+:::
+::::::
+:::
+
+**BMI vs Systolic Blood Presure**
+
+:::::: columns
+::: {.column width = "50%"}
+
+```{r}
+#| label: BMI_BPsys_drop
+#| echo: false
+#| warning: false
+
+p_bp <- ggplot(nhanes_lm, aes(x = BPSysAve, y = BMI)) +
+  geom_point(alpha = 0.3, size = 1.5, color = "gray40") +
+  geom_smooth(method = "loess", color = "red", linewidth = 1.5, se = TRUE) +
+  labs(title = "BMI vs Systolic Blood Pressure",
+       subtitle = "Expectation: higher BMI - higher BP",
+       x = "Systolic Blood Pressure (mmHg)",
+       y = "BMI (kg/m²)") +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold"))
+
+
+cor_bp <- cor(nhanes_lm$BPSysAve, nhanes_lm$BMI)
+#cor_bp
+```
+
+Although we expected a strong positive relashionship between BMI and systolic blood pressure, the data shows only a very week positive trend. The LOESS curve suggests a small increase in BP with BMI initially, but then the relashioship plateus and even goes down slightly. This indicates that systolic blood presure alone is not a predictor in this sample.
+
+BMI is expected to predict high blood pressure, but the data may not show this since many patients manage their blood pressure with medication.
+:::
+
+::: {.column width = "50%"}
+
+```{r}
+#| label: blood_resure_plot
+#| warning: false
+#| echo: false
+#|
+print(p_bp)
+
+```
+
+:::
+::::::
+
+
+::: {.box style="background-color:#f9f9f9; padding:15px; border-radius:10px;"}
+
+**BMI vs AlcoholDay**
+
+:::::: columns
+::: {.column width = "50%"}
+
+
+The LOESS curve is nearly flat with a slight downward tilt. The confidence interval widens as AlcoholDay increases (due to few observations with higher values)
+The unajusted linear correlation is appox 0.03, meaning very little to no association with BMI.
+
+:::
+::: {.column width = "50%"}
+
+```{r}
+#| label: alcohol
+#| echo: false
+#| warning: false
+
+plot_loess <- function(df, x, y="BMI", xlab=NULL){
+  ggplot(df, aes(x=.data[[x]], y=.data[[y]])) +
+    geom_point(alpha=.25, size=1, color="gray40") +
+    geom_smooth(method="loess", color = "red", se=TRUE, linewidth=1) +
+    labs(x = xlab %||% x, y = "BMI (kg/m²)") +
+    theme(plot.title = element_text(face="bold"))
+}
+
+# p_age   <- plot_loess(nhanes_lm, "Age") + ggtitle("BMI vs Age")
+# p_inc   <- plot_loess(nhanes_lm, "log_income", xlab="log(Income)") + ggtitle("BMI vs log(Income)")
+# p_sleep <- plot_loess(nhanes_lm, "SleepHrsNight") + ggtitle("BMI vs Sleep (hours/night)")
+p_alc   <- plot_loess(nhanes_lm, "AlcoholDay") + ggtitle("BMI vs Alcohol (drinks/day)")
+# p_bp    <- plot_loess(nhanes_lm, "BPSysAve") + ggtitle("BMI vs Systolic BP")
+ 
+
+
+
+# trying different ways to look at the alcohol day 
+
+p_alc2 <- plot_loess(dplyr::filter(nhanes_lm, AlcoholDay <= 40), "AlcoholDay") +
+  ggtitle("BMI vs Alcohol (drinks/day)") +
+  scale_x_continuous(limits = c(0, 40))
+
+p_alc2
+
+```
+
+:::
+
+::::::
+:::
+
+::: {.callout-note collapse = "true" title = "Appendinx: BMI vs Alcohol Day"}
+
+Below are the BMI–AlcoholDay correlations and visualizations: (i) the plot over the full 0–80 range, and (ii) the log(1 + AlcoholDay)
+
+```{r}
+#| label: acl_corelation
+
+cor_alc <- cor(nhanes_lm$AlcoholDay, nhanes_lm$BMI)
+cor_alc
+```
+
+**(i) the plot over the full 0–80 range**
+
+```{r}
+#| label: plot_alc_fullrange
+#| echo: false
+
+
+p_alc
+```
+
+**(ii) the log(1 + AlcoholDay)**
+
+```{r}
+#| label: plot_alc_log
+#| echo: false
+
+nhanes_lm <- nhanes_lm %>% 
+  mutate(alc_log1p = log1p(AlcoholDay))
+
+p_alc_log <- plot_loess(nhanes_lm, "alc_log1p") + ggtitle("BMI vs Alcohol (drinks/day)")
+p_alc_log
+
+ cor_alc_log <- cor(nhanes_lm$alc_log1p, nhanes_lm$BMI)
+ cor_alc_log
+# correlation for log is even smaller
+
+```
+The correlation between alcohol and BMI is even smaller when AlcoholDay is logaritmized - 0.0240489. 
+
+:::
+
+
+### BMI vs Categorical predictors
+
+::: {.box style="background-color:#f9f9f9; padding:15px; border-radius:10px;"}
+**BMI by Gender**
+
+:::::: columns
+::: {.column width = "50%"}
+
+```{r}
+#| label: p_gender1
+#| echo: false
+#| warning: false
+
+p_gender <- ggplot(nhanes_lm, aes(x = Gender, y = BMI, fill = Gender)) +
+  geom_boxplot(alpha = 0.7) +
+  geom_jitter(alpha = 0.1, width = 0.2, size = 0.5) +
+  stat_summary(fun = mean, geom = "point", shape = 23, 
+               size = 4, fill = "red", color = "black") +
+  labs(title = "BMI by Gender",
+       subtitle = "Red diamond = mean, Box shows median and quartiles",
+       x = "Gender",
+       y = "BMI (kg/m²)") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        plot.title = element_text(face = "bold"))
+
+
+# gender_stats <- nhanes_lm %>%
+#   group_by(Gender) %>%
+#   summarise(
+#     n = n(),
+#     Mean_BMI = mean(BMI),
+#     SD_BMI = sd(BMI),
+#     Median_BMI = median(BMI)
+#   )
+
+# print(gender_stats)
+
+# t_test_gender <- t.test(BMI ~ Gender, data = nhanes_lm)
+# t_test_gender
+
+```
+
+ 
+
+In this sample the average for female and male is almost the same; however, the BMI distribution is also more variable among females, as indicated by a higher standard deviation (sd = 7.04 vs. 5.43). There is *no evidence* that gender plays a strong role in explaining BMI differences in this sample.
+:::
+
+::: {.column width = "50%"}
+
+```{r}
+#| label: p_gender2
+#| echo: false
+#| warning: false
+#| 
+print(p_gender)
+
+```
+
+:::
+::::::
+:::
+**BMI by Physical Activity**
+
+:::::: columns
+::: {.column width = "50%"}
+
+```{r}
+#| label: p_active
+#| echo: false
+
+
+p_active <- ggplot(nhanes_lm, aes(x = PhysActive, y = BMI, fill = PhysActive)) +
+  geom_boxplot(alpha = 0.7) +
+  geom_jitter(alpha = 0.1, width = 0.2, size = 0.5) +
+  stat_summary(fun = mean, geom = "point", shape = 23, 
+               size = 4, fill = "red", color = "black") +
+  labs(title = "BMI by Physical Activity Status",
+       subtitle = "Expectation: Physically active individuals have lower BMI",
+       x = "Physically Active",
+       y = "BMI (kg/m²)") +
+  scale_fill_manual(values = c("No" = "coral", "Yes" = "lightgreen")) +
+  theme_minimal() +
+  theme(legend.position = "none",
+        plot.title = element_text(face = "bold"))
+
+
+active_stats <- nhanes_lm %>%
+  group_by(PhysActive) %>%
+  summarise(
+    n = n(),
+    Mean_BMI = mean(BMI),
+    SD_BMI = sd(BMI),
+    Median_BMI = median(BMI)
+  )
+
+
+t_test_active <- t.test(BMI ~ PhysActive, data = nhanes_lm)
+
+```
+
+On average, individuals that reported being physically active have a lower BMI (mean ≈ 27.9 kg/$m^{2}$) than those who are not (mean ≈ 29.9 kg/$m^{2}$). There is very strong evidence for a difference in BMI between physically active and inactive individuals (p \< 2.2 × $10^{-16}$), with an estimated mean difference of approximately 2.0 units (95% CI: \[1.68, 2.36\] kg/$m^{2}$). BMI is also more variable among inactive individuals (SD = 6.9 vs. 5.3), indicating a wider spread of body weight outcomes in this group.
+:::
+
+::: {.column width = "50%"}
+
+```{r}
+#| label: p_active_2
+#| echo: false
+
+print(p_active)
+```
+
+::: 
+
+::::::
+
+::: {.callout-note collapse = "true" title = "Appendix: Physical Activity Stats and T-test"}
+
+```{r}
+#| label: active_stats
+#| echo: false
+
+
+kable(active_stats,
+      caption = "Descriptive Statistics for Physical Active",
+       digits = 1
+       )
+
+
+t_test_active
+
+```
+
+:::
+
+
+::: {.box style="background-color:#f9f9f9; padding:15px; border-radius:10px;"}
+
+**BMI vs Education**
+
+:::::: columns
+::: {.column width = "50%"}
+
+```{r}
+#| label: education
+#| echo: false
+
+p_education <- ggplot(nhanes_lm, aes(x = Education, y = BMI, fill = Education)) +
+  geom_boxplot(alpha = 0.7) +
+  stat_summary(fun = mean, geom = "point", shape = 23, 
+               size = 3, fill = "red", color = "black") +
+  labs(title = "BMI by Education Level",
+       subtitle = "Expectation: Higher education → lower BMI",
+       x = "Education Level",
+       y = "BMI (kg/m²)") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        plot.title = element_text(face = "bold"),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+
+#print(p_education)
+
+education_stats <- nhanes_lm %>%
+  group_by(Education) %>%
+  summarise(
+    n = n(),
+    Mean_BMI = mean(BMI),
+    SD_BMI = sd(BMI),
+    Median_BMI = median(BMI)
+  ) %>%
+  arrange(desc(Mean_BMI))
+
+# print(education_stats)
+
+anova_education <- aov(BMI ~ Education, data = nhanes_lm)
+
+# summary(anova_education)
+
+
+
+anova_table <- summary(anova_education)[[1]]
+SS_education <- anova_table["Education", "Sum Sq"]
+SS_residual  <- anova_table["Residuals", "Sum Sq"]
+R2_edd <- SS_education / (SS_education + SS_residual)
+#R2_edd
+
+# tuk <- TukeyHSD(anova_education, "Education")
+# tuk
+# plot(tuk)
+
+```
+
+In this sample, individuals who reported having a Colledge Graduate had a lower mean (mean ≈ 27.1 kg/$m^{2}$) compared with rest of the groups (mean ≈ 28.2 - 29.2 kg/$m^{2}$). The one-way ANOVA test provides strong evidence that the mean BMI differs across education levels (p \< 0.001). However the coefficient of deteermination R2 = `r R2_edd` indicates that the education level only explains 1.3% in the BMI variation. This means that, while the difference is statistically significant, its practical importance is very small.
+:::
+
+::: {.column width = "50%"}
+
+```{r}
+#| label: education_plot
+#| echo: false
+print(p_education)
+
+```
+:::
+
+::::::
+
+:::
+
+
+::: {.callout-note collapse = "true" title = "Appendix: Education Stats and Anova and "}
+
+```{r}
+#| label: education_stats
+#| echo: false
+#| 
+
+
+kable(education_stats,
+      caption = "Descriptive Statistics for Education",
+       digits = 1
+       )
+
+anova_education <- aov(BMI ~ Education, data = nhanes_lm)
+```
+
+**Anova**
+
+```{r}
+#| label: edd
+#| echo: false
+summary(anova_education)
+
+
+```
+
+**Tukey**
+
+```{r}
+#| label: edd2
+#| echo: false
+
+
+tuk <- TukeyHSD(anova_education, "Education")
+
+tuk
+
+plot(tuk)
+
+```
+:::
+
+
+:::::: columns
+::: {.column width = "50%"}
+
+**BMI by Race**
+
+```{r}
+#| label: race1
+#| echo: false
+#| warning: false
+
+p_race <- ggplot(nhanes_lm, aes(Race1, BMI, fill = Race1))+
+  geom_boxplot(alpha = 0.7)+
+  stat_summary(fun = mean, geom = "point", shape = 23,
+                size = 3, fill = "red", color = "black") +
+  labs(title = "BMI by Race",
+      subtitle = "",
+      x = "Race/Ethnicity",
+       y = "BMI (kg/m²)") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        plot.title = element_text(face = "bold"),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+
+```
+
+&nbsp;
+
+In this sample Black and Mexican groups show higher average BMI than White, while “Other” is lower; the boxplots (red diamonds = means) reflect these shifts.
+:::
+
+::: {.column width = "50%"}
+
+```{r}
+#| label: race2
+#| echo: false
+
+print(p_race)
+
+```
+:::
+::::::
+
+
+::: {.callout-note collapse = "true" title = "Appendinx: Race Stats and Anova"}
+
+```{r}
+#| label: race3
+#| echo: false
+
+
+race_stats <- nhanes_lm %>%
+  group_by(Race1) %>%
+  summarise(
+    n = n(),
+    Mean_BMI = mean(BMI),
+    SD_BMI = sd(BMI),
+    Median_BMI = median(BMI)
+  ) %>%
+  arrange(desc(Mean_BMI))
+print(race_stats)
+
+anova_race <- aov(BMI ~ Race1, data = nhanes_lm)
+anova_race
+```
+
+One-way ANOVA indicates a significant overall difference across Race1 (p \< 0.001); pairwise Tukey comparisons can then identify which specific pairs differ.
+:::
+
+::: {.box style="background-color:#f9f9f9; padding:15px; border-radius:10px;"}
+
+:::::: columns
+::: {.column width = "50%"}
+
+**BMI vs Smoke**
+
+Smokers show an approximate 1.1 kg/$m^{2}$ lower mean BMI than non-smokers. The T-test result tells us that there is very strong evidence that the median BMI between non-smokers and smokers is not zero.(appendix)
+
+:::
+::: {.column width = "50%"}
+
+```{r}
+#| label: smoke
+#| echo: false
+
+
+
+
+p_smoke  <- ggplot(nhanes_lm, aes(SmokeNow, BMI, fill=SmokeNow)) +
+  geom_boxplot(alpha=.7) + guides(fill="none") + labs(title="BMI by Smoking status")
+
+p_smoke
+```
+
+:::
+::::::
+
+::: {.callout-note collapse = "true" title = "Appendix: BMI~Smoke t-test"}
+```{r}
+
+t_test_Smoke <- t.test(BMI ~ SmokeNow, data = nhanes_lm)
+t_test_Smoke
+
+```
+
+:::
+
+:::
+
+:::
+
+## Linear Model
+
+**Summary of Linear Modeling Progression (Collapsed Below)**
+
+To reach the final interaction model, we estimated a sequence of nested linear models. The simple BMI ~ Age regression showed no meaningful association, and adding basic demographics improved the fit only slightly, with race contributing the most. Socioeconomic factors provided minimal additional explanatory power. Lifestyle and clinical variables strengthened the model somewhat, with physical activity, smoking status, systolic blood pressure, and race emerging as the most consistent predictors of BMI. All earlier models and their outputs are collapsed below, while the final interaction model remains visible for interpretation.
+
+::: {.callout-note collapse = "true" title = "Linear Modeling Progression"}
+
+### BMI ~ Age
+
+We are starting with a simpler linear model
+
+:::::: columns
+::: {.column width = "50%"}
+
+The intercept is 28.01 kg/$m^{2}$. The interpretation has no meaning as it represents the BMI at age 0 for an adult. (part of the linear fit)
+
+The slope is 0.005 kg/$m^{2}$ and the interpretation would be that for the each year increase the BMI will increase with 0.005. The p value is 0.512 and we can say that in this linear model there is no evidence of a linear assocciation between BMI and Age.
+
+With a fit $R^{2}$ = 0.0002 (adj. $R^{2}$ = -0.0002) Age explaines none of the variability in BMI
+:::
+
+::: {.column width = "50%"}
+
+```{r}
+#| label: lm_age1
+#| echo: true
+
+
+m_age <-lm(BMI ~ Age, data = nhanes_lm)
+
+
+```
+
+```{r}
+#| label: lm_age2
+
+
+#summary(m_age)
+
+
+age_sum <- tidy(m_age, conf.int = TRUE)
+#age_sum
+age_fit <- glance(m_age)[, c("r.squared","adj.r.squared","sigma","nobs")]
+
+
+
+kable(age_sum, digits=3, caption="BMI ~ Age: coefficient table (with 95% CI)")
+#kable(age_fit, digits=3, caption="BMI ~ Age: model fit")
+age_fit
+```
+
+:::
+::::::
+
+### Model 1: Demographic
+
+We will add core demographic variables to the model: Age + Gender + Race
+
+**Model:** BMI \~ Age + Gender + Race
+
+> We fit a multiple linear model with BMI as the response and Age (continuous), Gender (female = reference), and Race (White = reference) as covariates.
+
+```{r}
+#| label: demographic
+
+
+M1 <- lm(BMI ~ Age + Gender + Race1, data = nhanes_lm)
+
+summary(M1)
+
+# Coefficients with 95% CIs (t-tests)
+# core_coef <- broom::tidy(M1, conf.int = TRUE)
+# core_coef
+
+# M1_sum <- tidy(M1, conf.int = TRUE)
+# kable(M1_sum, digits=3, caption="BMI ~ Age + Gender + Race coefficient table (with 95% CI)")
+
+
+
+# Model fit
+# M1_fit  <- broom::glance(M1)[, c("r.squared","adj.r.squared","sigma","df","nobs")]
+# knitr::kable(M1_fit,  digits = 3, caption = "Core model: fit statistics")
+```
+
+In this model the Race differences between groups relative to White: Black (+ 2.87 kg/$m^{2}$, p \< $10^{-8}$) and Mexican (+2.80 kg/$m^{2}$, p \< $10^{-6}$) participants have a higher BMI on average, while Other shows very weak evidence that the BMI is lower on everage than White (-1.13 kg/$m^{2}$, p \< 0.068) and for Hispanix group there is no evidence that the BMI is different from White category on average (+0.45 kg/$m^{2}$, p \< 0.517). The adjusted $R^{2}$ = 0.028, meaning that demographics only explain \~2.8% of BMI variability
+
+**F-tests for M1 (BMI \~ Age + Gender + Race1)**
+
+```{r}
+#| label: demographic1
+#| echo: true
+
+
+M1_drop1 <- drop1(M1, test = "F")
+M1_drop1 
+
+
+```
+
+Using drop1() we test each term conditional on the others. Race is associated with BMI; Age and Gender are not, at this stage.
+
+### Adding Socioeconomic factors
+
+We are adding socioeconomic factors to our model
+
+```{r}
+#| label: socioeco
+#| 
+M2 <- update(M1, . ~ . + Education + log_income)
+summary(M2)
+
+```
+
+Afteradding the Education and log_income as covariates the BMI remains higher forBlack and Mexican participants vs White. Age and particpats that are Colledge Graduates shows a very weak association with BMI. The adj. $R^{2}$ shows an explanability of 3.4%
+
+**Term-wise F-tests**
+
+```{r}
+#| label: SEF_drop1
+
+M2_drop1 <- drop1(M2, test = "F")
+M2_drop1
+
+```
+
+Term-wise F-tests: BMI differs overall by Race and Education; Age is borderline; Gender and log(Income) show little added association (conditional on other covariates).
+
+### Adding Lifestyle & Clinical predictors
+
+```{r}
+
+M3 <- update(M2, . ~ . + PhysActive + SleepHrsNight + AlcoholDay + SmokeNow + BPSysAve)
+summary(M3)
+```
+```{r}
+#| label: M3_with_log
+#| echo: false
+
+# with log for alcohol there are pvalue ishigher- no evidence, my question is if we log alcohol how we explain the model. AI gave no clear answer on this
+
+# M3_c <- update(M2, . ~ . + PhysActive + SleepHrsNight + alc_log1p + SmokeNow + BPSysAve)
+# summary(M3_c)
+
+```
+
+After adding lifestyle and clinical predictors to our Model BMI we can observe that BMI stays higher for Black and Mexican in comparision with White participants. Physically Active participants have a lower BMI, and Smoking participants have a lower BMI. Effects are conditional on the others (treatment coding); results are associations, not causal.
+
+**Term-wise F-tests**
+
+```{r}
+M3_drop1 <- drop1(M3, test = "F")
+M3_drop1
+
+
+
+```
+
+Term-wise F-tests for M3 (BMI \~ Age + Gender + Race1 + Education + log_income + PhysActive + SleepHrsNight + AlcoholDay + SmokeNow + BPSysAve)
+
+:::
+
+### Adding Interactions
+
+We extended the model with prespecified interactions to test whether the association between:
+
+-   **PhysActive × Gender** - Based on *Gender Differences in Exercise Habits and Quality of Life Reports*[^1], physical activity patterns differ significantly by gender. Here we test whether the BMI–activity association varies by sex.
+-   **PhysActive × Education** - According to the research *Education leads to a more physically active lifestyle*[^2], *"one additional year of education leads to a 0.62-unit higher overall physical activity"*. We are testing if in our sample the activity–BMI association varies across socioeconomic factors (education levels).
+-   **Gender × SmokeNow** - Based on the report from *Swiss association for tabacco control*[^3], there are known gender differences in smoking paterns. In out sample we are testing whether the smoking-BMI association differs by sex.
+
+```{r}
+#| label: interaction_model
+#| code-fold: false
+#| echo: true
+
+M4 <- update(M3, . ~ . + PhysActive:Gender + PhysActive:Education + Gender:SmokeNow)
+
+```
+
+::: {.callout-note collapse = "true" title = "Model Summary-  result"}
+
+```{r}
+summary(M4)
+```
+
+:::
+
+**Interaction observation:**
+
+-   Gender:SmokingNow: there is very strong evidence that smoking is linked to a lower BMI for both sexes: women \~ 0.7 kg/$m^{2}$ lower and men \~ 3.3 kg/$m^{2}$ compared with non-smokers.
+-   PhysActivity:Gender: there is evidence that difference in average BMIassociated with physical acivity in not 0 men. In the baseline group women show a small decrease with activity (\~ 0.3kg/$m^{2}$). Men add approx 1.1 kg/$m^{2}$ to the female difference.
+-   PhysActivity:Education: in lower (9–11) and higher (College) education groups, being active is associated with a noticeably lower BMI than in the 8th-grade group.
+
+> All of these interaction are conditional associations (not causal)
+
+As we added the interaction we oberve that AlcoholDay shows a small positive association with BMI (for each additional drink a day the BMI increases with 0.085 kg/$m^{2}$, p = 0.04), conditional on other covariates.
+
+**Term-wise F-tests**
+
+```{r}
+#| label: interaction_drop1
+#| code-fold: false
+#| echo: true
+
+M4_drop1 <- drop1(M4, test = "F")
+
+```
+
+
+::: {.callout-note collapse = "true" title = "F-test result"}
+
+```{r}
+M4_drop1
+```
+
+
+:::
+
+Term-wise F-tests summary: BMI is associated with race, systolic BP, and shows effect modification for Gender:Smoking and Gender:Physical activity. Education:Physical activity is not supported
+
+## Research Questions
+
+**After adjusting for covariates, how does BMI vary with Age?**
+
+Adjusted for all covariates, the term-wise F-test (drop1) shows little evidence of a linear association between age and BMI (p ≈ 0.12)
+
+**Do demographic factors show overall association with BMI?**
+
+-   **Race/ethnicity:** Yes. Strong overall association (clear F-test).
+-   **Education:** Yes (overall main effect), but no activity–education interaction.
+-   **Gender:** No large main effect, but gender modifies the associations of physical activity and smoking with BMI.
+
+**Are lifestile factors (PsyActive, AlcoholDay, SleepNight, SmokeNow) associated with BMI, and how much?**
+
+-  At the reference education (8th Grade), females show a small reduction with activity (PhysActive main term).
+- Males add the Gender:PhysActive interaction, show an increase with activity. 
+- In 9–11th Grade and College Grad, the Education:PhysActive interactions are negative, showing that there is an associated reduction than in the reference education. However with the Drop1 test there is weak to no evidence that there is an interaction bewteen Education and PhyActive
+
+**How much variance is explained by the model?**
+
+The model’s adjusted $R^{2}$ ≈ 0.088, so the model explains only 8.8% of the variability in BMI.
+
+[^1]: See [PMC article](https://pmc.ncbi.nlm.nih.gov/articles/PMC5033515/).
+
+[^2]: See [PMC article](https://pubmed.ncbi.nlm.nih.gov/32176397/).
+
+[^3]: See [AT report](https://www.at-schweiz.ch/en/knowledge/data-figures/tobacco-consumption-in-switzerland/prevalence-in-general-population/).
