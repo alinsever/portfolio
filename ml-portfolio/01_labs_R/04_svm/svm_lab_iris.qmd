@@ -1,0 +1,212 @@
+---
+title: "SVM Lab – Iris Dataset"
+author: "Alin Sever"
+date: "2025-11-15"
+format:
+  html:
+    toc: true
+    toc-depth: 4
+    number-sections: true
+    code-fold: false
+  pdf:
+    toc: true
+    number-sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Loading Packages
+
+```{r packages}
+#| output: false
+#
+library(tidyverse)
+library(e1071) # package for SVM
+library(caret) # helper functions
+
+```
+
+## Loading the data
+
+Inspect the structure of the data
+
+```{r data}
+data(iris)
+str(iris)
+```
+
+## View the data
+Plot the data by Sepal
+
+```{r data_plot}
+iris |> 
+    ggplot(aes(x = Sepal.Length, y = Sepal.Width, color = Species))+
+    geom_point()
+```
+
+
+Plot the data by petal
+
+```{r data_plot_petal}
+iris |> 
+    ggplot(aes(x = Petal.Length, y = Petal.Width, color = Species))+
+    geom_point()
+```
+
+## Prepare for Trainig
+
+This function creates a stratified split of data. It splits the dataset into training and testing p  = 85 (85% training) while preserving the class proportion of the Species variable.
+In other words this makes sure the proportion of each class (setosa, versicolor, virginica) in the split is the same as in the original dataset.
+List = FALSE - when you want the vector as a row numbers not as a list
+
+
+```{r seed}
+set.seed(42)
+indices <- createDataPartition(iris$Species, p = .85, list = FALSE)
+
+```
+
+Then I use it like this:
+
+- train = 85% rows
+- test_in = 15% (remainig) -indices
+- test_truth = actual labels for evaluating predictions
+
+```{r}
+train <- iris %>% slice(indices)
+test_in <- iris %>% slice(-indices) %>% select(-Species)
+test_truth <- iris %>% slice(-indices) %>% pull(Species)
+
+```
+
+
+## Train the SVM - Linear kernel
+
+The SVM function has the default cost of 10
+
+```{r}
+set.seed(42)
+iris_svm <- svm(Species ~ ., train, kernel = "linear", scale = TRUE, cost = 10)
+summary(iris_svm)
+```
+
+we can visualize the SVM decision boundaries only in two dimensions, even though the model was trained in four dimensions (all iris features).
+
+```{r}
+
+plot(iris_svm, train, Petal.Length ~ Petal.Width)
+
+```
+
+For Sepal leaf Dimensions  it is needed to be sliced the other dimenstions at a reasonable point
+
+
+```{r}
+plot(iris_svm, train, Sepal.Length ~ Sepal.Width,
+     slice = list(Petal.Length = 4.5, Petal.Width = 1.75))
+
+```
+
+The plots does not show the full SVM, only one projection at the time of the decision Surface into two dimensions
+
+### Predictions
+
+```{r}
+test_pred <- predict(iris_svm, test_in)
+table(test_pred)
+```
+
+### Results
+
+```{r}
+conf_matrix <- confusionMatrix(test_pred, test_truth)
+conf_matrix
+
+```
+
+The result is 100% accuracy 
+
+### Overfitting?
+Did the model overfit? even though we got 100% accuracy that might not mean overfitting because:
+
+- setosa is completely linearly separable.
+- versicolor vs. virginica are also almost linearly separable in petal space.
+
+## Train the dataset on radial kernel
+
+- Radial kernel - allows complex curved boundaries
+- High cost - tries to classify training points almost perfectly (risk of overfitting)
+
+```{r}
+set.seed(42)
+
+iris_svm2 <- svm(Species ~ ., train, kernel = "radial", scale = TRUE, cost = 100)
+summary(iris_svm2)
+```
+
+### Plots
+
+```{r}
+plot(iris_svm2, train, Petal.Length ~ Petal.Width, slice = list(Sepal.Length = 6, Sepal.Width = 3))
+```
+
+```{r}
+ plot(iris_svm2, train, Sepal.Length ~ Sepal.Width, slice = list(Petal.Length = 4.5, Petal.Width = 1.75))
+
+```
+
+### Predictions
+
+```{r}
+test_pred2 <- predict(iris_svm2, test_in)
+table(test_pred2)
+```
+
+### Results
+
+```{r}
+conf_matrix2 <- confusionMatrix(test_pred2, test_truth)
+conf_matrix2
+
+```
+
+Setosa (perfect):
+Prediction = Truth in all 7 cases → flawless.
+
+Versicolor (1 mistake):
+One virginica was misclassified as versicolor.
+
+Virginica (1 mistake):
+The same misclassification reflects here → 6/7 correct.
+
+
+
+
+**Cost (C) controls how strictly the SVM tries to separate the classes.**
+
+### High cost (C = large)
+
+Means:
+
+- Misclassification is heavily punished
+- SVM tries very hard to separate data perfectly
+- Margin becomes narrow
+- Only the critical points (right on the boundary) stay as support vectors
+- Fewer points are allowed inside the margin
+Results in fewer support vectors
+Because the model becomes more rigid and pushes as many points as possible away from the margin.
+
+### Low cost (C small)
+
+Means:
+
+- Misclassification is acceptable
+- SVM allows violations
+- Margin becomes wide
+- More points fall inside or on the margin
+- More points become support vectors
+
+Result in more support vectors
+Because the model becomes more tolerant, allowing many points to influence the boundary.

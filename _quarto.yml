@@ -18,12 +18,18 @@ website:
         contents:
           - text: "Overview"
             href: ml-portfolio/index.qmd
+
           - text: "R Labs"
-            href: ml-portfolio/labs_R/index.qmd
+            href: ml-portfolio/01_labs_R/index.qmd
+            contents:
+              - ml-portfolio/01_labs_R/04_svm/svm_lab_iris.qmd
+
+
           - text: "NHANES - R Project"
-            href: ml-portfolio/nhanes_R/index.qmd
+            href: ml-portfolio/02_nhanes_R/index.qmd
+
           - text: "Diabetes Readmission - Python"
-            href: ml-portfolio/diabetes_python/index.qmd
+            href: ml-portfolio/03_diabetes_python/index.qmd
 
       - section: "Standalone Projects"
         contents:
