@@ -18,8 +18,8 @@ website:
         contents:
           - text: "Overview"
             href: ml-portfolio/index.qmd
-          - text: "R Labs (SVM on iris)"
-            href: ml-portfolio/labs_R/svm_iris.qmd
+          - text: "R Labs"
+            href: ml-portfolio/labs_R/index.qmd
           - text: "NHANES - R Project"
             href: ml-portfolio/nhanes_R/index.qmd
           - text: "Diabetes Readmission - Python"

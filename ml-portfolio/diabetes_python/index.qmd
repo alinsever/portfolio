@@ -1,0 +1,9 @@
+---
+title: "Diabetes Readmission – Python"
+---
+
+# Diabetes Readmission (Python)
+
+This section will contain the Python-based machine learning project analyzing hospital readmission patterns for diabetes patients.
+
+Content will be added soon.

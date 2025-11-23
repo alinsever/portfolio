@@ -1,0 +1,28 @@
+# Quarto build output
+/_site/
+_site/
+*.pdf
+*.html
+
+# Quarto cache
+*.log
+*.aux
+*.out
+*.toc
+/.quarto/
+.quarto/
+.quarto-cache/
+*/.quarto-cache/
+
+# R / Python common ignores
+.Rhistory
+.RData
+.Rproj.user
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# Positron / VSCode settings
+.vscode/
+.idea/
+.DS_Store

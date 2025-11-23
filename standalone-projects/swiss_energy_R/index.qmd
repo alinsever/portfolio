@@ -1,0 +1,9 @@
+---
+title: "Swiss Energy Analysis – R"
+---
+
+# Swiss Energy and Solar Radiation (R)
+
+This analysis joins Swiss energy-production data with solar radiation data from MeteoSwiss.
+
+Content will be added soon.

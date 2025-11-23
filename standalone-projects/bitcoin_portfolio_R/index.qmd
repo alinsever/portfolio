@@ -1,0 +1,9 @@
+---
+title: "Bitcoin & Portfolio Analysis – R"
+---
+
+# Bitcoin & Portfolio Analysis (R)
+
+This project examines Bitcoin returns, risk, correlations, and portfolio behavior using R.
+
+Content will be added soon.
