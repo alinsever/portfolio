@@ -355,8 +355,7 @@
     "text": "This page summarizes the academic coursework from my MSc in Applied Information & Data Science (HSLU) and any completed online certifications.\nOnly online courses include downloadable certificates when available.",
     "crumbs": [
       "Home",
-      "Courses & Certificates",
-      "Overview"
+      "Courses & Certificates"
     ]
   },
   {
@@ -367,8 +366,7 @@
     "text": "MSc Courses – Applied Data Science (HSLU)\nThe following courses are part of my ongoing Master’s program.\nThese do not include certificates, but they show the breadth of my academic training.\n\nSemester I\n\nComputer Concepts for Data Scientists\nCustomer Data Analytics\nDesign of Experiments\n\nStatistics\nAlgebra 1\nAlgebra 2\nTime Series in Finanace\nPython Programming\n\nR Bootcamp\n\n\n\nSemester II\n\nMachine Learning 1\n\nMachine Learning 2\nGenerative AI (RAG System Project)\nData Quality\nData Collection and Integration (Python)\nGit and Devops (GitHub, Jira, Scrum, Python)\nTime Series Analysis\nDatabase Systems (SQL)\nDatascience in Healthcare\nTableau\n\nAdditional MSc courses will be added as my degree progresses.",
     "crumbs": [
       "Home",
-      "Courses & Certificates",
-      "Overview"
+      "Courses & Certificates"
     ]
   },
   {
@@ -379,8 +377,7 @@
     "text": "Verified Certificates\n\nAI in Healthcare - Standford Online (coursera)\nCourses:\n- Introduction to Heathcare\n- Introduction to Clinical Data\n- Fundamentals to Machine Learning in Healthcare\n- Evaluations of AI Applications in Healthcare\n- AI in Healthcare Capstone\nVerify Certificate\n\n\nAI Fundamentals (datacamp)\nVerify Certificate",
     "crumbs": [
       "Home",
-      "Courses & Certificates",
-      "Overview"
+      "Courses & Certificates"
     ]
   },
   {
@@ -391,8 +388,7 @@
     "text": "Skill Tracks/Learning Paths\n\nAI Business Fundamentals - Datacamp\nDownload Certificate (PDF)\n\n\nPower BI Fundamentals - Datacamp\nDownload Certificate (PDF)\nMore certificates will be added as I complete external training.",
     "crumbs": [
       "Home",
-      "Courses & Certificates",
-      "Overview"
+      "Courses & Certificates"
     ]
   },
   {
@@ -545,9 +541,45 @@
   {
     "objectID": "standalone-projects/swiss_electricity_transition_R/index.html",
     "href": "standalone-projects/swiss_electricity_transition_R/index.html",
-    "title": "Swiss Electricity Transition (R)",
+    "title": "Swiss Electricity System Under Transition",
     "section": "",
-    "text": "This analysis joins Swiss energy-production data with solar radiation data from MeteoSwiss.\nContent will be added soon.",
+    "text": "A data-driven assessment of whether Switzerland can maintain year-round electricity reliability as it transitions from nuclear power to a solar-dominant energy system.",
+    "crumbs": [
+      "Home",
+      "Standalone Projects",
+      "Swiss Electricity Transition (R)"
+    ]
+  },
+  {
+    "objectID": "standalone-projects/swiss_electricity_transition_R/index.html#tagline",
+    "href": "standalone-projects/swiss_electricity_transition_R/index.html#tagline",
+    "title": "Swiss Electricity System Under Transition",
+    "section": "",
+    "text": "A data-driven assessment of whether Switzerland can maintain year-round electricity reliability as it transitions from nuclear power to a solar-dominant energy system.",
+    "crumbs": [
+      "Home",
+      "Standalone Projects",
+      "Swiss Electricity Transition (R)"
+    ]
+  },
+  {
+    "objectID": "standalone-projects/swiss_electricity_transition_R/index.html#executive-summary",
+    "href": "standalone-projects/swiss_electricity_transition_R/index.html#executive-summary",
+    "title": "Swiss Electricity System Under Transition",
+    "section": "Executive Summary",
+    "text": "Executive Summary\n\nSeasonal mismatch is the core challenge: Solar can match nuclear generation annually, but winter production remains too low to reliably meet demand without additional balancing mechanisms.\nHydropower and imports already stabilize the system: Switzerland relies on hydro flexibility in summer and rising imports in winter; this reliance will grow as nuclear production declines.\nA successful transition requires more than solar expansion: Long-term reliability depends on seasonal storage, flexible hydro, smart-grid upgrades, and coordinated cross-border electricity flows.",
+    "crumbs": [
+      "Home",
+      "Standalone Projects",
+      "Swiss Electricity Transition (R)"
+    ]
+  },
+  {
+    "objectID": "standalone-projects/swiss_electricity_transition_R/index.html#introduction",
+    "href": "standalone-projects/swiss_electricity_transition_R/index.html#introduction",
+    "title": "Swiss Electricity System Under Transition",
+    "section": "Introduction",
+    "text": "Introduction\nSwitzerland is entering a decisive phase of its energy transition. With nuclear power gradually being phased out and solar capacity expanding rapidly, a central question emerges: can the country maintain a secure, balanced electricity system throughout the year? This project analyzes official Swiss energy and solar-radiation data (2020-2024) to evaluate whether photovoltaic power can realistically replace nuclear output. Using exploratory analysis, seasonal decomposition, correlation studies, and time-series forecasting, the findings show that although solar can match nuclear production in annual totals, it cannot address the winter supply gap on its own. Ensuring future reliability will require a system-level strategy combining imports, pumped-storage, flexible hydro, and emerging storage technologies.",
     "crumbs": [
       "Home",
       "Standalone Projects",
