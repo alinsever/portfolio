@@ -44,8 +44,8 @@ website:
           - text: "Bitcoin Portfolio (R)"
             href: standalone-projects/bitcoin_portfolio_R/index.qmd
 
-          - text: "Swiss Energy Analysis (R)"
-            href: standalone-projects/swiss_energy_R/index.qmd
+          - text: "Swiss Electricity Transition (R)"
+            href: standalone-projects/swiss_electricity_transition_R/index.qmd
             contents: 
               - standalone-projects/swiss_electricity_transition_R/Swiss_Electricity_Transition_Project.qmd
 
