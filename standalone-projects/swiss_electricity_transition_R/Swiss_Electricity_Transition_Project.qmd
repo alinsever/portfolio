@@ -1,8 +1,7 @@
 ---
-title: "Swiss Electricity System Under Transition: From Nuclear to Solar Power"
-authors: 
-  - "Alin Sever"
-  - "Alkiviadis Lazaridis"
+title: "Swiss Electricity System Under Transition"
+subtitle: "From Nuclear to Solar Power"
+authors: "Alin Sever"
 date: 2025-09-16
 
 format:
@@ -15,14 +14,13 @@ format:
     toc-depth: 3
     page-layout: full
 
-output-file: "Swiss Electricity Under Transition.html"
 
 execute:
   echo: true
   warning: false
   message: false
   freeze: auto
-editor: visual
+editor: source
 
 # navbar:
 #   tools:
@@ -105,6 +103,93 @@ Hydro power contributes over 50% of Switzerland’s electricity today, but expan
 As a result, this analysis focuses on the evolving relationship between **solar energy** and **nuclear phase-out**, while treating hydro as a relatively **stable, non-expanding baseline**.
 
 :::
+
+## Data Sources & Metadata
+
+This appendix provides detailed metadata for the datasets used in this analysis. Each table is shown in a **scrollable box** to keep the layout compact.
+
+-   [**Energy data (Swiss Federal Office of energy)**](https://www.bfe.admin.ch/bfe/en/home/supply/statistics-and-geodata/energy-statistics/electricity-statistics.html/#kw-96076): Monthly Energy Production (hydro, nuclear, solar, etc.).
+
+::: {.callout-note collapse="true" title="Click to expand: Metadata for Monthly Production Dataset"}
+```{r}
+#| label: monthly_prod_metadata
+#| echo: false
+#| warning: false
+
+monthly_prod_metadata <- readRDS("RDS/monthly_prod_metadata.rds")
+
+div(class = "scroll-box",
+    
+monthly_prod_metadata %>%
+  gt() %>%
+  tab_header(title = md("**Metadata: Monthly Energy Production (Switzerland)**")) %>%
+  cols_label(
+    variable_name = "Variable",
+    description = "Description",
+    unit = "Unit",
+    source = "Source"
+  )
+)
+
+```
+:::
+
+-   [**MeteoSwiss OGD-NBCN**](https://www.meteoswiss.admin.ch/services-and-publications/applications/ext/download-data-without-coding-skills.html#lang=en&mdt=homogenous&pgid=Radiation&sid=SAM&col=ch.meteoschweiz.ogd-nbcn&di=&tr=&hdr=): Monthly Solar Irradiation.
+
+::: {.callout-note collapse="true" title="Click to expand: Metadata for Monthly Solar Irradiation Dataset"}
+```{r}
+#| label: irradiation_metadata
+#| echo: false
+#| warning: false
+
+#saveRDS(radiation_metadata, "RDS/radiation_metadata.rds")
+radiation_metadata <- readRDS("RDS/radiation_metadata.rds")
+
+
+
+
+div(class = "scroll-box",
+    
+radiation_metadata %>%
+  gt() %>%
+  tab_header(title = md("**Metadata: Solar Radiation (MeteoSwiss Aggregated Data)**")) %>%
+  cols_label(
+    variable_name = "Variable",
+    description = "Description",
+    unit = "Unit",
+    source = "Source"
+  )
+)
+```
+:::
+
+> Both data sets are aggregated to **monthly** frequency and merged on a monthly date column.
+
+-   [**Energy data (Swiss Federal Office of energy)**](https://www.bfe.admin.ch/bfe/en/home/supply/statistics-and-geodata/energy-statistics/electricity-statistics.html/#kw-96076): Swiss Nuclear Power Plants Dataset.
+
+::: {.callout-note collapse="true" title="Click to expand: Metadata for Nuclear Production Dataset"}
+```{r}
+#| label: nuclear_metadata
+#| echo: false
+#| warning: false
+
+#write_rds(nuclear_metadata, "RDS/nuclear_metadata.rds")
+nuclear_metadata <- readRDS("RDS/nuclear_metadata.rds")
+
+div(class = "scroll-box",
+    
+nuclear_metadata %>%
+  gt() %>%
+  tab_header(title = md("**Metadata: Swiss Nuclear Power Plants Dataset**")) %>%
+  cols_label(
+    Variable_Name = "Variable",
+    Description = "Description"
+  )
+)
+```
+:::
+
+
 
 ## Energy Production (2020–2024)
 
@@ -1454,145 +1539,3 @@ The path forward will require a **portfolio approach**:
 
 Ultimately, success will not be measured by annual generation totals, but by ensuring **secure electricity supply in winter**, when the system is under the greatest strain.
 
-## Chapter of Choice: Enhancing Reports with Custom Layout & Styling
-
-While most of this report focuses on data analysis and visualization, a key part of professional reporting is **presentation**. To make results **clearer and more accessible**, we extended standard R Markdown functionality with a few extra tools:
-
--   **`janitor`**: for data cleaning and consistent variable names.
--   **Quarto column layouts**: for side-by-side figures and explanations.
--   **`htmltools`**: for scrollable boxes containing long metadata tables.
-
-Together, these approaches improve both the **readability** and **professional appearance** of the report.
-
-### 1. Data Cleaning with `janitor`
-
-The raw Swiss energy datasets came with inconsistent variable names (e.g., `Thermic_clasique`, `Hydroelectric Power`). Using `janitor::clean_names()`, we standardized all column names to **snake_case**:
-
-To avoid manual downloads, we wrote a custom R function `fetch_station()` that:
-
--   Dynamically constructs the MeteoSwiss URL for each NBCN station
--   Downloads the CSV file directly from the web
--   Cleans and formats the data (dates, variables, filtering post-2020)
-
-This allowed us to **batch-compile radiation datasets** across multiple stations in a fast and reproducible way.
-
-### 2. Custom Layouts in Quarto
-
-To present figures and text side-by-side, we used Quarto’s column layout. This allows us to place, for example, a chart in one column and a written explanation in another:
-
-### 3. Scrollable Metadata Boxes with `htmltools`
-
-Some metadata tables (e.g., nuclear dataset descriptions) are too long to fit comfortably in the report. To keep the document compact, we wrapped them in **scrollable boxes** using `htmltools::div()`.
-
-This way, readers can scroll through details without breaking the overall flow of the report.
-
-### 4. Styling with CSS
-
-Beyond the analysis, we also customized the **look and feel** of the report.
-
-A dedicated stylesheet (`styles.scss`) was created to define onts, colors and layout globally, instead of customizing each plot or table individually, ensuring the document is readable in different viewing conditions.
-
-we also attempted to create a light and dark theme using .scss; however, we were not able to solve an issue with the background in the table rows (maybe by using another table package besides gt)
-
-## Use of Gen AI and Other Learning Resources
-
-During this project, we made selective use of **Generative AI (ChatGPT)**.
-
--   AI did **not replace independent work**: simply “dropping data” and expecting for a solution does not really work.
--   Instead, AI was most useful for:
-    -   Debugging code and finding mistakes faster
-    -   Suggesting alternative approaches when I already knew the structure of what I wanted
-    -   Saving time by pointing out small fixes (e.g., pivoting data, styling ggplot outputs, fixing Quarto CSS issues)
-    -   Explaining concepts: Clarifying forecasting model components or statistical tests (e.g., ADF test, ARIMA)
-
-While ChatGPT helped with writing sections of the report, it required me to provide the core ideas, structure, and analytical direction.
-
-In addition to AI, we also relied on **traditional learning resources**, such as:
-
--   **YouTube tutorials** - e.g., *Albert Ralph* for CSS styling, and *David Keyes (R for the Rest of Us)* for Quarto report styling
--   **Quarto documentation** on the official [quarto.org](https://quarto.org) site, particularly for themes, callouts, and advanced formatting
-
-## Appendix: Data Sources & Metadata
-
-This appendix provides detailed metadata for the datasets used in this analysis. Each table is shown in a **scrollable box** to keep the layout compact.
-
--   [**Energy data (Swiss Federal Office of energy)**](https://www.bfe.admin.ch/bfe/en/home/supply/statistics-and-geodata/energy-statistics/electricity-statistics.html/#kw-96076): Monthly Energy Production (hydro, nuclear, solar, etc.).
-
-::: {.callout-note collapse="true" title="Click to expand: Metadata for Monthly Production Dataset"}
-```{r}
-#| label: monthly_prod_metadata
-#| echo: false
-#| warning: false
-
-monthly_prod_metadata <- readRDS("RDS/monthly_prod_metadata.rds")
-
-div(class = "scroll-box",
-    
-monthly_prod_metadata %>%
-  gt() %>%
-  tab_header(title = md("**Metadata: Monthly Energy Production (Switzerland)**")) %>%
-  cols_label(
-    variable_name = "Variable",
-    description = "Description",
-    unit = "Unit",
-    source = "Source"
-  )
-)
-
-```
-:::
-
--   [**MeteoSwiss OGD-NBCN**](https://www.meteoswiss.admin.ch/services-and-publications/applications/ext/download-data-without-coding-skills.html#lang=en&mdt=homogenous&pgid=Radiation&sid=SAM&col=ch.meteoschweiz.ogd-nbcn&di=&tr=&hdr=): Monthly Solar Irradiation.
-
-::: {.callout-note collapse="true" title="Click to expand: Metadata for Monthly Solar Irradiation Dataset"}
-```{r}
-#| label: irradiation_metadata
-#| echo: false
-#| warning: false
-
-#saveRDS(radiation_metadata, "RDS/radiation_metadata.rds")
-radiation_metadata <- readRDS("RDS/radiation_metadata.rds")
-
-
-
-
-div(class = "scroll-box",
-    
-radiation_metadata %>%
-  gt() %>%
-  tab_header(title = md("**Metadata: Solar Radiation (MeteoSwiss Aggregated Data)**")) %>%
-  cols_label(
-    variable_name = "Variable",
-    description = "Description",
-    unit = "Unit",
-    source = "Source"
-  )
-)
-```
-:::
-
-> Both data sets are aggregated to **monthly** frequency and merged on a monthly date column.
-
--   [**Energy data (Swiss Federal Office of energy)**](https://www.bfe.admin.ch/bfe/en/home/supply/statistics-and-geodata/energy-statistics/electricity-statistics.html/#kw-96076): Swiss Nuclear Power Plants Dataset.
-
-::: {.callout-note collapse="true" title="Click to expand: Metadata for Nuclear Production Dataset"}
-```{r}
-#| label: nuclear_metadata
-#| echo: false
-#| warning: false
-
-#write_rds(nuclear_metadata, "RDS/nuclear_metadata.rds")
-nuclear_metadata <- readRDS("RDS/nuclear_metadata.rds")
-
-div(class = "scroll-box",
-    
-nuclear_metadata %>%
-  gt() %>%
-  tab_header(title = md("**Metadata: Swiss Nuclear Power Plants Dataset**")) %>%
-  cols_label(
-    Variable_Name = "Variable",
-    Description = "Description"
-  )
-)
-```
-:::
