@@ -1,0 +1,68 @@
+---
+title: "Courses & Certificates"
+---
+
+# Courses & Certificates
+
+This page summarizes the academic coursework from my MSc in Applied Information & Data Science (HSLU) and any completed online certifications.  
+Only online courses include downloadable certificates when available.
+
+---
+
+## MSc Courses – Applied Data Science (HSLU)
+
+The following courses are part of my ongoing Master’s program.  
+These do **not** include certificates, but they show the breadth of my academic training.
+
+### Semester I
+- Computer Concepts for Data Scientists
+- Customer Data Analytics 
+- Design of Experiments  
+- Statistics
+- Algebra I & II  
+- Time Series in Finanace
+- Python Programming  
+- R Bootcamp  
+ 
+
+### Semester II
+- Machine Learning 1  
+- Machine Learning 2 
+- Generative AI (RAG System Project)
+- Data Quality
+- Data Collection and Integration (Python)
+- Git and Devops (GitHub, Jira, Scrum, Python)
+- Time Series Analysis 
+- Database Systems (SQL)
+- Datascience in Healthcare
+- Tableau
+
+Additional MSc courses will be added as my degree progresses.
+
+---
+
+
+## Verified Certificates
+
+
+
+### AI in Healthcare - Standford Online (coursera)
+Certificate: https://coursera.org/share/78dbffb0042b5edaf7de6454240161de
+
+### AI Fundamentals (datacamp)
+Certificate: https://www.datacamp.com/skill-verification/AIF0027489612311
+
+
+
+
+## Skill Tracks/Learning Paths
+
+### AI Business Fundamentals - Datacamp
+[Download Certificate (PDF)](../assets/certificates/ai_buss_fund.pdf)
+
+
+### Power BI Fundamentals - Datacamp
+[Download Certificate (PDF)](../assets/certificates/pwr_bi_fund.pdf)
+
+
+More certificates will be added as I complete external training.

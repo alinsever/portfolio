@@ -76,33 +76,6 @@ This report combines exploratory data analysis, a study of solar output vs. radi
 
 > Will Switzerland be able to replace nuclear power with solar, or will it need to rely on imports, hydro expansion, and storage?
 
-## Introduction
-
-Switzerland’s electricity mix is unique in Europe, with a strong reliance on **hydropower** and a legacy of **nuclear energy**. This has enabled the country to maintain a **low-carbon electricity system** for decades.
-
-However, under the **Swiss Energy Strategy 2050**, the government plans to **phase out nuclear energy** and significantly **increase the share of renewables** - especially **solar power**.
-
-This report investigates whether this transition is technically feasible, focusing on three key questions:
-
--   How does Switzerland currently produce electricity, and how does this vary seasonally?
--   What is the real potential of **solar PV**, given seasonal variation in sunlight?
--   Can solar realistically **replace nuclear capacity**, or will Switzerland depend on **imports and hydro**?
-
-We use data from **2020 to 2024** - the period when Switzerland began officially recording renewable production - to assess energy dynamics, simulate future scenarios, and evaluate feasibility.
-
-::: {.callout-note collapse = "true" title = "Why Start in 2020?"}
-
-Switzerland began **systematically reporting renewable energy production in monthly detail** starting in 2020. As such, this year marks the most reliable starting point for consistent renewable energy tracking in the Swiss energy system.
-
-:::
-
-::: {.callout-note collapse = "true" title = "Why We Focus on Solar and Nuclear"}
-
-Hydro power contributes over 50% of Switzerland’s electricity today, but expanding it further is challenging due to **ecological protections**, **geographic limitations**, and **social resistance** to large infrastructure projects.
-
-As a result, this analysis focuses on the evolving relationship between **solar energy** and **nuclear phase-out**, while treating hydro as a relatively **stable, non-expanding baseline**.
-
-:::
 
 ## Data Sources & Metadata
 
@@ -189,6 +162,33 @@ nuclear_metadata %>%
 ```
 :::
 
+## Introduction
+
+Switzerland’s electricity mix is unique in Europe, with a strong reliance on **hydropower** and a legacy of **nuclear energy**. This has enabled the country to maintain a **low-carbon electricity system** for decades.
+
+However, under the **Swiss Energy Strategy 2050**, the government plans to **phase out nuclear energy** and significantly **increase the share of renewables** - especially **solar power**.
+
+This report investigates whether this transition is technically feasible, focusing on three key questions:
+
+-   How does Switzerland currently produce electricity, and how does this vary seasonally?
+-   What is the real potential of **solar PV**, given seasonal variation in sunlight?
+-   Can solar realistically **replace nuclear capacity**, or will Switzerland depend on **imports and hydro**?
+
+We use data from **2020 to 2024** - the period when Switzerland began officially recording renewable production - to assess energy dynamics, simulate future scenarios, and evaluate feasibility.
+
+::: {.callout-note collapse = "true" title = "Why Start in 2020?"}
+
+Switzerland began **systematically reporting renewable energy production in monthly detail** starting in 2020. As such, this year marks the most reliable starting point for consistent renewable energy tracking in the Swiss energy system.
+
+:::
+
+::: {.callout-note collapse = "true" title = "Why We Focus on Solar and Nuclear"}
+
+Hydro power contributes over 50% of Switzerland’s electricity today, but expanding it further is challenging due to **ecological protections**, **geographic limitations**, and **social resistance** to large infrastructure projects.
+
+As a result, this analysis focuses on the evolving relationship between **solar energy** and **nuclear phase-out**, while treating hydro as a relatively **stable, non-expanding baseline**.
+
+:::
 
 
 ## Energy Production (2020–2024)

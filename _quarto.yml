@@ -50,6 +50,14 @@ website:
               - standalone-projects/swiss_electricity_transition_R/Swiss_Electricity_Transition_Project.qmd
 
 
+      - section: "Courses & Certificates"
+        contents:
+          - text: "Overview"
+            href: courses/index.qmd
+
+
+
+
 format:
   html:
     theme: cosmo
