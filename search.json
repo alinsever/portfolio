@@ -1,0 +1,93 @@
+[
+  {
+    "objectID": "standalone-projects/swiss_energy_R/index.html",
+    "href": "standalone-projects/swiss_energy_R/index.html",
+    "title": "Swiss Energy and Solar Radiation (R)",
+    "section": "",
+    "text": "This analysis joins Swiss energy-production data with solar radiation data from MeteoSwiss.\nContent will be added soon.",
+    "crumbs": [
+      "Home",
+      "Standalone Projects",
+      "Swiss Energy Analysis (R)"
+    ]
+  },
+  {
+    "objectID": "standalone-projects/bitcoin_portfolio_R/index.html",
+    "href": "standalone-projects/bitcoin_portfolio_R/index.html",
+    "title": "Bitcoin & Portfolio Analysis – R",
+    "section": "",
+    "text": "This project examines Bitcoin returns, risk, correlations, and portfolio behavior using R.\nContent will be added soon.",
+    "crumbs": [
+      "Home",
+      "Standalone Projects",
+      "Bitcoin Portfolio (R)"
+    ]
+  },
+  {
+    "objectID": "ml-portfolio/labs_R/index.html",
+    "href": "ml-portfolio/labs_R/index.html",
+    "title": "R Machine Learning Labs",
+    "section": "",
+    "text": "This folder will include R-based ML labs such as SVM, logistic regression, clustering, and other course exercises.\nContent will be added soon.",
+    "crumbs": [
+      "Home",
+      "ML Portfolio",
+      "R Labs"
+    ]
+  },
+  {
+    "objectID": "ml-portfolio/diabetes_python/index.html",
+    "href": "ml-portfolio/diabetes_python/index.html",
+    "title": "Diabetes Readmission (Python)",
+    "section": "",
+    "text": "This section will contain the Python-based machine learning project analyzing hospital readmission patterns for diabetes patients.\nContent will be added soon.",
+    "crumbs": [
+      "Home",
+      "ML Portfolio",
+      "Diabetes Readmission - Python"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome",
+    "section": "",
+    "text": "Alin Sever – Data Analyst & MSc in Applied Data Science\nWelcome to my professional portfolio.\nThis website showcases selected analytical, machine learning, and data science projects developed during my MSc at the Lucerne University of Applied Sciences and through independent work.\nThe portfolio is divided into two main sections:\n\nML Portfolio — machine learning work in R and Python\n\nStandalone Projects — applied analysis, dashboards, data pipelines, and research projects\n\nUse the sidebar to navigate through the content."
+  },
+  {
+    "objectID": "ml-portfolio/index.html",
+    "href": "ml-portfolio/index.html",
+    "title": "Machine Learning Portfolio",
+    "section": "",
+    "text": "This section presents machine learning work developed in R and Python.\nProjects included:\n\nR Labs (example: SVM on iris)\nNHANES health analysis in R (regression + SVM)\nDiabetes readmission prediction in Python (end-to-end pipeline)\n\nMore projects will be added as the MSc program continues.",
+    "crumbs": [
+      "Home",
+      "ML Portfolio",
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "ml-portfolio/nhanes_R/index.html",
+    "href": "ml-portfolio/nhanes_R/index.html",
+    "title": "NHANES Project (R)",
+    "section": "",
+    "text": "This section will host the NHANES health analysis project, including regression models, classification, and data exploration.\nContent will be added soon.",
+    "crumbs": [
+      "Home",
+      "ML Portfolio",
+      "NHANES - R Project"
+    ]
+  },
+  {
+    "objectID": "standalone-projects/index.html",
+    "href": "standalone-projects/index.html",
+    "title": "Standalone Projects",
+    "section": "",
+    "text": "This section includes analytical projects that are not strictly machine learning models but still demonstrate data science and applied research skills.\nCurrent projects:\n\nBitcoin & Portfolio Analysis (R)\nSwiss Energy Production and Solar Radiation (R)",
+    "crumbs": [
+      "Home",
+      "Standalone Projects",
+      "Overview"
+    ]
+  }
+]
