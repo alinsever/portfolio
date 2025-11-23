@@ -1,6 +1,7 @@
 project:
   type: website
   output-dir: _site
+  freeze: auto
 
 website:
   title: "Portfolio - Alin Sever"
@@ -62,7 +63,3 @@ execute:
   warning: false
   message: false
 
-project:
-  type: website
-  output-dir: _site
-  freeze: auto
