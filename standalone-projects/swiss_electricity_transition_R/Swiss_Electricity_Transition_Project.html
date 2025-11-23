@@ -1,0 +1,3959 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2025-09-16">
+
+<title>Swiss Electricity System Under Transition – Portfolio - Alin Sever</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-1d4f84655f446305ac42a8f1abcf7405.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+
+<link href="../../site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+
+<script src="../../site_libs/leaflet-1.3.1/leaflet.js"></script>
+
+<link href="../../site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+
+<script src="../../site_libs/proj4-2.6.2/proj4.min.js"></script>
+
+<script src="../../site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+
+<link href="../../site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+
+<script src="../../site_libs/leaflet-binding-2.2.3/leaflet.js"></script>
+
+
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/alin.png" alt="" class="navbar-logo light-content">
+    <img src="../../assets/alin.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Alin Sever</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Swiss Electricity System Under Transition</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ML Portfolio</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ml-portfolio/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../ml-portfolio/01_labs_R/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R Labs</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ml-portfolio/01_labs_R/04_svm/svm_lab_iris.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Support Vector Machine (Lab)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../ml-portfolio/02_nhanes_R/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NHANES - R Project</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ml-portfolio/02_nhanes_R/01_linear_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Regression Analysis - Predicting Body Mass Index</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ml-portfolio/02_nhanes_R/02_support_vector_machine.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Predicting Obesity using Support Vector Machines</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ml-portfolio/03_diabetes_python/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diabetes Readmission - Python</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Standalone Projects</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../standalone-projects/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../standalone-projects/bitcoin_portfolio_R/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bitcoin Portfolio (R)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../standalone-projects/swiss_energy_R/index.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Swiss Energy Analysis (R)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#data-sources-metadata" id="toc-data-sources-metadata" class="nav-link" data-scroll-target="#data-sources-metadata">Data Sources &amp; Metadata</a></li>
+  <li><a href="#energy-production-20202024" id="toc-energy-production-20202024" class="nav-link" data-scroll-target="#energy-production-20202024">Energy Production (2020–2024)</a>
+  <ul class="collapse">
+  <li><a href="#monthly-energy-production-in-switzerland" id="toc-monthly-energy-production-in-switzerland" class="nav-link" data-scroll-target="#monthly-energy-production-in-switzerland">Monthly Energy Production in Switzerland</a></li>
+  <li><a href="#average-share-of-energy-production-20202024" id="toc-average-share-of-energy-production-20202024" class="nav-link" data-scroll-target="#average-share-of-energy-production-20202024">Average Share of Energy Production (2020–2024)</a></li>
+  <li><a href="#seasonality-of-energy-production" id="toc-seasonality-of-energy-production" class="nav-link" data-scroll-target="#seasonality-of-energy-production">Seasonality of Energy Production</a></li>
+  <li><a href="#correlation-between-energy-sources" id="toc-correlation-between-energy-sources" class="nav-link" data-scroll-target="#correlation-between-energy-sources">Correlation Between Energy Sources</a></li>
+  <li><a href="#nuclear-power-plants-overview" id="toc-nuclear-power-plants-overview" class="nav-link" data-scroll-target="#nuclear-power-plants-overview">Nuclear Power Plants Overview</a></li>
+  <li><a href="#geographic-overview" id="toc-geographic-overview" class="nav-link" data-scroll-target="#geographic-overview">Geographic Overview</a></li>
+  </ul></li>
+  <li><a href="#photovoltaic-performance-and-solar-radiation" id="toc-photovoltaic-performance-and-solar-radiation" class="nav-link" data-scroll-target="#photovoltaic-performance-and-solar-radiation">Photovoltaic Performance and Solar Radiation</a>
+  <ul class="collapse">
+  <li><a href="#method-stl-decomposition" id="toc-method-stl-decomposition" class="nav-link" data-scroll-target="#method-stl-decomposition">Method: STL Decomposition</a></li>
+  <li><a href="#comparison-solar-radiation-vs-normalized-pv-output" id="toc-comparison-solar-radiation-vs-normalized-pv-output" class="nav-link" data-scroll-target="#comparison-solar-radiation-vs-normalized-pv-output">Comparison: Solar Radiation vs Normalized PV Output</a></li>
+  <li><a href="#correlation-analysis" id="toc-correlation-analysis" class="nav-link" data-scroll-target="#correlation-analysis">Correlation Analysis</a></li>
+  <li><a href="#seasonal-distribution-of-pv-energy-production" id="toc-seasonal-distribution-of-pv-energy-production" class="nav-link" data-scroll-target="#seasonal-distribution-of-pv-energy-production">Seasonal Distribution of PV Energy Production</a></li>
+  <li><a href="#pv-contribution-over-time" id="toc-pv-contribution-over-time" class="nav-link" data-scroll-target="#pv-contribution-over-time">PV Contribution Over Time</a></li>
+  <li><a href="#forecasting-solar-pv-production-20252030" id="toc-forecasting-solar-pv-production-20252030" class="nav-link" data-scroll-target="#forecasting-solar-pv-production-20252030">Forecasting Solar PV Production (2025–2030)</a></li>
+  <li><a href="#growth-vs.-nuclear-comparison" id="toc-growth-vs.-nuclear-comparison" class="nav-link" data-scroll-target="#growth-vs.-nuclear-comparison">Growth vs.&nbsp;Nuclear Comparison</a></li>
+  </ul></li>
+  <li><a href="#electricity-imports-exports-grid-balance" id="toc-electricity-imports-exports-grid-balance" class="nav-link" data-scroll-target="#electricity-imports-exports-grid-balance">Electricity Imports, Exports &amp; Grid Balance</a>
+  <ul class="collapse">
+  <li><a href="#grid-balance-check" id="toc-grid-balance-check" class="nav-link" data-scroll-target="#grid-balance-check">Grid Balance Check</a></li>
+  <li><a href="#average-net-electricity-imports-by-month-20202024" id="toc-average-net-electricity-imports-by-month-20202024" class="nav-link" data-scroll-target="#average-net-electricity-imports-by-month-20202024">Average Net Electricity Imports by Month (2020–2024)</a></li>
+  <li><a href="#why-imports-will-matter" id="toc-why-imports-will-matter" class="nav-link" data-scroll-target="#why-imports-will-matter">Why Imports Will Matter</a></li>
+  </ul></li>
+  <li><a href="#replacing-nuclear-with-solar-feasibility-and-limitations" id="toc-replacing-nuclear-with-solar-feasibility-and-limitations" class="nav-link" data-scroll-target="#replacing-nuclear-with-solar-feasibility-and-limitations">Replacing Nuclear with Solar: Feasibility and Limitations</a>
+  <ul class="collapse">
+  <li><a href="#winter-gaps-without-nuclear" id="toc-winter-gaps-without-nuclear" class="nav-link" data-scroll-target="#winter-gaps-without-nuclear">Winter Gaps Without Nuclear</a></li>
+  <li><a href="#imports-as-one-of-the-balancing-mechanism" id="toc-imports-as-one-of-the-balancing-mechanism" class="nav-link" data-scroll-target="#imports-as-one-of-the-balancing-mechanism">Imports as one of the Balancing Mechanism</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content column-page-right" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Swiss Electricity System Under Transition</h1>
+<p class="subtitle lead">From Nuclear to Solar Power</p>
+</div>
+
+
+
+<div class="quarto-title-meta column-page-right">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Alin Sever </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 16, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="preface" class="level2">
+<h2 class="anchored" data-anchor-id="preface">Preface</h2>
+<p>Switzerland stands at a turning point in its energy transition. With a national policy to <strong>phase out nuclear power by 2050</strong>, and growing urgency around climate change, the country faces a critical challenge:</p>
+<blockquote class="blockquote">
+<p><strong>Can it maintain energy security while transitioning to a renewable electricity system?</strong></p>
+</blockquote>
+<p>What began as a data-driven exploration of Swiss energy production soon evolved into a focused investigation of one key question:</p>
+<p><strong>Can solar photovoltaic (PV) energy scale enough to replace nuclear power?</strong></p>
+<p>This report combines exploratory data analysis, a study of solar output vs.&nbsp;radiation patterns, and a forward-looking scenario :</p>
+<blockquote class="blockquote">
+<p>Will Switzerland be able to replace nuclear power with solar, or will it need to rely on imports, hydro expansion, and storage?</p>
+</blockquote>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Switzerland’s electricity mix is unique in Europe, with a strong reliance on <strong>hydropower</strong> and a legacy of <strong>nuclear energy</strong>. This has enabled the country to maintain a <strong>low-carbon electricity system</strong> for decades.</p>
+<p>However, under the <strong>Swiss Energy Strategy 2050</strong>, the government plans to <strong>phase out nuclear energy</strong> and significantly <strong>increase the share of renewables</strong> - especially <strong>solar power</strong>.</p>
+<p>This report investigates whether this transition is technically feasible, focusing on three key questions:</p>
+<ul>
+<li>How does Switzerland currently produce electricity, and how does this vary seasonally?</li>
+<li>What is the real potential of <strong>solar PV</strong>, given seasonal variation in sunlight?</li>
+<li>Can solar realistically <strong>replace nuclear capacity</strong>, or will Switzerland depend on <strong>imports and hydro</strong>?</li>
+</ul>
+<p>We use data from <strong>2020 to 2024</strong> - the period when Switzerland began officially recording renewable production - to assess energy dynamics, simulate future scenarios, and evaluate feasibility.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Why Start in 2020?">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why Start in 2020?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Switzerland began <strong>systematically reporting renewable energy production in monthly detail</strong> starting in 2020. As such, this year marks the most reliable starting point for consistent renewable energy tracking in the Swiss energy system.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Why We Focus on Solar and Nuclear">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why We Focus on Solar and Nuclear
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Hydro power contributes over 50% of Switzerland’s electricity today, but expanding it further is challenging due to <strong>ecological protections</strong>, <strong>geographic limitations</strong>, and <strong>social resistance</strong> to large infrastructure projects.</p>
+<p>As a result, this analysis focuses on the evolving relationship between <strong>solar energy</strong> and <strong>nuclear phase-out</strong>, while treating hydro as a relatively <strong>stable, non-expanding baseline</strong>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="data-sources-metadata" class="level2">
+<h2 class="anchored" data-anchor-id="data-sources-metadata">Data Sources &amp; Metadata</h2>
+<p>This appendix provides detailed metadata for the datasets used in this analysis. Each table is shown in a <strong>scrollable box</strong> to keep the layout compact.</p>
+<ul>
+<li><a href="https://www.bfe.admin.ch/bfe/en/home/supply/statistics-and-geodata/energy-statistics/electricity-statistics.html/#kw-96076"><strong>Energy data (Swiss Federal Office of energy)</strong></a>: Monthly Energy Production (hydro, nuclear, solar, etc.).</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Click to expand: Metadata for Monthly Production Dataset">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Click to expand: Metadata for Monthly Production Dataset
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output-display">
+<div class="scroll-box">
+<div id="xmgtugcvlw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xmgtugcvlw table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#xmgtugcvlw thead, #xmgtugcvlw tbody, #xmgtugcvlw tfoot, #xmgtugcvlw tr, #xmgtugcvlw td, #xmgtugcvlw th {
+  border-style: none;
+}
+
+#xmgtugcvlw p {
+  margin: 0;
+  padding: 0;
+}
+
+#xmgtugcvlw .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xmgtugcvlw .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#xmgtugcvlw .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xmgtugcvlw .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xmgtugcvlw .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xmgtugcvlw .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xmgtugcvlw .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xmgtugcvlw .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xmgtugcvlw .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xmgtugcvlw .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xmgtugcvlw .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xmgtugcvlw .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xmgtugcvlw .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#xmgtugcvlw .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#xmgtugcvlw .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xmgtugcvlw .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xmgtugcvlw .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xmgtugcvlw .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xmgtugcvlw .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xmgtugcvlw .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#xmgtugcvlw .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#xmgtugcvlw .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#xmgtugcvlw .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xmgtugcvlw .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#xmgtugcvlw .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#xmgtugcvlw .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xmgtugcvlw .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xmgtugcvlw .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xmgtugcvlw .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xmgtugcvlw .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xmgtugcvlw .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xmgtugcvlw .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xmgtugcvlw .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xmgtugcvlw .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xmgtugcvlw .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xmgtugcvlw .gt_left {
+  text-align: left;
+}
+
+#xmgtugcvlw .gt_center {
+  text-align: center;
+}
+
+#xmgtugcvlw .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xmgtugcvlw .gt_font_normal {
+  font-weight: normal;
+}
+
+#xmgtugcvlw .gt_font_bold {
+  font-weight: bold;
+}
+
+#xmgtugcvlw .gt_font_italic {
+  font-style: italic;
+}
+
+#xmgtugcvlw .gt_super {
+  font-size: 65%;
+}
+
+#xmgtugcvlw .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#xmgtugcvlw .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#xmgtugcvlw .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#xmgtugcvlw .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#xmgtugcvlw .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#xmgtugcvlw .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#xmgtugcvlw .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#xmgtugcvlw .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#xmgtugcvlw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<td colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Metadata: Monthly Energy Production (Switzerland)</strong></td>
+</tr>
+<tr class="gt_col_headings even">
+<th id="variable_name" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Variable</th>
+<th id="description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Description</th>
+<th id="source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Source</th>
+<th id="unit" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Unit</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="variable_name">date_month</td>
+<td class="gt_row gt_left" headers="description">Monthly timestamp (first day of each month, parsed from multilingual date string)</td>
+<td class="gt_row gt_left" headers="source">Swiss Federal Office of Energy (SFOE)</td>
+<td class="gt_row gt_left" headers="unit">YYYY-MM-DD</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="variable_name">date_label</td>
+<td class="gt_row gt_left" headers="description">Month label in short format (e.g., Jan-2020) for plotting or reporting</td>
+<td class="gt_row gt_left" headers="source">Swiss Federal Office of Energy (SFOE)</td>
+<td class="gt_row gt_left" headers="unit">string</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="variable_name">hydroelectric</td>
+<td class="gt_row gt_left" headers="description">Monthly electricity production from hydroelectric sources (in GWh)</td>
+<td class="gt_row gt_left" headers="source">Swiss Federal Office of Energy (SFOE)</td>
+<td class="gt_row gt_left" headers="unit">GWh</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="variable_name">nuclear</td>
+<td class="gt_row gt_left" headers="description">Monthly electricity production from nuclear power plants (in GWh)</td>
+<td class="gt_row gt_left" headers="source">Swiss Federal Office of Energy (SFOE)</td>
+<td class="gt_row gt_left" headers="unit">GWh</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="variable_name">thermic_clasique</td>
+<td class="gt_row gt_left" headers="description">Electricity production from classic thermal (fossil fuel-based) sources (in GWh)</td>
+<td class="gt_row gt_left" headers="source">Swiss Federal Office of Energy (SFOE)</td>
+<td class="gt_row gt_left" headers="unit">GWh</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="variable_name">thermic_renewable</td>
+<td class="gt_row gt_left" headers="description">Electricity production from renewable thermal sources (e.g., biogas, waste) (in GWh)</td>
+<td class="gt_row gt_left" headers="source">Swiss Federal Office of Energy (SFOE)</td>
+<td class="gt_row gt_left" headers="unit">GWh</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="variable_name">wind_thurbine</td>
+<td class="gt_row gt_left" headers="description">Electricity generated from wind turbines (in GWh)</td>
+<td class="gt_row gt_left" headers="source">Swiss Federal Office of Energy (SFOE)</td>
+<td class="gt_row gt_left" headers="unit">GWh</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="variable_name">photovoltaic</td>
+<td class="gt_row gt_left" headers="description">Electricity produced from photovoltaic (solar) sources (in GWh)</td>
+<td class="gt_row gt_left" headers="source">Swiss Federal Office of Energy (SFOE)</td>
+<td class="gt_row gt_left" headers="unit">GWh</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="variable_name">total</td>
+<td class="gt_row gt_left" headers="description">Total electricity production from all sources (hydro, nuclear, thermal, renewables) (in GWh)</td>
+<td class="gt_row gt_left" headers="source">Swiss Federal Office of Energy (SFOE)</td>
+<td class="gt_row gt_left" headers="unit">GWh</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="variable_name">acumulation_pumping</td>
+<td class="gt_row gt_left" headers="description">Electricity used for pumping water into accumulation lakes (in GWh, i.e., storage)</td>
+<td class="gt_row gt_left" headers="source">Swiss Federal Office of Energy (SFOE)</td>
+<td class="gt_row gt_left" headers="unit">GWh</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="variable_name">net_production</td>
+<td class="gt_row gt_left" headers="description">Net electricity production (total production - pumping/storage use) (in GWh)</td>
+<td class="gt_row gt_left" headers="source">Swiss Federal Office of Energy (SFOE)</td>
+<td class="gt_row gt_left" headers="unit">GWh</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="variable_name">import</td>
+<td class="gt_row gt_left" headers="description">Gross imports of electricity from neighboring countries (in GWh)</td>
+<td class="gt_row gt_left" headers="source">Swiss Federal Office of Energy (SFOE)</td>
+<td class="gt_row gt_left" headers="unit">GWh</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="variable_name">export</td>
+<td class="gt_row gt_left" headers="description">Gross exports of electricity to neighboring countries (in GWh)</td>
+<td class="gt_row gt_left" headers="source">Swiss Federal Office of Energy (SFOE)</td>
+<td class="gt_row gt_left" headers="unit">GWh</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="variable_name">country_consumtion</td>
+<td class="gt_row gt_left" headers="description">Total electricity used domestically, including grid and industrial use (in GWh)</td>
+<td class="gt_row gt_left" headers="source">Swiss Federal Office of Energy (SFOE)</td>
+<td class="gt_row gt_left" headers="unit">GWh</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="variable_name">losses</td>
+<td class="gt_row gt_left" headers="description">Grid losses (distribution/transmission) (in GWh)</td>
+<td class="gt_row gt_left" headers="source">Swiss Federal Office of Energy (SFOE)</td>
+<td class="gt_row gt_left" headers="unit">GWh</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="variable_name">final_consumtion</td>
+<td class="gt_row gt_left" headers="description">Final consumption by Swiss end users (households, services, industry) (in GWh)</td>
+<td class="gt_row gt_left" headers="source">Swiss Federal Office of Energy (SFOE)</td>
+<td class="gt_row gt_left" headers="unit">GWh</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="variable_name">export_import</td>
+<td class="gt_row gt_left" headers="description">Net importer/exporter status (1 = net importer, 0 = net exporter)</td>
+<td class="gt_row gt_left" headers="source">Swiss Federal Office of Energy (SFOE)</td>
+<td class="gt_row gt_left" headers="unit">binary (0/1)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li><a href="https://www.meteoswiss.admin.ch/services-and-publications/applications/ext/download-data-without-coding-skills.html#lang=en&amp;mdt=homogenous&amp;pgid=Radiation&amp;sid=SAM&amp;col=ch.meteoschweiz.ogd-nbcn&amp;di=&amp;tr=&amp;hdr="><strong>MeteoSwiss OGD-NBCN</strong></a>: Monthly Solar Irradiation.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Click to expand: Metadata for Monthly Solar Irradiation Dataset">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Click to expand: Metadata for Monthly Solar Irradiation Dataset
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output-display">
+<div class="scroll-box">
+<div id="ftkbmsxqaw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ftkbmsxqaw table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ftkbmsxqaw thead, #ftkbmsxqaw tbody, #ftkbmsxqaw tfoot, #ftkbmsxqaw tr, #ftkbmsxqaw td, #ftkbmsxqaw th {
+  border-style: none;
+}
+
+#ftkbmsxqaw p {
+  margin: 0;
+  padding: 0;
+}
+
+#ftkbmsxqaw .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ftkbmsxqaw .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ftkbmsxqaw .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ftkbmsxqaw .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ftkbmsxqaw .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ftkbmsxqaw .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ftkbmsxqaw .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ftkbmsxqaw .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ftkbmsxqaw .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ftkbmsxqaw .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ftkbmsxqaw .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ftkbmsxqaw .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ftkbmsxqaw .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ftkbmsxqaw .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ftkbmsxqaw .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ftkbmsxqaw .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ftkbmsxqaw .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ftkbmsxqaw .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ftkbmsxqaw .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ftkbmsxqaw .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ftkbmsxqaw .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ftkbmsxqaw .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ftkbmsxqaw .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ftkbmsxqaw .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ftkbmsxqaw .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ftkbmsxqaw .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ftkbmsxqaw .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ftkbmsxqaw .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ftkbmsxqaw .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ftkbmsxqaw .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ftkbmsxqaw .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ftkbmsxqaw .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ftkbmsxqaw .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ftkbmsxqaw .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ftkbmsxqaw .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ftkbmsxqaw .gt_left {
+  text-align: left;
+}
+
+#ftkbmsxqaw .gt_center {
+  text-align: center;
+}
+
+#ftkbmsxqaw .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ftkbmsxqaw .gt_font_normal {
+  font-weight: normal;
+}
+
+#ftkbmsxqaw .gt_font_bold {
+  font-weight: bold;
+}
+
+#ftkbmsxqaw .gt_font_italic {
+  font-style: italic;
+}
+
+#ftkbmsxqaw .gt_super {
+  font-size: 65%;
+}
+
+#ftkbmsxqaw .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ftkbmsxqaw .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ftkbmsxqaw .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ftkbmsxqaw .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ftkbmsxqaw .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ftkbmsxqaw .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ftkbmsxqaw .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ftkbmsxqaw .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ftkbmsxqaw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<td colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Metadata: Solar Radiation (MeteoSwiss Aggregated Data)</strong></td>
+</tr>
+<tr class="gt_col_headings even">
+<th id="variable_name" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Variable</th>
+<th id="description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Description</th>
+<th id="source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Source</th>
+<th id="processing_steps" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">processing_steps</th>
+<th id="unit" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Unit</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="variable_name">date_month</td>
+<td class="gt_row gt_left" headers="description">First day of each month (used as timestamp for monthly aggregated data)</td>
+<td class="gt_row gt_left" headers="source">meteoswiss.ch</td>
+<td class="gt_row gt_left" headers="processing_steps">Dates represent the aggregation level (monthly); derived from daily values</td>
+<td class="gt_row gt_left" headers="unit">YYYY-MM-DD</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="variable_name">global_radiation</td>
+<td class="gt_row gt_left" headers="description">Monthly average global solar radiation across all Swiss MeteoSwiss stations (in MJ/m²)</td>
+<td class="gt_row gt_left" headers="source">meteoswiss.ch</td>
+<td class="gt_row gt_left" headers="processing_steps">Downloaded monthly global radiation values from multiple stations; averaged across stations per month</td>
+<td class="gt_row gt_left" headers="unit">MJ/m²</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Both data sets are aggregated to <strong>monthly</strong> frequency and merged on a monthly date column.</p>
+</blockquote>
+<ul>
+<li><a href="https://www.bfe.admin.ch/bfe/en/home/supply/statistics-and-geodata/energy-statistics/electricity-statistics.html/#kw-96076"><strong>Energy data (Swiss Federal Office of energy)</strong></a>: Swiss Nuclear Power Plants Dataset.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Click to expand: Metadata for Nuclear Production Dataset">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Click to expand: Metadata for Nuclear Production Dataset
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output-display">
+<div class="scroll-box">
+<div id="usxuitwzxh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#usxuitwzxh table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#usxuitwzxh thead, #usxuitwzxh tbody, #usxuitwzxh tfoot, #usxuitwzxh tr, #usxuitwzxh td, #usxuitwzxh th {
+  border-style: none;
+}
+
+#usxuitwzxh p {
+  margin: 0;
+  padding: 0;
+}
+
+#usxuitwzxh .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#usxuitwzxh .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#usxuitwzxh .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#usxuitwzxh .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#usxuitwzxh .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#usxuitwzxh .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#usxuitwzxh .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#usxuitwzxh .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#usxuitwzxh .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#usxuitwzxh .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#usxuitwzxh .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#usxuitwzxh .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#usxuitwzxh .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#usxuitwzxh .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#usxuitwzxh .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#usxuitwzxh .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#usxuitwzxh .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#usxuitwzxh .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#usxuitwzxh .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#usxuitwzxh .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#usxuitwzxh .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#usxuitwzxh .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#usxuitwzxh .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#usxuitwzxh .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#usxuitwzxh .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#usxuitwzxh .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#usxuitwzxh .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#usxuitwzxh .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#usxuitwzxh .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#usxuitwzxh .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#usxuitwzxh .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#usxuitwzxh .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#usxuitwzxh .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#usxuitwzxh .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#usxuitwzxh .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#usxuitwzxh .gt_left {
+  text-align: left;
+}
+
+#usxuitwzxh .gt_center {
+  text-align: center;
+}
+
+#usxuitwzxh .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#usxuitwzxh .gt_font_normal {
+  font-weight: normal;
+}
+
+#usxuitwzxh .gt_font_bold {
+  font-weight: bold;
+}
+
+#usxuitwzxh .gt_font_italic {
+  font-style: italic;
+}
+
+#usxuitwzxh .gt_super {
+  font-size: 65%;
+}
+
+#usxuitwzxh .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#usxuitwzxh .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#usxuitwzxh .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#usxuitwzxh .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#usxuitwzxh .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#usxuitwzxh .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#usxuitwzxh .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#usxuitwzxh .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#usxuitwzxh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<td colspan="2" class="gt_heading gt_title gt_font_normal gt_bottom_border"><strong>Metadata: Swiss Nuclear Power Plants Dataset</strong></td>
+</tr>
+<tr class="gt_col_headings even">
+<th id="Variable_Name" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Variable</th>
+<th id="Description" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Description</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable_Name">year</td>
+<td class="gt_row gt_left" headers="Description">Calendar year</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable_Name">beznau1_production_gwh</td>
+<td class="gt_row gt_left" headers="Description">Beznau I: Annual energy production (GWh)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable_Name">beznau1_capacity_mwe</td>
+<td class="gt_row gt_left" headers="Description">Beznau I: Installed capacity (MWe)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable_Name">beznau1_util_pct</td>
+<td class="gt_row gt_left" headers="Description">Beznau I: Capacity utilization rate (%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable_Name">beznau2_production_gwh</td>
+<td class="gt_row gt_left" headers="Description">Beznau II: Production (GWh)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable_Name">beznau2_capacity_mwe</td>
+<td class="gt_row gt_left" headers="Description">Beznau II: Capacity (MWe)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable_Name">beznau2_util_pct</td>
+<td class="gt_row gt_left" headers="Description">Beznau II: Utilization (%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable_Name">muhleberg_production_gwh</td>
+<td class="gt_row gt_left" headers="Description">Mühleberg: Production (GWh)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable_Name">muhleberg_capacity_mwe</td>
+<td class="gt_row gt_left" headers="Description">Mühleberg: Capacity (MWe)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable_Name">muhleberg_util_pct</td>
+<td class="gt_row gt_left" headers="Description">Mühleberg: Utilization (%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable_Name">gosgen_production_gwh</td>
+<td class="gt_row gt_left" headers="Description">Gösgen: Production (GWh)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable_Name">gosgen_capacity_mwe</td>
+<td class="gt_row gt_left" headers="Description">Gösgen: Capacity (MWe)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable_Name">gosgen_util_pct</td>
+<td class="gt_row gt_left" headers="Description">Gösgen: Utilization (%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable_Name">leibstadt_production_gwh</td>
+<td class="gt_row gt_left" headers="Description">Leibstadt: Production (GWh)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable_Name">leibstadt_capacity_mwe</td>
+<td class="gt_row gt_left" headers="Description">Leibstadt: Capacity (MWe)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable_Name">leibstadt_util_pct</td>
+<td class="gt_row gt_left" headers="Description">Leibstadt: Utilization (%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable_Name">total_production_gwh</td>
+<td class="gt_row gt_left" headers="Description">Sum of all reactors’ production (GWh)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Variable_Name">total_capacity_mwe</td>
+<td class="gt_row gt_left" headers="Description">Sum of installed capacities (MWe)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Variable_Name">total_util_pct</td>
+<td class="gt_row gt_left" headers="Description">Aggregate capacity utilization (%, rough)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="energy-production-20202024" class="level2">
+<h2 class="anchored" data-anchor-id="energy-production-20202024">Energy Production (2020–2024)</h2>
+<p>Switzerland began <strong>consistently recording monthly renewable energy production</strong> in 2020, providing a solid foundation for analyzing how the country generates electricity across sources and seasons.</p>
+<p>This section explores production from <strong>hydroelectric, nuclear, solar, thermal (classic and renewable), and wind</strong> sources using monthly data from 2020 to mid-2025. The goal is to understand:</p>
+<ul>
+<li>How electricity production is distributed across sources</li>
+<li>How <strong>seasonality</strong> affects each energy type</li>
+<li>What happens to <strong>nuclear output</strong> when renewables peak</li>
+<li>How <strong>pumped storage</strong> is used to balance the grid</li>
+</ul>
+<p>These dynamics set the stage for assessing whether solar energy can realistically scale to replace nuclear output in the coming decades.</p>
+<section id="monthly-energy-production-in-switzerland" class="level3">
+<h3 class="anchored" data-anchor-id="monthly-energy-production-in-switzerland">Monthly Energy Production in Switzerland</h3>
+<p>The chart below shows monthly electricity generation by energy type, from January 2020 to May 2025. Each color band represents a specific energy source.</p>
+<p>Additional features:</p>
+<ul>
+<li>A <strong>red line</strong> shows <strong>net production</strong> (after subtracting pumped storage use)</li>
+<li><strong>Grey bars below zero</strong> represent <strong>electricity used for pumped storage</strong> (i.e., storing excess electricity by pumping water uphill)</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Swiss_Electricity_Transition_Project_files/figure-html/overview-plot-1.png" class="img-fluid figure-img" width="1084"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>Hydroelectric power</strong> shows a strong seasonal pattern, peaking between <strong>May and August</strong> due to snowmelt and rainfall.</li>
+<li><strong>Nuclear energy</strong> remains relatively stable but shows <strong>regular dips around May–June</strong>, corresponding with planned maintenance.</li>
+<li><strong>Solar output</strong> is strongly seasonal, increasing during spring and peaking in summer.</li>
+<li><strong>Thermal production</strong> (classic and renewable) remains steady throughout the year.</li>
+<li><strong>Wind power</strong> contributes very little to the energy mix.</li>
+<li><strong>Pumped storage usage</strong> (grey bars) increases during high-production periods - storing surplus electricity for later use.</li>
+<li>The <strong>net production line</strong> reflects how pumped storage smooths out seasonal volatility in supply.</li>
+</ul>
+<p>Together, these patterns highlight Switzerland’s ability to dynamically balance its energy system - a vital feature as the country phases out stable nuclear baseload.</p>
+</section>
+<section id="average-share-of-energy-production-20202024" class="level3">
+<h3 class="anchored" data-anchor-id="average-share-of-energy-production-20202024">Average Share of Energy Production (2020–2024)</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>The table on the right shows the average share of each energy source in Switzerland’s electricity mix over the five-year period:</p>
+<p>Hydroelectric power is clearly dominant, providing over half of the country’s electricity. Nuclear remains significant at over a quarter, while <strong>solar - despite rapid growth - still accounts for just 5.2%</strong> of the total mix.</p>
+<p>Thermal sources together contribute around <strong>15%</strong>, and wind power remains negligible.</p>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div id="rbjganqqxc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rbjganqqxc table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#rbjganqqxc thead, #rbjganqqxc tbody, #rbjganqqxc tfoot, #rbjganqqxc tr, #rbjganqqxc td, #rbjganqqxc th {
+  border-style: none;
+}
+
+#rbjganqqxc p {
+  margin: 0;
+  padding: 0;
+}
+
+#rbjganqqxc .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rbjganqqxc .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#rbjganqqxc .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rbjganqqxc .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rbjganqqxc .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rbjganqqxc .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rbjganqqxc .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rbjganqqxc .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rbjganqqxc .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rbjganqqxc .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rbjganqqxc .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rbjganqqxc .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rbjganqqxc .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#rbjganqqxc .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#rbjganqqxc .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rbjganqqxc .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rbjganqqxc .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rbjganqqxc .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rbjganqqxc .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rbjganqqxc .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#rbjganqqxc .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#rbjganqqxc .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#rbjganqqxc .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rbjganqqxc .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#rbjganqqxc .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#rbjganqqxc .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rbjganqqxc .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rbjganqqxc .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rbjganqqxc .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rbjganqqxc .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#rbjganqqxc .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rbjganqqxc .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rbjganqqxc .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rbjganqqxc .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rbjganqqxc .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rbjganqqxc .gt_left {
+  text-align: left;
+}
+
+#rbjganqqxc .gt_center {
+  text-align: center;
+}
+
+#rbjganqqxc .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rbjganqqxc .gt_font_normal {
+  font-weight: normal;
+}
+
+#rbjganqqxc .gt_font_bold {
+  font-weight: bold;
+}
+
+#rbjganqqxc .gt_font_italic {
+  font-style: italic;
+}
+
+#rbjganqqxc .gt_super {
+  font-size: 65%;
+}
+
+#rbjganqqxc .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#rbjganqqxc .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#rbjganqqxc .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#rbjganqqxc .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#rbjganqqxc .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#rbjganqqxc .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#rbjganqqxc .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#rbjganqqxc .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#rbjganqqxc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<td colspan="2" class="gt_heading gt_title gt_font_normal gt_bottom_border">Avg. Share of Production (2020–2024)</td>
+</tr>
+<tr class="gt_col_headings even">
+<th id="production_type" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Energy Type</th>
+<th id="avg_share" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Avg. Share (%)</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="production_type">Hydroelectric</td>
+<td class="gt_row gt_right" headers="avg_share">51.5</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="production_type">Nuclear</td>
+<td class="gt_row gt_right" headers="avg_share">28.3</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="production_type">Thermal (Classic)</td>
+<td class="gt_row gt_right" headers="avg_share">10.1</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="production_type">Solar</td>
+<td class="gt_row gt_right" headers="avg_share">5.2</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="production_type">Thermal (Renewable)</td>
+<td class="gt_row gt_right" headers="avg_share">4.8</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="production_type">Wind</td>
+<td class="gt_row gt_right" headers="avg_share">0.2</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="seasonality-of-energy-production" class="level3">
+<h3 class="anchored" data-anchor-id="seasonality-of-energy-production">Seasonality of Energy Production</h3>
+<p>To better understand how Switzerland’s electricity mix changes over time, we visualize each energy source’s <strong>monthly share of total production</strong>, rather than absolute values.</p>
+<p>This approach helps uncover:</p>
+<ul>
+<li><strong>Seasonal trends</strong></li>
+<li><strong>Trade-offs</strong> between energy types (e.g., hydro vs.&nbsp;nuclear)</li>
+<li><strong>Complementarity</strong> between renewables</li>
+</ul>
+<p>The chart below shows monthly percentage shares for each production type from January 2020 to mid-2025.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Swiss_Electricity_Transition_Project_files/figure-html/plot2-1.png" class="img-fluid figure-img" width="1008"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The chart shows that:</p>
+<ul>
+<li><strong>Hydroelectric (red line)</strong> shows a strong and consistent seasonal pattern:
+<ul>
+<li>Peaks in <strong>late spring to early summer</strong> (May–July)</li>
+<li>Drops in <strong>autumn and winter</strong>, especially December–February</li>
+</ul></li>
+<li><strong>Nuclear (gold line)</strong> behaves in an <strong>inverse seasonal pattern</strong>:
+<ul>
+<li>Most stable across months, but shows <strong>predictable dips</strong> in <strong>May–June</strong>, corresponding with <strong>scheduled maintenance outages</strong></li>
+<li>These dips are <strong>well-aligned with hydro and solar peaks</strong>, indicating planned coordination</li>
+</ul></li>
+<li><strong>Solar (cyan line)</strong> rises steadily from March, <strong>peaking in June–July</strong>, then drops in autumn and nearly vanishes in December–January.</li>
+<li><strong>Thermal (classic and renewable)</strong> sources remain relatively flat and <strong>act as baseline supplements</strong>, especially in winter.</li>
+<li><strong>Wind</strong> contributes a <strong>negligible share</strong>, fluctuating around 0.2% with no clear seasonal pattern.</li>
+</ul>
+<p>Overall, the chart illustrates a <strong>deliberate balancing strategy</strong>:</p>
+<ul>
+<li>Switzerland <strong>reduces nuclear output when renewable supply increases</strong>, especially in summer.</li>
+<li>This modulation <strong>enhances grid flexibility</strong>, an essential feature as the country prepares to phase out nuclear energy</li>
+</ul>
+</section>
+<section id="correlation-between-energy-sources" class="level3">
+<h3 class="anchored" data-anchor-id="correlation-between-energy-sources">Correlation Between Energy Sources</h3>
+<p>The seasonal analysis suggested that <strong>nuclear production often declines when renewable output (hydro and solar) increases</strong>. To test this relationship more formally, we calculate <strong>Pearson correlation coefficients</strong> between monthly shares of:</p>
+<ul>
+<li>Hydroelectric vs.&nbsp;Nuclear</li>
+<li>Solar vs.&nbsp;Nuclear</li>
+</ul>
+<p>Why do this?</p>
+<p>Correlation helps quantify the <strong>degree of inverse movement</strong> between sources. If two sources are strongly negatively correlated, it means when one rises, the other tends to fall - suggesting <strong>substitution or balancing behavior</strong>.</p>
+<p>For Switzerland, this matters because:</p>
+<ul>
+<li>If nuclear consistently <strong>steps down when renewables rise</strong>, it shows the grid is already designed to integrate renewables without overcapacity.<br>
+</li>
+<li>It also highlights how <strong>nuclear provides flexibility</strong> today, which will need to be replaced by other mechanisms (imports, storage, or flexible hydro) after the phase-out.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div id="dbnjhkkvgb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dbnjhkkvgb table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#dbnjhkkvgb thead, #dbnjhkkvgb tbody, #dbnjhkkvgb tfoot, #dbnjhkkvgb tr, #dbnjhkkvgb td, #dbnjhkkvgb th {
+  border-style: none;
+}
+
+#dbnjhkkvgb p {
+  margin: 0;
+  padding: 0;
+}
+
+#dbnjhkkvgb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#dbnjhkkvgb .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#dbnjhkkvgb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#dbnjhkkvgb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#dbnjhkkvgb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dbnjhkkvgb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dbnjhkkvgb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dbnjhkkvgb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#dbnjhkkvgb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#dbnjhkkvgb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#dbnjhkkvgb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#dbnjhkkvgb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#dbnjhkkvgb .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#dbnjhkkvgb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#dbnjhkkvgb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#dbnjhkkvgb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#dbnjhkkvgb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#dbnjhkkvgb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#dbnjhkkvgb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dbnjhkkvgb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#dbnjhkkvgb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#dbnjhkkvgb .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#dbnjhkkvgb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dbnjhkkvgb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#dbnjhkkvgb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#dbnjhkkvgb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dbnjhkkvgb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dbnjhkkvgb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#dbnjhkkvgb .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dbnjhkkvgb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#dbnjhkkvgb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dbnjhkkvgb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dbnjhkkvgb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dbnjhkkvgb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dbnjhkkvgb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dbnjhkkvgb .gt_left {
+  text-align: left;
+}
+
+#dbnjhkkvgb .gt_center {
+  text-align: center;
+}
+
+#dbnjhkkvgb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#dbnjhkkvgb .gt_font_normal {
+  font-weight: normal;
+}
+
+#dbnjhkkvgb .gt_font_bold {
+  font-weight: bold;
+}
+
+#dbnjhkkvgb .gt_font_italic {
+  font-style: italic;
+}
+
+#dbnjhkkvgb .gt_super {
+  font-size: 65%;
+}
+
+#dbnjhkkvgb .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#dbnjhkkvgb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#dbnjhkkvgb .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#dbnjhkkvgb .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#dbnjhkkvgb .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#dbnjhkkvgb .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#dbnjhkkvgb .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#dbnjhkkvgb .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#dbnjhkkvgb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Relationship" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Source Pair</th>
+<th id="Correlation" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Pearson Correlation</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Relationship">Hydroelectric vs Nuclear</td>
+<td class="gt_row gt_right" headers="Correlation">−0.774</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Relationship">Solar vs Nuclear</td>
+<td class="gt_row gt_right" headers="Correlation">−0.566</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The results confirm our observations:</p>
+<ul>
+<li><p><strong>Hydroelectric vs.&nbsp;Nuclear</strong>:<br>
+A <strong>strong negative correlation (r = -0.774)</strong>.<br>
+When hydro production increases in spring and summer, nuclear output reliably decreases - mainly due to <strong>planned maintenance</strong> and grid balancing.</p></li>
+<li><p><strong>Solar vs.&nbsp;Nuclear</strong>:<br>
+A <strong>moderate negative correlation (r = -0.566)</strong>.<br>
+Solar output is still a smaller share of the mix than hydro, but the inverse relationship suggests nuclear is also adjusted downward during solar peaks.</p></li>
+</ul>
+<p>In short, Switzerland’s nuclear fleet already functions as a <strong>flexible buffer</strong> against seasonal renewable fluctuations.<br>
+Replacing this role will be a <strong>major challenge post-2050</strong>, as solar and hydro cannot “self-balance” without external support (imports, long-duration storage, or expanded hydro flexibility).</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Planned Nuclear Maintenance and Seasonal Renewables">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Planned Nuclear Maintenance and Seasonal Renewables
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Swiss nuclear plants typically undergo annual inspections and fuel replacement in <strong>late spring to early summer</strong>. This timing aligns with <strong>peak hydro and solar output</strong>, allowing nuclear capacity to temporarily decrease without compromising grid stability. This synergy reflects how Switzerland already <strong>leverages seasonal renewables to reduce nuclear reliance</strong>. This pattern will become increasingly critical as the phase-out proceeds.</p>
+<p><a href="https://ensi.admin.ch/en/ensi-is-the-national-regulatory-body-with-responsibility-for-the-nuclear-safety-and-security-of-swiss-nuclear-facilities/ensis-remit/?utm_source=chatgpt.com">Source: ENSI – Operation of Nuclear Power Plants</a></p>
+</div>
+</div>
+</div>
+</section>
+<section id="nuclear-power-plants-overview" class="level3">
+<h3 class="anchored" data-anchor-id="nuclear-power-plants-overview">Nuclear Power Plants Overview</h3>
+<p>Nuclear energy has been a cornerstone of Switzerland’s electricity system for decades, providing stable, low-carbon baseload power. Today, the country operates <strong>four reactors across three sites</strong>:</p>
+<ul>
+<li><strong>Beznau I &amp; II</strong> (Aargau) - the world’s oldest commercial reactors still in operation.</li>
+<li><strong>Gösgen</strong> (Solothurn).</li>
+<li><strong>Leibstadt</strong> (Aargau).</li>
+</ul>
+<p>The <strong>Mühleberg plant (Bern)</strong> was permanently decommissioned in <strong>December 2019</strong>, becoming the first Swiss nuclear reactor to shut down.</p>
+<p>Between 2020 and 2024, nuclear contributed on average 22,190 GWh, representing between 28.4% (2024) and 35.8% (2022) of Switzerland’s total electricity production.</p>
+<p>Switzerland has decided on a gradual <strong>nuclear phase-out</strong>, meaning no new reactors will be built, but the existing plants can continue operating as long as they remain safe.</p>
+</section>
+<section id="geographic-overview" class="level3">
+<h3 class="anchored" data-anchor-id="geographic-overview">Geographic Overview</h3>
+<p>The map below shows the locations and status of Swiss nuclear power plants.</p>
+<ul>
+<li><strong>Green markers</strong>: operational reactors</li>
+<li><strong>Red markers</strong>: decommissioned sites</li>
+</ul>
+<p>Hovering over a site displays details on average production (2020–2024), canton, and operational history.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-2a02d58595b578dc024a" style="width:90%;height:400px;"></div>
+<script type="application/json" data-for="htmlwidget-2a02d58595b578dc024a">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[47.552107,47.562107,47.3656,47.6012,46.9689],[8.228491999999999,8.238491999999999,7.9671,8.1845,7.2684],5,null,null,{"interactive":true,"className":"","stroke":true,"color":["green","green","green","green","red"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["green","green","green","green","red"],"fillOpacity":0.8},null,null,null,null,["<strong>Beznau I<\/strong><br>Canton: AG<br>Status: Operational<br>Average annual production (2020–2024): 2,718 GWh<br>Oldest commercial reactor worldwide (1969).","<strong>Beznau II<\/strong><br>Canton: AG<br>Status: Operational<br>Average annual production (2020–2024): 2,897 GWh<br>Twin reactor of Beznau I (1971).","<strong>Gösgen<\/strong><br>Canton: SO<br>Status: Operational<br>Average annual production (2020–2024): 7,977 GWh<br>In operation since 1979.","<strong>Leibstadt<\/strong><br>Canton: AG<br>Status: Operational<br>Average annual production (2020–2024): 8,598 GWh<br>Largest Swiss reactor, in operation since 1984.","<strong>Mühleberg<\/strong><br>Canton: BE<br>Status: Decommissioned<br>Average annual production (2020–2024): N/A (decommissioned)<br>Decommissioned in December 2019."],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["green","red"],"labels":["Operational","Decommissioned"],"na_color":null,"na_label":"NA","opacity":0.5,"position":"bottomright","type":"unknown","title":"Nuclear Plant Status","extra":null,"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[46.9689,47.6012],"lng":[7.2684,8.238491999999999]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p><em>Note:</em> Coordinates for the nuclear power plants were obtained from public sources<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Nuclear Phase-Out Policy">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Nuclear Phase-Out Policy
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Under the <strong>Swiss Energy Strategy 2050</strong>, no new nuclear plants will be constructed.<br>
+Existing plants can continue operating <strong>indefinitely</strong>, provided safety is guaranteed.<br>
+This flexible phase-out contrasts with some countries (e.g., Germany), where <strong>fixed shutdown dates</strong> were set.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="photovoltaic-performance-and-solar-radiation" class="level2">
+<h2 class="anchored" data-anchor-id="photovoltaic-performance-and-solar-radiation">Photovoltaic Performance and Solar Radiation</h2>
+<p>Switzerland has expanded its installed solar PV capacity rapidly in recent years. However, raw production values reflect both:</p>
+<ul>
+<li><strong>Growing infrastructure</strong> (more panels installed)<br>
+</li>
+<li><strong>Natural variation in solar radiation</strong> (seasonal cycles, weather)</li>
+</ul>
+<p>To isolate how much solar performance depends on <strong>sunlight</strong> rather than capacity growth,we compare <strong>solar production</strong> with <strong>measured solar radiation</strong> between 2020 and 2024.</p>
+<section id="method-stl-decomposition" class="level3">
+<h3 class="anchored" data-anchor-id="method-stl-decomposition">Method: STL Decomposition</h3>
+<p>We apply <strong>STL decomposition (Seasonal-Trend decomposition using LOESS)</strong> to photovoltaic production:</p>
+<ul>
+<li><strong>Trend</strong>: captures the long-term growth in installed PV capacity</li>
+<li><strong>Seasonal</strong>: captures regular annual cycles (sunlight availability)</li>
+<li><strong>Remainder</strong>: captures short-term variation and anomalies</li>
+</ul>
+<p>By recombining the <strong>seasonal + remainder components</strong>, we obtain a <strong>normalized PV output</strong> — representing solar generation patterns independent of capacity growth.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Swiss_Electricity_Transition_Project_files/figure-html/stl-decomposition-plot-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption>STL decomposition of monthly photovoltaic production, showing trend, seasonal cycle, and remainder.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="comparison-solar-radiation-vs-normalized-pv-output" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-solar-radiation-vs-normalized-pv-output">Comparison: Solar Radiation vs Normalized PV Output</h3>
+<p>The figure below compares normalized PV output (MWh) to measured solar radiation (MJ/m²). A dual-axis plot aligns the two series, making their seasonal co-movement visible.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Swiss_Electricity_Transition_Project_files/figure-html/solar_vs_radiation-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="correlation-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="correlation-analysis">Correlation Analysis</h3>
+<p>To quantify this relationship, we compute the Pearson correlation coefficient between:</p>
+<ul>
+<li><strong>Normalized PV output</strong>, and</li>
+<li><strong>Measured solar radiation</strong></li>
+</ul>
+<blockquote class="blockquote">
+<p>The resulting correlation is: 0.896.</p>
+</blockquote>
+<p>As expected this indicates:<br>
+- This very strong positive correlation shows that solar PV production is tightly coupled to radiation availability.<br>
+- Seasonal radiation patterns, not infrastructure, explain the shape of PV output.<br>
+- Capacity growth only scales the curve upwards — it does not change the fundamental seasonal imbalance.</p>
+</section>
+<section id="seasonal-distribution-of-pv-energy-production" class="level3">
+<h3 class="anchored" data-anchor-id="seasonal-distribution-of-pv-energy-production">Seasonal Distribution of PV Energy Production</h3>
+<p>When averaged across 2020–2024, the seasonal breakdown of PV output is:</p>
+<ul>
+<li><strong>Winter (Dec–Feb):</strong> 8.3%<br>
+</li>
+<li><strong>Spring (Mar–May):</strong> 31.6%<br>
+</li>
+<li><strong>Summer (Jun–Aug):</strong> 40.8%<br>
+</li>
+<li><strong>Autumn (Sep–Nov):</strong> 19.3%</li>
+</ul>
+<p>These numbers are telling us that:</p>
+<ul>
+<li>Production is heavily concentrated in summer (nearly half of annual PV output).</li>
+<li>Winter output is very limited, despite being the period of highest demand (heating + low daylight).</li>
+<li>This seasonal mismatch is the core structural challenge for replacing nuclear with solar.</li>
+</ul>
+</section>
+<section id="pv-contribution-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="pv-contribution-over-time">PV Contribution Over Time</h3>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p>Switzerland’s photovoltaic (PV) generation has grown rapidly in recent years.To illustrate this trend, we track <strong>annual PV production (GWh)</strong> and its share of total electricity production from 2020 to 2024.</p>
+<p>The chart shows steady year-on-year growth, with no reversals.</p>
+<p>This suggests strong policy and market momentum supporting PV expansion.</p>
+<p>Yet, even with this rapid growth:</p>
+<ul>
+<li>PV accounted for only ~<strong>7.4%</strong> of Switzerland’s electricity in 2024</li>
+<li>Nuclear, by contrast, still supplied ~28% over the same period</li>
+</ul>
+</div><div class="column" style="width:45%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Swiss_Electricity_Transition_Project_files/figure-html/pv_plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="forecasting-solar-pv-production-20252030" class="level3">
+<h3 class="anchored" data-anchor-id="forecasting-solar-pv-production-20252030">Forecasting Solar PV Production (2025–2030)</h3>
+<p>In this section, we use time series modeling to forecast monthly solar PV production in Switzerland from <strong>2025 to 2030</strong>, based on trends observed between <strong>2020 and mid-2025</strong>.</p>
+<p><strong>Methodology</strong></p>
+<p>We use an <strong>ARIMA (Auto-Regressive Integrated Moving Average)</strong> model, a widely used statistical technique for modeling time series data. This model captures:</p>
+<ul>
+<li><strong>Trend</strong> (long term increase in PV output due to growning Installations)</li>
+<li><strong>Seasonality</strong> (cyclical patterns due to solar radiation patterns)</li>
+<li><strong>Short-term dependencies</strong> (month to month autocorrelation in output)</li>
+</ul>
+<p><strong>Assumptions</strong></p>
+<p>This forecast is based on the critical assumptions that the PV capacity conitnues to grow at a similar pace as observed in 2020 to mid 2025.</p>
+<p>The model does not account for:</p>
+<ul>
+<li>Policy changes,</li>
+<li>Supply chain disruptions,</li>
+<li>Technological breakthroughs,</li>
+<li>Accelerated or stalled installation rates.</li>
+</ul>
+<p>It is a s trend projection, with no technical potential simulation or policy scenarios.</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><strong>Interpretation:</strong></p>
+<ul>
+<li><p>The seasonality is clearly preserved in the forecast: output peaks in <strong>summer</strong> (May–July) and drops in <strong>winter</strong> (December–January).</p></li>
+<li><p>The amplitude of production increases over time, consistent with observed growth in installed capacity.</p></li>
+<li><p>by 2030 the PV production can peak to 1600 Ghw during the summer months, potentially being able to supply <strong>over 10 TWh/year</strong>.</p></li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Swiss_Electricity_Transition_Project_files/figure-html/arima-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="What Do the Confidence Intervals Mean?">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What Do the Confidence Intervals Mean?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The shaded ribbons around the forecast represent confidence intervals:</p>
+<ul>
+<li><strong>80% interval</strong> (darker blue): there’s an 80% chance the true value falls inside.</li>
+<li><strong>95% interval</strong> (lighter blue): there’s a 95% chance the true value falls inside.</li>
+</ul>
+<p>These intervals <strong>widen over time</strong> to reflect increasing uncertainty in long-term forecasts.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="growth-vs.-nuclear-comparison" class="level3">
+<h3 class="anchored" data-anchor-id="growth-vs.-nuclear-comparison">Growth vs.&nbsp;Nuclear Comparison</h3>
+<p>At the current pace (~1 TWh added annually), Switzerland would need about <strong>22 years</strong> to scale PV production enough to match the <strong>annual nuclear output</strong> (≈22–23 TWh).</p>
+<p>However, this projection assumes:</p>
+<ul>
+<li><strong>Linear growth</strong> (no acceleration or policy-driven scale-up)</li>
+<li><strong>No seasonal adjustment</strong> (ignores the winter shortfall identified earlier)</li>
+</ul>
+<p>In reality, <strong>scaling PV alone is insufficient</strong>: seasonal storage, imports, and flexible hydro will be essential to cover winter deficits.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Why Annual Growth is Misleading">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why Annual Growth is Misleading
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Annual growth rates can create the illusion that solar can fully replace nuclear. But electricity systems are <strong>seasonal</strong>, not annual.</p>
+<p>Even if PV reaches 22–23 TWh/year, the <strong>winter contribution will remain very small</strong>.<br>
+Thus, the transition challenge is not just about producing “enough” yearly solar - it’s about producing it <strong>when it’s needed most</strong>.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="electricity-imports-exports-grid-balance" class="level2">
+<h2 class="anchored" data-anchor-id="electricity-imports-exports-grid-balance">Electricity Imports, Exports &amp; Grid Balance</h2>
+<p>Switzerland operates one of Europe’s most reliable electricity systems. This reliability depends not only on domestic production but also on <strong>cross-border electricity flows</strong>, which help balance seasonal supply and demand.</p>
+<p>In this section, we examine how Switzerland balances its grid by looking at:</p>
+<ul>
+<li>The overall balance of production, imports, and consumption</li>
+<li>Seasonal patterns in imports and exports</li>
+<li>The implications of losing stable nuclear generation</li>
+</ul>
+<section id="grid-balance-check" class="level3">
+<h3 class="anchored" data-anchor-id="grid-balance-check">Grid Balance Check</h3>
+<p>We verify whether Switzerland’s electricity system is operationally balanced using the identity:</p>
+<p><strong>Grid Balance = (Net Production + Imports) – (Exports + Consumption)</strong></p>
+<p>The balance equals <strong>zero in all months</strong>, confirming that the Swiss grid is <strong>consistently balanced</strong> - total inflows match total outflows.</p>
+<p>This highlights Switzerland’s strong integration with the European grid and its ability to maintain operational stability.</p>
+</section>
+<section id="average-net-electricity-imports-by-month-20202024" class="level3">
+<h3 class="anchored" data-anchor-id="average-net-electricity-imports-by-month-20202024">Average Net Electricity Imports by Month (2020–2024)</h3>
+<p>The figure below shows average monthly <strong>net imports</strong> (exports-imports), averaged across 2020–2024:</p>
+<ul>
+<li><strong>Positive values = Net Export</strong></li>
+<li><strong>Negative values = Net Import</strong></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><strong>Winter (Dec–Feb)</strong>: Switzerland is a net importer of electricity, reflecting higher demand and limited solar output.</p>
+<p><strong>Spring and Summer (Apr–Aug)</strong>: The country becomes a net exporter, supported by strong hydroelectric flows and solar generation.</p>
+<p><strong>Autumn (Sep–Nov)</strong>: The balance moves closer to zero, with mixed import/export activity.</p>
+<p>This seasonal pattern confirms Switzerland’s reliance on imports during winter deficits, while acting as a net exporter during periods of renewable abundance.</p>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Swiss_Electricity_Transition_Project_files/figure-html/avg_import-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="why-imports-will-matter" class="level3">
+<h3 class="anchored" data-anchor-id="why-imports-will-matter">Why Imports Will Matter</h3>
+<p>Today, nuclear power provides <strong>stable year-round baseload</strong>, covering winter demand when solar is minimal. With nuclear gradually phased out:</p>
+<ul>
+<li><strong>Winter deficits will deepen</strong> (solar provides only ~8.3% of annual output in winter vs ~40.8% in summer).</li>
+<li><strong>Hydropower cannot fully compensate</strong>, as its seasonal peaks align with summer.</li>
+<li><strong>Imports will become increasingly critical</strong> for:
+<ul>
+<li>Security of supply</li>
+<li>Grid stability</li>
+<li>Market integration with neighboring countries</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="replacing-nuclear-with-solar-feasibility-and-limitations" class="level2">
+<h2 class="anchored" data-anchor-id="replacing-nuclear-with-solar-feasibility-and-limitations">Replacing Nuclear with Solar: Feasibility and Limitations</h2>
+<p>To test whether solar could fully replace nuclear energy, we simulate a <strong>nuclear-free Swiss grid</strong> where:</p>
+<ul>
+<li>Nuclear production (~22–23 TWh/year) is removed.</li>
+<li>Solar PV is scaled up to ~28 TWh/year (≈ nuclear + current PV), distributed monthly based on real PV production profiles (2020–2024).</li>
+<li>Hydroelectric, thermal, and wind remain fixed at their 2020–2024 averages.</li>
+<li>Imports are excluded at first, to reveal the true domestic balance.</li>
+</ul>
+<p>This scenario represents a simple “<strong>solar-for-nuclear substitution</strong>” without assuming additional hydro expansion, storage, or demand-side flexibility, second and tertiary reserves, etc.</p>
+<section id="winter-gaps-without-nuclear" class="level3">
+<h3 class="anchored" data-anchor-id="winter-gaps-without-nuclear">Winter Gaps Without Nuclear</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>In this scenario, domestic production falls short of consumption by up to <strong>2.1 TWh in December</strong> and <strong>1.7 TWh in January</strong>. Across the winter months (Nov–Feb), the total deficit reaches ~5.7 TWh.</p>
+<p>By contrast, summer months (May–Aug) show large surpluses of ~13 TWh, underscoring the structural <strong>seasonal mismatch</strong>.</p>
+<p>The chart reinforces the conclusion:</p>
+<ul>
+<li>solar can match nuclear’s <strong>annual output</strong>,</li>
+<li>but not its <strong>seasonal reliability</strong>.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Swiss_Electricity_Transition_Project_files/figure-html/monthly_gap_plot-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="imports-as-one-of-the-balancing-mechanism" class="level3">
+<h3 class="anchored" data-anchor-id="imports-as-one-of-the-balancing-mechanism">Imports as one of the Balancing Mechanism</h3>
+<p>Switzerland already relies on <strong>imports in winter</strong> and <strong>exports in summer</strong> to balance its grid. In a nuclear-free system, this reliance would <strong>increase sharply</strong>, with imports becoming the <strong>primary tool for covering winter deficits</strong>.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>The chart on the right illustrates this point: imports (orange bars) rise steeply in <strong>December–February</strong>, while in <strong>May–August</strong> solar and hydro surpluses reduce the need for imports.</p>
+<p>While technically feasible thanks to Switzerland’s strong interconnections with neighboring countries, this dependence raises key risks:</p>
+<ul>
+<li><strong>Energy security</strong>: reliance on France, Germany, and Italy during critical months.</li>
+<li><strong>Market volatility</strong>: higher price exposure if Europe faces simultaneous winter shortages.</li>
+<li><strong>Geopolitical exposure</strong>: reduced autonomy when neighboring systems are also under pressure.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Swiss_Electricity_Transition_Project_files/figure-html/replace_nuclear_w_solar-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>This analysis shows that while <strong>solar can replace nuclear in annual totals</strong>, it cannot guarantee <strong>seasonal reliability</strong>. Without nuclear, Switzerland faces <strong>deficits of ~5–6 TWh in winter</strong> (Nov–Feb) and <strong>surpluses of ~13 TWh in summer</strong>.</p>
+<p>Today, imports already bridge these gaps. In a nuclear-free future, however, <strong>imports would become the backbone of winter security</strong>. While technically feasible, this creates dependence on neighboring systems (France, Germany, Italy) and heightens exposure to <strong>market volatility</strong> and <strong>geopolitical risks</strong>.</p>
+<p>At the same time, Switzerland is investing in <strong>domestic balancing solutions</strong>:</p>
+<ul>
+<li><strong>Pumped-storage</strong>: the 900 MW <strong>Nant de Drance</strong> plant came online in 2022<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, offering capacity comparable to a nuclear reactor such as Gösgen. Further projects are under study in the <strong>Grimsel region</strong><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</li>
+<li><strong>Battery storage</strong>: projects such as <strong>Alpiq’s Gondo and Lausanne batteries</strong> demonstrate the growing role of short-term flexibility<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</li>
+<li><strong>Solar expansion</strong>: according to <em>Energie Zukunft Schweiz</em>, Switzerland has a <strong>technical PV potential of 9–11 GW</strong><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. Unlocking this potential requires stronger political and regulatory frameworks. In parallel, federal studies suggest that <strong>~6% of Swiss land area is suitable for PV</strong><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>, though deployment faces constraints from heritage protection and land-use policies.</li>
+<li><strong>Smart-grid upgrades</strong>: ongoing digitalization projects aim to improve flexibility, demand management, and grid resilience<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>.</li>
+</ul>
+<p>Switzerland’s energy transition is therefore not just about <strong>adding solar capacity</strong>. It is a <strong>system challenge</strong>: aligning seasonal production with demand, balancing imports with domestic flexibility, and integrating storage and smart-grid technology.</p>
+<p>The path forward will require a <strong>portfolio approach</strong>:</p>
+<ul>
+<li>Seasonal <strong>imports</strong> (short- to medium-term necessity)</li>
+<li>Expansion of <strong>solar and flexible hydropower</strong></li>
+<li><strong>Long-duration storage</strong> (pumped-hydro, future technologies)</li>
+<li><strong>Smart grids and efficiency gains</strong></li>
+</ul>
+<p>Ultimately, success will not be measured by annual generation totals, but by ensuring <strong>secure electricity supply in winter</strong>, when the system is under the greatest strain.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Coordinates for nuclear power plants in Switzerland: <a href="https://en.wikipedia.org/wiki/Beznau_Nuclear_Power_Plant">Beznau</a>, <a href="https://en.wikipedia.org/wiki/Gösgen_Nuclear_Power_Plant">Gösgen</a>, <a href="https://en.wikipedia.org/wiki/Leibstadt_Nuclear_Power_Plant">Leibstadt</a>, and <a href="https://en.wikipedia.org/wiki/Mühleberg_Nuclear_Power_Plant">Mühleberg</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Nant de Drance SA – <a href="https://www.nant-de-drance.ch/en/the-power-plant/">The power plant</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>KWO (Kraftwerke Oberhasli AG) – <a href="https://www.grimselstrom.ch/en/projekte/kraftwerk-handeck-4">Projects</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Alpiq – <a href="https://www.alpiq.com/energy/assets/battery-energy-storage-systems">Battery storage in Lausanne</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><a href="https://www.axpo.com/lt/en/newsroom/magazine/renewable-energy/technical-potential-of-9-to-11-gw.html">Potential PV</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p><a href="https://www.swissinfo.ch/eng/climate-solutions/around-6-per-cent-of-the-surface-area-in-switzerland-can-be-used-for-solar-installations/89959131">Article - New Federal Study</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>SFOE – <a href="https://www.bfe.admin.ch/bfe/en/home/supply/electricity-supply/electricity-networks/smart-grids.html">Smart grid updates</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/alinsever\.github\.io\/portfolio\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
