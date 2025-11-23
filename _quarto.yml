@@ -1,0 +1,53 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Portfolio - Alin Sever"
+  navbar:
+    logo: assets/logo.png
+    title: "Alin Sever"
+    left:
+      - text: "Home"
+        href: index.qmd
+  sidebar:
+    style: "floating"
+    search: true
+    contents:
+      - section: "ML Portfolio"
+        contents:
+          - text: "Overview"
+            href: ml-portfolio/index.qmd
+          - text: "R Labs (SVM on iris)"
+            href: ml-portfolio/labs_R/svm_iris.qmd
+          - text: "NHANES - R Project"
+            href: ml-portfolio/nhanes_R/index.qmd
+          - text: "Diabetes Readmission - Python"
+            href: ml-portfolio/diabetes_python/index.qmd
+
+      - section: "Standalone Projects"
+        contents:
+          - text: "Overview"
+            href: standalone-projects/index.qmd
+          - text: "Bitcoin Portfolio (R)"
+            href: standalone-projects/bitcoin_portfolio_R/index.qmd
+          - text: "Swiss Energy Analysis (R)"
+            href: standalone-projects/swiss_energy_R/index.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    code-summary: "Show code"
+  pdf:
+    documentclass: scrreprt
+    papersize: a4
+    geometry:
+      - margin=2.5cm
+
+execute:
+  echo: true
+  warning: false
+  message: false

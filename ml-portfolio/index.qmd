@@ -1,0 +1,15 @@
+---
+title: "ML Portfolio"
+---
+
+# Machine Learning Portfolio
+
+This section presents machine learning work developed in R and Python.
+
+Projects included:
+
+- R Labs (example: SVM on iris)
+- NHANES health analysis in R (regression + SVM)
+- Diabetes readmission prediction in Python (end-to-end pipeline)
+
+More projects will be added as the MSc program continues.
