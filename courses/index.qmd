@@ -13,7 +13,7 @@ Only online courses include downloadable certificates when available.
 The following courses are part of my ongoing Master’s program.  
 These do **not** include certificates, but they show the breadth of my academic training.
 
-### Semester I
+#### Semester I
 - Computer Concepts for Data Scientists
 - Customer Data Analytics 
 - Design of Experiments  
@@ -25,7 +25,7 @@ These do **not** include certificates, but they show the breadth of my academic 
 - R Bootcamp  
  
 
-### Semester II
+#### Semester II
 - Machine Learning 1  
 - Machine Learning 2 
 - Generative AI (RAG System Project)
@@ -46,7 +46,7 @@ Additional MSc courses will be added as my degree progresses.
 
 
 
-### AI in Healthcare - Standford Online (coursera)
+#### AI in Healthcare - Standford Online (coursera)
 
 Courses:
 
@@ -58,7 +58,7 @@ Courses:
     
 [Verify Certificate](https://coursera.org/share/78dbffb0042b5edaf7de6454240161de)
 
-### AI Fundamentals (datacamp)
+#### AI Fundamentals (datacamp)
 [Verify Certificate](https://www.datacamp.com/skill-verification/AIF0027489612311)
 
 

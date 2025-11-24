@@ -11,6 +11,11 @@ website:
     left:
       - text: "Home"
         href: index.qmd
+  page-footer:
+    center: |
+      **Contact:** alinsever0@gmail.com  
+      LinkedIn: https://www.linkedin.com/in/alinsever  
+      GitHub: https://github.com/alinsever
   sidebar:
     style: "floating"
     search: true
