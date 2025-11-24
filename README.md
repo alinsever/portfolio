@@ -15,7 +15,8 @@ This section will include:
 Applied analytics projects, dashboards, and data engineering work.
 Current planned additions:
 - Bitcoin & Portfolio Analysis (R)
-- Swiss Energy Production & Solar Radiation (R)
+- Swiss Electricity System Under Transition (R)
+      From Nuclear to Solar Power
 
 
 Website URL
