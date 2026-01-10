@@ -9,4 +9,6 @@ This section includes analytical projects that are not strictly machine learning
 Current projects:
 
 - Bitcoin & Portfolio Analysis (R)
-- Swiss Energy Production and Solar Radiation (R)
+
+- Swiss Electricity System Under Transition (R)
+    From Nuclear to Solar Power
