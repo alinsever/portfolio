@@ -1,0 +1,26 @@
+---
+title: "Support Vector Machine"
+sutitle: "Prep"
+author: "Alin Sever"
+date: "2026-01-10"
+format:
+  html:
+    toc: true
+    toc-depth: 4
+    number-sections: true
+    code-fold: false
+  pdf:
+    toc: true
+    number-sections: true
+  
+
+
+---
+
+# What is SVM
+
+SVM is a binary clasifier that learns a decision functtion:
+
+$$
+f(x) = w^\top x + b \;\Rightarrow\; \hat{y} = \operatorname{sign}(f(x))
+$$
