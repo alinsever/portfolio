@@ -199,7 +199,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ml-portfolio/02_nhanes_R/02_support_vector_machine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Predicting Obesity using Support Vector Machines</span></a>
+ <span class="menu-text">Predicting Obesity with Support Vector Machines</span></a>
   </div>
 </li>
       </ul>
@@ -269,8 +269,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive Summary</a></li>
-  <li><a href="#preface" id="toc-preface" class="nav-link" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
   <li><a href="#data-sources-metadata" id="toc-data-sources-metadata" class="nav-link" data-scroll-target="#data-sources-metadata">Data Sources &amp; Metadata</a></li>
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#energy-production-20202024" id="toc-energy-production-20202024" class="nav-link" data-scroll-target="#energy-production-20202024">Energy Production (2020–2024)</a>
@@ -358,14 +357,19 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="executive-summary" class="level2">
-<h2 class="anchored" data-anchor-id="executive-summary">Executive Summary</h2>
-<p>This project analyzes Switzerland’s electricity transition from nuclear power toward renewable energy, with a specific focus on whether solar photovoltaic production can realistically replace nuclear generation.</p>
-<p>Using monthly electricity production data from the Swiss Federal Office of Energy and solar radiation data from MeteoSwiss, the analysis examines Switzerland’s electricity mix from 2020 to 2024. The project explores seasonal production patterns, the relationship between nuclear, hydro, and solar output, solar PV growth, import-export dynamics, and a simplified nuclear-free scenario.</p>
-<p>The findings show that Switzerland’s electricity system is highly seasonal. Hydropower dominates the national electricity mix and peaks in spring and summer, while nuclear provides stable year-round baseload production. Solar PV has grown rapidly, but its production remains heavily concentrated in summer, when electricity demand is lower and hydropower is already strong.</p>
-<p>A key finding is that solar power can potentially replace nuclear in annual production totals, but not in seasonal reliability. In a simulated nuclear-free scenario where solar is scaled to replace nuclear output, Switzerland would still face significant winter deficits of approximately 5–6 TWh between November and February, while producing large summer surpluses.</p>
-<p>The analysis concludes that Switzerland’s energy transition is not only a question of installing more solar capacity. It is a system-level challenge involving winter security, imports, hydro flexibility, pumped storage, battery storage, smart grids, and demand management. Solar will play an essential role, but it cannot replace nuclear alone without stronger balancing mechanisms.</p>
-</section>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Key Finding
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Solar power can help Switzerland replace nuclear energy in <strong>annual production totals</strong>, but it cannot replace nuclear’s <strong>seasonal reliability</strong> on its own. In a nuclear-free scenario with scaled solar production, Switzerland still faces winter electricity deficits of approximately <strong>5–6 TWh</strong>, while producing large summer surpluses. This suggests that the transition requires not only more solar capacity, but also imports, storage, flexible hydropower, and smart-grid solutions.</p>
+</div>
+</div>
 <section id="preface" class="level2">
 <h2 class="anchored" data-anchor-id="preface">Preface</h2>
 <p>Switzerland stands at a turning point in its energy transition. With a national policy to <strong>phase out nuclear power by 2050</strong>, and growing urgency around climate change, the country faces a critical challenge:</p>
@@ -386,7 +390,7 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://www.bfe.admin.ch/bfe/en/home/supply/statistics-and-geodata/energy-statistics/electricity-statistics.html/#kw-96076"><strong>Energy data (Swiss Federal Office of energy)</strong></a>: Monthly Energy Production (hydro, nuclear, solar, etc.).</li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled" title="Click to expand: Metadata for Monthly Production Dataset">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -395,28 +399,28 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output-display">
 <div class="scroll-box">
-<div id="tcctqnhsgb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tcctqnhsgb table {
+<div id="tmrzhkwfdn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tmrzhkwfdn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tcctqnhsgb thead, #tcctqnhsgb tbody, #tcctqnhsgb tfoot, #tcctqnhsgb tr, #tcctqnhsgb td, #tcctqnhsgb th {
+#tmrzhkwfdn thead, #tmrzhkwfdn tbody, #tmrzhkwfdn tfoot, #tmrzhkwfdn tr, #tmrzhkwfdn td, #tmrzhkwfdn th {
   border-style: none;
 }
 
-#tcctqnhsgb p {
+#tmrzhkwfdn p {
   margin: 0;
   padding: 0;
 }
 
-#tcctqnhsgb .gt_table {
+#tmrzhkwfdn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -442,12 +446,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#tcctqnhsgb .gt_caption {
+#tmrzhkwfdn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tcctqnhsgb .gt_title {
+#tmrzhkwfdn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -459,7 +463,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#tcctqnhsgb .gt_subtitle {
+#tmrzhkwfdn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -471,7 +475,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#tcctqnhsgb .gt_heading {
+#tmrzhkwfdn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -483,13 +487,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#tcctqnhsgb .gt_bottom_border {
+#tmrzhkwfdn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tcctqnhsgb .gt_col_headings {
+#tmrzhkwfdn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -504,7 +508,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#tcctqnhsgb .gt_col_heading {
+#tmrzhkwfdn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -524,7 +528,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#tcctqnhsgb .gt_column_spanner_outer {
+#tmrzhkwfdn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -536,15 +540,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#tcctqnhsgb .gt_column_spanner_outer:first-child {
+#tmrzhkwfdn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tcctqnhsgb .gt_column_spanner_outer:last-child {
+#tmrzhkwfdn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tcctqnhsgb .gt_column_spanner {
+#tmrzhkwfdn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -556,11 +560,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#tcctqnhsgb .gt_spanner_row {
+#tmrzhkwfdn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tcctqnhsgb .gt_group_heading {
+#tmrzhkwfdn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -586,7 +590,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#tcctqnhsgb .gt_empty_group_heading {
+#tmrzhkwfdn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -601,15 +605,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#tcctqnhsgb .gt_from_md > :first-child {
+#tmrzhkwfdn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tcctqnhsgb .gt_from_md > :last-child {
+#tmrzhkwfdn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tcctqnhsgb .gt_row {
+#tmrzhkwfdn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -628,7 +632,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#tcctqnhsgb .gt_stub {
+#tmrzhkwfdn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -641,7 +645,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#tcctqnhsgb .gt_stub_row_group {
+#tmrzhkwfdn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -655,15 +659,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#tcctqnhsgb .gt_row_group_first td {
+#tmrzhkwfdn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tcctqnhsgb .gt_row_group_first th {
+#tmrzhkwfdn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tcctqnhsgb .gt_summary_row {
+#tmrzhkwfdn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -673,16 +677,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#tcctqnhsgb .gt_first_summary_row {
+#tmrzhkwfdn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tcctqnhsgb .gt_first_summary_row.thick {
+#tmrzhkwfdn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tcctqnhsgb .gt_last_summary_row {
+#tmrzhkwfdn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -692,7 +696,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#tcctqnhsgb .gt_grand_summary_row {
+#tmrzhkwfdn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -702,7 +706,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#tcctqnhsgb .gt_first_grand_summary_row {
+#tmrzhkwfdn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -712,7 +716,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#tcctqnhsgb .gt_last_grand_summary_row_top {
+#tmrzhkwfdn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -722,11 +726,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#tcctqnhsgb .gt_striped {
+#tmrzhkwfdn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tcctqnhsgb .gt_table_body {
+#tmrzhkwfdn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -735,7 +739,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#tcctqnhsgb .gt_footnotes {
+#tmrzhkwfdn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -749,7 +753,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#tcctqnhsgb .gt_footnote {
+#tmrzhkwfdn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -758,7 +762,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#tcctqnhsgb .gt_sourcenotes {
+#tmrzhkwfdn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -772,7 +776,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#tcctqnhsgb .gt_sourcenote {
+#tmrzhkwfdn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -780,72 +784,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#tcctqnhsgb .gt_left {
+#tmrzhkwfdn .gt_left {
   text-align: left;
 }
 
-#tcctqnhsgb .gt_center {
+#tmrzhkwfdn .gt_center {
   text-align: center;
 }
 
-#tcctqnhsgb .gt_right {
+#tmrzhkwfdn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tcctqnhsgb .gt_font_normal {
+#tmrzhkwfdn .gt_font_normal {
   font-weight: normal;
 }
 
-#tcctqnhsgb .gt_font_bold {
+#tmrzhkwfdn .gt_font_bold {
   font-weight: bold;
 }
 
-#tcctqnhsgb .gt_font_italic {
+#tmrzhkwfdn .gt_font_italic {
   font-style: italic;
 }
 
-#tcctqnhsgb .gt_super {
+#tmrzhkwfdn .gt_super {
   font-size: 65%;
 }
 
-#tcctqnhsgb .gt_footnote_marks {
+#tmrzhkwfdn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tcctqnhsgb .gt_asterisk {
+#tmrzhkwfdn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tcctqnhsgb .gt_indent_1 {
+#tmrzhkwfdn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tcctqnhsgb .gt_indent_2 {
+#tmrzhkwfdn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tcctqnhsgb .gt_indent_3 {
+#tmrzhkwfdn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tcctqnhsgb .gt_indent_4 {
+#tmrzhkwfdn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tcctqnhsgb .gt_indent_5 {
+#tmrzhkwfdn .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tcctqnhsgb .katex-display {
+#tmrzhkwfdn .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tcctqnhsgb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tmrzhkwfdn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -979,7 +983,7 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://www.meteoswiss.admin.ch/services-and-publications/applications/ext/download-data-without-coding-skills.html#lang=en&amp;mdt=homogenous&amp;pgid=Radiation&amp;sid=SAM&amp;col=ch.meteoschweiz.ogd-nbcn&amp;di=&amp;tr=&amp;hdr="><strong>MeteoSwiss OGD-NBCN</strong></a>: Monthly Solar Irradiation.</li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled" title="Click to expand: Metadata for Monthly Solar Irradiation Dataset">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -988,28 +992,28 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output-display">
 <div class="scroll-box">
-<div id="zfdvrvorsb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zfdvrvorsb table {
+<div id="mgfwfsqayu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mgfwfsqayu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zfdvrvorsb thead, #zfdvrvorsb tbody, #zfdvrvorsb tfoot, #zfdvrvorsb tr, #zfdvrvorsb td, #zfdvrvorsb th {
+#mgfwfsqayu thead, #mgfwfsqayu tbody, #mgfwfsqayu tfoot, #mgfwfsqayu tr, #mgfwfsqayu td, #mgfwfsqayu th {
   border-style: none;
 }
 
-#zfdvrvorsb p {
+#mgfwfsqayu p {
   margin: 0;
   padding: 0;
 }
 
-#zfdvrvorsb .gt_table {
+#mgfwfsqayu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1035,12 +1039,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#zfdvrvorsb .gt_caption {
+#mgfwfsqayu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zfdvrvorsb .gt_title {
+#mgfwfsqayu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1052,7 +1056,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#zfdvrvorsb .gt_subtitle {
+#mgfwfsqayu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1064,7 +1068,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#zfdvrvorsb .gt_heading {
+#mgfwfsqayu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1076,13 +1080,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#zfdvrvorsb .gt_bottom_border {
+#mgfwfsqayu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zfdvrvorsb .gt_col_headings {
+#mgfwfsqayu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1097,7 +1101,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#zfdvrvorsb .gt_col_heading {
+#mgfwfsqayu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1117,7 +1121,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#zfdvrvorsb .gt_column_spanner_outer {
+#mgfwfsqayu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1129,15 +1133,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#zfdvrvorsb .gt_column_spanner_outer:first-child {
+#mgfwfsqayu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zfdvrvorsb .gt_column_spanner_outer:last-child {
+#mgfwfsqayu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zfdvrvorsb .gt_column_spanner {
+#mgfwfsqayu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1149,11 +1153,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#zfdvrvorsb .gt_spanner_row {
+#mgfwfsqayu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zfdvrvorsb .gt_group_heading {
+#mgfwfsqayu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1179,7 +1183,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#zfdvrvorsb .gt_empty_group_heading {
+#mgfwfsqayu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1194,15 +1198,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#zfdvrvorsb .gt_from_md > :first-child {
+#mgfwfsqayu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zfdvrvorsb .gt_from_md > :last-child {
+#mgfwfsqayu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zfdvrvorsb .gt_row {
+#mgfwfsqayu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1221,7 +1225,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#zfdvrvorsb .gt_stub {
+#mgfwfsqayu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1234,7 +1238,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#zfdvrvorsb .gt_stub_row_group {
+#mgfwfsqayu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1248,15 +1252,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#zfdvrvorsb .gt_row_group_first td {
+#mgfwfsqayu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zfdvrvorsb .gt_row_group_first th {
+#mgfwfsqayu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zfdvrvorsb .gt_summary_row {
+#mgfwfsqayu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1266,16 +1270,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#zfdvrvorsb .gt_first_summary_row {
+#mgfwfsqayu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zfdvrvorsb .gt_first_summary_row.thick {
+#mgfwfsqayu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zfdvrvorsb .gt_last_summary_row {
+#mgfwfsqayu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1285,7 +1289,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#zfdvrvorsb .gt_grand_summary_row {
+#mgfwfsqayu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1295,7 +1299,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#zfdvrvorsb .gt_first_grand_summary_row {
+#mgfwfsqayu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1305,7 +1309,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#zfdvrvorsb .gt_last_grand_summary_row_top {
+#mgfwfsqayu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1315,11 +1319,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#zfdvrvorsb .gt_striped {
+#mgfwfsqayu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zfdvrvorsb .gt_table_body {
+#mgfwfsqayu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1328,7 +1332,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#zfdvrvorsb .gt_footnotes {
+#mgfwfsqayu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1342,7 +1346,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#zfdvrvorsb .gt_footnote {
+#mgfwfsqayu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1351,7 +1355,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#zfdvrvorsb .gt_sourcenotes {
+#mgfwfsqayu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1365,7 +1369,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#zfdvrvorsb .gt_sourcenote {
+#mgfwfsqayu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1373,72 +1377,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#zfdvrvorsb .gt_left {
+#mgfwfsqayu .gt_left {
   text-align: left;
 }
 
-#zfdvrvorsb .gt_center {
+#mgfwfsqayu .gt_center {
   text-align: center;
 }
 
-#zfdvrvorsb .gt_right {
+#mgfwfsqayu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zfdvrvorsb .gt_font_normal {
+#mgfwfsqayu .gt_font_normal {
   font-weight: normal;
 }
 
-#zfdvrvorsb .gt_font_bold {
+#mgfwfsqayu .gt_font_bold {
   font-weight: bold;
 }
 
-#zfdvrvorsb .gt_font_italic {
+#mgfwfsqayu .gt_font_italic {
   font-style: italic;
 }
 
-#zfdvrvorsb .gt_super {
+#mgfwfsqayu .gt_super {
   font-size: 65%;
 }
 
-#zfdvrvorsb .gt_footnote_marks {
+#mgfwfsqayu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zfdvrvorsb .gt_asterisk {
+#mgfwfsqayu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zfdvrvorsb .gt_indent_1 {
+#mgfwfsqayu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zfdvrvorsb .gt_indent_2 {
+#mgfwfsqayu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zfdvrvorsb .gt_indent_3 {
+#mgfwfsqayu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zfdvrvorsb .gt_indent_4 {
+#mgfwfsqayu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zfdvrvorsb .gt_indent_5 {
+#mgfwfsqayu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zfdvrvorsb .katex-display {
+#mgfwfsqayu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zfdvrvorsb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mgfwfsqayu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1488,7 +1492,7 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://www.bfe.admin.ch/bfe/en/home/supply/statistics-and-geodata/energy-statistics/electricity-statistics.html/#kw-96076"><strong>Energy data (Swiss Federal Office of energy)</strong></a>: Swiss Nuclear Power Plants Dataset.</li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled" title="Click to expand: Metadata for Nuclear Production Dataset">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1497,28 +1501,28 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="cell-output-display">
 <div class="scroll-box">
-<div id="pobjylqmuy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pobjylqmuy table {
+<div id="klozwvdnyf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#klozwvdnyf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pobjylqmuy thead, #pobjylqmuy tbody, #pobjylqmuy tfoot, #pobjylqmuy tr, #pobjylqmuy td, #pobjylqmuy th {
+#klozwvdnyf thead, #klozwvdnyf tbody, #klozwvdnyf tfoot, #klozwvdnyf tr, #klozwvdnyf td, #klozwvdnyf th {
   border-style: none;
 }
 
-#pobjylqmuy p {
+#klozwvdnyf p {
   margin: 0;
   padding: 0;
 }
 
-#pobjylqmuy .gt_table {
+#klozwvdnyf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1544,12 +1548,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#pobjylqmuy .gt_caption {
+#klozwvdnyf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pobjylqmuy .gt_title {
+#klozwvdnyf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1561,7 +1565,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#pobjylqmuy .gt_subtitle {
+#klozwvdnyf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1573,7 +1577,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#pobjylqmuy .gt_heading {
+#klozwvdnyf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1585,13 +1589,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#pobjylqmuy .gt_bottom_border {
+#klozwvdnyf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pobjylqmuy .gt_col_headings {
+#klozwvdnyf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1606,7 +1610,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#pobjylqmuy .gt_col_heading {
+#klozwvdnyf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1626,7 +1630,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#pobjylqmuy .gt_column_spanner_outer {
+#klozwvdnyf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1638,15 +1642,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#pobjylqmuy .gt_column_spanner_outer:first-child {
+#klozwvdnyf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pobjylqmuy .gt_column_spanner_outer:last-child {
+#klozwvdnyf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pobjylqmuy .gt_column_spanner {
+#klozwvdnyf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1658,11 +1662,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#pobjylqmuy .gt_spanner_row {
+#klozwvdnyf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pobjylqmuy .gt_group_heading {
+#klozwvdnyf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1688,7 +1692,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#pobjylqmuy .gt_empty_group_heading {
+#klozwvdnyf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1703,15 +1707,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#pobjylqmuy .gt_from_md > :first-child {
+#klozwvdnyf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pobjylqmuy .gt_from_md > :last-child {
+#klozwvdnyf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pobjylqmuy .gt_row {
+#klozwvdnyf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1730,7 +1734,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#pobjylqmuy .gt_stub {
+#klozwvdnyf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1743,7 +1747,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#pobjylqmuy .gt_stub_row_group {
+#klozwvdnyf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1757,15 +1761,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#pobjylqmuy .gt_row_group_first td {
+#klozwvdnyf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pobjylqmuy .gt_row_group_first th {
+#klozwvdnyf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pobjylqmuy .gt_summary_row {
+#klozwvdnyf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1775,16 +1779,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#pobjylqmuy .gt_first_summary_row {
+#klozwvdnyf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pobjylqmuy .gt_first_summary_row.thick {
+#klozwvdnyf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pobjylqmuy .gt_last_summary_row {
+#klozwvdnyf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1794,7 +1798,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#pobjylqmuy .gt_grand_summary_row {
+#klozwvdnyf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1804,7 +1808,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#pobjylqmuy .gt_first_grand_summary_row {
+#klozwvdnyf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1814,7 +1818,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#pobjylqmuy .gt_last_grand_summary_row_top {
+#klozwvdnyf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1824,11 +1828,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#pobjylqmuy .gt_striped {
+#klozwvdnyf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pobjylqmuy .gt_table_body {
+#klozwvdnyf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1837,7 +1841,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#pobjylqmuy .gt_footnotes {
+#klozwvdnyf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1851,7 +1855,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#pobjylqmuy .gt_footnote {
+#klozwvdnyf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1860,7 +1864,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#pobjylqmuy .gt_sourcenotes {
+#klozwvdnyf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1874,7 +1878,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#pobjylqmuy .gt_sourcenote {
+#klozwvdnyf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1882,72 +1886,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#pobjylqmuy .gt_left {
+#klozwvdnyf .gt_left {
   text-align: left;
 }
 
-#pobjylqmuy .gt_center {
+#klozwvdnyf .gt_center {
   text-align: center;
 }
 
-#pobjylqmuy .gt_right {
+#klozwvdnyf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pobjylqmuy .gt_font_normal {
+#klozwvdnyf .gt_font_normal {
   font-weight: normal;
 }
 
-#pobjylqmuy .gt_font_bold {
+#klozwvdnyf .gt_font_bold {
   font-weight: bold;
 }
 
-#pobjylqmuy .gt_font_italic {
+#klozwvdnyf .gt_font_italic {
   font-style: italic;
 }
 
-#pobjylqmuy .gt_super {
+#klozwvdnyf .gt_super {
   font-size: 65%;
 }
 
-#pobjylqmuy .gt_footnote_marks {
+#klozwvdnyf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pobjylqmuy .gt_asterisk {
+#klozwvdnyf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pobjylqmuy .gt_indent_1 {
+#klozwvdnyf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pobjylqmuy .gt_indent_2 {
+#klozwvdnyf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pobjylqmuy .gt_indent_3 {
+#klozwvdnyf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pobjylqmuy .gt_indent_4 {
+#klozwvdnyf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pobjylqmuy .gt_indent_5 {
+#klozwvdnyf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#pobjylqmuy .katex-display {
+#klozwvdnyf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#pobjylqmuy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#klozwvdnyf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2062,7 +2066,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>We use data from <strong>2020 to 2024</strong> - the period when Switzerland began officially recording renewable production - to assess energy dynamics, simulate future scenarios, and evaluate feasibility.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Why Start in 2020?">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2071,14 +2075,14 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Switzerland began <strong>systematically reporting renewable energy production in monthly detail</strong> starting in 2020. As such, this year marks the most reliable starting point for consistent renewable energy tracking in the Swiss energy system.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Why We Focus on Solar and Nuclear">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2087,7 +2091,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Hydro power contributes over 50% of Switzerland’s electricity today, but expanding it further is challenging due to <strong>ecological protections</strong>, <strong>geographic limitations</strong>, and <strong>social resistance</strong> to large infrastructure projects.</p>
 <p>As a result, this analysis focuses on the evolving relationship between <strong>solar energy</strong> and <strong>nuclear phase-out</strong>, while treating hydro as a relatively <strong>stable, non-expanding baseline</strong>.</p>
@@ -2144,23 +2148,23 @@ ul.task-list li input[type="checkbox"] {
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<div id="newqkcwech" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#newqkcwech table {
+<div id="rudvcoqgyi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rudvcoqgyi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#newqkcwech thead, #newqkcwech tbody, #newqkcwech tfoot, #newqkcwech tr, #newqkcwech td, #newqkcwech th {
+#rudvcoqgyi thead, #rudvcoqgyi tbody, #rudvcoqgyi tfoot, #rudvcoqgyi tr, #rudvcoqgyi td, #rudvcoqgyi th {
   border-style: none;
 }
 
-#newqkcwech p {
+#rudvcoqgyi p {
   margin: 0;
   padding: 0;
 }
 
-#newqkcwech .gt_table {
+#rudvcoqgyi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2186,12 +2190,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#newqkcwech .gt_caption {
+#rudvcoqgyi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#newqkcwech .gt_title {
+#rudvcoqgyi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2203,7 +2207,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#newqkcwech .gt_subtitle {
+#rudvcoqgyi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2215,7 +2219,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#newqkcwech .gt_heading {
+#rudvcoqgyi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2227,13 +2231,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#newqkcwech .gt_bottom_border {
+#rudvcoqgyi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#newqkcwech .gt_col_headings {
+#rudvcoqgyi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2248,7 +2252,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#newqkcwech .gt_col_heading {
+#rudvcoqgyi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2268,7 +2272,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#newqkcwech .gt_column_spanner_outer {
+#rudvcoqgyi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2280,15 +2284,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#newqkcwech .gt_column_spanner_outer:first-child {
+#rudvcoqgyi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#newqkcwech .gt_column_spanner_outer:last-child {
+#rudvcoqgyi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#newqkcwech .gt_column_spanner {
+#rudvcoqgyi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2300,11 +2304,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#newqkcwech .gt_spanner_row {
+#rudvcoqgyi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#newqkcwech .gt_group_heading {
+#rudvcoqgyi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2330,7 +2334,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#newqkcwech .gt_empty_group_heading {
+#rudvcoqgyi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2345,15 +2349,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#newqkcwech .gt_from_md > :first-child {
+#rudvcoqgyi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#newqkcwech .gt_from_md > :last-child {
+#rudvcoqgyi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#newqkcwech .gt_row {
+#rudvcoqgyi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2372,7 +2376,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#newqkcwech .gt_stub {
+#rudvcoqgyi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2385,7 +2389,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#newqkcwech .gt_stub_row_group {
+#rudvcoqgyi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2399,15 +2403,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#newqkcwech .gt_row_group_first td {
+#rudvcoqgyi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#newqkcwech .gt_row_group_first th {
+#rudvcoqgyi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#newqkcwech .gt_summary_row {
+#rudvcoqgyi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2417,16 +2421,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#newqkcwech .gt_first_summary_row {
+#rudvcoqgyi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#newqkcwech .gt_first_summary_row.thick {
+#rudvcoqgyi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#newqkcwech .gt_last_summary_row {
+#rudvcoqgyi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2436,7 +2440,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#newqkcwech .gt_grand_summary_row {
+#rudvcoqgyi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2446,7 +2450,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#newqkcwech .gt_first_grand_summary_row {
+#rudvcoqgyi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2456,7 +2460,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#newqkcwech .gt_last_grand_summary_row_top {
+#rudvcoqgyi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2466,11 +2470,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#newqkcwech .gt_striped {
+#rudvcoqgyi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#newqkcwech .gt_table_body {
+#rudvcoqgyi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2479,7 +2483,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#newqkcwech .gt_footnotes {
+#rudvcoqgyi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2493,7 +2497,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#newqkcwech .gt_footnote {
+#rudvcoqgyi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2502,7 +2506,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#newqkcwech .gt_sourcenotes {
+#rudvcoqgyi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2516,7 +2520,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#newqkcwech .gt_sourcenote {
+#rudvcoqgyi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2524,72 +2528,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#newqkcwech .gt_left {
+#rudvcoqgyi .gt_left {
   text-align: left;
 }
 
-#newqkcwech .gt_center {
+#rudvcoqgyi .gt_center {
   text-align: center;
 }
 
-#newqkcwech .gt_right {
+#rudvcoqgyi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#newqkcwech .gt_font_normal {
+#rudvcoqgyi .gt_font_normal {
   font-weight: normal;
 }
 
-#newqkcwech .gt_font_bold {
+#rudvcoqgyi .gt_font_bold {
   font-weight: bold;
 }
 
-#newqkcwech .gt_font_italic {
+#rudvcoqgyi .gt_font_italic {
   font-style: italic;
 }
 
-#newqkcwech .gt_super {
+#rudvcoqgyi .gt_super {
   font-size: 65%;
 }
 
-#newqkcwech .gt_footnote_marks {
+#rudvcoqgyi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#newqkcwech .gt_asterisk {
+#rudvcoqgyi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#newqkcwech .gt_indent_1 {
+#rudvcoqgyi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#newqkcwech .gt_indent_2 {
+#rudvcoqgyi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#newqkcwech .gt_indent_3 {
+#rudvcoqgyi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#newqkcwech .gt_indent_4 {
+#rudvcoqgyi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#newqkcwech .gt_indent_5 {
+#rudvcoqgyi .gt_indent_5 {
   text-indent: 25px;
 }
 
-#newqkcwech .katex-display {
+#rudvcoqgyi .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#newqkcwech div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rudvcoqgyi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2696,23 +2700,23 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div id="dafwnvkpod" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dafwnvkpod table {
+<div id="ydxheysnez" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ydxheysnez table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#dafwnvkpod thead, #dafwnvkpod tbody, #dafwnvkpod tfoot, #dafwnvkpod tr, #dafwnvkpod td, #dafwnvkpod th {
+#ydxheysnez thead, #ydxheysnez tbody, #ydxheysnez tfoot, #ydxheysnez tr, #ydxheysnez td, #ydxheysnez th {
   border-style: none;
 }
 
-#dafwnvkpod p {
+#ydxheysnez p {
   margin: 0;
   padding: 0;
 }
 
-#dafwnvkpod .gt_table {
+#ydxheysnez .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2738,12 +2742,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#dafwnvkpod .gt_caption {
+#ydxheysnez .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#dafwnvkpod .gt_title {
+#ydxheysnez .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2755,7 +2759,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#dafwnvkpod .gt_subtitle {
+#ydxheysnez .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2767,7 +2771,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#dafwnvkpod .gt_heading {
+#ydxheysnez .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2779,13 +2783,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#dafwnvkpod .gt_bottom_border {
+#ydxheysnez .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dafwnvkpod .gt_col_headings {
+#ydxheysnez .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2800,7 +2804,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#dafwnvkpod .gt_col_heading {
+#ydxheysnez .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2820,7 +2824,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#dafwnvkpod .gt_column_spanner_outer {
+#ydxheysnez .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2832,15 +2836,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#dafwnvkpod .gt_column_spanner_outer:first-child {
+#ydxheysnez .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dafwnvkpod .gt_column_spanner_outer:last-child {
+#ydxheysnez .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dafwnvkpod .gt_column_spanner {
+#ydxheysnez .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2852,11 +2856,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#dafwnvkpod .gt_spanner_row {
+#ydxheysnez .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#dafwnvkpod .gt_group_heading {
+#ydxheysnez .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2882,7 +2886,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#dafwnvkpod .gt_empty_group_heading {
+#ydxheysnez .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2897,15 +2901,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#dafwnvkpod .gt_from_md > :first-child {
+#ydxheysnez .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dafwnvkpod .gt_from_md > :last-child {
+#ydxheysnez .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dafwnvkpod .gt_row {
+#ydxheysnez .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2924,7 +2928,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#dafwnvkpod .gt_stub {
+#ydxheysnez .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2937,7 +2941,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#dafwnvkpod .gt_stub_row_group {
+#ydxheysnez .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2951,15 +2955,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#dafwnvkpod .gt_row_group_first td {
+#ydxheysnez .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dafwnvkpod .gt_row_group_first th {
+#ydxheysnez .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#dafwnvkpod .gt_summary_row {
+#ydxheysnez .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2969,16 +2973,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#dafwnvkpod .gt_first_summary_row {
+#ydxheysnez .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#dafwnvkpod .gt_first_summary_row.thick {
+#ydxheysnez .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dafwnvkpod .gt_last_summary_row {
+#ydxheysnez .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2988,7 +2992,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#dafwnvkpod .gt_grand_summary_row {
+#ydxheysnez .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2998,7 +3002,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#dafwnvkpod .gt_first_grand_summary_row {
+#ydxheysnez .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3008,7 +3012,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#dafwnvkpod .gt_last_grand_summary_row_top {
+#ydxheysnez .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3018,11 +3022,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#dafwnvkpod .gt_striped {
+#ydxheysnez .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dafwnvkpod .gt_table_body {
+#ydxheysnez .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3031,7 +3035,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#dafwnvkpod .gt_footnotes {
+#ydxheysnez .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3045,7 +3049,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#dafwnvkpod .gt_footnote {
+#ydxheysnez .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3054,7 +3058,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#dafwnvkpod .gt_sourcenotes {
+#ydxheysnez .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3068,7 +3072,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#dafwnvkpod .gt_sourcenote {
+#ydxheysnez .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3076,72 +3080,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#dafwnvkpod .gt_left {
+#ydxheysnez .gt_left {
   text-align: left;
 }
 
-#dafwnvkpod .gt_center {
+#ydxheysnez .gt_center {
   text-align: center;
 }
 
-#dafwnvkpod .gt_right {
+#ydxheysnez .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dafwnvkpod .gt_font_normal {
+#ydxheysnez .gt_font_normal {
   font-weight: normal;
 }
 
-#dafwnvkpod .gt_font_bold {
+#ydxheysnez .gt_font_bold {
   font-weight: bold;
 }
 
-#dafwnvkpod .gt_font_italic {
+#ydxheysnez .gt_font_italic {
   font-style: italic;
 }
 
-#dafwnvkpod .gt_super {
+#ydxheysnez .gt_super {
   font-size: 65%;
 }
 
-#dafwnvkpod .gt_footnote_marks {
+#ydxheysnez .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#dafwnvkpod .gt_asterisk {
+#ydxheysnez .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dafwnvkpod .gt_indent_1 {
+#ydxheysnez .gt_indent_1 {
   text-indent: 5px;
 }
 
-#dafwnvkpod .gt_indent_2 {
+#ydxheysnez .gt_indent_2 {
   text-indent: 10px;
 }
 
-#dafwnvkpod .gt_indent_3 {
+#ydxheysnez .gt_indent_3 {
   text-indent: 15px;
 }
 
-#dafwnvkpod .gt_indent_4 {
+#ydxheysnez .gt_indent_4 {
   text-indent: 20px;
 }
 
-#dafwnvkpod .gt_indent_5 {
+#ydxheysnez .gt_indent_5 {
   text-indent: 25px;
 }
 
-#dafwnvkpod .katex-display {
+#ydxheysnez .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#dafwnvkpod div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ydxheysnez div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3180,7 +3184,7 @@ Solar output is still a smaller share of the mix than hydro, but the inverse rel
 <p>In short, Switzerland’s nuclear fleet already functions as a <strong>flexible buffer</strong> against seasonal renewable fluctuations.<br>
 Replacing this role will be a <strong>major challenge post-2050</strong>, as solar and hydro cannot “self-balance” without external support (imports, long-duration storage, or expanded hydro flexibility).</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Planned Nuclear Maintenance and Seasonal Renewables">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -3189,7 +3193,7 @@ Replacing this role will be a <strong>major challenge post-2050</strong>, as sol
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Swiss nuclear plants typically undergo annual inspections and fuel replacement in <strong>late spring to early summer</strong>. This timing aligns with <strong>peak hydro and solar output</strong>, allowing nuclear capacity to temporarily decrease without compromising grid stability. This synergy reflects how Switzerland already <strong>leverages seasonal renewables to reduce nuclear reliance</strong>. This pattern will become increasingly critical as the phase-out proceeds.</p>
 <p><a href="https://ensi.admin.ch/en/ensi-is-the-national-regulatory-body-with-responsibility-for-the-nuclear-safety-and-security-of-swiss-nuclear-facilities/ensis-remit/?utm_source=chatgpt.com">Source: ENSI – Operation of Nuclear Power Plants</a></p>
@@ -3219,13 +3223,13 @@ Replacing this role will be a <strong>major challenge post-2050</strong>, as sol
 <p>Hovering over a site displays details on average production (2020–2024), canton, and operational history.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-feedeec98edcaebd5293" style="width:90%;height:400px;"></div>
-<script type="application/json" data-for="htmlwidget-feedeec98edcaebd5293">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[47.552107,47.562107,47.3656,47.6012,46.9689],[8.228491999999999,8.238491999999999,7.9671,8.1845,7.2684],5,null,null,{"interactive":true,"className":"","stroke":true,"color":["green","green","green","green","red"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["green","green","green","green","red"],"fillOpacity":0.8},null,null,null,null,["<strong>Beznau I<\/strong><br>Canton: AG<br>Status: Operational<br>Average annual production (2020–2024): 2,718 GWh<br>Oldest commercial reactor worldwide (1969).","<strong>Beznau II<\/strong><br>Canton: AG<br>Status: Operational<br>Average annual production (2020–2024): 2,897 GWh<br>Twin reactor of Beznau I (1971).","<strong>Gösgen<\/strong><br>Canton: SO<br>Status: Operational<br>Average annual production (2020–2024): 7,977 GWh<br>In operation since 1979.","<strong>Leibstadt<\/strong><br>Canton: AG<br>Status: Operational<br>Average annual production (2020–2024): 8,598 GWh<br>Largest Swiss reactor, in operation since 1984.","<strong>Mühleberg<\/strong><br>Canton: BE<br>Status: Decommissioned<br>Average annual production (2020–2024): N/A (decommissioned)<br>Decommissioned in December 2019."],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["green","red"],"labels":["Operational","Decommissioned"],"na_color":null,"na_label":"NA","opacity":0.5,"position":"bottomright","type":"unknown","title":"Nuclear Plant Status","extra":null,"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[46.9689,47.6012],"lng":[7.2684,8.238491999999999]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-859912fd4577abafb949" style="width:90%;height:400px;"></div>
+<script type="application/json" data-for="htmlwidget-859912fd4577abafb949">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[47.552107,47.562107,47.3656,47.6012,46.9689],[8.228491999999999,8.238491999999999,7.9671,8.1845,7.2684],5,null,null,{"interactive":true,"className":"","stroke":true,"color":["green","green","green","green","red"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["green","green","green","green","red"],"fillOpacity":0.8},null,null,null,null,["<strong>Beznau I<\/strong><br>Canton: AG<br>Status: Operational<br>Average annual production (2020–2024): 2,718 GWh<br>Oldest commercial reactor worldwide (1969).","<strong>Beznau II<\/strong><br>Canton: AG<br>Status: Operational<br>Average annual production (2020–2024): 2,897 GWh<br>Twin reactor of Beznau I (1971).","<strong>Gösgen<\/strong><br>Canton: SO<br>Status: Operational<br>Average annual production (2020–2024): 7,977 GWh<br>In operation since 1979.","<strong>Leibstadt<\/strong><br>Canton: AG<br>Status: Operational<br>Average annual production (2020–2024): 8,598 GWh<br>Largest Swiss reactor, in operation since 1984.","<strong>Mühleberg<\/strong><br>Canton: BE<br>Status: Decommissioned<br>Average annual production (2020–2024): N/A (decommissioned)<br>Decommissioned in December 2019."],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["green","red"],"labels":["Operational","Decommissioned"],"na_color":null,"na_label":"NA","opacity":0.5,"position":"bottomright","type":"unknown","title":"Nuclear Plant Status","extra":null,"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[46.9689,47.6012],"lng":[7.2684,8.238491999999999]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><em>Note:</em> Coordinates for the nuclear power plants were obtained from public sources<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Nuclear Phase-Out Policy">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -3234,7 +3238,7 @@ Replacing this role will be a <strong>major challenge post-2050</strong>, as sol
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Under the <strong>Swiss Energy Strategy 2050</strong>, no new nuclear plants will be constructed.<br>
 Existing plants can continue operating <strong>indefinitely</strong>, provided safety is guaranteed.<br>
@@ -3386,7 +3390,7 @@ This flexible phase-out contrasts with some countries (e.g., Germany), where <st
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="What Do the Confidence Intervals Mean?">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -3395,7 +3399,7 @@ This flexible phase-out contrasts with some countries (e.g., Germany), where <st
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The shaded ribbons around the forecast represent confidence intervals:</p>
 <ul>
@@ -3417,7 +3421,7 @@ This flexible phase-out contrasts with some countries (e.g., Germany), where <st
 </ul>
 <p>In reality, <strong>scaling PV alone is insufficient</strong>: seasonal storage, imports, and flexible hydro will be essential to cover winter deficits.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Why Annual Growth is Misleading">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -3426,7 +3430,7 @@ This flexible phase-out contrasts with some countries (e.g., Germany), where <st
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Annual growth rates can create the illusion that solar can fully replace nuclear. But electricity systems are <strong>seasonal</strong>, not annual.</p>
 <p>Even if PV reaches 22–23 TWh/year, the <strong>winter contribution will remain very small</strong>.<br>
