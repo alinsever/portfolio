@@ -6,7 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Alin Sever">
 <meta name="dcterms.date" content="2025-09-16">
+<meta name="description" content="A data-driven analysis of Switzerland’s electricity transition, examining nuclear phase-out, solar PV growth, seasonal production patterns, imports, and grid-balancing challenges.">
 
 <title>Swiss Electricity System Under Transition – Portfolio - Alin Sever</title>
 <style>
@@ -191,7 +193,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ml-portfolio/02_nhanes_R/01_linear_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Linear Regression Analysis - Predicting Body Mass Index</span></a>
+ <span class="menu-text">Linear Regression Analysis: Predicting Body Mass Index</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -267,7 +269,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive Summary</a></li>
+  <li><a href="#preface" id="toc-preface" class="nav-link" data-scroll-target="#preface">Preface</a></li>
   <li><a href="#data-sources-metadata" id="toc-data-sources-metadata" class="nav-link" data-scroll-target="#data-sources-metadata">Data Sources &amp; Metadata</a></li>
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#energy-production-20202024" id="toc-energy-production-20202024" class="nav-link" data-scroll-target="#energy-production-20202024">Energy Production (2020–2024)</a>
@@ -314,9 +317,21 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../standalone-projects/index.html">Standalone Projects</a></li><li class="breadcrumb-item"><a href="../../standalone-projects/swiss_electricity_transition_R/index.html">Swiss Electricity Transition (R)</a></li><li class="breadcrumb-item"><a href="../../standalone-projects/swiss_electricity_transition_R/Swiss_Electricity_Transition_Project.html">Swiss Electricity System Under Transition</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Swiss Electricity System Under Transition</h1>
-<p class="subtitle lead">From Nuclear to Solar Power</p>
-</div>
+<p class="subtitle lead">Assessing whether solar power can replace nuclear energy in Switzerland’s future electricity mix.</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">R</div>
+    <div class="quarto-category">Energy Analytics</div>
+    <div class="quarto-category">Forecasting</div>
+    <div class="quarto-category">Data Visualization</div>
+    <div class="quarto-category">Switzerland</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    A data-driven analysis of Switzerland’s electricity transition, examining nuclear phase-out, solar PV growth, seasonal production patterns, imports, and grid-balancing challenges.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta column-page-right">
@@ -343,6 +358,14 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="executive-summary" class="level2">
+<h2 class="anchored" data-anchor-id="executive-summary">Executive Summary</h2>
+<p>This project analyzes Switzerland’s electricity transition from nuclear power toward renewable energy, with a specific focus on whether solar photovoltaic production can realistically replace nuclear generation.</p>
+<p>Using monthly electricity production data from the Swiss Federal Office of Energy and solar radiation data from MeteoSwiss, the analysis examines Switzerland’s electricity mix from 2020 to 2024. The project explores seasonal production patterns, the relationship between nuclear, hydro, and solar output, solar PV growth, import-export dynamics, and a simplified nuclear-free scenario.</p>
+<p>The findings show that Switzerland’s electricity system is highly seasonal. Hydropower dominates the national electricity mix and peaks in spring and summer, while nuclear provides stable year-round baseload production. Solar PV has grown rapidly, but its production remains heavily concentrated in summer, when electricity demand is lower and hydropower is already strong.</p>
+<p>A key finding is that solar power can potentially replace nuclear in annual production totals, but not in seasonal reliability. In a simulated nuclear-free scenario where solar is scaled to replace nuclear output, Switzerland would still face significant winter deficits of approximately 5–6 TWh between November and February, while producing large summer surpluses.</p>
+<p>The analysis concludes that Switzerland’s energy transition is not only a question of installing more solar capacity. It is a system-level challenge involving winter security, imports, hydro flexibility, pumped storage, battery storage, smart grids, and demand management. Solar will play an essential role, but it cannot replace nuclear alone without stronger balancing mechanisms.</p>
+</section>
 <section id="preface" class="level2">
 <h2 class="anchored" data-anchor-id="preface">Preface</h2>
 <p>Switzerland stands at a turning point in its energy transition. With a national policy to <strong>phase out nuclear power by 2050</strong>, and growing urgency around climate change, the country faces a critical challenge:</p>
@@ -377,23 +400,23 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell">
 <div class="cell-output-display">
 <div class="scroll-box">
-<div id="dcukiadzyn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dcukiadzyn table {
+<div id="tcctqnhsgb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tcctqnhsgb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#dcukiadzyn thead, #dcukiadzyn tbody, #dcukiadzyn tfoot, #dcukiadzyn tr, #dcukiadzyn td, #dcukiadzyn th {
+#tcctqnhsgb thead, #tcctqnhsgb tbody, #tcctqnhsgb tfoot, #tcctqnhsgb tr, #tcctqnhsgb td, #tcctqnhsgb th {
   border-style: none;
 }
 
-#dcukiadzyn p {
+#tcctqnhsgb p {
   margin: 0;
   padding: 0;
 }
 
-#dcukiadzyn .gt_table {
+#tcctqnhsgb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -419,12 +442,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#dcukiadzyn .gt_caption {
+#tcctqnhsgb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#dcukiadzyn .gt_title {
+#tcctqnhsgb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -436,7 +459,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#dcukiadzyn .gt_subtitle {
+#tcctqnhsgb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -448,7 +471,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#dcukiadzyn .gt_heading {
+#tcctqnhsgb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -460,13 +483,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#dcukiadzyn .gt_bottom_border {
+#tcctqnhsgb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dcukiadzyn .gt_col_headings {
+#tcctqnhsgb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -481,7 +504,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#dcukiadzyn .gt_col_heading {
+#tcctqnhsgb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -501,7 +524,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#dcukiadzyn .gt_column_spanner_outer {
+#tcctqnhsgb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -513,15 +536,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#dcukiadzyn .gt_column_spanner_outer:first-child {
+#tcctqnhsgb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dcukiadzyn .gt_column_spanner_outer:last-child {
+#tcctqnhsgb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dcukiadzyn .gt_column_spanner {
+#tcctqnhsgb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -533,11 +556,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#dcukiadzyn .gt_spanner_row {
+#tcctqnhsgb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#dcukiadzyn .gt_group_heading {
+#tcctqnhsgb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -563,7 +586,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#dcukiadzyn .gt_empty_group_heading {
+#tcctqnhsgb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -578,15 +601,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#dcukiadzyn .gt_from_md > :first-child {
+#tcctqnhsgb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dcukiadzyn .gt_from_md > :last-child {
+#tcctqnhsgb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dcukiadzyn .gt_row {
+#tcctqnhsgb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -605,7 +628,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#dcukiadzyn .gt_stub {
+#tcctqnhsgb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -618,7 +641,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#dcukiadzyn .gt_stub_row_group {
+#tcctqnhsgb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -632,15 +655,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#dcukiadzyn .gt_row_group_first td {
+#tcctqnhsgb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dcukiadzyn .gt_row_group_first th {
+#tcctqnhsgb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#dcukiadzyn .gt_summary_row {
+#tcctqnhsgb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -650,16 +673,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#dcukiadzyn .gt_first_summary_row {
+#tcctqnhsgb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#dcukiadzyn .gt_first_summary_row.thick {
+#tcctqnhsgb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dcukiadzyn .gt_last_summary_row {
+#tcctqnhsgb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -669,7 +692,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#dcukiadzyn .gt_grand_summary_row {
+#tcctqnhsgb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -679,7 +702,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#dcukiadzyn .gt_first_grand_summary_row {
+#tcctqnhsgb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -689,7 +712,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#dcukiadzyn .gt_last_grand_summary_row_top {
+#tcctqnhsgb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -699,11 +722,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#dcukiadzyn .gt_striped {
+#tcctqnhsgb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dcukiadzyn .gt_table_body {
+#tcctqnhsgb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -712,7 +735,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#dcukiadzyn .gt_footnotes {
+#tcctqnhsgb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -726,7 +749,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#dcukiadzyn .gt_footnote {
+#tcctqnhsgb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -735,7 +758,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#dcukiadzyn .gt_sourcenotes {
+#tcctqnhsgb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -749,7 +772,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#dcukiadzyn .gt_sourcenote {
+#tcctqnhsgb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -757,72 +780,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#dcukiadzyn .gt_left {
+#tcctqnhsgb .gt_left {
   text-align: left;
 }
 
-#dcukiadzyn .gt_center {
+#tcctqnhsgb .gt_center {
   text-align: center;
 }
 
-#dcukiadzyn .gt_right {
+#tcctqnhsgb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dcukiadzyn .gt_font_normal {
+#tcctqnhsgb .gt_font_normal {
   font-weight: normal;
 }
 
-#dcukiadzyn .gt_font_bold {
+#tcctqnhsgb .gt_font_bold {
   font-weight: bold;
 }
 
-#dcukiadzyn .gt_font_italic {
+#tcctqnhsgb .gt_font_italic {
   font-style: italic;
 }
 
-#dcukiadzyn .gt_super {
+#tcctqnhsgb .gt_super {
   font-size: 65%;
 }
 
-#dcukiadzyn .gt_footnote_marks {
+#tcctqnhsgb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#dcukiadzyn .gt_asterisk {
+#tcctqnhsgb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dcukiadzyn .gt_indent_1 {
+#tcctqnhsgb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#dcukiadzyn .gt_indent_2 {
+#tcctqnhsgb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#dcukiadzyn .gt_indent_3 {
+#tcctqnhsgb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#dcukiadzyn .gt_indent_4 {
+#tcctqnhsgb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#dcukiadzyn .gt_indent_5 {
+#tcctqnhsgb .gt_indent_5 {
   text-indent: 25px;
 }
 
-#dcukiadzyn .katex-display {
+#tcctqnhsgb .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#dcukiadzyn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tcctqnhsgb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -970,23 +993,23 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell">
 <div class="cell-output-display">
 <div class="scroll-box">
-<div id="guvrjlbhjj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#guvrjlbhjj table {
+<div id="zfdvrvorsb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zfdvrvorsb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#guvrjlbhjj thead, #guvrjlbhjj tbody, #guvrjlbhjj tfoot, #guvrjlbhjj tr, #guvrjlbhjj td, #guvrjlbhjj th {
+#zfdvrvorsb thead, #zfdvrvorsb tbody, #zfdvrvorsb tfoot, #zfdvrvorsb tr, #zfdvrvorsb td, #zfdvrvorsb th {
   border-style: none;
 }
 
-#guvrjlbhjj p {
+#zfdvrvorsb p {
   margin: 0;
   padding: 0;
 }
 
-#guvrjlbhjj .gt_table {
+#zfdvrvorsb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1012,12 +1035,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#guvrjlbhjj .gt_caption {
+#zfdvrvorsb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#guvrjlbhjj .gt_title {
+#zfdvrvorsb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1029,7 +1052,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#guvrjlbhjj .gt_subtitle {
+#zfdvrvorsb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1041,7 +1064,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#guvrjlbhjj .gt_heading {
+#zfdvrvorsb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1053,13 +1076,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#guvrjlbhjj .gt_bottom_border {
+#zfdvrvorsb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#guvrjlbhjj .gt_col_headings {
+#zfdvrvorsb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1074,7 +1097,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#guvrjlbhjj .gt_col_heading {
+#zfdvrvorsb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1094,7 +1117,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#guvrjlbhjj .gt_column_spanner_outer {
+#zfdvrvorsb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1106,15 +1129,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#guvrjlbhjj .gt_column_spanner_outer:first-child {
+#zfdvrvorsb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#guvrjlbhjj .gt_column_spanner_outer:last-child {
+#zfdvrvorsb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#guvrjlbhjj .gt_column_spanner {
+#zfdvrvorsb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1126,11 +1149,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#guvrjlbhjj .gt_spanner_row {
+#zfdvrvorsb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#guvrjlbhjj .gt_group_heading {
+#zfdvrvorsb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1156,7 +1179,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#guvrjlbhjj .gt_empty_group_heading {
+#zfdvrvorsb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1171,15 +1194,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#guvrjlbhjj .gt_from_md > :first-child {
+#zfdvrvorsb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#guvrjlbhjj .gt_from_md > :last-child {
+#zfdvrvorsb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#guvrjlbhjj .gt_row {
+#zfdvrvorsb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1198,7 +1221,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#guvrjlbhjj .gt_stub {
+#zfdvrvorsb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1211,7 +1234,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#guvrjlbhjj .gt_stub_row_group {
+#zfdvrvorsb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1225,15 +1248,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#guvrjlbhjj .gt_row_group_first td {
+#zfdvrvorsb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#guvrjlbhjj .gt_row_group_first th {
+#zfdvrvorsb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#guvrjlbhjj .gt_summary_row {
+#zfdvrvorsb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1243,16 +1266,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#guvrjlbhjj .gt_first_summary_row {
+#zfdvrvorsb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#guvrjlbhjj .gt_first_summary_row.thick {
+#zfdvrvorsb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#guvrjlbhjj .gt_last_summary_row {
+#zfdvrvorsb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1262,7 +1285,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#guvrjlbhjj .gt_grand_summary_row {
+#zfdvrvorsb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1272,7 +1295,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#guvrjlbhjj .gt_first_grand_summary_row {
+#zfdvrvorsb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1282,7 +1305,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#guvrjlbhjj .gt_last_grand_summary_row_top {
+#zfdvrvorsb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1292,11 +1315,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#guvrjlbhjj .gt_striped {
+#zfdvrvorsb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#guvrjlbhjj .gt_table_body {
+#zfdvrvorsb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1305,7 +1328,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#guvrjlbhjj .gt_footnotes {
+#zfdvrvorsb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1319,7 +1342,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#guvrjlbhjj .gt_footnote {
+#zfdvrvorsb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1328,7 +1351,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#guvrjlbhjj .gt_sourcenotes {
+#zfdvrvorsb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1342,7 +1365,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#guvrjlbhjj .gt_sourcenote {
+#zfdvrvorsb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1350,72 +1373,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#guvrjlbhjj .gt_left {
+#zfdvrvorsb .gt_left {
   text-align: left;
 }
 
-#guvrjlbhjj .gt_center {
+#zfdvrvorsb .gt_center {
   text-align: center;
 }
 
-#guvrjlbhjj .gt_right {
+#zfdvrvorsb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#guvrjlbhjj .gt_font_normal {
+#zfdvrvorsb .gt_font_normal {
   font-weight: normal;
 }
 
-#guvrjlbhjj .gt_font_bold {
+#zfdvrvorsb .gt_font_bold {
   font-weight: bold;
 }
 
-#guvrjlbhjj .gt_font_italic {
+#zfdvrvorsb .gt_font_italic {
   font-style: italic;
 }
 
-#guvrjlbhjj .gt_super {
+#zfdvrvorsb .gt_super {
   font-size: 65%;
 }
 
-#guvrjlbhjj .gt_footnote_marks {
+#zfdvrvorsb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#guvrjlbhjj .gt_asterisk {
+#zfdvrvorsb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#guvrjlbhjj .gt_indent_1 {
+#zfdvrvorsb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#guvrjlbhjj .gt_indent_2 {
+#zfdvrvorsb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#guvrjlbhjj .gt_indent_3 {
+#zfdvrvorsb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#guvrjlbhjj .gt_indent_4 {
+#zfdvrvorsb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#guvrjlbhjj .gt_indent_5 {
+#zfdvrvorsb .gt_indent_5 {
   text-indent: 25px;
 }
 
-#guvrjlbhjj .katex-display {
+#zfdvrvorsb .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#guvrjlbhjj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zfdvrvorsb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1479,23 +1502,23 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell">
 <div class="cell-output-display">
 <div class="scroll-box">
-<div id="cwpwcightp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cwpwcightp table {
+<div id="pobjylqmuy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pobjylqmuy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cwpwcightp thead, #cwpwcightp tbody, #cwpwcightp tfoot, #cwpwcightp tr, #cwpwcightp td, #cwpwcightp th {
+#pobjylqmuy thead, #pobjylqmuy tbody, #pobjylqmuy tfoot, #pobjylqmuy tr, #pobjylqmuy td, #pobjylqmuy th {
   border-style: none;
 }
 
-#cwpwcightp p {
+#pobjylqmuy p {
   margin: 0;
   padding: 0;
 }
 
-#cwpwcightp .gt_table {
+#pobjylqmuy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1521,12 +1544,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#cwpwcightp .gt_caption {
+#pobjylqmuy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cwpwcightp .gt_title {
+#pobjylqmuy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1538,7 +1561,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#cwpwcightp .gt_subtitle {
+#pobjylqmuy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1550,7 +1573,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#cwpwcightp .gt_heading {
+#pobjylqmuy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1562,13 +1585,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#cwpwcightp .gt_bottom_border {
+#pobjylqmuy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cwpwcightp .gt_col_headings {
+#pobjylqmuy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1583,7 +1606,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#cwpwcightp .gt_col_heading {
+#pobjylqmuy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1603,7 +1626,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#cwpwcightp .gt_column_spanner_outer {
+#pobjylqmuy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1615,15 +1638,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#cwpwcightp .gt_column_spanner_outer:first-child {
+#pobjylqmuy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cwpwcightp .gt_column_spanner_outer:last-child {
+#pobjylqmuy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cwpwcightp .gt_column_spanner {
+#pobjylqmuy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1635,11 +1658,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#cwpwcightp .gt_spanner_row {
+#pobjylqmuy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cwpwcightp .gt_group_heading {
+#pobjylqmuy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1665,7 +1688,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#cwpwcightp .gt_empty_group_heading {
+#pobjylqmuy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1680,15 +1703,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#cwpwcightp .gt_from_md > :first-child {
+#pobjylqmuy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cwpwcightp .gt_from_md > :last-child {
+#pobjylqmuy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cwpwcightp .gt_row {
+#pobjylqmuy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1707,7 +1730,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#cwpwcightp .gt_stub {
+#pobjylqmuy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1720,7 +1743,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#cwpwcightp .gt_stub_row_group {
+#pobjylqmuy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1734,15 +1757,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#cwpwcightp .gt_row_group_first td {
+#pobjylqmuy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cwpwcightp .gt_row_group_first th {
+#pobjylqmuy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cwpwcightp .gt_summary_row {
+#pobjylqmuy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1752,16 +1775,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#cwpwcightp .gt_first_summary_row {
+#pobjylqmuy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cwpwcightp .gt_first_summary_row.thick {
+#pobjylqmuy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cwpwcightp .gt_last_summary_row {
+#pobjylqmuy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1771,7 +1794,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#cwpwcightp .gt_grand_summary_row {
+#pobjylqmuy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1781,7 +1804,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#cwpwcightp .gt_first_grand_summary_row {
+#pobjylqmuy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1791,7 +1814,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#cwpwcightp .gt_last_grand_summary_row_top {
+#pobjylqmuy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1801,11 +1824,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#cwpwcightp .gt_striped {
+#pobjylqmuy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cwpwcightp .gt_table_body {
+#pobjylqmuy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1814,7 +1837,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#cwpwcightp .gt_footnotes {
+#pobjylqmuy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1828,7 +1851,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#cwpwcightp .gt_footnote {
+#pobjylqmuy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1837,7 +1860,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#cwpwcightp .gt_sourcenotes {
+#pobjylqmuy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1851,7 +1874,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#cwpwcightp .gt_sourcenote {
+#pobjylqmuy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1859,72 +1882,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#cwpwcightp .gt_left {
+#pobjylqmuy .gt_left {
   text-align: left;
 }
 
-#cwpwcightp .gt_center {
+#pobjylqmuy .gt_center {
   text-align: center;
 }
 
-#cwpwcightp .gt_right {
+#pobjylqmuy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cwpwcightp .gt_font_normal {
+#pobjylqmuy .gt_font_normal {
   font-weight: normal;
 }
 
-#cwpwcightp .gt_font_bold {
+#pobjylqmuy .gt_font_bold {
   font-weight: bold;
 }
 
-#cwpwcightp .gt_font_italic {
+#pobjylqmuy .gt_font_italic {
   font-style: italic;
 }
 
-#cwpwcightp .gt_super {
+#pobjylqmuy .gt_super {
   font-size: 65%;
 }
 
-#cwpwcightp .gt_footnote_marks {
+#pobjylqmuy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cwpwcightp .gt_asterisk {
+#pobjylqmuy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cwpwcightp .gt_indent_1 {
+#pobjylqmuy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cwpwcightp .gt_indent_2 {
+#pobjylqmuy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cwpwcightp .gt_indent_3 {
+#pobjylqmuy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cwpwcightp .gt_indent_4 {
+#pobjylqmuy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cwpwcightp .gt_indent_5 {
+#pobjylqmuy .gt_indent_5 {
   text-indent: 25px;
 }
 
-#cwpwcightp .katex-display {
+#pobjylqmuy .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#cwpwcightp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#pobjylqmuy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2121,23 +2144,23 @@ ul.task-list li input[type="checkbox"] {
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<div id="bydtzeijbo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bydtzeijbo table {
+<div id="newqkcwech" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#newqkcwech table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bydtzeijbo thead, #bydtzeijbo tbody, #bydtzeijbo tfoot, #bydtzeijbo tr, #bydtzeijbo td, #bydtzeijbo th {
+#newqkcwech thead, #newqkcwech tbody, #newqkcwech tfoot, #newqkcwech tr, #newqkcwech td, #newqkcwech th {
   border-style: none;
 }
 
-#bydtzeijbo p {
+#newqkcwech p {
   margin: 0;
   padding: 0;
 }
 
-#bydtzeijbo .gt_table {
+#newqkcwech .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2163,12 +2186,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#bydtzeijbo .gt_caption {
+#newqkcwech .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bydtzeijbo .gt_title {
+#newqkcwech .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2180,7 +2203,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#bydtzeijbo .gt_subtitle {
+#newqkcwech .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2192,7 +2215,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#bydtzeijbo .gt_heading {
+#newqkcwech .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2204,13 +2227,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#bydtzeijbo .gt_bottom_border {
+#newqkcwech .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bydtzeijbo .gt_col_headings {
+#newqkcwech .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2225,7 +2248,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#bydtzeijbo .gt_col_heading {
+#newqkcwech .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2245,7 +2268,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#bydtzeijbo .gt_column_spanner_outer {
+#newqkcwech .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2257,15 +2280,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#bydtzeijbo .gt_column_spanner_outer:first-child {
+#newqkcwech .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bydtzeijbo .gt_column_spanner_outer:last-child {
+#newqkcwech .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bydtzeijbo .gt_column_spanner {
+#newqkcwech .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2277,11 +2300,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#bydtzeijbo .gt_spanner_row {
+#newqkcwech .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bydtzeijbo .gt_group_heading {
+#newqkcwech .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2307,7 +2330,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#bydtzeijbo .gt_empty_group_heading {
+#newqkcwech .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2322,15 +2345,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#bydtzeijbo .gt_from_md > :first-child {
+#newqkcwech .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bydtzeijbo .gt_from_md > :last-child {
+#newqkcwech .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bydtzeijbo .gt_row {
+#newqkcwech .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2349,7 +2372,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#bydtzeijbo .gt_stub {
+#newqkcwech .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2362,7 +2385,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#bydtzeijbo .gt_stub_row_group {
+#newqkcwech .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2376,15 +2399,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#bydtzeijbo .gt_row_group_first td {
+#newqkcwech .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bydtzeijbo .gt_row_group_first th {
+#newqkcwech .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bydtzeijbo .gt_summary_row {
+#newqkcwech .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2394,16 +2417,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#bydtzeijbo .gt_first_summary_row {
+#newqkcwech .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bydtzeijbo .gt_first_summary_row.thick {
+#newqkcwech .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bydtzeijbo .gt_last_summary_row {
+#newqkcwech .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2413,7 +2436,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#bydtzeijbo .gt_grand_summary_row {
+#newqkcwech .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2423,7 +2446,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#bydtzeijbo .gt_first_grand_summary_row {
+#newqkcwech .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2433,7 +2456,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#bydtzeijbo .gt_last_grand_summary_row_top {
+#newqkcwech .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2443,11 +2466,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#bydtzeijbo .gt_striped {
+#newqkcwech .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bydtzeijbo .gt_table_body {
+#newqkcwech .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2456,7 +2479,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#bydtzeijbo .gt_footnotes {
+#newqkcwech .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2470,7 +2493,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#bydtzeijbo .gt_footnote {
+#newqkcwech .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2479,7 +2502,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#bydtzeijbo .gt_sourcenotes {
+#newqkcwech .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2493,7 +2516,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#bydtzeijbo .gt_sourcenote {
+#newqkcwech .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2501,72 +2524,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#bydtzeijbo .gt_left {
+#newqkcwech .gt_left {
   text-align: left;
 }
 
-#bydtzeijbo .gt_center {
+#newqkcwech .gt_center {
   text-align: center;
 }
 
-#bydtzeijbo .gt_right {
+#newqkcwech .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bydtzeijbo .gt_font_normal {
+#newqkcwech .gt_font_normal {
   font-weight: normal;
 }
 
-#bydtzeijbo .gt_font_bold {
+#newqkcwech .gt_font_bold {
   font-weight: bold;
 }
 
-#bydtzeijbo .gt_font_italic {
+#newqkcwech .gt_font_italic {
   font-style: italic;
 }
 
-#bydtzeijbo .gt_super {
+#newqkcwech .gt_super {
   font-size: 65%;
 }
 
-#bydtzeijbo .gt_footnote_marks {
+#newqkcwech .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bydtzeijbo .gt_asterisk {
+#newqkcwech .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bydtzeijbo .gt_indent_1 {
+#newqkcwech .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bydtzeijbo .gt_indent_2 {
+#newqkcwech .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bydtzeijbo .gt_indent_3 {
+#newqkcwech .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bydtzeijbo .gt_indent_4 {
+#newqkcwech .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bydtzeijbo .gt_indent_5 {
+#newqkcwech .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bydtzeijbo .katex-display {
+#newqkcwech .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bydtzeijbo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#newqkcwech div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2673,23 +2696,23 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div id="tejeigdmzu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tejeigdmzu table {
+<div id="dafwnvkpod" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dafwnvkpod table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tejeigdmzu thead, #tejeigdmzu tbody, #tejeigdmzu tfoot, #tejeigdmzu tr, #tejeigdmzu td, #tejeigdmzu th {
+#dafwnvkpod thead, #dafwnvkpod tbody, #dafwnvkpod tfoot, #dafwnvkpod tr, #dafwnvkpod td, #dafwnvkpod th {
   border-style: none;
 }
 
-#tejeigdmzu p {
+#dafwnvkpod p {
   margin: 0;
   padding: 0;
 }
 
-#tejeigdmzu .gt_table {
+#dafwnvkpod .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2715,12 +2738,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#tejeigdmzu .gt_caption {
+#dafwnvkpod .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tejeigdmzu .gt_title {
+#dafwnvkpod .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2732,7 +2755,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#tejeigdmzu .gt_subtitle {
+#dafwnvkpod .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2744,7 +2767,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#tejeigdmzu .gt_heading {
+#dafwnvkpod .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2756,13 +2779,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#tejeigdmzu .gt_bottom_border {
+#dafwnvkpod .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tejeigdmzu .gt_col_headings {
+#dafwnvkpod .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2777,7 +2800,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#tejeigdmzu .gt_col_heading {
+#dafwnvkpod .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2797,7 +2820,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#tejeigdmzu .gt_column_spanner_outer {
+#dafwnvkpod .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2809,15 +2832,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#tejeigdmzu .gt_column_spanner_outer:first-child {
+#dafwnvkpod .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tejeigdmzu .gt_column_spanner_outer:last-child {
+#dafwnvkpod .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tejeigdmzu .gt_column_spanner {
+#dafwnvkpod .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2829,11 +2852,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#tejeigdmzu .gt_spanner_row {
+#dafwnvkpod .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tejeigdmzu .gt_group_heading {
+#dafwnvkpod .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2859,7 +2882,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#tejeigdmzu .gt_empty_group_heading {
+#dafwnvkpod .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2874,15 +2897,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#tejeigdmzu .gt_from_md > :first-child {
+#dafwnvkpod .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tejeigdmzu .gt_from_md > :last-child {
+#dafwnvkpod .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tejeigdmzu .gt_row {
+#dafwnvkpod .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2901,7 +2924,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#tejeigdmzu .gt_stub {
+#dafwnvkpod .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2914,7 +2937,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#tejeigdmzu .gt_stub_row_group {
+#dafwnvkpod .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2928,15 +2951,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#tejeigdmzu .gt_row_group_first td {
+#dafwnvkpod .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tejeigdmzu .gt_row_group_first th {
+#dafwnvkpod .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tejeigdmzu .gt_summary_row {
+#dafwnvkpod .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2946,16 +2969,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#tejeigdmzu .gt_first_summary_row {
+#dafwnvkpod .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tejeigdmzu .gt_first_summary_row.thick {
+#dafwnvkpod .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tejeigdmzu .gt_last_summary_row {
+#dafwnvkpod .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2965,7 +2988,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#tejeigdmzu .gt_grand_summary_row {
+#dafwnvkpod .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2975,7 +2998,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#tejeigdmzu .gt_first_grand_summary_row {
+#dafwnvkpod .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2985,7 +3008,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#tejeigdmzu .gt_last_grand_summary_row_top {
+#dafwnvkpod .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2995,11 +3018,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#tejeigdmzu .gt_striped {
+#dafwnvkpod .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tejeigdmzu .gt_table_body {
+#dafwnvkpod .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3008,7 +3031,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#tejeigdmzu .gt_footnotes {
+#dafwnvkpod .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3022,7 +3045,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#tejeigdmzu .gt_footnote {
+#dafwnvkpod .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3031,7 +3054,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#tejeigdmzu .gt_sourcenotes {
+#dafwnvkpod .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3045,7 +3068,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#tejeigdmzu .gt_sourcenote {
+#dafwnvkpod .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3053,72 +3076,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#tejeigdmzu .gt_left {
+#dafwnvkpod .gt_left {
   text-align: left;
 }
 
-#tejeigdmzu .gt_center {
+#dafwnvkpod .gt_center {
   text-align: center;
 }
 
-#tejeigdmzu .gt_right {
+#dafwnvkpod .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tejeigdmzu .gt_font_normal {
+#dafwnvkpod .gt_font_normal {
   font-weight: normal;
 }
 
-#tejeigdmzu .gt_font_bold {
+#dafwnvkpod .gt_font_bold {
   font-weight: bold;
 }
 
-#tejeigdmzu .gt_font_italic {
+#dafwnvkpod .gt_font_italic {
   font-style: italic;
 }
 
-#tejeigdmzu .gt_super {
+#dafwnvkpod .gt_super {
   font-size: 65%;
 }
 
-#tejeigdmzu .gt_footnote_marks {
+#dafwnvkpod .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tejeigdmzu .gt_asterisk {
+#dafwnvkpod .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tejeigdmzu .gt_indent_1 {
+#dafwnvkpod .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tejeigdmzu .gt_indent_2 {
+#dafwnvkpod .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tejeigdmzu .gt_indent_3 {
+#dafwnvkpod .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tejeigdmzu .gt_indent_4 {
+#dafwnvkpod .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tejeigdmzu .gt_indent_5 {
+#dafwnvkpod .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tejeigdmzu .katex-display {
+#dafwnvkpod .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tejeigdmzu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#dafwnvkpod div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3196,8 +3219,8 @@ Replacing this role will be a <strong>major challenge post-2050</strong>, as sol
 <p>Hovering over a site displays details on average production (2020–2024), canton, and operational history.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-a9008875cce51ebc211b" style="width:90%;height:400px;"></div>
-<script type="application/json" data-for="htmlwidget-a9008875cce51ebc211b">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[47.552107,47.562107,47.3656,47.6012,46.9689],[8.228491999999999,8.238491999999999,7.9671,8.1845,7.2684],5,null,null,{"interactive":true,"className":"","stroke":true,"color":["green","green","green","green","red"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["green","green","green","green","red"],"fillOpacity":0.8},null,null,null,null,["<strong>Beznau I<\/strong><br>Canton: AG<br>Status: Operational<br>Average annual production (2020–2024): 2,718 GWh<br>Oldest commercial reactor worldwide (1969).","<strong>Beznau II<\/strong><br>Canton: AG<br>Status: Operational<br>Average annual production (2020–2024): 2,897 GWh<br>Twin reactor of Beznau I (1971).","<strong>Gösgen<\/strong><br>Canton: SO<br>Status: Operational<br>Average annual production (2020–2024): 7,977 GWh<br>In operation since 1979.","<strong>Leibstadt<\/strong><br>Canton: AG<br>Status: Operational<br>Average annual production (2020–2024): 8,598 GWh<br>Largest Swiss reactor, in operation since 1984.","<strong>Mühleberg<\/strong><br>Canton: BE<br>Status: Decommissioned<br>Average annual production (2020–2024): N/A (decommissioned)<br>Decommissioned in December 2019."],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["green","red"],"labels":["Operational","Decommissioned"],"na_color":null,"na_label":"NA","opacity":0.5,"position":"bottomright","type":"unknown","title":"Nuclear Plant Status","extra":null,"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[46.9689,47.6012],"lng":[7.2684,8.238491999999999]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-feedeec98edcaebd5293" style="width:90%;height:400px;"></div>
+<script type="application/json" data-for="htmlwidget-feedeec98edcaebd5293">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[47.552107,47.562107,47.3656,47.6012,46.9689],[8.228491999999999,8.238491999999999,7.9671,8.1845,7.2684],5,null,null,{"interactive":true,"className":"","stroke":true,"color":["green","green","green","green","red"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["green","green","green","green","red"],"fillOpacity":0.8},null,null,null,null,["<strong>Beznau I<\/strong><br>Canton: AG<br>Status: Operational<br>Average annual production (2020–2024): 2,718 GWh<br>Oldest commercial reactor worldwide (1969).","<strong>Beznau II<\/strong><br>Canton: AG<br>Status: Operational<br>Average annual production (2020–2024): 2,897 GWh<br>Twin reactor of Beznau I (1971).","<strong>Gösgen<\/strong><br>Canton: SO<br>Status: Operational<br>Average annual production (2020–2024): 7,977 GWh<br>In operation since 1979.","<strong>Leibstadt<\/strong><br>Canton: AG<br>Status: Operational<br>Average annual production (2020–2024): 8,598 GWh<br>Largest Swiss reactor, in operation since 1984.","<strong>Mühleberg<\/strong><br>Canton: BE<br>Status: Decommissioned<br>Average annual production (2020–2024): N/A (decommissioned)<br>Decommissioned in December 2019."],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["green","red"],"labels":["Operational","Decommissioned"],"na_color":null,"na_label":"NA","opacity":0.5,"position":"bottomright","type":"unknown","title":"Nuclear Plant Status","extra":null,"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[46.9689,47.6012],"lng":[7.2684,8.238491999999999]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><em>Note:</em> Coordinates for the nuclear power plants were obtained from public sources<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>

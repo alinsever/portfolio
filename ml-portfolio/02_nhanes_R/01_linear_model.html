@@ -8,8 +8,9 @@
 
 <meta name="author" content="Alin Sever">
 <meta name="dcterms.date" content="2025-10-16">
+<meta name="description" content="A linear regression project using NHANES data to examine which demographic, socioeconomic, lifestyle, and clinical variables are associated with adult BMI.">
 
-<title>Linear Regression Analysis - Predicting Body Mass Index – Portfolio - Alin Sever</title>
+<title>Linear Regression Analysis: Predicting Body Mass Index – Portfolio - Alin Sever</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -178,7 +179,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../ml-portfolio/index.html">ML Portfolio</a></li><li class="breadcrumb-item"><a href="../../ml-portfolio/02_nhanes_R/index.html">NHANES - R Project</a></li><li class="breadcrumb-item"><a href="../../ml-portfolio/02_nhanes_R/01_linear_model.html">Linear Regression Analysis - Predicting Body Mass Index</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../ml-portfolio/index.html">ML Portfolio</a></li><li class="breadcrumb-item"><a href="../../ml-portfolio/02_nhanes_R/index.html">NHANES - R Project</a></li><li class="breadcrumb-item"><a href="../../ml-portfolio/02_nhanes_R/01_linear_model.html">Linear Regression Analysis: Predicting Body Mass Index</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -240,7 +241,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ml-portfolio/02_nhanes_R/01_linear_model.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Linear Regression Analysis - Predicting Body Mass Index</span></a>
+ <span class="menu-text">Linear Regression Analysis: Predicting Body Mass Index</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -312,42 +313,56 @@ window.Quarto = {
 </li>
     </ul>
     </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+    <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-to-linear-modeling" id="toc-introduction-to-linear-modeling" class="nav-link active" data-scroll-target="#introduction-to-linear-modeling"><span class="header-section-number">1</span> Introduction to Linear Modeling</a>
+  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary"><span class="header-section-number">1</span> Executive Summary</a></li>
+  <li><a href="#introduction-to-linear-modeling" id="toc-introduction-to-linear-modeling" class="nav-link" data-scroll-target="#introduction-to-linear-modeling"><span class="header-section-number">2</span> Introduction to Linear Modeling</a>
   <ul>
-  <li><a href="#linear-models-for-bmi" id="toc-linear-models-for-bmi" class="nav-link" data-scroll-target="#linear-models-for-bmi"><span class="header-section-number">1.1</span> Linear Models for BMI</a></li>
-  <li><a href="#model-specifications" id="toc-model-specifications" class="nav-link" data-scroll-target="#model-specifications"><span class="header-section-number">1.2</span> Model Specifications</a></li>
-  <li><a href="#reasearch-questions" id="toc-reasearch-questions" class="nav-link" data-scroll-target="#reasearch-questions"><span class="header-section-number">1.3</span> Reasearch Questions</a></li>
+  <li><a href="#linear-models-for-bmi" id="toc-linear-models-for-bmi" class="nav-link" data-scroll-target="#linear-models-for-bmi"><span class="header-section-number">2.1</span> Linear Models for BMI</a></li>
+  <li><a href="#model-specifications" id="toc-model-specifications" class="nav-link" data-scroll-target="#model-specifications"><span class="header-section-number">2.2</span> Model Specifications</a></li>
+  <li><a href="#reasearch-questions" id="toc-reasearch-questions" class="nav-link" data-scroll-target="#reasearch-questions"><span class="header-section-number">2.3</span> Reasearch Questions</a></li>
   </ul></li>
-  <li><a href="#data-processing" id="toc-data-processing" class="nav-link" data-scroll-target="#data-processing"><span class="header-section-number">2</span> Data processing</a></li>
-  <li><a href="#exploratory-analysis-eda" id="toc-exploratory-analysis-eda" class="nav-link" data-scroll-target="#exploratory-analysis-eda"><span class="header-section-number">3</span> Exploratory Analysis (EDA)</a>
+  <li><a href="#data-processing" id="toc-data-processing" class="nav-link" data-scroll-target="#data-processing"><span class="header-section-number">3</span> Data processing</a></li>
+  <li><a href="#exploratory-analysis-eda" id="toc-exploratory-analysis-eda" class="nav-link" data-scroll-target="#exploratory-analysis-eda"><span class="header-section-number">4</span> Exploratory Analysis (EDA)</a>
   <ul>
-  <li><a href="#outcome-distribution-bmi" id="toc-outcome-distribution-bmi" class="nav-link" data-scroll-target="#outcome-distribution-bmi"><span class="header-section-number">3.1</span> Outcome distribution (BMI)</a></li>
-  <li><a href="#summary-of-exploratory-data-analysis-bmi-vs-predictors" id="toc-summary-of-exploratory-data-analysis-bmi-vs-predictors" class="nav-link" data-scroll-target="#summary-of-exploratory-data-analysis-bmi-vs-predictors"><span class="header-section-number">3.2</span> Summary of Exploratory Data Analysis BMI vs predictors</a></li>
+  <li><a href="#outcome-distribution-bmi" id="toc-outcome-distribution-bmi" class="nav-link" data-scroll-target="#outcome-distribution-bmi"><span class="header-section-number">4.1</span> Outcome distribution (BMI)</a></li>
+  <li><a href="#summary-of-exploratory-data-analysis-bmi-vs-predictors" id="toc-summary-of-exploratory-data-analysis-bmi-vs-predictors" class="nav-link" data-scroll-target="#summary-of-exploratory-data-analysis-bmi-vs-predictors"><span class="header-section-number">4.2</span> Summary of Exploratory Data Analysis BMI vs predictors</a></li>
   </ul></li>
-  <li><a href="#linear-model" id="toc-linear-model" class="nav-link" data-scroll-target="#linear-model"><span class="header-section-number">4</span> Linear Model</a>
+  <li><a href="#linear-model" id="toc-linear-model" class="nav-link" data-scroll-target="#linear-model"><span class="header-section-number">5</span> Linear Model</a>
   <ul>
-  <li><a href="#adding-interactions" id="toc-adding-interactions" class="nav-link" data-scroll-target="#adding-interactions"><span class="header-section-number">4.5</span> Adding Interactions</a></li>
+  <li><a href="#adding-interactions" id="toc-adding-interactions" class="nav-link" data-scroll-target="#adding-interactions"><span class="header-section-number">5.5</span> Adding Interactions</a></li>
   </ul></li>
-  <li><a href="#research-questions" id="toc-research-questions" class="nav-link" data-scroll-target="#research-questions"><span class="header-section-number">5</span> Research Questions</a></li>
+  <li><a href="#research-questions" id="toc-research-questions" class="nav-link" data-scroll-target="#research-questions"><span class="header-section-number">6</span> Research Questions</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="01_linear_model.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../ml-portfolio/index.html">ML Portfolio</a></li><li class="breadcrumb-item"><a href="../../ml-portfolio/02_nhanes_R/index.html">NHANES - R Project</a></li><li class="breadcrumb-item"><a href="../../ml-portfolio/02_nhanes_R/01_linear_model.html">Linear Regression Analysis - Predicting Body Mass Index</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../ml-portfolio/index.html">ML Portfolio</a></li><li class="breadcrumb-item"><a href="../../ml-portfolio/02_nhanes_R/index.html">NHANES - R Project</a></li><li class="breadcrumb-item"><a href="../../ml-portfolio/02_nhanes_R/01_linear_model.html">Linear Regression Analysis: Predicting Body Mass Index</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Linear Regression Analysis - Predicting Body Mass Index</h1>
-</div>
+<h1 class="title">Linear Regression Analysis: Predicting Body Mass Index</h1>
+<p class="subtitle lead">Exploring demographic, socioeconomic, lifestyle, and clinical factors associated with BMI using NHANES data.</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">R</div>
+    <div class="quarto-category">Linear Regression</div>
+    <div class="quarto-category">Statistics</div>
+    <div class="quarto-category">NHANES</div>
+    <div class="quarto-category">Data Analysis</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    A linear regression project using NHANES data to examine which demographic, socioeconomic, lifestyle, and clinical variables are associated with adult BMI.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -374,16 +389,23 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction-to-linear-modeling" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="introduction-to-linear-modeling"><span class="header-section-number">1</span> Introduction to Linear Modeling</h2>
+<section id="executive-summary" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="executive-summary"><span class="header-section-number">1</span> Executive Summary</h2>
+<p>This project applies linear regression analysis to examine which factors are associated with Body Mass Index (BMI) among U.S. adults using the NHANES dataset. The analysis focuses on adults aged 18 and older and includes demographic, socioeconomic, lifestyle, and clinical variables such as age, gender, race, education, household income, physical activity, sleep, alcohol use, smoking status, and systolic blood pressure.</p>
+<p>The workflow begins with data preparation, missing value handling, and exploratory data analysis. BMI showed a right-skewed distribution, with a large share of participants classified as overweight or obese. The exploratory analysis suggested that physical activity, race/ethnicity, and education had the strongest visible associations with BMI, while continuous variables such as age, income, sleep, alcohol use, and systolic blood pressure showed weaker linear relationships.</p>
+<p>A sequence of linear regression models was developed, starting with a simple BMI–age model and gradually adding demographic, socioeconomic, lifestyle, clinical, and interaction terms. The final model showed that race/ethnicity, physical activity, smoking status, systolic blood pressure, and selected interaction effects were associated with BMI. However, the model explained only a modest share of BMI variation, with an adjusted R² of approximately 8.8%.</p>
+<p>Overall, the analysis shows that BMI is influenced by multiple overlapping factors, but that linear regression captures only part of this complexity. The project demonstrates a structured statistical modeling workflow in R, including exploratory analysis, model building, interaction testing, and careful interpretation of associations rather than causal effects.</p>
+</section>
+<section id="introduction-to-linear-modeling" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="introduction-to-linear-modeling"><span class="header-section-number">2</span> Introduction to Linear Modeling</h2>
 <p><strong>The goal is to explain wich factors are associated with BMI in US adults</strong> (NHANES dataset), controling for demographics (age, gender, race, education), socio-economic indicators (education, income) and lifestyle (sleep, physical activity, alcohol, smoking). We will start simple and incrementally extend to a multiple linear regression, also adding multiple regression effects that are conditional on the other covariates in the model.</p>
-<section id="linear-models-for-bmi" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="linear-models-for-bmi"><span class="header-section-number">1.1</span> Linear Models for BMI</h3>
+<section id="linear-models-for-bmi" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="linear-models-for-bmi"><span class="header-section-number">2.1</span> Linear Models for BMI</h3>
 <p>Body Mass Index (BMI) is a continuous variable calculated as weight (kg) divided by height squared (<span class="math inline">\(m^{2}\)</span>). BMI is a proxy for body fat and is strongly related to chronic diseases such as diabetes, cardiovascular disease and hypertension.</p>
 <p>In this analysis, we use NHANES adult participants (Age &gt;= 18) to examine how demographics, socioeconomic status and lifestyle behaviors are associated withBMI</p>
 </section>
-<section id="model-specifications" class="level3" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="model-specifications"><span class="header-section-number">1.2</span> Model Specifications</h3>
+<section id="model-specifications" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="model-specifications"><span class="header-section-number">2.2</span> Model Specifications</h3>
 <p>We model BMI as a linear function of selected predictors:</p>
 <p>BMI = <span class="math inline">\(\beta_0\)</span> + <span class="math inline">\(\beta_1\)</span> * Age + <span class="math inline">\(\beta_2\)</span> * Gender + <span class="math inline">\(\beta_3\)</span> * Race + <span class="math inline">\(\beta_4\)</span> * Education + <span class="math inline">\(\beta_5\)</span> * log(Income) + <span class="math inline">\(\beta_6\)</span> * PhysActive + <span class="math inline">\(\beta_7\)</span> * SleepHrs + <span class="math inline">\(\beta_8\)</span> * SmokeNow + <span class="math inline">\(\beta_8\)</span> * AlcoholDay + <span class="math inline">\(\epsilon\)</span></p>
 <p>Where:</p>
@@ -393,8 +415,8 @@ window.Quarto = {
 <li><span class="math inline">\(\epsilon\)</span> represents the random error term (assumed that it is normally distributed)</li>
 </ul>
 </section>
-<section id="reasearch-questions" class="level3" data-number="1.3">
-<h3 data-number="1.3" class="anchored" data-anchor-id="reasearch-questions"><span class="header-section-number">1.3</span> Reasearch Questions</h3>
+<section id="reasearch-questions" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="reasearch-questions"><span class="header-section-number">2.3</span> Reasearch Questions</h3>
 <ul>
 <li>After adjusting for covariates, how does BMI vary with Age?</li>
 <li>Do demographic factors (Gender, Race, Education) show overall association with BMI?</li>
@@ -403,8 +425,8 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="data-processing" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="data-processing"><span class="header-section-number">2</span> Data processing</h2>
+<section id="data-processing" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="data-processing"><span class="header-section-number">3</span> Data processing</h2>
 <ul>
 <li>Population: NHANES adults (Age <span class="math inline">\(\geqslant\)</span> 18).</li>
 <li>Variables: Age; Gender; Race1; Education; HHIncomeMid (we used log transform); PhysActive; SleepHrsNight; AlcoholDay; SmokeNow; BPSysAve. Factor coding: treatment contrasts (reference vs others).</li>
@@ -491,10 +513,10 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="exploratory-analysis-eda" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="exploratory-analysis-eda"><span class="header-section-number">3</span> Exploratory Analysis (EDA)</h2>
-<section id="outcome-distribution-bmi" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="outcome-distribution-bmi"><span class="header-section-number">3.1</span> Outcome distribution (BMI)</h3>
+<section id="exploratory-analysis-eda" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="exploratory-analysis-eda"><span class="header-section-number">4</span> Exploratory Analysis (EDA)</h2>
+<section id="outcome-distribution-bmi" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="outcome-distribution-bmi"><span class="header-section-number">4.1</span> Outcome distribution (BMI)</h3>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Summary statistics: mean, median, SD, quantiles:</strong></p>
@@ -620,8 +642,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="summary-of-exploratory-data-analysis-bmi-vs-predictors" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="summary-of-exploratory-data-analysis-bmi-vs-predictors"><span class="header-section-number">3.2</span> Summary of Exploratory Data Analysis BMI vs predictors</h3>
+<section id="summary-of-exploratory-data-analysis-bmi-vs-predictors" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="summary-of-exploratory-data-analysis-bmi-vs-predictors"><span class="header-section-number">4.2</span> Summary of Exploratory Data Analysis BMI vs predictors</h3>
 <p>Among all variables examined, physical activity, race/ethnicity, and education level showed the strongest associations with BMI. Physically active individuals had noticeably lower BMI on average, and several race and education groups displayed meaningful mean differences. In contrast, most continuous predictors such as age, income, sleep hours, blood pressure, and alcohol use—showed very weak correlations and offered limited linear explanatory power. Please see below in the collapsed section for the full EDA.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Pairwise relationships with BMI">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
@@ -635,8 +657,8 @@ window.Quarto = {
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<section id="pairwise-relationships-with-bmi-continuous-predictors" class="level3" data-number="3.3">
-<h3 data-number="3.3" class="anchored" data-anchor-id="pairwise-relationships-with-bmi-continuous-predictors"><span class="header-section-number">3.3</span> Pairwise relationships with BMI (continuous predictors)</h3>
+<section id="pairwise-relationships-with-bmi-continuous-predictors" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="pairwise-relationships-with-bmi-continuous-predictors"><span class="header-section-number">4.3</span> Pairwise relationships with BMI (continuous predictors)</h3>
 <div class="box" style="background-color:#f9f9f9; padding:15px; border-radius:10px;">
 <p><strong>BMI vs Age</strong></p>
 <div class="columns">
@@ -743,7 +765,7 @@ window.Quarto = {
 <p>Below are the BMI–AlcoholDay correlations and visualizations: (i) the plot over the full 0–80 range, and (ii) the log(1 + AlcoholDay)</p>
 <div class="cell">
 <details class="code-fold">
-<summary>Show code</summary>
+<summary>View R Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>cor_alc <span class="ot">&lt;-</span> <span class="fu">cor</span>(nhanes_lm<span class="sc">$</span>AlcoholDay, nhanes_lm<span class="sc">$</span>BMI)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>cor_alc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -779,8 +801,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="bmi-vs-categorical-predictors" class="level3" data-number="3.4">
-<h3 data-number="3.4" class="anchored" data-anchor-id="bmi-vs-categorical-predictors"><span class="header-section-number">3.4</span> BMI vs Categorical predictors</h3>
+<section id="bmi-vs-categorical-predictors" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="bmi-vs-categorical-predictors"><span class="header-section-number">4.4</span> BMI vs Categorical predictors</h3>
 <div class="box" style="background-color:#f9f9f9; padding:15px; border-radius:10px;">
 <p><strong>BMI by Gender</strong></p>
 <div class="columns">
@@ -1089,7 +1111,7 @@ Estimated effects may be unbalanced</code></pre>
 <div class="callout-body-container callout-body">
 <div class="cell">
 <details class="code-fold">
-<summary>Show code</summary>
+<summary>View R Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>t_test_Smoke <span class="ot">&lt;-</span> <span class="fu">t.test</span>(BMI <span class="sc">~</span> SmokeNow, <span class="at">data =</span> nhanes_lm)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>t_test_Smoke</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -1117,8 +1139,8 @@ sample estimates:
 </div>
 </section>
 </section>
-<section id="linear-model" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="linear-model"><span class="header-section-number">4</span> Linear Model</h2>
+<section id="linear-model" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="linear-model"><span class="header-section-number">5</span> Linear Model</h2>
 <p><strong>Summary of Linear Modeling Progression (Collapsed Below)</strong></p>
 <p>To reach the final interaction model, we estimated a sequence of nested linear models. The simple BMI ~ Age regression showed no meaningful association, and adding basic demographics improved the fit only slightly, with race contributing the most. Socioeconomic factors provided minimal additional explanatory power. Lifestyle and clinical variables strengthened the model somewhat, with physical activity, smoking status, systolic blood pressure, and race emerging as the most consistent predictors of BMI. All earlier models and their outputs are collapsed below, while the final interaction model remains visible for interpretation.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Linear Modeling Progression">
@@ -1133,8 +1155,8 @@ sample estimates:
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<section id="bmi-age" class="level3" data-number="4.1">
-<h3 data-number="4.1" class="anchored" data-anchor-id="bmi-age"><span class="header-section-number">4.1</span> BMI ~ Age</h3>
+<section id="bmi-age" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="bmi-age"><span class="header-section-number">5.1</span> BMI ~ Age</h3>
 <p>We are starting with a simpler linear model</p>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -1144,13 +1166,13 @@ sample estimates:
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <details class="code-fold">
-<summary>Show code</summary>
+<summary>View R Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>m_age <span class="ot">&lt;-</span><span class="fu">lm</span>(BMI <span class="sc">~</span> Age, <span class="at">data =</span> nhanes_lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
-<summary>Show code</summary>
+<summary>View R Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(m_age)</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1208,7 +1230,7 @@ sample estimates:
 </table>
 </div>
 <details class="code-fold">
-<summary>Show code</summary>
+<summary>View R Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#kable(age_fit, digits=3, caption="BMI ~ Age: model fit")</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>age_fit</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -1222,8 +1244,8 @@ sample estimates:
 </div>
 </div>
 </section>
-<section id="model-1-demographic" class="level3" data-number="4.2">
-<h3 data-number="4.2" class="anchored" data-anchor-id="model-1-demographic"><span class="header-section-number">4.2</span> Model 1: Demographic</h3>
+<section id="model-1-demographic" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="model-1-demographic"><span class="header-section-number">5.2</span> Model 1: Demographic</h3>
 <p>We will add core demographic variables to the model: Age + Gender + Race</p>
 <p><strong>Model:</strong> BMI ~ Age + Gender + Race</p>
 <blockquote class="blockquote">
@@ -1231,7 +1253,7 @@ sample estimates:
 </blockquote>
 <div class="cell">
 <details class="code-fold">
-<summary>Show code</summary>
+<summary>View R Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(BMI <span class="sc">~</span> Age <span class="sc">+</span> Gender <span class="sc">+</span> Race1, <span class="at">data =</span> nhanes_lm)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1262,7 +1284,7 @@ Multiple R-squared:  0.03055,   Adjusted R-squared:  0.02772
 F-statistic: 10.78 on 6 and 2053 DF,  p-value: 7.701e-12</code></pre>
 </div>
 <details class="code-fold">
-<summary>Show code</summary>
+<summary>View R Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Coefficients with 95% CIs (t-tests)</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># core_coef &lt;- broom::tidy(M1, conf.int = TRUE)</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># core_coef</span></span>
@@ -1281,7 +1303,7 @@ F-statistic: 10.78 on 6 and 2053 DF,  p-value: 7.701e-12</code></pre>
 <p><strong>F-tests for M1 (BMI ~ Age + Gender + Race1)</strong></p>
 <div class="cell">
 <details class="code-fold">
-<summary>Show code</summary>
+<summary>View R Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>M1_drop1 <span class="ot">&lt;-</span> <span class="fu">drop1</span>(M1, <span class="at">test =</span> <span class="st">"F"</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>M1_drop1 </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -1301,12 +1323,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>Using drop1() we test each term conditional on the others. Race is associated with BMI; Age and Gender are not, at this stage.</p>
 </section>
-<section id="adding-socioeconomic-factors" class="level3" data-number="4.3">
-<h3 data-number="4.3" class="anchored" data-anchor-id="adding-socioeconomic-factors"><span class="header-section-number">4.3</span> Adding Socioeconomic factors</h3>
+<section id="adding-socioeconomic-factors" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="adding-socioeconomic-factors"><span class="header-section-number">5.3</span> Adding Socioeconomic factors</h3>
 <p>We are adding socioeconomic factors to our model</p>
 <div class="cell">
 <details class="code-fold">
-<summary>Show code</summary>
+<summary>View R Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fu">update</span>(M1, . <span class="sc">~</span> . <span class="sc">+</span> Education <span class="sc">+</span> log_income)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -1346,7 +1368,7 @@ F-statistic: 7.501 on 11 and 2048 DF,  p-value: 9.159e-13</code></pre>
 <p><strong>Term-wise F-tests</strong></p>
 <div class="cell">
 <details class="code-fold">
-<summary>Show code</summary>
+<summary>View R Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>M2_drop1 <span class="ot">&lt;-</span> <span class="fu">drop1</span>(M2, <span class="at">test =</span> <span class="st">"F"</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>M2_drop1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -1368,11 +1390,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>Term-wise F-tests: BMI differs overall by Race and Education; Age is borderline; Gender and log(Income) show little added association (conditional on other covariates).</p>
 </section>
-<section id="adding-lifestyle-clinical-predictors" class="level3" data-number="4.4">
-<h3 data-number="4.4" class="anchored" data-anchor-id="adding-lifestyle-clinical-predictors"><span class="header-section-number">4.4</span> Adding Lifestyle &amp; Clinical predictors</h3>
+<section id="adding-lifestyle-clinical-predictors" class="level3" data-number="5.4">
+<h3 data-number="5.4" class="anchored" data-anchor-id="adding-lifestyle-clinical-predictors"><span class="header-section-number">5.4</span> Adding Lifestyle &amp; Clinical predictors</h3>
 <div class="cell">
 <details class="code-fold">
-<summary>Show code</summary>
+<summary>View R Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>M3 <span class="ot">&lt;-</span> <span class="fu">update</span>(M2, . <span class="sc">~</span> . <span class="sc">+</span> PhysActive <span class="sc">+</span> SleepHrsNight <span class="sc">+</span> AlcoholDay <span class="sc">+</span> SmokeNow <span class="sc">+</span> BPSysAve)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -1418,7 +1440,7 @@ F-statistic: 11.12 on 16 and 2043 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><strong>Term-wise F-tests</strong></p>
 <div class="cell">
 <details class="code-fold">
-<summary>Show code</summary>
+<summary>View R Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>M3_drop1 <span class="ot">&lt;-</span> <span class="fu">drop1</span>(M3, <span class="at">test =</span> <span class="st">"F"</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>M3_drop1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -1449,8 +1471,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </div>
-<section id="adding-interactions" class="level3" data-number="4.5">
-<h3 data-number="4.5" class="anchored" data-anchor-id="adding-interactions"><span class="header-section-number">4.5</span> Adding Interactions</h3>
+<section id="adding-interactions" class="level3" data-number="5.5">
+<h3 data-number="5.5" class="anchored" data-anchor-id="adding-interactions"><span class="header-section-number">5.5</span> Adding Interactions</h3>
 <p>We extended the model with prespecified interactions to test whether the association between:</p>
 <ul>
 <li><strong>PhysActive × Gender</strong> - Based on <em>Gender Differences in Exercise Habits and Quality of Life Reports</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, physical activity patterns differ significantly by gender. Here we test whether the BMI–activity association varies by sex.</li>
@@ -1474,7 +1496,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="callout-body-container callout-body">
 <div class="cell">
 <details class="code-fold">
-<summary>Show code</summary>
+<summary>View R Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
@@ -1553,7 +1575,7 @@ F-statistic: 10.05 on 22 and 2037 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="callout-body-container callout-body">
 <div class="cell">
 <details class="code-fold">
-<summary>Show code</summary>
+<summary>View R Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>M4_drop1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
@@ -1584,8 +1606,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Term-wise F-tests summary: BMI is associated with race, systolic BP, and shows effect modification for Gender:Smoking and Gender:Physical activity. Education:Physical activity is not supported</p>
 </section>
 </section>
-<section id="research-questions" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="research-questions"><span class="header-section-number">5</span> Research Questions</h2>
+<section id="research-questions" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="research-questions"><span class="header-section-number">6</span> Research Questions</h2>
 <p><strong>After adjusting for covariates, how does BMI vary with Age?</strong></p>
 <p>Adjusted for all covariates, the term-wise F-test (drop1) shows little evidence of a linear association between age and BMI (p ≈ 0.12)</p>
 <p><strong>Do demographic factors show overall association with BMI?</strong></p>
