@@ -4,7 +4,6 @@ title: "Swiss Electricity System Under Transition"
 
 
 
-## Tagline
 A data-driven assessment of whether Switzerland can maintain year-round electricity reliability as it transitions from nuclear power to a solar-dominant energy system.
 
 ## Executive Summary

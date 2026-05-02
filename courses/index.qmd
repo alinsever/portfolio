@@ -13,17 +13,13 @@ Only online courses include downloadable certificates when available.
 The following courses are part of my ongoing Master’s program.  
 These do **not** include certificates, but they show the breadth of my academic training.
 
-#### Semester I
-- Computer Concepts for Data Scientists
-- Customer Data Analytics 
-- Design of Experiments  
-- Statistics
-- Algebra 1
-- Algebra 2
-- Time Series in Finanace
-- Python Programming  
-- R Bootcamp  
- 
+#### Semester III
+- Deep Learning
+- Computational Language Technilogies (NLP)
+- IBM - Watson X Challenge (Case Study - Agentic AI competition)
+- Advanced Generative AI (RAG System Project - Improving Ethel - RAG System for studies at ETH Zurich)
+- Data Visualization and Narration
+
 
 #### Semester II
 - Machine Learning 1  
@@ -37,6 +33,20 @@ These do **not** include certificates, but they show the breadth of my academic 
 - Datascience in Healthcare
 - Tableau
 
+#### Semester I
+- Computer Concepts for Data Scientists
+- Customer Data Analytics 
+- Design of Experiments  
+- Statistics
+- Algebra 1
+- Algebra 2
+- Time Series in Finanace
+- Python Programming  
+- R Bootcamp  
+ 
+
+
+
 Additional MSc courses will be added as my degree progresses.
 
 ---
@@ -44,7 +54,12 @@ Additional MSc courses will be added as my degree progresses.
 
 ## Verified Certificates
 
+#### Team Essenstials for Designing AI Solutions - IBM
+[Verify Certificate](https://www.credly.com/badges/799f3ac2-6b8d-4d95-805b-5f1d46e02f9c/public_url)
 
+
+#### Enterprise Design Thinking Practioner - IBM
+[Verify Certificate](https://www.credly.com/badges/799f3ac2-6b8d-4d95-805b-5f1d46e02f9c/public_url)
 
 #### AI in Healthcare - Standford Online (coursera)
 

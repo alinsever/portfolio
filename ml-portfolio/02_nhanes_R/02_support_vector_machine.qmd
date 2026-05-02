@@ -1,22 +1,26 @@
 ---
-title: "Predicting Obesity using Support Vector Machines"
+title: "Predicting Obesity with Support Vector Machines"
+subtitle: "Comparing linear and radial SVM models for obesity classification using NHANES data."
 author: "Alin Sever"
 date: "2025-11-20"
+categories: [R, Machine Learning, SVM, Classification, NHANES]
+image: "../../../assets/logo.png"
+description: "A machine learning project using Support Vector Machines to classify obesity status from demographic, socioeconomic, lifestyle, and clinical predictors in the NHANES dataset."
 format:
   html:
     toc: true
+    toc-location: left
     toc-depth: 4
     number-sections: true
     code-fold: true
-  pdf:
-    toc: true
-    number-sections: true
-
-
-editor: source
-
+    code-summary: "View R Code"
 ---
 
+::: {.callout-tip}
+## Key Finding
+
+The **radial SVM** outperformed the linear SVM, reaching approximately **77.9% test accuracy** and substantially improving the identification of obese individuals. This suggests that obesity classification in the NHANES dataset is not well captured by a simple linear boundary and benefits from a more flexible, non-linear machine learning approach.
+:::
 
 ```{r}
 #| label: cache

@@ -1,20 +1,26 @@
 ---
-title: "Linear Regression Analysis - Predicting Body Mass Index"
+title: "Linear Regression Analysis: Predicting Body Mass Index"
+subtitle: "Exploring demographic, socioeconomic, lifestyle, and clinical factors associated with BMI using NHANES data."
 author: "Alin Sever"
 date: "2025-10-16"
+categories: [R, Linear Regression, Statistics, NHANES, Data Analysis]
+image: "../../../assets/logo.png"
+description: "A linear regression project using NHANES data to examine which demographic, socioeconomic, lifestyle, and clinical variables are associated with adult BMI."
 format:
   html:
     toc: true
+    toc-location: left
     toc-depth: 4
     number-sections: true
     code-fold: true
-  pdf:
-    toc: true
-    number-sections: true
-
-
-editor: source
+    code-summary: "View R Code"
 ---
+
+::: {.callout-tip}
+## Key Finding
+
+The linear regression model identifies **race/ethnicity**, **physical activity**, **smoking status**, and **systolic blood pressure** as relevant predictors of BMI, but explains only about **8.8%** of BMI variation. This suggests that BMI is shaped by complex factors beyond the variables available in the NHANES dataset.
+:::
 
 ```{r}
 #| label: cache

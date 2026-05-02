@@ -5,14 +5,21 @@ format:
     toc: false
 ---
 
-# Alin Sever – Data Analyst & MSc in Applied Data Science
+# Alin Sever – Data Analyst & MSc in Data Science and AI
 
 Welcome to my professional portfolio.  
-This website showcases selected analytical, machine learning, and data science projects developed during my MSc at the Lucerne University of Applied Sciences and through independent work.
+
+
+This website showcases selected analytical, machine learning, and data science projects developed during my MSc in Applied Information and Data Science at the Lucerne University of Applied Sciences and through independent work.
+
+My interests focus on building practical **AI solutions**, **automation workflows**, dashboards, and **data-driven tools** that solve real business problems and improve decision-making.
+
 
 The portfolio is divided into two main sections:
 
-- **ML Portfolio** — machine learning work in R and Python  
-- **Standalone Projects** — applied analysis, dashboards, data pipelines, and research projects
+- **ML Portfolio** - with selected projects shared through GitHub repositories for easier access to the code and project structure.
+
+
+- **Standalone Projects** -  applied analysis, dashboards, data pipelines, and research projects
 
 Use the sidebar to navigate through the content.

@@ -4,6 +4,6 @@ title: "NHANES Project (R)"
 
 
 
-This section will host the NHANES health analysis project, including regression models, classification, and data exploration.
 
-Content will be added soon.
+
+The project will utilize the NHANES dataset to analyze health-related variables and predict outcomes such as diabetes status. The analysis will include data preprocessing, exploratory data analysis, regression modeling, and support vector machine (SVM) classification.
