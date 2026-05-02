@@ -2,8 +2,6 @@
 title: "NHANES Project (R)"
 ---
 
+This project focuses on analyzing the National Health and Nutrition Examination Survey (NHANES) dataset using R. The NHANES dataset contains a wide range of health-related variables collected from a representative sample of the U.S. population.
 
-
-
-
-The project will utilize the NHANES dataset to analyze health-related variables and predict outcomes such as diabetes status. The analysis will include data preprocessing, exploratory data analysis, regression modeling, and support vector machine (SVM) classification.
+The analysis will include data preprocessing, exploratory data analysis, regression modeling, and support vector machine (SVM) classification.
