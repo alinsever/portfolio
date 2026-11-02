@@ -1,0 +1,4 @@
+# Quarto / R sources and caches live here locally; only the rendered reports/ are published
+Projects/
+.quarto/
+desktop.ini
