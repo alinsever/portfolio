@@ -1,0 +1,167 @@
+/* ==========================================================================
+   graph.css — hero layout + the interactive profile/projects graph
+   (engine: js/graph.js)
+   ========================================================================== */
+
+/* ---- hero layout: text column + graph column ---------------------------- */
+
+.hero .container { max-width: 1560px; }
+
+.hero__grid {
+  display: grid;
+  gap: 28px;
+  align-items: center;
+}
+
+.hero__graph {
+  position: relative;
+  width: 100%;
+  height: clamp(440px, 56vw, 520px);
+}
+
+@media (min-width: 1440px) {
+  .hero__grid { grid-template-columns: minmax(340px, 400px) minmax(0, 1fr); gap: 16px; }
+  .hero__graph { height: min(620px, calc(100svh - 150px)); min-height: 460px; }
+}
+
+@media (max-width: 699.98px) {
+  .hero__graph { height: 580px; }
+}
+
+/* ---- graph -------------------------------------------------------------- */
+
+.graph { position: absolute; inset: 0; }
+
+.graph__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  touch-action: pan-y;        /* vertical swipes still scroll the page */
+  user-select: none;
+  -webkit-user-select: none;
+}
+.graph__svg.is-dragging { cursor: grabbing; }
+.graph__svg.is-dragging .graph__node { cursor: grabbing; }
+
+/* edges */
+.graph__edge {
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  transition: opacity .25s, stroke-width .25s, stroke-opacity .25s;
+  animation: edge-in 1s ease .4s backwards;
+}
+.graph__edge--profile  { stroke: #4cc9f0; stroke-opacity: .38; }
+.graph__edge--projects { stroke: #ff9f6e; stroke-opacity: .42; }
+.graph__edge--bridge   { stroke: #fff;    stroke-opacity: .2; stroke-dasharray: 3 5; }
+
+.graph__edge.is-on {
+  stroke: #fff;
+  stroke-opacity: .95;
+  stroke-width: 2.2;
+  stroke-dasharray: none;
+}
+.graph__edge.is-ping { animation: edge-ping .9s ease-out; }
+
+/* nodes */
+.graph__node {
+  --c: #4cc9f0;
+  cursor: pointer;
+  outline: none;
+  transition: opacity .25s;
+}
+.graph__node--projects { --c: #ff9f6e; }
+
+.graph__halo {
+  fill: var(--c);
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  pointer-events: none;
+}
+.graph__node--hub .graph__halo { opacity: .18; }
+.graph__node.is-ping .graph__halo { animation: halo-ping .9s ease-out; }
+
+.graph__hit { fill: transparent; }
+
+.graph__dot {
+  fill: var(--c);
+  stroke: rgba(255, 255, 255, .92);
+  stroke-width: 1.6;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform .25s cubic-bezier(.2, .7, .2, 1), stroke-width .2s;
+  animation: dot-in .7s cubic-bezier(.2, .7, .2, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 30ms);
+}
+.graph__node:hover .graph__dot,
+.graph__node:focus-visible .graph__dot { transform: scale(1.3); }
+.graph__node:focus-visible .graph__dot { stroke: #fff; stroke-width: 3.2; }
+
+/* labels: hubs and mid-size nodes always, the rest on hover / focus / neighbour */
+.graph__label {
+  fill: #dbe7f7;
+  font: 500 11px/1 "Poppins", system-ui, sans-serif;
+  text-anchor: middle;
+  paint-order: stroke;
+  stroke: #07162b;
+  stroke-width: 4px;
+  stroke-linejoin: round;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .2s, fill .2s;
+}
+.graph__node--hub .graph__label { font-weight: 600; fill: #fff; }
+.graph__node--hub .graph__label,
+.graph__node--mid .graph__label { opacity: .95; }
+.graph__node:hover .graph__label,
+.graph__node:focus-visible .graph__label,
+.graph__node.is-on .graph__label { opacity: 1; fill: #fff; }
+
+/* hovering a node lights up its neighbours (one "message-passing" hop) */
+.graph.is-focus .graph__node:not(.is-on) { opacity: .2; }
+.graph.is-focus .graph__edge:not(.is-on) { opacity: .06; }
+
+/* legend */
+.graph__legend {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: 500 .72rem/1.4 "Poppins", system-ui, sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #9fb2cf;
+  pointer-events: none;
+}
+.graph__key::before {
+  content: "";
+  display: inline-block;
+  width: 9px; height: 9px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .08);
+}
+.graph__key--profile  { --c: #4cc9f0; }
+.graph__key--projects { --c: #ff9f6e; }
+.graph__hint { font-weight: 400; letter-spacing: 0; text-transform: none; color: #8296b6; }
+
+/* ---- motion ------------------------------------------------------------- */
+
+@keyframes edge-in { from { opacity: 0; } }
+@keyframes dot-in  { from { transform: scale(0); } }
+
+@keyframes halo-ping {
+  from { opacity: .8; transform: scale(1); }
+  to   { opacity: 0;  transform: scale(2.9); }
+}
+@keyframes edge-ping {
+  from { stroke-opacity: 1; stroke-width: 2.6px; }
+}

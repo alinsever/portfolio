@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project — Alin Sever</title>
+  <meta name="description" content="Project details.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23040b14'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23149ddd'/%3E%3Ccircle cx='16' cy='18' r='4' fill='%237fd3ff'/%3E%3Ccircle cx='49' cy='20' r='4' fill='%237fd3ff'/%3E%3Ccircle cx='46' cy='48' r='4' fill='%237fd3ff'/%3E%3C/svg%3E">
+
+  <script>document.documentElement.classList.add("js")</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Open+Sans:wght@400;600;700&family=Poppins:wght@400;500;600&family=Raleway:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <link rel="stylesheet" href="css/base.css?v=35">
+  <link rel="stylesheet" href="css/layout.css?v=35">
+  <link rel="stylesheet" href="css/projects.css?v=35">
+</head>
+<body data-page="project">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="site-sidebar"></div>
+
+  <main id="main">
+    <article class="detail">
+      <div class="container" id="project-root">
+        <noscript><p>This page needs JavaScript to show project details. <a href="projects.html">Back to projects</a>.</p></noscript>
+      </div>
+    </article>
+
+    <section class="cta" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <p class="cta__eyebrow">Contact</p>
+        <h2 class="cta__title" id="contact-title">Would you like to explore how we can work together?</h2>
+        <div class="cta__links">
+          <a class="btn btn--primary" href="mailto:alinsever0@gmail.com"><i class="bi bi-envelope" aria-hidden="true"></i> Email me</a>
+          <a class="btn btn--ghost" href="projects.html"><i class="bi bi-arrow-left" aria-hidden="true"></i> All projects</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year">2026</span> Alin Sever. Built with plain HTML, CSS and JavaScript.</p>
+  </footer>
+
+  <script src="js/projects-data.js?v=35" defer></script>
+  <script src="js/layout.js?v=35" defer></script>
+  <script src="js/projects.js?v=35" defer></script>
+  <script src="js/project-detail.js?v=35" defer></script>
+  <script>document.getElementById("year").textContent = new Date().getFullYear()</script>
+</body>
+</html>

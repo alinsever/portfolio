@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <style>
+    .n { animation: tw 4.5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .n:nth-of-type(3n)   { animation-delay: -1.2s; }
+    .n:nth-of-type(3n+1) { animation-delay: -2.6s; }
+    .n:nth-of-type(4n)   { animation-duration: 6s; }
+    .e { animation: flow 9s linear infinite; }
+    @keyframes tw   { 0%, 100% { opacity: .35; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.35); } }
+    @keyframes flow { to { stroke-dashoffset: -64; } }
+    @media (prefers-reduced-motion: reduce) { .n, .e { animation: none; } }
+  </style>
+  <defs>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#fff"/>
+    </pattern>
+    <radialGradient id="fade" cx="76%" cy="42%" r="62%">
+      <stop offset="0" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="m"><rect width="1600" height="900" fill="url(#fade)"/></mask>
+  </defs>
+
+  <!-- dotted field, fading away from the right-hand cluster -->
+  <rect width="1600" height="900" fill="url(#dots)" opacity=".22" mask="url(#m)"/>
+
+  <!-- connections -->
+  <g stroke="#149ddd" stroke-opacity=".38" stroke-width="1" stroke-dasharray="4 6" fill="none">
+    <path class="e" d="M1020 150L1180 260L1340 180L1460 330"/>
+    <path class="e" d="M1180 260L1260 420L1100 470"/>
+    <path class="e" d="M1260 420L1380 560L1180 640L1100 470"/>
+    <path class="e" d="M980 330L1020 150M980 330L1100 470M980 330L1180 260"/>
+    <path class="e" d="M900 560L1100 470M900 560L1180 640"/>
+    <path class="e" d="M1460 330L1380 560L1500 700L1300 760L1180 640"/>
+    <path class="e" d="M780 220L1020 150M780 220L980 330M700 420L980 330M700 420L900 560"/>
+  </g>
+
+  <!-- nodes -->
+  <g fill="#7fd3ff">
+    <circle class="n" cx="1020" cy="150" r="4"/>
+    <circle class="n" cx="1180" cy="260" r="5"/>
+    <circle class="n" cx="1340" cy="180" r="3.5"/>
+    <circle class="n" cx="1460" cy="330" r="4.5"/>
+    <circle class="n" cx="1260" cy="420" r="5.5"/>
+    <circle class="n" cx="1100" cy="470" r="4"/>
+    <circle class="n" cx="1380" cy="560" r="4.5"/>
+    <circle class="n" cx="1180" cy="640" r="4"/>
+    <circle class="n" cx="980"  cy="330" r="5"/>
+    <circle class="n" cx="900"  cy="560" r="3.5"/>
+    <circle class="n" cx="1500" cy="700" r="3.5"/>
+    <circle class="n" cx="1300" cy="760" r="4"/>
+    <circle class="n" cx="780"  cy="220" r="3.5"/>
+    <circle class="n" cx="700"  cy="420" r="4"/>
+  </g>
+</svg>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alin Sever — Data Scientist &amp; AI Engineer</title>
+  <meta name="description" content="Portfolio of Alin Sever, data scientist and AI engineer: selected projects, skills and resume.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23040b14'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23149ddd'/%3E%3Ccircle cx='16' cy='18' r='4' fill='%237fd3ff'/%3E%3Ccircle cx='49' cy='20' r='4' fill='%237fd3ff'/%3E%3Ccircle cx='46' cy='48' r='4' fill='%237fd3ff'/%3E%3C/svg%3E">
+
+  <script>document.documentElement.classList.add("js")</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Open+Sans:wght@400;600;700&family=Poppins:wght@400;500;600&family=Raleway:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <link rel="stylesheet" href="css/base.css?v=35">
+  <link rel="stylesheet" href="css/layout.css?v=35">
+  <link rel="stylesheet" href="css/home.css?v=35">
+  <link rel="stylesheet" href="css/projects.css?v=35">
+  <link rel="stylesheet" href="css/graph.css?v=35">
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="site-sidebar"></div>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero" aria-labelledby="hero-name">
+      <div class="container hero__grid">
+       <div class="hero__text">
+        <img class="hero__photo rise" style="--i:0" src="assets/img/profile-round.webp" width="480" height="480" alt="Portrait of Alin Sever">
+        <p class="hero__eyebrow rise" style="--i:1">Portfolio</p>
+        <h1 class="hero__name rise" id="hero-name" style="--i:2">Alin Sever</h1>
+        <p class="hero__role rise" style="--i:3">
+          <span class="typed" data-typed="Data Analyst|Data Scientist|AI Engineer" aria-hidden="true">Data Analyst</span>
+          <span class="visually-hidden">Data Analyst, Data Scientist and AI Engineer</span>
+        </p>
+        <p class="hero__blurb rise" style="--i:4">
+          Seven-plus years of enterprise analytics, now building machine learning, NLP and agentic AI systems.
+        </p>
+        <div class="hero__actions rise" style="--i:5">
+          <a class="btn btn--primary" href="projects.html">View projects <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+          <a class="btn btn--ghost" href="#contact">Get in touch</a>
+        </div>
+       </div>
+
+        <!-- filled in by js/graph.js: nodes on the left are my profile, nodes on the right are my projects -->
+        <div class="hero__graph" id="hero-graph" role="group"
+             aria-label="Interactive graph. Profile nodes (resume, skills, education, experience) are on one side and project nodes on the other. Each node is a link."></div>
+      </div>
+      <a class="hero__scroll rise" style="--i:6" href="#about"><i class="bi bi-arrow-down" aria-hidden="true"></i> Scroll</a>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <h2 class="section__title reveal" id="about-title">About</h2>
+        <div class="about">
+          <div class="reveal" style="--i:1">
+            <p class="about__lead">
+              I'm a data scientist with 7+ years in analytics across large, enterprise-scale organisations, currently
+              completing my MSc at HSLU in Lucerne. I've automated mission-critical reporting pipelines, designed
+              organisation-wide KPI frameworks and built production dashboards, and I'm now applying machine learning,
+              NLP and agentic AI in my studies. Twice recipient of an Award of Excellence.
+            </p>
+            <hr>
+            <ul class="facts">
+              <li><i class="bi bi-chevron-right" aria-hidden="true"></i><span><strong>Location:</strong> Lucerne, Switzerland</span></li>
+              <li><i class="bi bi-chevron-right" aria-hidden="true"></i><span><strong>Degree:</strong> MSc Applied Information &amp; Data Science at HSLU</span></li>
+              <li><i class="bi bi-chevron-right" aria-hidden="true"></i><span><strong>Languages:</strong> English (C2), German (B1), Romanian</span></li>
+              <li><i class="bi bi-chevron-right" aria-hidden="true"></i><span><strong>Focus:</strong> ML, Deep Learning, NLP, Agentic AI</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="section section--alt" id="skills" aria-labelledby="skills-title">
+      <div class="container">
+        <h2 class="section__title reveal" id="skills-title">Skills</h2>
+        <div class="skills">
+          <article class="skill-card skill-card--wide reveal" style="--i:1">
+            <header class="skill-card__head"><i class="bi bi-cpu" aria-hidden="true"></i><h3>ML &amp; AI</h3></header>
+            <ul class="chips">
+              <li>NLP</li><li>Supervised learning</li><li>Feature engineering</li><li>scikit-learn</li>
+              <li>RAG pipelines</li><li>LLM APIs</li><li>Agentic AI</li><li>IBM Watson Orchestrate</li><li>ChromaDB</li>
+              <li class="chip--soft">PyTorch <small>learning</small></li>
+            </ul>
+          </article>
+          <article class="skill-card reveal" style="--i:2">
+            <header class="skill-card__head"><i class="bi bi-code-slash" aria-hidden="true"></i><h3>Programming</h3></header>
+            <ul class="chips"><li>Python</li><li>SQL</li><li>R</li><li>VBA</li></ul>
+          </article>
+          <article class="skill-card reveal" style="--i:3">
+            <header class="skill-card__head"><i class="bi bi-bar-chart-line" aria-hidden="true"></i><h3>BI &amp; Dashboards</h3></header>
+            <ul class="chips"><li>R Shiny</li><li>Power BI</li><li>Tableau</li><li>IBM Cognos</li><li>Excel</li></ul>
+          </article>
+          <article class="skill-card reveal" style="--i:4">
+            <header class="skill-card__head"><i class="bi bi-diagram-3" aria-hidden="true"></i><h3>Data Engineering</h3></header>
+            <ul class="chips"><li>ETL</li><li>BigQuery</li><li>Data validation</li><li>KPI design</li><li>Reporting automation</li></ul>
+          </article>
+          <article class="skill-card reveal" style="--i:5">
+            <header class="skill-card__head"><i class="bi bi-git" aria-hidden="true"></i><h3>Dev &amp; Workflow</h3></header>
+            <ul class="chips">
+              <li>Git / GitHub</li><li>Agile / Scrum</li><li>JIRA</li><li>Quarto</li><li>Node.js</li>
+              <li class="chip--soft">Docker <small>basic</small></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RESUME ============ -->
+    <section class="section" id="resume" aria-labelledby="resume-title">
+      <div class="container">
+        <h2 class="section__title reveal" id="resume-title">Resume</h2>
+        <div class="resume">
+
+          <div class="reveal" style="--i:1">
+            <h3 class="resume__heading">Education</h3>
+            <div class="timeline">
+              <article class="timeline__item">
+                <h4 class="timeline__title">MSc Applied Information &amp; Data Science</h4>
+                <span class="timeline__date">Feb 2025 – Jun 2027</span>
+                <p class="timeline__org">Hochschule Luzern (HSLU), Lucerne, Switzerland</p>
+                <ul class="timeline__list">
+                  <li>Focus: machine learning, data pipelines, AI systems, statistical modelling, version-controlled development</li>
+                </ul>
+              </article>
+              <article class="timeline__item">
+                <h4 class="timeline__title">Bachelor's Degree in Food Engineering</h4>
+                <span class="timeline__date">2009 – 2013</span>
+                <p class="timeline__org">University of Life Sciences, Timișoara, Romania</p>
+              </article>
+            </div>
+
+            <h3 class="resume__heading resume__heading--spaced">Awards &amp; Certifications</h3>
+            <div class="timeline">
+              <article class="timeline__item timeline__item--reveal" tabindex="0">
+                <h4 class="timeline__title">Team Essentials for Designing AI Solutions<i class="bi bi-chevron-down timeline__chevron" aria-hidden="true"></i></h4>
+                <span class="timeline__date">Apr 2026</span>
+                <p class="timeline__org">IBM SkillsBuild (digital badge)</p>
+                <ul class="timeline__list timeline__list--reveal">
+                  <li>Enterprise Design Thinking applied to designing responsible, human-centred AI solutions</li>
+                  <li><a href="https://www.credly.com/badges/799f3ac2-6b8d-4d95-805b-5f1d46e02f9c/public_url" target="_blank" rel="noopener">View credential on Credly<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+                </ul>
+              </article>
+              <article class="timeline__item timeline__item--reveal" tabindex="0">
+                <h4 class="timeline__title">Enterprise Design Thinking Practitioner<i class="bi bi-chevron-down timeline__chevron" aria-hidden="true"></i></h4>
+                <span class="timeline__date">Mar 2026</span>
+                <p class="timeline__org">IBM SkillsBuild (digital badge)</p>
+                <ul class="timeline__list timeline__list--reveal">
+                  <li>Using the Enterprise Design Thinking framework to solve complex, human-centred problems: design research, prototyping and aligning teams</li>
+                  <li><a href="https://www.credly.com/badges/a10e3eae-8140-462e-9656-153ac4b3394e/public_url" target="_blank" rel="noopener">View credential on Credly<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+                </ul>
+              </article>
+              <article class="timeline__item timeline__item--reveal" tabindex="0">
+                <h4 class="timeline__title">AI in Healthcare<i class="bi bi-chevron-down timeline__chevron" aria-hidden="true"></i></h4>
+                <p class="timeline__org">Specialization certificate, Coursera</p>
+                <ul class="timeline__list timeline__list--reveal">
+                  <li><a href="https://www.coursera.org/account/accomplishments/specialization/LDHT3YPW858A" target="_blank" rel="noopener">View certificate on Coursera<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+                </ul>
+              </article>
+              <article class="timeline__item timeline__item--reveal" tabindex="0">
+                <h4 class="timeline__title">Award of Excellence – Best Problem Solver<i class="bi bi-chevron-down timeline__chevron" aria-hidden="true"></i></h4>
+                <span class="timeline__date">2023</span>
+                <p class="timeline__org">The department's top individual award</p>
+                <ul class="timeline__list timeline__list--reveal">
+                  <li>For developing automation tools and reporting solutions that improved efficiency and reduced manual work in a complex government environment</li>
+                </ul>
+              </article>
+              <article class="timeline__item timeline__item--reveal" tabindex="0">
+                <h4 class="timeline__title">Award of Excellence<i class="bi bi-chevron-down timeline__chevron" aria-hidden="true"></i></h4>
+                <span class="timeline__date">2019</span>
+                <ul class="timeline__list timeline__list--reveal">
+                  <li>For high-impact analysis on critical operational topics, including queue management trends</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+
+          <div class="reveal" style="--i:2">
+            <h3 class="resume__heading">Experience</h3>
+            <div class="timeline">
+              <article class="timeline__item">
+                <h4 class="timeline__title">Data Analyst | Senior Data Analyst</h4>
+                <span class="timeline__date">Feb 2021 – Dec 2025</span>
+                <p class="timeline__org">Immigration, Refugees and Citizenship Canada (IRCC)</p>
+                <ul class="timeline__list">
+                  <li>Consolidated 7 data sources into a fully automated R and Quarto reporting pipeline, cutting delivery time from 1 day to under 5 minutes and eliminating manual Excel compilation</li>
+                  <li>Engineered a cross-jurisdictional identity-matching algorithm with a 97% match rate across provincial and federal databases, replacing manual matching by immigration officers</li>
+                  <li>Achieved a 0% error rate on mission-critical reporting through fully automated data validation across multi-million-row warehouse datasets</li>
+                  <li>Designed and standardised a processing-time KPI framework for multiple file types, formally adopted across the full department</li>
+                </ul>
+              </article>
+              <article class="timeline__item">
+                <h4 class="timeline__title">Data Analyst</h4>
+                <span class="timeline__date">Nov 2018 – Jan 2021</span>
+                <p class="timeline__org">Public Services and Procurement Canada (PSPC)</p>
+                <ul class="timeline__list">
+                  <li>Cut manual data compiling from several hours to 30 minutes for 90+ stakeholders by deploying centralised SQL + VBA BI dashboards</li>
+                  <li>Consolidated multi-source operational data into analysis-ready datasets, standardising KPI definitions and owning dashboard design and delivery end to end</li>
+                  <li>Delivered trend and queue analyses that informed workload and capacity planning</li>
+                  <li>Created the Deputy Minister Package, a performance presentation deck formally adopted as a template for other projects across the organisation</li>
+                </ul>
+              </article>
+              <article class="timeline__item">
+                <h4 class="timeline__title">Planning &amp; Forecasting Analyst</h4>
+                <span class="timeline__date">Jan 2015 – Oct 2018</span>
+                <p class="timeline__org">Millennium 1 Solutions</p>
+                <ul class="timeline__list">
+                  <li>Reduced monthly overtime by approximately 140 hours by forecasting workforce requirements with advanced Excel models</li>
+                  <li>Achieved a 2.5% error margin on monthly client billing forecasts through variance analysis</li>
+                  <li>Built VBA-driven Excel dashboards for automated operational tracking, replacing manual data compilation</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURED PROJECTS ============ -->
+    <section class="section section--alt" id="featured" aria-labelledby="featured-title">
+      <div class="container">
+        <h2 class="section__title reveal" id="featured-title">Featured projects</h2>
+        <p class="section__lead reveal" style="--i:1">Selected work from my MSc at HSLU: RAG systems, agentic AI, NLP and machine learning.</p>
+        <ul class="project-grid project-grid--featured" id="featured-grid"></ul>
+        <p class="section__more reveal">
+          <a class="btn btn--outline" href="projects.html">View all projects <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ RECOMMENDATIONS ============ -->
+    <!-- Quotes are copied word for word from the letters. To change a letter, replace its PDF in assets/letters/. -->
+    <section class="section" id="recommendations" aria-labelledby="recs-title">
+      <div class="container">
+        <h2 class="section__title reveal" id="recs-title">Recommendations</h2>
+        <p class="section__lead reveal" style="--i:1">Five letters from managers and colleagues I worked with at PSPC and IRCC, written in spring 2026. Each card shows an excerpt, and the full letter opens as a PDF.</p>
+
+        <div class="letters">
+
+          <article class="letter letter--third reveal" style="--i:1">
+            <i class="bi bi-quote letter__mark" aria-hidden="true"></i>
+            <blockquote class="letter__quote">
+              <p>Alin Sever is an exceptional public servant with strong analytical and technical skills, sound judgment, and a disciplined, self-directed approach to work. I have counted on him in high-pressure and ambiguous situations, and he has consistently delivered.</p>
+            </blockquote>
+            <footer class="letter__who">
+              <span class="letter__avatar" aria-hidden="true">AB</span>
+              <div>
+                <p class="letter__name">Alexandre Bilodeau</p>
+                <p class="letter__role">Assistant Director, IRCC</p>
+                <p class="letter__rel">Direct manager at PSPC and IRCC</p>
+              </div>
+            </footer>
+            <a class="letter__pdf" href="assets/letters/alexandre-bilodeau.pdf" target="_blank" rel="noopener"><i class="bi bi-file-earmark-pdf" aria-hidden="true"></i> Read the full letter<span class="visually-hidden"> from Alexandre Bilodeau (PDF, opens in a new tab)</span></a>
+          </article>
+
+          <article class="letter letter--third reveal" style="--i:2">
+            <i class="bi bi-quote letter__mark" aria-hidden="true"></i>
+            <blockquote class="letter__quote">
+              <p>A defining strength of Alin’s work was his ability to move beyond descriptive analysis and generate insights that informed decision-making. He brought a disciplined, analytical mindset to complex problems, approaching them in a structured and methodical way.</p>
+            </blockquote>
+            <footer class="letter__who">
+              <span class="letter__avatar" aria-hidden="true">IS</span>
+              <div>
+                <p class="letter__name">Ian Smart</p>
+                <p class="letter__role">Assistant Director, IRCC</p>
+                <p class="letter__rel">Manager for about two years, as Senior Data Analyst</p>
+              </div>
+            </footer>
+            <a class="letter__pdf" href="assets/letters/ian-smart.pdf" target="_blank" rel="noopener"><i class="bi bi-file-earmark-pdf" aria-hidden="true"></i> Read the full letter<span class="visually-hidden"> from Ian Smart (PDF, opens in a new tab)</span></a>
+          </article>
+
+          <article class="letter letter--third reveal" style="--i:3">
+            <i class="bi bi-quote letter__mark" aria-hidden="true"></i>
+            <blockquote class="letter__quote">
+              <p>Alin was dependable, collaborative, and professional. He communicated clearly, followed through on priorities, and approached challenging work with ownership and initiative.</p>
+            </blockquote>
+            <footer class="letter__who">
+              <span class="letter__avatar" aria-hidden="true">AT</span>
+              <div>
+                <p class="letter__name">Angelyn Tsegaye</p>
+                <p class="letter__role">Acting Director, IRCC</p>
+                <p class="letter__rel">Manager, Asylum Reporting team, Jun 2023 – Aug 2024</p>
+              </div>
+            </footer>
+            <a class="letter__pdf" href="assets/letters/angelyn-tsegaye.pdf" target="_blank" rel="noopener"><i class="bi bi-file-earmark-pdf" aria-hidden="true"></i> Read the full letter<span class="visually-hidden"> from Angelyn Tsegaye (PDF, opens in a new tab)</span></a>
+          </article>
+
+          <article class="letter letter--half reveal" style="--i:1">
+            <i class="bi bi-quote letter__mark" aria-hidden="true"></i>
+            <blockquote class="letter__quote">
+              <p>Alin demonstrated an exceptional ability to rapidly transform and automate essential government-wide reports related to timeliness, workforce productivity, and inventory management, despite limited initial knowledge and tight timelines. His work resulted in standardized, reliable reporting tools that were adopted across over 200 government departments and agencies, eliminating the need for individual departments to develop and run their own reports.</p>
+            </blockquote>
+            <footer class="letter__who">
+              <span class="letter__avatar" aria-hidden="true">PB</span>
+              <div>
+                <p class="letter__name">Paula Boncan</p>
+                <p class="letter__role">Research Analyst, IRCC</p>
+                <p class="letter__rel">Colleague at PSPC and IRCC</p>
+              </div>
+            </footer>
+            <a class="letter__pdf" href="assets/letters/paula-boncan.pdf" target="_blank" rel="noopener"><i class="bi bi-file-earmark-pdf" aria-hidden="true"></i> Read the full letter<span class="visually-hidden"> from Paula Boncan (PDF, opens in a new tab)</span></a>
+          </article>
+
+          <article class="letter letter--half reveal" style="--i:2">
+            <i class="bi bi-quote letter__mark" aria-hidden="true"></i>
+            <blockquote class="letter__quote">
+              <p>He is patient, respectful, and genuinely enjoyable to work with — qualities that earned him the appreciation of everyone on the team. His calm approach and willingness to help others foster a positive and productive work environment.</p>
+            </blockquote>
+            <footer class="letter__who">
+              <span class="letter__avatar" aria-hidden="true">TZ</span>
+              <div>
+                <p class="letter__name">Tina Zeng</p>
+                <p class="letter__role">Senior Research &amp; Evaluation Analyst, IRCC</p>
+                <p class="letter__rel">Colleague at PSPC and IRCC</p>
+              </div>
+            </footer>
+            <a class="letter__pdf" href="assets/letters/tina-zeng.pdf" target="_blank" rel="noopener"><i class="bi bi-file-earmark-pdf" aria-hidden="true"></i> Read the full letter<span class="visually-hidden"> from Tina Zeng (PDF, opens in a new tab)</span></a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="cta" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <p class="cta__eyebrow">Contact</p>
+        <h2 class="cta__title" id="contact-title">Would you like to explore how we can work together?</h2>
+        <p class="cta__text">I'm open to data science and AI roles, collaborations and interesting problems. Send a short note about what you have in mind and I'll get back to you.</p>
+        <div class="cta__links">
+          <a class="btn btn--primary" href="mailto:alinsever0@gmail.com"><i class="bi bi-envelope" aria-hidden="true"></i> Email me</a>
+          <a class="btn btn--ghost" href="https://www.linkedin.com/in/alin-sever" target="_blank" rel="noopener"><i class="bi bi-linkedin" aria-hidden="true"></i> LinkedIn</a>
+          <a class="btn btn--ghost" href="https://github.com/alinsever" target="_blank" rel="noopener"><i class="bi bi-github" aria-hidden="true"></i> GitHub</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year">2026</span> Alin Sever. Built with plain HTML, CSS and JavaScript.</p>
+  </footer>
+
+  <script src="js/projects-data.js?v=35" defer></script>
+  <script src="js/layout.js?v=35" defer></script>
+  <script src="js/projects.js?v=35" defer></script>
+  <script src="js/graph.js?v=35" defer></script>
+  <script>document.getElementById("year").textContent = new Date().getFullYear()</script>
+</body>
+</html>

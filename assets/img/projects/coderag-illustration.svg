@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1408" height="704" viewBox="0 0 1408 704">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07162b"/>
+      <stop offset=".55" stop-color="#0a2342"/>
+      <stop offset="1" stop-color="#0a1830"/>
+    </linearGradient>
+    <radialGradient id="glowC"><stop offset="0" stop-color="#149ddd" stop-opacity=".32"/><stop offset="1" stop-color="#149ddd" stop-opacity="0"/></radialGradient>
+    <radialGradient id="glowI"><stop offset="0" stop-color="#5561a6" stop-opacity=".42"/><stop offset="1" stop-color="#5561a6" stop-opacity="0"/></radialGradient>
+    <radialGradient id="glowO"><stop offset="0" stop-color="#ff9f6e" stop-opacity=".30"/><stop offset="1" stop-color="#ff9f6e" stop-opacity="0"/></radialGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.3" fill="#fff" fill-opacity=".10"/></pattern>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#112a50"/><stop offset="1" stop-color="#0a1b36"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000" flood-opacity=".5"/></filter>
+    <filter id="blur"><feGaussianBlur stdDeviation="7"/></filter>
+    <style>
+      .mono { font-family: Consolas, "Cascadia Mono", "SFMono-Regular", Menlo, "Courier New", monospace; }
+      .ui   { font-family: Poppins, "Segoe UI", system-ui, sans-serif; }
+      .code { font-size: 16px; }
+      .cap  { font-size: 11.5px; letter-spacing: .16em; fill: #8fa6c8; font-weight: 600; text-transform: uppercase; }
+    </style>
+  </defs>
+
+  <!-- background -->
+  <rect width="1408" height="704" fill="url(#bg)"/>
+  <rect width="1408" height="704" fill="url(#dots)"/>
+  <ellipse cx="830" cy="340" rx="470" ry="330" fill="url(#glowC)"/>
+  <ellipse cx="120" cy="690" rx="460" ry="280" fill="url(#glowI)"/>
+  <ellipse cx="1000" cy="360" rx="150" ry="230" fill="url(#glowO)"/>
+
+  <!-- ============ code editor card ============ -->
+  <g filter="url(#shadow)">
+    <rect x="70" y="120" width="500" height="330" rx="18" fill="url(#card)" stroke="#7fd3ff" stroke-opacity=".24"/>
+  </g>
+  <path d="M70 138a18 18 0 0 1 18-18h464a18 18 0 0 1 18 18v24H70z" fill="#fff" fill-opacity=".05"/>
+  <circle cx="98" cy="141" r="5.5" fill="#ff6b6b"/><circle cx="118" cy="141" r="5.5" fill="#ffd166"/><circle cx="138" cy="141" r="5.5" fill="#4cc9f0"/>
+  <text x="168" y="146" class="mono" font-size="13" fill="#8fa6c8">rag_core.py</text>
+
+  <rect x="82" y="321" width="476" height="28" rx="6" fill="#4cc9f0" fill-opacity=".14"/>
+  <rect x="82" y="321" width="3" height="28" rx="1.5" fill="#4cc9f0"/>
+  <g class="mono code" xml:space="preserve">
+    <text x="96"  y="198" fill="#6f86a8" font-style="italic"># merge the ranked lists of all query variants</text>
+    <text x="96"  y="228"><tspan fill="#ff9f6e">def</tspan> <tspan fill="#4cc9f0">rrf</tspan><tspan fill="#dbe7f7">(rankings, k=</tspan><tspan fill="#7fd3ff">60</tspan><tspan fill="#dbe7f7">):</tspan></text>
+    <text x="124" y="256"><tspan fill="#dbe7f7">scores </tspan><tspan fill="#8fa6c8">=</tspan> <tspan fill="#4cc9f0">defaultdict</tspan><tspan fill="#dbe7f7">(float)</tspan></text>
+    <text x="124" y="284"><tspan fill="#ff9f6e">for</tspan> <tspan fill="#dbe7f7">docs</tspan> <tspan fill="#ff9f6e">in</tspan> <tspan fill="#dbe7f7">rankings:</tspan></text>
+    <text x="152" y="312"><tspan fill="#ff9f6e">for</tspan> <tspan fill="#dbe7f7">rank, doc</tspan> <tspan fill="#ff9f6e">in</tspan> <tspan fill="#4cc9f0">enumerate</tspan><tspan fill="#dbe7f7">(docs):</tspan></text>
+    <text x="180" y="340"><tspan fill="#dbe7f7">scores[doc]</tspan> <tspan fill="#8fa6c8">+=</tspan> <tspan fill="#7fd3ff">1</tspan> <tspan fill="#8fa6c8">/</tspan> <tspan fill="#dbe7f7">(rank</tspan> <tspan fill="#8fa6c8">+</tspan> <tspan fill="#7fd3ff">1</tspan> <tspan fill="#8fa6c8">+</tspan> <tspan fill="#dbe7f7">k)</tspan></text>
+    <text x="124" y="372"><tspan fill="#ff9f6e">return</tspan> <tspan fill="#4cc9f0">sorted</tspan><tspan fill="#dbe7f7">(scores, key=scores.get,</tspan></text>
+    <text x="252" y="400"><tspan fill="#dbe7f7">reverse=</tspan><tspan fill="#ff9f6e">True</tspan><tspan fill="#dbe7f7">)</tspan></text>
+  </g>
+
+  <!-- file types that get indexed -->
+  <text x="70" y="494" class="ui cap">Your course files</text>
+  <g class="mono" font-size="14" text-anchor="middle" fill="#dbe7f7">
+    <g transform="translate(70 508)"><rect width="62" height="34" rx="17" fill="#fff" fill-opacity=".05" stroke="#7fd3ff" stroke-opacity=".3"/><text x="31" y="22">.py</text></g>
+    <g transform="translate(146 508)"><rect width="56" height="34" rx="17" fill="#fff" fill-opacity=".05" stroke="#7fd3ff" stroke-opacity=".3"/><text x="28" y="22">.R</text></g>
+    <g transform="translate(216 508)"><rect width="84" height="34" rx="17" fill="#fff" fill-opacity=".05" stroke="#7fd3ff" stroke-opacity=".3"/><text x="42" y="22">.ipynb</text></g>
+    <g transform="translate(314 508)"><rect width="70" height="34" rx="17" fill="#fff" fill-opacity=".05" stroke="#7fd3ff" stroke-opacity=".3"/><text x="35" y="22">.qmd</text></g>
+    <g transform="translate(398 508)"><rect width="70" height="34" rx="17" fill="#fff" fill-opacity=".05" stroke="#7fd3ff" stroke-opacity=".3"/><text x="35" y="22">.Rmd</text></g>
+    <g transform="translate(482 508)"><rect width="66" height="34" rx="17" fill="#ff9f6e" fill-opacity=".10" stroke="#ff9f6e" stroke-opacity=".5"/><text x="33" y="22">.pdf</text></g>
+  </g>
+
+  <!-- ============ retrieval network ============ -->
+  <!-- code -> question -->
+  <path d="M570 300 C 600 300, 610 335, 636 335" fill="none" stroke="#4cc9f0" stroke-opacity=".6" stroke-width="1.8" stroke-dasharray="3 6" stroke-linecap="round"/>
+
+  <!-- question -> query variants -->
+  <g stroke="#4cc9f0" stroke-opacity=".6" stroke-width="1.7" fill="none">
+    <line x1="660" y1="335" x2="790" y2="205"/>
+    <line x1="660" y1="335" x2="790" y2="285"/>
+    <line x1="660" y1="335" x2="790" y2="385"/>
+    <line x1="660" y1="335" x2="790" y2="465"/>
+  </g>
+
+  <!-- query variants -> chunks -->
+  <g stroke="#ff9f6e" stroke-opacity=".34" stroke-width="1.2" fill="none">
+    <line x1="790" y1="205" x2="950" y2="150"/><line x1="790" y1="205" x2="950" y2="215"/><line x1="790" y1="205" x2="950" y2="280" stroke-opacity=".75" stroke-width="2"/>
+    <line x1="790" y1="285" x2="950" y2="215"/><line x1="790" y1="285" x2="950" y2="280" stroke-opacity=".75" stroke-width="2"/><line x1="790" y1="285" x2="950" y2="345" stroke-opacity=".75" stroke-width="2"/>
+    <line x1="790" y1="385" x2="950" y2="345" stroke-opacity=".75" stroke-width="2"/><line x1="790" y1="385" x2="950" y2="410" stroke-opacity=".75" stroke-width="2"/><line x1="790" y1="385" x2="950" y2="475"/>
+    <line x1="790" y1="465" x2="950" y2="410" stroke-opacity=".75" stroke-width="2"/><line x1="790" y1="465" x2="950" y2="475"/><line x1="790" y1="465" x2="950" y2="540"/>
+  </g>
+
+  <!-- best chunks -> answer -->
+  <g fill="none" stroke="#ff9f6e" stroke-opacity=".75" stroke-width="1.8" stroke-linecap="round">
+    <path d="M963 280 C 1010 280, 1010 262, 1050 262"/>
+    <path d="M963 345 C 1010 345, 1010 330, 1050 330"/>
+    <path d="M963 410 C 1010 410, 1010 398, 1050 398"/>
+  </g>
+  <g fill="#ff9f6e"><circle cx="1050" cy="262" r="3.5"/><circle cx="1050" cy="330" r="3.5"/><circle cx="1050" cy="398" r="3.5"/></g>
+
+  <!-- node glows -->
+  <g filter="url(#blur)">
+    <circle cx="660" cy="335" r="30" fill="#4cc9f0" fill-opacity=".55"/>
+    <circle cx="950" cy="280" r="17" fill="#ff9f6e" fill-opacity=".6"/>
+    <circle cx="950" cy="345" r="20" fill="#ff9f6e" fill-opacity=".7"/>
+    <circle cx="950" cy="410" r="17" fill="#ff9f6e" fill-opacity=".6"/>
+  </g>
+
+  <!-- nodes -->
+  <g stroke="#fff" stroke-opacity=".92" stroke-width="1.6">
+    <circle cx="660" cy="335" r="19" fill="#4cc9f0" stroke-width="2.2"/>
+    <circle cx="790" cy="205" r="9" fill="#4cc9f0"/><circle cx="790" cy="285" r="9" fill="#4cc9f0"/>
+    <circle cx="790" cy="385" r="9" fill="#4cc9f0"/><circle cx="790" cy="465" r="9" fill="#4cc9f0"/>
+    <circle cx="950" cy="150" r="7"  fill="#ff9f6e" stroke-opacity=".6"/>
+    <circle cx="950" cy="215" r="8"  fill="#ff9f6e" stroke-opacity=".7"/>
+    <circle cx="950" cy="280" r="11" fill="#ff9f6e"/>
+    <circle cx="950" cy="345" r="13" fill="#ff9f6e" stroke-width="2"/>
+    <circle cx="950" cy="410" r="11" fill="#ff9f6e"/>
+    <circle cx="950" cy="475" r="8"  fill="#ff9f6e" stroke-opacity=".7"/>
+    <circle cx="950" cy="540" r="7"  fill="#ff9f6e" stroke-opacity=".6"/>
+  </g>
+  <circle cx="660" cy="335" r="6" fill="#fff" fill-opacity=".9"/>
+
+  <!-- small labels -->
+  <g class="ui cap" text-anchor="middle">
+    <text x="660" y="378">Question</text>
+    <text x="790" y="172">Query variants</text>
+    <text x="950" y="116">Chunks</text>
+  </g>
+
+  <!-- ============ answer card ============ -->
+  <g filter="url(#shadow)">
+    <rect x="1050" y="130" width="300" height="340" rx="18" fill="url(#card)" stroke="#7fd3ff" stroke-opacity=".24"/>
+  </g>
+  <path d="M1050 148a18 18 0 0 1 18-18h264a18 18 0 0 1 18 18v24h-300z" fill="#fff" fill-opacity=".05"/>
+  <circle cx="1078" cy="151" r="5.5" fill="#ff6b6b"/><circle cx="1098" cy="151" r="5.5" fill="#ffd166"/><circle cx="1118" cy="151" r="5.5" fill="#4cc9f0"/>
+
+  <!-- question bubble -->
+  <rect x="1150" y="186" width="182" height="46" rx="14" fill="#1b4a8a"/>
+  <rect x="1166" y="199" width="128" height="6.5" rx="3.25" fill="#dbe7f7" fill-opacity=".9"/>
+  <rect x="1166" y="212" width="86" height="6.5" rx="3.25" fill="#dbe7f7" fill-opacity=".9"/>
+  <!-- answer bubble -->
+  <rect x="1068" y="246" width="264" height="150" rx="14" fill="#0e2748" stroke="#7fd3ff" stroke-opacity=".2"/>
+  <circle cx="1090" cy="268" r="8" fill="#4cc9f0"/><circle cx="1090" cy="268" r="3" fill="#07162b"/>
+  <rect x="1108" y="263" width="90" height="6.5" rx="3.25" fill="#7fd3ff" fill-opacity=".6"/>
+  <rect x="1086" y="288" width="224" height="6.5" rx="3.25" fill="#dbe7f7" fill-opacity=".55"/>
+  <rect x="1086" y="303" width="236" height="6.5" rx="3.25" fill="#dbe7f7" fill-opacity=".55"/>
+  <rect x="1086" y="318" width="170" height="6.5" rx="3.25" fill="#dbe7f7" fill-opacity=".55"/>
+  <rect x="1086" y="338" width="222" height="48" rx="8" fill="#07162b"/>
+  <rect x="1098" y="348" width="64" height="5.5" rx="2.75" fill="#ff9f6e"/>
+  <rect x="1112" y="360" width="112" height="5.5" rx="2.75" fill="#4cc9f0"/>
+  <rect x="1112" y="372" width="78" height="5.5" rx="2.75" fill="#dbe7f7" fill-opacity=".7"/>
+
+  <!-- sources -->
+  <text x="1068" y="418" class="ui cap" font-size="10.5">Sources</text>
+  <g class="mono" font-size="12" fill="#dbe7f7">
+    <g transform="translate(1068 427)"><rect width="88" height="28" rx="14" fill="#fff" fill-opacity=".05" stroke="#ff9f6e" stroke-opacity=".5"/><circle cx="14" cy="14" r="3.6" fill="#ff9f6e"/><text x="24" y="18.5">lab_03.py</text></g>
+    <g transform="translate(1162 427)"><rect width="94" height="28" rx="14" fill="#fff" fill-opacity=".05" stroke="#ff9f6e" stroke-opacity=".5"/><circle cx="14" cy="14" r="3.6" fill="#ff9f6e"/><text x="24" y="18.5">slides.pdf</text></g>
+    <g transform="translate(1262 427)"><rect width="70" height="28" rx="14" fill="#fff" fill-opacity=".05" stroke="#ff9f6e" stroke-opacity=".5"/><circle cx="14" cy="14" r="3.6" fill="#ff9f6e"/><text x="24" y="18.5">stats.R</text></g>
+  </g>
+
+  <!-- caption -->
+  <text x="805" y="604" text-anchor="middle" class="ui" font-size="15" font-weight="600" letter-spacing="3.2" fill="#7fd3ff" fill-opacity=".9">RETRIEVE  ·  FUSE  ·  ANSWER</text>
+</svg>

@@ -1,0 +1,1270 @@
+---
+title: "Risk or Refuge? Bitcoin, S&P 500, and Bonds"
+subtitle: "Assessing asset interactions under market stress within a diversified portfolio framework."
+author: "Alin Sever & Cyriel Van Helleputte"
+date: "2025-03-08"
+categories: [R, Finance, Bitcoin, Portfolio Optimization]
+image: "../../../assets/logo.png"
+description: "An empirical study on Bitcoin's role as a diversifier or safe haven during market volatility."
+format:
+  html:
+    toc: true
+    toc-location: left
+    code-fold: true
+    code-summary: "View R Code"
+---
+
+```{r}
+#| label: setup
+#| echo: false
+
+knitr::opts_chunk$set(
+  fig.align = "center",
+  out.width = "100%"
+)
+```
+
+```{r}
+#| label: packages
+#| include: false
+
+packages <- c("quantmod",
+              "xts",
+              "tidyverse",
+              "tseries",
+              "forecast",
+              "vars",
+              "PerformanceAnalytics",
+              "zoo",
+              "patchwork",
+              "scales",
+              "fBasics",
+              "patchwork",
+              "jpeg",
+              "plotly",
+              "gt")
+
+
+lapply(packages, library, character.only = TRUE)
+
+for (pkg in packages){
+ if (!requireNamespace(pkg, quietly = TRUE)) {
+   install.packages(pkg)
+ }
+ library(pkg, character.only = TRUE)
+}
+
+```
+
+
+
+## **Executive Summary**
+::: {.callout-tip}
+## Key Finding
+Modest Bitcoin allocations (**4–9%**) significantly enhance both absolute and risk-adjusted returns across traditional portfolio frameworks (60/40, All Weather, Cockroach), especially when funded from the bond component.
+:::
+
+
+## Abstract   
+
+This study examines the role of Bitcoin in diversified portfolios under varying market volatility regimes. Prompted by a recent market event in which Bitcoin displayed unexpected resilience during an equity selloff, the paper investigates whether Bitcoin continues to behave as a speculative asset or is evolving into a diversification tool or safe haven. Using daily and weekly data from 2016 to 2025 for Bitcoin, the S&P 500, and long-term U.S. Treasury bonds (TLT), we assess correlations, Granger causality, and return behaviors relative to the CBOE Volatility Index (VIX).
+
+Our findings indicate that Bitcoin exhibits low correlation with both equities and bonds and only a modest negative correlation with VIX, suggesting a semi-independent asset profile. While its diversification benefits are inconsistent, they become more apparent during volatile periods.
+
+We further evaluate Bitcoin’s inclusion in three portfolio frameworks—the 60/40 Portfolio, the All Weather Portfolio, and the Cockroach Portfolio—via historical backtesting and sensitivity analysis. Across all frameworks, modest Bitcoin allocations (4–9%) significantly enhance both absolute and risk-adjusted returns, especially when the allocation is funded from the bond component.
+
+The results support a strategic reconsideration of Bitcoin’s role in long-term portfolio design and highlight its potential to improve portfolio efficiency in a post-Covid investment landscape.
+
+
+## Preface  
+
+This research was motivated by a unique and timely market event. In the midst of a sharp equity selloff last month, Bitcoin—long regarded as a high-volatility, risk-on asset—exhibited remarkable resilience. For the first time, its reaction was more muted than that of the S&P 500, challenging assumptions about its role during periods of stress.
+
+This moment prompted us to explore a central question: Is Bitcoin still a speculative risk asset, or has it begun to evolve into a potential refuge—perhaps even a diversifier—in volatile markets? We viewed this not just as an anomaly, but as a potential signal of structural change in the behavior of digital assets.
+
+The result is this paper: a blend of empirical analysis and theoretical exploration that examines how Bitcoin, equities, and long-term U.S. bonds behave under different volatility regimes. We use the VIX as a lens to understand market stress and explore correlations, causality, and portfolio implications over the past decade. While the motivation was sparked by a single market event, our broader goal is to contribute to the evolving conversation around Bitcoin’s place in modern portfolio theory.
+
+  
+## Introduction
+
+Building on the market anomaly described in the preface, this section investigates how Bitcoin behaves under varying market volatility regimes and how that behavior compares to traditional assets. Bitcoin has often been described as “digital gold,” a speculative asset, or a potential hedge against financial stress. Yet, its role in diversified portfolios remains widely debated.
+
+Our goal is to explore whether Bitcoin behaves more like equities, bonds, or something entirely different during periods of heightened market volatility. To do this, we analyze its relationship with the S&P 500 and long-term U.S. Treasury bonds (TLT), using the VIX index as a proxy for market volatility.
+
+
+
+```{r setup-data, include = FALSE, message=FALSE, warning=FALSE}
+
+## 1. Bitcoin (BTC-USD)----
+
+
+btc_data <- getSymbols("BTC-USD", from = "2016-01-01", to = "2025-05-14", auto.assign = FALSE)
+btc <- btc_data[, 6]  # Adjusted Close
+colnames(btc) <- "BTC_Close"
+#summary(btc)
+
+## 2. S&P 500 (^GSPC)----
+
+sp500_data <- getSymbols("^GSPC", from = "2016-01-01", to = "2025-05-14", auto.assign = FALSE)
+sp500 <- sp500_data[, 6]
+colnames(sp500) <- "SP500_Close"
+#summary(sp500)
+
+
+
+## 3. TLT (iShares 20+ Year Treasury Bond ETF)----
+
+tlt_data <- getSymbols("TLT", from = "2016-01-01", to = "2025-05-14", auto.assign = FALSE)
+tlt <- tlt_data[, 6]
+colnames(tlt) <- "TLT_Close"
+#summary(tlt)
+
+
+## 4. VIX (Volatility Index)----
+
+vix_data <- getSymbols("^VIX", from = "2016-01-01", to = "2025-05-14", auto.assign = FALSE)
+vix <- vix_data[, 6]
+colnames(vix) <- "VIX_Close"
+
+# Fill missing VIX values if needed
+vix <- na.locf(vix)
+#summary(vix)
+
+
+
+```
+
+
+
+## Methodology  
+
+  
+We downloaded daily adjusted closing prices for Bitcoin (BTC-USD), the S&P 500 Index (^GSPC), and long-term U.S. Treasury bonds (TLT) from Yahoo Finance, covering the period from 2016 to 2025. Using the Augmented Dickey-Fuller (ADF) test, we confirmed that all three price series are non-stationary. We then applied a log transformation and calculated log returns, which proved to be stationary and suitable for further analysis.
+
+To explore patterns in the data, we examined seasonality and trends, and plotted all three return series together for visual comparison. A correlation analysis was then performed between each asset’s return series and the VIX in order to assess the extent to which asset performance is associated with changes in implied market volatility.This allowed us to compare how the relationships between BTC, S&P 500, and TLT change during calm vs. stressful market periods.
+
+Further the strategic portfolio allocation employs a quantitative, backtested analysis of historical portfolio performance spanning from 2016 to the present. Data for equities, bonds, commodities, and Bitcoin were sourced from reputable financial databases, with daily returns aggregated to calculate annualized performance metrics. The analysis evaluates three portfolio frameworks—the classical 60/40 Portfolio, the All Weather Portfolio, and the Cockroach Portfolio—both with and without Bitcoin exposure.
+
+To assess the impact of Bitcoin allocation, a sensitivity analysis was conducted across a range of BTC weights (0% to 15%), evaluating changes in annualized return, volatility, maximum drawdown, and Sharpe ratio. Optimal allocations were identified as the points where each portfolio’s Sharpe ratio peaked. All results are reported net of fees and without leverage. Risk-adjusted performance was the central evaluation criterion, supported by absolute return metrics to ensure a holistic view of portfolio efficiency.  
+
+
+
+## Data and Descriptive Statistics 
+
+<div style="text-align: left; color: purple"> 
+### Plotting raw prices
+</div>
+
+For a visual inspection, we plotted the raw daily closing prices of Bitcoin, the S&P 500, and TLT to observe general trends and differences in their price behavior over time.
+
+```{r plot-prices, fig.width=14, fig.height=8, echo=FALSE, warning=FALSE}
+# Plot closing prices
+
+
+btc_df <- data.frame(date = index(btc), price = as.numeric(btc))
+sp500_df <- data.frame(date = index(sp500), price = as.numeric(sp500))
+tlt_df <- data.frame(date = index(tlt), price = as.numeric(tlt))
+
+p1 <- ggplot(btc_df, aes(x = date, y = price)) + geom_line(color = "darkorange") + ggtitle("Bitcoin") + theme_minimal()
+p2 <- ggplot(sp500_df, aes(x = date, y = price)) + geom_line(color = "steelblue") + ggtitle("S&P 500") + theme_minimal()
+p3 <- ggplot(tlt_df, aes(x = date, y = price)) + geom_line(color = "forestgreen") + ggtitle("TLT - Bonds") + theme_minimal()
+
+
+p1 + p2 + p3
+
+```
+
+Bitcoin exhibits high volatility and sharp price swings, particularly during speculative booms in 2017, 2021, and 2024. 
+  
+The S&P 500 displays a steady upward trend with notable dips during crisis periods such as COVID-19 and inflation-driven corrections.  
+  
+In contrast, TLT demonstrates a more stable yet inverse pattern, with prices rising during market stress (e.g., 2020) and declining as interest rates increase. These visual patterns offer initial insights into how each asset reacts under different market conditions.
+
+<div style="text-align: left; color: purple"> 
+### Stationarity Tests and Log Returns
+</div>
+
+We applied the Augmented Dickey-Fuller (ADF) test to the raw prices of Bitcoin, the S&P 500, and TLT. As expected, all three price series were found to be non-stationary. We applied a logarithmic transformation followed  by a conversion the non-stationary price series into stationary return series, for further time series analysis.
+
+
+```{r adf-log-returns, include=FALSE, message=FALSE, warning=FALSE}
+
+# Ensure clean series (adjusted close already extracted)
+btc_clean <- na.omit(btc)
+sp500_clean <- na.omit(sp500)
+tlt_clean <- na.omit(tlt)
+
+# --- ADF on raw prices ---
+cat("ADF Test on BTC (raw):\n")
+print(adf.test(btc_clean))
+
+cat("\nADF Test on S&P 500 (raw):\n")
+print(adf.test(sp500_clean))
+
+cat("\nADF Test on TLT (raw):\n")
+print(adf.test(tlt_clean))
+
+# --- Log returns ---
+btc_log <- log(btc_clean)
+sp500_log <- log(sp500_clean)
+tlt_log <- log(tlt_clean)
+
+
+btc_returns <- na.omit(diff(btc_log))
+sp500_returns <- na.omit(diff(sp500_log))
+tlt_returns <- na.omit(diff(tlt_log))
+
+# --- ADF on log returns ---
+cat("\nADF Test on BTC Returns:\n")
+print(adf.test(btc_returns))
+
+cat("\nADF Test on S&P 500 Returns:\n")
+print(adf.test(sp500_returns))
+
+cat("\nADF Test on TLT Returns:\n")
+print(adf.test(tlt_returns))
+
+```
+
+<div style="text-align: left; color: purple"> 
+### Log Return Series
+</div>
+
+The following plots show the daily log returns for Bitcoin, the S&P 500, and TLT. Bitcoin exhibits the highest volatility, while TLT and the S&P 500 show more stable return profiles with occasional spikes during crisis periods.
+
+```{r log-return-plots, fig.width=14, fig.height=4, echo=FALSE}
+par(mfrow = c(1, 3))  # 1 row, 3 columns
+
+plot(btc_returns, main = "BTC Log Returns", col = "darkorange", ylab = "Log Return", xlab = "")
+plot(sp500_returns, main = "S&P 500 Log Returns", col = "steelblue", ylab = "Log Return", xlab = "")
+plot(tlt_returns, main = "TLT Log Returns", col = "forestgreen", ylab = "Log Return", xlab = "")
+
+par(mfrow = c(1, 1))  # Reset layout
+```
+
+<div style="text-align: left; color: purple"> 
+### Trend and Seasonality Decomposition
+</div>
+
+To better understand the structure of each asset, we applied classical time series decomposition to the log-transformed price series of Bitcoin, the S&P 500, and TLT. This allows us to observe long-term trends, potential seasonal effects, and short-term fluctuations.
+
+```{r decomposition, warning=FALSE, echo=FALSE}
+# Log-transform adjusted prices
+btc_log <- log(na.omit(btc))
+sp500_log <- log(na.omit(sp500))
+tlt_log <- log(na.omit(tlt))
+
+# Convert to ts format (daily with ~252 observations/year)
+btc_ts <- ts(coredata(btc_log), start = c(2016, 1), frequency = 252)
+sp500_ts <- ts(coredata(sp500_log), start = c(2016, 1), frequency = 252)
+tlt_ts <- ts(coredata(tlt_log), start = c(2016, 1), frequency = 252)
+
+# Decompose using classical additive method
+btc_decomp <- decompose(btc_ts)
+sp500_decomp <- decompose(sp500_ts)
+tlt_decomp <- decompose(tlt_ts)
+
+```
+
+
+
+```{r save-decomposition-jpegs, include=FALSE}
+
+jpeg("btc_decomp.jpg", width = 600, height = 600)
+plot(btc_decomp, xlab = "Year")
+dev.off()
+
+jpeg("sp500_decomp.jpg", width = 600, height = 600)
+plot(sp500_decomp, xlab = "Year")
+dev.off()
+
+jpeg("tlt_decomp.jpg", width = 600, height = 600)
+plot(tlt_decomp, xlab = "Year")
+dev.off()
+
+```
+
+
+
+```{r display-decomposition,  fig.width=14, fig.height=8, echo=FALSE, message=FALSE, warning=FALSE}
+
+par(mfrow = c(1, 3), mar = c(5, 0, 3, 0))  # 3 columns, top margin for titles
+
+btc_img <- readJPEG("btc_decomp.jpg", native = TRUE)
+sp500_img <- readJPEG("sp500_decomp.jpg", native = TRUE)
+tlt_img <- readJPEG("tlt_decomp.jpg", native = TRUE)
+
+plot(1:2, type = "n", axes = FALSE, xlab = "", ylab = "")
+rasterImage(btc_img, 1, 1, 2, 2)
+mtext("Bitcoin", side = 3, line = 0.5, cex = 1.2)
+mtext("High volatility, weak seasonality", side = 1, line = 1, cex = 1.4)
+
+
+
+plot(1:2, type = "n", axes = FALSE, xlab = "", ylab = "")
+rasterImage(sp500_img, 1, 1, 2, 2)
+mtext("S&P 500", side = 3, line = 0.5, cex = 1.2)
+mtext("Stable trend, strong seasonality", side = 1, line = 1, cex = 1.4)
+
+plot(1:2, type = "n", axes = FALSE, xlab = "", ylab = "")
+rasterImage(tlt_img, 1, 1, 2, 2)
+mtext("TLT", side = 3, line = 0.5, cex = 1.2)
+mtext("Trend reversal, policy-sensitive", side = 1, line = 2, cex = 1.4)
+
+par(mfrow = c(1, 1))  
+
+
+```
+
+Bitcoin shows a strong but volatile upward trend with limited visible seasonality and a high level of randomness, reflecting its speculative and sentiment-driven nature.
+
+The S&P 500 exhibits a smoother, consistent trend with clear seasonality, likely tied to calendar-based market cycles and macroeconomic rhythms.
+
+TLT (long-term U.S. Treasury bonds) shows a trend reversal — rising during the 2020 crisis and falling in recent years — with evident seasonality and persistent noise, reflecting its sensitivity to interest rate shifts and policy changes.
+
+<div style="text-align: left; color: purple"> 
+### Normalized data, removed seasonality
+</div>
+
+After decomposition, we normalized the seasonally adjusted log prices so all series begin at the same index level. This made it easier to visually compare their relative performance and variability over time, despite differences in price scale.
+
+<details>
+  <summary><strong>Detailed methodology</strong></summary>
+  
+  We first applied classical time series decomposition to the log-transformed price series of each asset. This separated each series into three components: trend, seasonality, and residual (random). By subtracting the seasonal component from the log prices, we obtained the seasonally adjusted log price series, which removed recurring calendar-based effects (e.g., patterns that repeat annually or quarterly).  
+  
+After removing seasonality, we then normalized each seasonally adjusted log series by dividing each value by the first value in the series and multiplying by 100. This re-indexed all series to start at 100, preserving their shape but aligning them on the same scale.  
+  
+  The purpose of this two-step process was to focus the analysis on underlying trends and relative movements rather than absolute price levels. Since assets like Bitcoin, S&P 500, and TLT operate on vastly different price ranges, normalization allows us to meaningfully compare their percentage-based changes over time. The seasonal adjustment ensures that temporary, recurring fluctuations do not distort this comparison.
+</details>
+```{r display-decomposition2,  fig.width=14, fig.height=8, echo=FALSE, message=FALSE, warning=FALSE}
+
+# --- Decompose log prices and remove seasonality ---
+btc_log <- log(na.omit(btc))
+sp500_log <- log(na.omit(sp500))
+tlt_log <- log(na.omit(tlt))
+vix_log <- log(na.omit(vix))
+
+btc_ts <- ts(coredata(btc_log), start = c(2016, 1), frequency = 252)
+sp500_ts <- ts(coredata(sp500_log), start = c(2016, 1), frequency = 252)
+tlt_ts <- ts(coredata(tlt_log), start = c(2016, 1), frequency = 252)
+vix_ts <- ts(coredata(vix_log), start = c(2016, 1), frequency = 252)
+
+btc_decomposed <- decompose(btc_ts)
+sp500_decomposed <- decompose(sp500_ts)
+tlt_decomposed <- decompose(tlt_ts)
+vix_decomposed <- decompose(vix_ts)
+
+btc_adj <- btc_ts - btc_decomposed$seasonal
+sp500_adj <- sp500_ts - sp500_decomposed$seasonal
+tlt_adj <- tlt_ts - tlt_decomposed$seasonal
+vix_adj <- vix_ts - vix_decomposed$seasonal
+
+# --- Trim to shortest common length ---
+min_length <- min(length(btc_adj), length(sp500_adj), length(tlt_adj), length(vix_adj))
+dates <- time(btc_ts)[1:min_length]
+
+# Trim each series
+btc_trim <- btc_adj[1:min_length]
+sp500_trim <- sp500_adj[1:min_length]
+tlt_trim <- tlt_adj[1:min_length]
+vix_trim <- vix_adj[1:min_length]
+
+# Combine into data frame
+combined_df <- data.frame(
+  Date = dates,
+  Bitcoin = as.numeric(btc_trim),
+  SP500 = as.numeric(sp500_trim),
+  TLT = as.numeric(tlt_trim),
+  VIX = as.numeric(vix_trim)
+)
+
+
+
+# --- Normalize and plot with ggplot2 ---
+normalize <- function(x) x / x[1] * 100
+
+normalized_df <- combined_df %>%
+  mutate(
+    Bitcoin = normalize(Bitcoin),
+    SP500 = normalize(SP500),
+    TLT = normalize(TLT),
+    VIX = normalize(VIX)
+  ) %>%
+  pivot_longer(cols = -Date, names_to = "Asset", values_to = "Index")
+
+
+# static plot
+# ggplot(normalized_df, aes(x = Date, y = Index, color = Asset)) +
+#  geom_line(size = 1) +
+#  labs(title = "Normalized Seasonally Adjusted Log Prices",
+#       subtitle = "All series indexed to 100 at start date",
+#       y = "Indexed Level (100 = start)", x = "Year") +
+#  scale_color_manual(values = c("Bitcoin" = "darkorange",
+#                                "SP500" = "steelblue",
+#                                "TLT" = "forestgreen",
+#                                "VIX" = "red")) +
+#  theme_minimal() +
+#  theme(legend.position = "bottom")
+
+ 
+ 
+```
+
+
+```{r plotly-interactive, fig.width=10, fig.height=6, echo=FALSE, message=FALSE, warning=FALSE}
+library(plotly)
+library(dplyr)
+library(tibble)
+
+# Prepare data
+plot_data <- normalized_df %>%
+  mutate(Asset = as.character(Asset)) %>%
+  filter(Asset %in% c("Bitcoin", "SP500", "TLT", "VIX"))
+
+# Color map
+colors <- c("Bitcoin" = "darkorange",
+            "SP500" = "steelblue",
+            "TLT" = "forestgreen",
+            "VIX" = "red")
+
+# Base plot
+p <- plot_ly()
+
+for (a in unique(plot_data$Asset)) {
+  df_sub <- filter(plot_data, Asset == a)
+  
+  p <- add_trace(p,
+                 data = df_sub,
+                 x = ~Date,
+                 y = ~Index,
+                 type = 'scatter',
+                 mode = 'lines',
+                 name = a,
+                 line = list(color = colors[a], width = 2))
+}
+
+# Events to annotate
+annotations_data <- tibble(
+  date = as.Date(c("2020-03-01", "2022-01-01", "2022-02-24", "2022-03-16", "2023-03-10", "2023-11-01")),
+  label = c("COVID-19 Crash", "Tech Sell-off", "Russia-Ukraine War",
+            "Fed Rate Hike Starts", "SVB Collapse", "Fed Signals Pause")
+)
+
+# Shapes and annotations
+ymin <- min(plot_data$Index, na.rm = TRUE)
+ymax <- max(plot_data$Index, na.rm = TRUE)
+
+shapes <- list()
+annotations <- list()
+
+for (i in seq_len(nrow(annotations_data))) {
+  event <- annotations_data[i, ]
+  shapes[[i]] <- list(
+    type = "line",
+    x0 = event$date,
+    x1 = event$date,
+    y0 = ymin,
+    y1 = ymax,
+    xref = "x",
+    yref = "y",
+    line = list(color = "grey", dash = "dash", width = 1)
+  )
+  annotations[[i]] <- list( # ------------ NOT WORKING 
+    x = event$date,
+    y = 1.05,  # paper space just above the top
+    xref = "x",
+    yref = "paper",
+    text = event$label,
+    showarrow = FALSE,
+    xanchor = "center",
+    yanchor = "bottom",
+    font = list(size = 10, color = "black")
+  )
+}
+
+# Final layout
+p <- layout(p,
+  title = "Normalized Seasonally Adjusted Log Prices",
+  xaxis = list(title = "Year"),
+  yaxis = list(title = "Indexed Level (100 = start)"),
+  shapes = shapes,
+  annotations = annotations,
+  legend = list(orientation = "h", x = 0.1, y = -0.2),
+  margin = list(t = 80, b = 60),
+  width = 820,
+  height = 460
+)
+
+p
+
+```
+
+With the normalized plot we once again can confirm that Bitcoin demonstrates the most dramatic movements, with sharp rises and steep corrections reflecting its speculative nature. The S&P 500 follows a steady upward trend, interrupted by short-term dips during major market events. TLT, representing long-term U.S. Treasury bonds, trends downward after peaking around 2020, in line with rising interest rates.  
+Meanwhile, VIX exhibits repeated spikes during periods of market stress — notably in early 2020 and again in 2022 — often aligning with downturns in risk assets like Bitcoin and equities.
+
+
+<div style="text-align: left; color: purple"> 
+### Correlation with volatility index (VIX):
+</div> 
+
+Understanding the interdependencies between various financial assets is crucial for effective risk management and portfolio diversification. In this study, we investigate the relationships between four key financial instruments: Bitcoin (BTC), the S&P 500 Index (representing equities), long-term U.S. government bonds (proxied by the TLT ETF), and the CBOE Volatility Index (VIX). 
+
+Using weekly adjusted closing prices from 2016 onward, we compute log returns and evaluate pairwise correlations. In addition, we perform Granger causality tests to examine potential predictive relationships, focusing especially on the dynamics between Bitcoin and traditional financial assets. The results aim to inform whether Bitcoin behaves as a diversification asset or is increasingly integrated into broader market sentiment.
+
+We then compute correlation matrices for each regime to observe how relationships between the three assets and VIX change in different market environments.
+
+```{r corellation, echo=FALSE, warning=FALSE, message=FALSE}
+
+
+data <- NULL
+tickers_index <- c("BTC-USD", "^GSPC", "TLT", "^VIX") # Tickers from Yahoo Finance for S&P 500 (^GSPC) and US Aggregate Bond Index (AGG)
+
+for (Ticker in tickers_index){
+  data <- cbind(data,
+                getSymbols.yahoo(Ticker, from="2016-01-01", periodicity = "weekly", auto.assign=FALSE)[,6])
+}
+
+colnames(data) <- c("Bitcoin", "Stocks", "Bonds", "VIX")
+
+data_clean <- na.omit(data)
+
+log_Returns<-diff(log(data))[-1,]
+
+cor_matrix <- cor(log_Returns, use = "complete.obs")
+
+cor_matrix_rounded <- round(cor_matrix, 3)
+
+# Convert matrix to data frame and keep rownames
+cor_df <- as.data.frame(cor_matrix_rounded)
+cor_df <- tibble::rownames_to_column(cor_df, var = "Asset")
+
+# Create a gt table
+cor_df %>%
+  gt() %>%
+  tab_header(
+    title = "Correlation Matrix of Asset Returns"
+  ) %>%
+  fmt_number(
+    columns = -Asset,
+    decimals = 3
+  )
+
+
+```
+
+The correlation analysis of weekly log returns reveals several noteworthy insights:
+
+- **Bitcoin and S&P 500 (ρ = 0.293):** A weak positive correlation suggests that Bitcoin has some co-movement with equity markets, though it remains partially decoupled. This aligns with the narrative of Bitcoin as a speculative asset that can at times behave independently of traditional equities.
+
+- **Bitcoin and Bonds (ρ = 0.029):** Near-zero correlation implies Bitcoin offers limited diversification benefit specifically against bond price movements.
+
+- **Bitcoin and VIX (ρ = -0.192):** A modest negative correlation with the VIX suggests that when Bitcoin drops VIX goes up, but only slightly.  
+
+- **S&P 500 and VIX (ρ = -0.733):** A strong inverse correlation confirms the well-documented pattern that when S&P 500 declines,the VIX tends to rise. This means when the stock market drops, people expect more uncertainty and turbulence ahead which causes VIX to go up.
+
+- **Bonds and other assets:** Bonds show virtually no correlation with stocks, Bitcoin, or VIX, highlighting their traditional role as a stabilizing component in diversified portfolios.
+
+
+
+### Granger Causality Results
+
+To explore potential predictive relationships between financial assets, Granger causality tests were conducted using weekly log returns with lag lengths of 1 and 2 periods. The goal was to determine whether past values of one asset class contain information that helps forecast another.
+
+```{r granger_test, echo=FALSE, warning=FALSE, message=FALSE}
+
+#grangertest(Stocks ~ VIX, order = 1, data = log_Returns)
+#grangertest(VIX ~ Stocks, order = 1, data = log_Returns)
+
+
+#grangertest(Bonds ~ VIX, order = 1, data = log_Returns)
+#grangertest(VIX ~ Bonds, order = 1, data = log_Returns)
+
+
+#grangertest(Bitcoin ~ Stocks, order = 2, data = log_Returns)
+#grangertest(Stocks ~ Bitcoin, order = 2, data = log_Returns)
+
+
+#grangertest(Bitcoin ~ Bonds, order = 2, data = log_Returns)
+#grangertest(Bonds ~ Bitcoin, order = 2, data = log_Returns)
+
+#grangertest(Bitcoin ~ VIX, order = 2, data = log_Returns)
+#grangertest(VIX ~ Bitcoin, order = 2, data = log_Returns)
+
+
+#grangertest(Stocks ~ Bonds, order = 2, data = log_Returns)
+#grangertest(Bonds ~ Stocks, order = 2, data = log_Returns)
+
+# - All the results would get printed so I #- out
+
+```
+
+
+
+
+#### Bitcoin and Bonds
+
+The test between Bitcoin and Bonds revealed an **asymmetric relationship**:
+
+- **Bitcoin → Bonds** (lag 2): *p = 0.0534*  
+  There is **marginal evidence** that Bitcoin Granger-causes bond returns at the 10% significance level. This implies Bitcoin may weakly anticipate movement in bond markets, potentially due to reallocations driven by investor sentiment or liquidity shifts.
+
+- **Bonds → Bitcoin** (lag 2): *p = 0.9519*  
+  Bonds do **not** Granger-cause Bitcoin. This confirms that traditional fixed-income movements hold no predictive power over Bitcoin’s price behavior.
+
+#### Stocks and Bonds
+
+The equity-bond relationship also showed an **unbalanced direction of influence**:
+
+- **Stocks → Bonds** (lag 2): *p = 0.0123*  
+  The result is **statistically significant at the 5% level**, indicating that stock returns **Granger-cause** bond returns. This suggests that movements in the equity market can help forecast bond market trends, likely reflecting how investor sentiment and macro expectations first manifest in equities before spilling over into bonds.
+
+- **Bonds → Stocks** (lag 2): *p = 0.4426*  
+  There is no evidence that bond returns Granger-cause stock returns, confirming the leading role of equities in this pair.
+
+
+These results suggest that while Bitcoin still operates largely independently from traditional assets, it may have a weak influence on bond markets. In contrast, the equity market plays a more active role in leading bond market behavior, highlighting its forward-looking nature and importance for asset allocation decisions.
+
+
+Overall, the results imply that Bitcoin has limited integration with traditional assets and continues to behave as a semi-independent asset, offering potential—but inconsistent—diversification benefits.
+
+
+## Strategic Portfolio Allocation: The Role of Bitcoin
+
+<div style="text-align: left; color: purple"> 
+### From Theory to Practice: Portfolio Construction and Bitcoin Allocation
+</div>
+
+
+Having established that Bitcoin exhibits distinct behavior compared to equities and bonds during different volatility regimes, we now explore its potential value within diversified portfolio structures.
+
+The classical 60/40 portfolio—comprising 60% equities and 40% bonds—has historically been favored for its balance of growth and stability. However, in the post-Covid environment, the increasing correlation between equities and bonds has eroded its diversification benefits. This shift raises the question: can Bitcoin help restore or even enhance portfolio efficiency?
+
+In this section, we evaluate three portfolio frameworks—the 60/40 Portfolio, the All Weather Portfolio, and the Cockroach Portfolio—both with and without Bitcoin allocations. We apply historical backtesting and sensitivity analyses to assess how varying levels of Bitcoin exposure affect key performance metrics such as annualized return, Sharpe ratio, and maximum drawdown. Through this practical lens, we aim to determine whether Bitcoin can serve as a meaningful addition to modern portfolio design.
+
+<div style="text-align: left; color: purple"> 
+### Structural Shift
+</div>
+
+However, the post-Covid environment marked a structural shift. As shown in the accompanying figure, the equity-bond correlation has turned increasingly positive, undermining the diversification benefit. Concurrently, the portfolio’s Sharpe ratio has declined, indicating a deteriorating risk-adjusted return. In essence, not only did risk increase, but returns did not sufficiently compensate for that added risk.
+
+
+```{r 60_40, fig.width=9, fig.height=5.5, echo=FALSE, message=FALSE, warning=FALSE}
+
+invisible(getSymbols(c("^GSPC", "TLT"), src = "yahoo", from = "2000-01-01"))
+
+
+prices <- merge(Ad(GSPC), Ad(TLT))
+colnames(prices) <- c("SP500", "TLT")
+
+
+returns <- na.omit(diff(log(prices)))  
+#head(returns)
+
+
+returns$portfolio_60_40 <- 0.6 * returns$SP500 + 0.4 * returns$TLT
+
+
+returns_df <- data.frame(
+  date = index(returns),
+  coredata(returns)
+)
+returns_df$year <- format(as.Date(returns_df$date), "%Y")
+
+
+returns$year <- format(index(returns), "%Y")
+
+
+
+returns_yearly <- split(returns, returns$year)
+
+
+metrics_yearly <- lapply(names(returns_yearly), function(yr) {
+  data <- returns_yearly[[yr]]
+  data <- na.omit(data)
+  
+  sharpe <- as.numeric(SharpeRatio.annualized(data$portfolio_60_40, scale = 252))
+  correlation <- cor(data$SP500, data$TLT, use = "complete.obs")
+  
+  return(data.frame(
+    year = as.numeric(yr),
+    sharpe = sharpe,
+    correlation = correlation
+  ))
+})
+
+
+metrics_yearly_df <- do.call(rbind, metrics_yearly)
+
+
+max_sharpe <- max(metrics_yearly_df$sharpe, na.rm = TRUE)
+max_corr <- max(abs(metrics_yearly_df$correlation), na.rm = TRUE)
+
+metrics_yearly_df <- metrics_yearly_df %>%
+  mutate(correlation_scaled = correlation * (max_sharpe / max_corr))
+
+
+ggplot(metrics_yearly_df, aes(x = year)) +
+  geom_col(aes(y = sharpe), fill = "skyblue", width = 0.7) +
+  geom_line(aes(y = correlation_scaled), color = "#3b3b3b", size = 1.1) +
+  geom_point(aes(y = correlation_scaled), color = "#3b3b3b", size = 2) +
+  scale_y_continuous(
+    name = "Sharpe Ratio",
+    sec.axis = sec_axis(~ . * (max_corr / max_sharpe),
+                        name = "Stock-Bond Correlation", labels = percent)
+  ) +
+  labs(
+    title = "60/40 Portfolio Sharpe Ratio vs. Equity-Bond Correlation",
+    x = "Year"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.title.y.right = element_text(color = "#3b3b3b"),
+    axis.title.y.left = element_text(color = "skyblue"),
+    plot.title = element_text(face = "bold", size = 16)
+  )
+
+
+
+```
+
+This shift suggests that the 60/40 portfolio no longer provides the capital protection it once did. The post-Covid investment landscape calls for a re-evaluation of traditional portfolio construction frameworks in light of changing correlation structures and risk-return dynamics.
+
+
+<div style="text-align: left; color: purple"> 
+### Alternatives
+</div>
+To explore alternatives to the traditional 60/40 portfolio, we compare the performance of three portfolio strategies — the 60/40 Portfolio[^1] , the All Weather Portfolio[^2] , and the Cockroach Portfolio[^3]  — both with and without a Bitcoin allocation[^4]  over the 2016–present period. The addition of Bitcoin[^5], even in small proportions (4% to 7.5%), consistently enhances annualized returns and Sharpe ratios across all portfolio types.  
+For instance, the Cockroach Portfolio’s annualized return increases from 11.2% to 13.1% when a 7% Bitcoin allocation is included, with the Sharpe ratio remaining at 1.2. While volatility and drawdown generally rise, they do so proportionately less than the increase in returns, preserving or improving risk-adjusted performance. Notably, the 60/40 Portfolio also benefits, with its Sharpe ratio improving from 0.9 to 1.0.
+
+
+
+```{r portofolio_performance, fig.width=9, fig.height=5.5, echo = FALSE, warning=FALSE, message=FALSE}
+
+
+invisible(getSymbols(c("SPY", "TLT", "GLD", "DBC", "BTC-USD"), src = "yahoo", from = "2016-01-01"))
+
+prices <- merge(
+  Ad(SPY),
+  Ad(TLT),
+  Ad(GLD),
+  Ad(DBC),
+  Ad(`BTC-USD`)
+)
+colnames(prices) <- c("SPY", "TLT", "GLD", "DBC", "BTC")
+returns <- na.omit(diff(log(prices)))
+
+
+weights <- list(
+  "60/40 (Exc. BTC)" = c(SPY = 0.6, TLT = 0.4, GLD = 0,    DBC = 0,    BTC = 0),
+  "60/40 (+ BTC)"    = c(SPY = 0.6, TLT = 0.36, GLD = 0,    DBC = 0,    BTC = 0.04),
+  
+  "All Weather (Exc. BTC)" = c(SPY = 0.3, TLT = 0.55, GLD = 0.075, DBC = 0.075, BTC = 0),
+  "All Weather (+ BTC)"    = c(SPY = 0.3, TLT = 0.475, GLD = 0.075, DBC = 0.075, BTC = 0.075),
+  
+  "Cockroach (Exc. BTC)" = c(SPY = 0.25, TLT = 0.25, GLD = 0.25, DBC = 0.25, BTC = 0),
+  "Cockroach (+ BTC)"    = c(SPY = 0.25, TLT = 0.18, GLD = 0.25, DBC = 0.25, BTC = 0.07)
+)
+
+
+portfolio_returns <- lapply(weights, function(w) {
+  Return.portfolio(returns, weights = w, rebalance_on = "months")
+})
+
+
+metrics_list <- list()
+
+for (name in names(portfolio_returns)) {
+  p <- portfolio_returns[[name]]
+  metrics_list[[name]] <- data.frame(
+    Portfolio = name,
+    Annualized_Return = round(Return.annualized(p)[1] * 100, 1),
+    Max_Drawdown = round(maxDrawdown(p)[1] * 100, 1),
+    Volatility = round(sd.annualized(p)[1] * 100, 1),
+    Correlation = round(cor(p, returns$SPY, use = "complete.obs")[1] * 100, 1),
+    Sharpe = round(SharpeRatio.annualized(p, Rf = 0)[1], 2),
+    stringsAsFactors = FALSE
+  )
+}
+
+metrics_df <- bind_rows(metrics_list)
+
+
+metrics_long <- metrics_df %>%
+  pivot_longer(cols = -Portfolio, names_to = "Metric", values_to = "Value") %>%
+  separate(Portfolio, into = c("Type", "BTC"), sep = " \\(") %>%
+  mutate(BTC = ifelse(grepl("BTC", BTC), gsub("\\)", "", BTC), "Exc. BTC"))
+
+metrics_wide <- metrics_long %>%
+  unite("Column", Type, BTC, sep = " - ") %>%
+  pivot_wider(names_from = Column, values_from = Value)
+
+
+metric_order <- c("Annualized_Return", "Max_Drawdown", "Volatility", "Correlation", "Sharpe")
+metrics_wide <- metrics_wide %>%
+  slice(match(metric_order, Metric)) %>%
+  rename_with(~ gsub("_", " ", .), "Metric")
+
+
+gt(metrics_wide) %>%
+  tab_header(
+    title = "Portfolio Performance Comparison",
+    subtitle = "With and Without Bitcoin (2016–Present)"
+  ) %>%
+  tab_spanner(
+    label = "60/40 Portfolio",
+    columns = matches("^60/40")
+  ) %>%
+  tab_spanner(
+    label = "All Weather Portfolio",
+    columns = matches("^All Weather")
+  ) %>%
+  tab_spanner(
+    label = "Cockroach Portfolio",
+    columns = matches("^Cockroach")
+  ) %>%
+  cols_label(
+    Metric = "Metric",
+    `60/40 - Exc. BTC` = "Excl. BTC",
+    `60/40 - + BTC` = "Incl. BTC (4%)",
+    `All Weather - Exc. BTC` = "Excl. BTC",
+    `All Weather - + BTC` = "Incl. BTC (7.5%)",
+    `Cockroach - Exc. BTC` = "Excl. BTC",
+    `Cockroach - + BTC` = "Incl. BTC (7%)"
+  ) %>%
+  fmt_number(columns = -Metric, decimals = 1) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = list(
+      cells_column_labels(everything()),
+      cells_row_groups(everything())
+    )
+  )
+
+```
+
+
+These results suggest that modest exposure to Bitcoin may enhance long-term portfolio efficiency without meaningfully compromising stability. Consequently, for investors seeking improved returns and diversification, incorporating digital assets could represent a viable strategic adjustment.
+
+[^1]: The 60/40 portfolio allocates 60% to equities and 40% to bonds, and has long been considered a benchmark for balanced portfolios. Its origins trace back to traditional wealth management practices that sought to capture long-term equity growth while tempering volatility with fixed income stability. The model assumes a negative or low correlation between stocks and bonds, which historically provided effective diversification. Despite its simplicity, the 60/40 portfolio remains popular among institutional and retail investors due to its ease of implementation and historical performance.  
+[^2]: The All Weather portfolio was developed by Bridgewater Associates, led by Ray Dalio. It aims to perform across all economic environments—growth, recession, inflation, and deflation—by diversifying across asset classes with different sensitivities to macroeconomic conditions. It typically includes allocations to equities, long-term bonds, intermediate bonds, commodities, and inflation-protected securities (e.g., TIPS). The portfolio is constructed based on risk parity principles, where asset classes are weighted to equalize risk contribution rather than capital allocation. Its core objective is resilience, not maximum return.  
+[^3]: The Cockroach portfolio is a more recent framework inspired by principles of extreme diversification and capital preservation. Named for the cockroach’s resilience, it distributes capital equally across four broad asset classes: stocks, bonds, gold, and cash. Some variations include real estate or cryptocurrencies. The idea is to prepare for a wide range of market outcomes, including tail-risk events. The portfolio is particularly appealing to investors with strong aversion to drawdowns and a preference for robust portfolios over aggressive growth strategies.  
+[^4]: For a detailed overview of the asset allocations used in each portfolio variation, including the distributions across equities, bonds, commodities, gold and Bitcoin, please refer to Appendix A: Portfolio Allocation Table.  
+[^5]: To assess the impact of Bitcoin inclusion, we evaluated two allocation approaches: a pro-rata method, where Bitcoin was funded proportionally from all assets, and a bonds-only adjustment, where Bitcoin allocation was subtracted solely from the bond component (TLT). Across all portfolio types, the bonds-only approach consistently resulted in higher annualized returns. In several cases, it also delivered an equal or improved Sharpe ratio, indicating better risk-adjusted performance. Based on these results, we opted to deduct Bitcoin allocations exclusively from bonds in our final portfolio models. See Appendix B: Where should BTC allocation be deducted from?   
+
+<div style="text-align: left; color: purple"> 
+### Allocation Sensitivity Analysis 
+</div>
+
+<div style="text-align: left; color: purple"> 
+#### Overview
+</div>
+
+Here we present a sensitivity analysis of Bitcoin allocation on portfolio performance, focusing on three asset allocation strategies: the 60/40 Portfolio, the All Weather Portfolio, and the Cockroach Portfolio. The left-hand chart illustrates the relationship between BTC allocation and the Sharpe ratio, while the right-hand chart depicts annualized returns over the same range.
+
+```{r allocations_sensitivity, fig.width=16, fig.height=7, echo=FALSE, message=FALSE, warning=FALSE}
+
+#BTC allocation sensitivity analysis ( max sharp -> max annual return)
+
+
+
+invisible(getSymbols(c("SPY", "TLT", "GLD", "DBC", "BTC-USD"), src = "yahoo", from = "2016-01-01"))
+prices <- merge(Ad(SPY), Ad(TLT), Ad(GLD), Ad(DBC), Ad(`BTC-USD`))
+colnames(prices) <- c("SPY", "TLT", "GLD", "DBC", "BTC")
+returns <- na.omit(diff(log(prices)))
+
+
+base_weights <- list(
+  "60/40" = c(SPY = 0.6, TLT = 0.4, GLD = 0, DBC = 0),
+  "All Weather" = c(SPY = 0.3, TLT = 0.55, GLD = 0.075, DBC = 0.075),
+  "Cockroach" = c(SPY = 0.25, TLT = 0.25, GLD = 0.25, DBC = 0.25)
+)
+
+
+btc_weights <- seq(0, 0.2, by = 0.01)
+results <- data.frame()
+
+for (portfolio_name in names(base_weights)) {
+  base_w <- base_weights[[portfolio_name]]
+  
+  for (btc_w in btc_weights) {
+    if (btc_w >= 1) next
+    
+    
+    w <- base_w * (1 - btc_w)
+    w["BTC"] <- btc_w
+    
+    
+    for (asset in c("SPY", "TLT", "GLD", "DBC", "BTC")) {
+      if (!(asset %in% names(w))) w[asset] <- 0
+    }
+    w <- w[c("SPY", "TLT", "GLD", "DBC", "BTC")]
+    
+    
+    port_ret <- Return.portfolio(returns, weights = w, rebalance_on = "months")
+    
+    
+    sharpe <- as.numeric(SharpeRatio.annualized(port_ret, Rf = 0))
+    ann_ret <- as.numeric(Return.annualized(port_ret)) * 100
+    vol <- as.numeric(sd.annualized(port_ret)) * 100
+    mdd <- as.numeric(maxDrawdown(port_ret)) * 100
+    
+    results <- rbind(results, data.frame(
+      Portfolio = portfolio_name,
+      BTC_Allocation = btc_w * 100,
+      Sharpe = round(sharpe, 3),
+      Annualized_Return = round(ann_ret, 2),
+      Volatility = round(vol, 2),
+      Max_Drawdown = round(mdd, 2)
+    ))
+  }
+}
+
+
+tolerance <- 0.01
+
+optimal_combined <- results %>%
+  group_by(Portfolio) %>%
+  filter(Sharpe >= max(Sharpe, na.rm = TRUE) - tolerance) %>%
+  filter(Annualized_Return == max(Annualized_Return, na.rm = TRUE)) %>%
+  arrange(Portfolio)
+
+#print(optimal_combined)
+
+
+
+
+p1 <- ggplot(results, aes(x = BTC_Allocation, y = Sharpe, color = Portfolio)) +
+  geom_line(size = 1) +
+  geom_point(data = optimal_combined, aes(x = BTC_Allocation, y = Sharpe), size = 3, shape = 21, fill = "white") +
+  labs(title = "Sharpe Ratio vs BTC Allocation (Optimal Points Highlighted)",
+       x = "BTC Allocation (%)", y = "Sharpe Ratio") +
+  theme_minimal()
+
+
+p2 <- ggplot(results, aes(x = BTC_Allocation, y = Annualized_Return, color = Portfolio)) +
+  geom_line(size = 1) +
+  geom_point(data = optimal_combined, aes(x = BTC_Allocation, y = Annualized_Return), size = 3, shape = 21, fill = "white") +
+  labs(title = "Annualized Return vs BTC Allocation (Optimal Points Highlighted)",
+       x = "BTC Allocation (%)", y = "Annualized Return (%)") +
+  theme_minimal()
+
+p1 + p2
+```
+
+
+<div style="text-align: left; color: purple"> 
+#### Interpretation
+</div>
+
+The analysis reveals that a modest allocation to Bitcoin—between approximately 5% and 10%—optimizes the Sharpe ratio for all three portfolios[^6] . The Cockroach Portfolio shows the most pronounced improvement, achieving the highest risk-adjusted return with a BTC allocation around 6–7%. Beyond this range, Sharpe ratios decline, indicating that additional Bitcoin exposure leads to diminishing returns per unit of risk.
+
+Nevertheless, annualized returns continue to rise linearly with increased Bitcoin allocation, reflecting Bitcoin’s strong historical performance. However, this comes at the cost of reduced risk efficiency beyond the optimal allocation. These findings suggest that incorporating Bitcoin into diversified portfolios can enhance performance, but the allocation must be calibrated carefully to avoid excessive volatility.
+
+[^6]: Following Sharpe ratio optimization, we identified a certain interval within which Sharpe values remained near-optimal. For these Sharpe values, we selected allocations that further improved annualized returns, provided that the Sharpe ratio remained nearly unchanged. 
+
+
+<div style="text-align: left; color: purple"> 
+### Portfolio Performance Under Optimal Allocation
+</div>
+
+```{r portofolio_performance2, echo=FALSE, message=FALSE, warning=FALSE}
+#portfolios using optimal BTC allocations
+
+
+weights <- list(
+  "60/40 (Exc. BTC)" = c(SPY = 0.6, TLT = 0.4, GLD = 0,    DBC = 0,    BTC = 0),
+  "60/40 (+ BTC)"    = c(SPY = 0.6, TLT = 0.31, GLD = 0,    DBC = 0,    BTC = 0.09),
+  
+  "All Weather (Exc. BTC)" = c(SPY = 0.3, TLT = 0.55, GLD = 0.075, DBC = 0.075, BTC = 0),
+  "All Weather (+ BTC)"    = c(SPY = 0.3, TLT = 0.47, GLD = 0.075, DBC = 0.075, BTC = 0.08),
+  
+  "Cockroach (Exc. BTC)" = c(SPY = 0.25, TLT = 0.25, GLD = 0.25, DBC = 0.25, BTC = 0),
+  "Cockroach (+ BTC)"    = c(SPY = 0.25, TLT = 0.2, GLD = 0.25, DBC = 0.25, BTC = 0.05)
+)
+
+
+portfolio_returns <- lapply(weights, function(w) {
+  Return.portfolio(returns, weights = w, rebalance_on = "months")
+})
+
+
+metrics_list <- list()
+
+for (name in names(portfolio_returns)) {
+  p <- portfolio_returns[[name]]
+  metrics_list[[name]] <- data.frame(
+    Portfolio = name,
+    Annualized_Return = round(Return.annualized(p)[1] * 100, 1),
+    Max_Drawdown = round(maxDrawdown(p)[1] * 100, 1),
+    Volatility = round(sd.annualized(p)[1] * 100, 1),
+    Correlation = round(cor(p, returns$SPY, use = "complete.obs")[1] * 100, 1),
+    Sharpe = round(SharpeRatio.annualized(p, Rf = 0)[1], 2),
+    stringsAsFactors = FALSE
+  )
+}
+
+metrics_df <- bind_rows(metrics_list)
+
+
+metrics_long <- metrics_df %>%
+  pivot_longer(cols = -Portfolio, names_to = "Metric", values_to = "Value") %>%
+  separate(Portfolio, into = c("Type", "BTC"), sep = " \\(") %>%
+  mutate(BTC = ifelse(grepl("BTC", BTC), gsub("\\)", "", BTC), "Exc. BTC"))
+
+metrics_wide <- metrics_long %>%
+  unite("Column", Type, BTC, sep = " - ") %>%
+  pivot_wider(names_from = Column, values_from = Value)
+
+
+metric_order <- c("Annualized_Return", "Max_Drawdown", "Volatility", "Correlation", "Sharpe")
+metrics_wide <- metrics_wide %>%
+  slice(match(metric_order, Metric)) %>%
+  rename_with(~ gsub("_", " ", .), "Metric")
+
+
+gt(metrics_wide) %>%
+  tab_header(
+    title = "Portfolio Performance Comparison",
+    subtitle = "With and Without Bitcoin (2016–Present)"
+  ) %>%
+  tab_spanner(
+    label = "60/40 Portfolio",
+    columns = matches("^60/40")
+  ) %>%
+  tab_spanner(
+    label = "All Weather Portfolio",
+    columns = matches("^All Weather")
+  ) %>%
+  tab_spanner(
+    label = "Cockroach Portfolio",
+    columns = matches("^Cockroach")
+  ) %>%
+  cols_label(
+    Metric = "Metric",
+    `60/40 - Exc. BTC` = "Excl. BTC",
+    `60/40 - + BTC` = "Incl. BTC (9%)",
+    `All Weather - Exc. BTC` = "Excl. BTC",
+    `All Weather - + BTC` = "Incl. BTC (8%)",
+    `Cockroach - Exc. BTC` = "Excl. BTC",
+    `Cockroach - + BTC` = "Incl. BTC (5%)"
+  ) %>%
+  fmt_number(columns = -Metric, decimals = 1) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = list(
+      cells_column_labels(everything()),
+      cells_row_groups(everything())
+    )
+  )
+```
+
+This table presents the performance metrics of three portfolio strategies — the 60/40 Portfolio, the All Weather Portfolio, and the Cockroach Portfolio — evaluated at their individually optimized Bitcoin allocations[^7] . The optimal BTC allocations, determined through prior sensitivity analysis, are 9%, 8%, and 5% respectively. These allocations represent the point at which each portfolio’s Sharpe ratio is maximized, striking a balance between higher return and manageable risk.
+
+[^7]: As in previous analyses, Bitcoin allocations in this chart have been made by reducing the bond (TLT) allocation, while all other asset weights remain unchanged.
+
+At their optimal allocations, all portfolios exhibit significantly improved annualized returns: the 60/40 Portfolio increases from 10.8% to 13.2%, the All Weather Portfolio from 9.2% to 11.4%, and the Cockroach Portfolio from 11.2% to 12.6%. Volatility and maximum drawdown rise correspondingly, though not disproportionately. Notably, the Cockroach Portfolio maintains its superior risk-adjusted return with a Sharpe ratio of 1.2 — the highest among the three.
+
+These results highlight the potential of modest, precisely calibrated Bitcoin exposure to enhance portfolio efficiency. Incorporating crypto assets strategically — rather than excessively — appears to optimize return potential while preserving diversification and downside control.
+
+## Conclusion
+
+The findings presented in this study illustrate a clear need to reassess traditional portfolio construction strategies in light of changing market dynamics. The long-standing 60/40 portfolio, while historically effective due to the inverse relationship between equities and bonds, has become less resilient in the post-Covid investment landscape. The positive correlation between asset classes and declining Sharpe ratios suggest that investors can no longer rely on traditional diversification alone to achieve optimal risk-adjusted returns.
+
+In response, this analysis has explored the performance of alternative multi-asset portfolio frameworks, including the All Weather and Cockroach portfolios. These strategies, by design, introduce a broader range of asset exposures—particularly to real assets such as commodities and gold—which can provide greater resilience across varying macroeconomic environments. However, the most notable performance enhancement across all models was achieved through the inclusion of a modest Bitcoin allocation.
+
+Our empirical analysis, covering the period from 2016 to the present, demonstrates that adding Bitcoin—within a carefully calibrated range of 4% to 9%—consistently improved both absolute and risk-adjusted returns. The sensitivity analysis revealed that there is a clear inflection point beyond which additional Bitcoin exposure yields diminishing Sharpe ratios, underlining the importance of precision in portfolio design.
+
+Crucially, the performance benefits were maximized when the Bitcoin allocation was funded entirely by reducing the bond component of the portfolios, rather than through a pro-rata reduction across all assets. This adjustment maintained the integrity of the broader diversification strategy while allowing for the inclusion of a high-growth, low-correlation asset.
+
+Overall, the findings support a strategic rethinking of long-term portfolio construction. For investors seeking higher returns without significantly compromising stability, incorporating a small, risk-conscious allocation to digital assets—particularly Bitcoin—can offer meaningful improvements in portfolio efficiency. As financial markets evolve, so too must our frameworks for managing risk and capturing opportunity.
+
+## Appendix
+
+<div style="text-align: left; color: purple"> 
+### Appendix A: Portfolio Allocation Table
+</div>
+
+```{r appendinx_A, echo=FALSE, warning=FALSE, message=FALSE}
+
+
+allocations <- tribble(
+  ~Portfolio, ~BTC, ~SPY, ~TLT, ~GLD, ~DBC,
+  "60/40 (Excl. BTC)",      "0%",   "60%",  "40%",  "0%",   "0%",
+  "60/40 (+BTC 4%)",        "4%",   "60%",  "36%",  "0%",   "0%",
+  "All Weather (Excl. BTC)", "0%",   "30%",  "55%",  "7.5%", "7.5%",
+  "All Weather (+BTC 7.5%)", "7.5%", "30%",  "47.5%", "7.5%", "7.5%",
+  "Cockroach (Excl. BTC)",  "0%",   "25%",  "25%",  "25%",  "25%",
+  "Cockroach (+BTC 7%)",    "7%",   "25%",  "18%",  "25%",  "25%"
+)
+
+
+allocations_transposed <- allocations %>%
+  pivot_longer(cols = -Portfolio, names_to = "Asset", values_to = "Weight") %>%
+  pivot_wider(names_from = Portfolio, values_from = Weight)
+
+
+allocations_transposed %>%
+  gt() %>%
+  tab_header(
+    title = "Portfolio Allocations",
+  ) %>%
+  cols_label(
+    Asset = "Asset"
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels(everything())
+  )
+
+```
+
+<div style="text-align: left; color: purple"> 
+### Appendix B: Where Should BTC Allocation Be Deducted From?
+</div>
+
+```{r appendix_b, echo=FALSE, message=FALSE, warning=FALSE}
+
+base_weights <- list(
+  "60/40 (Exc. BTC)" = c(SPY = 0.6, TLT = 0.4, GLD = 0,    DBC = 0,    BTC = 0),
+  "All Weather (Exc. BTC)" = c(SPY = 0.3, TLT = 0.55, GLD = 0.075, DBC = 0.075, BTC = 0),
+  "Cockroach (Exc. BTC)" = c(SPY = 0.25, TLT = 0.25, GLD = 0.25, DBC = 0.25, BTC = 0)
+)
+
+
+add_btc_variants <- function(w, btc_alloc, label) {
+  w_prorata <- w * (1 - btc_alloc)
+  w_prorata["BTC"] <- btc_alloc
+  name1 <- paste0(label, " (+BTC Pro-rata)")
+  
+  w_bonds <- w
+  bond_assets <- c("TLT")
+  bond_total <- sum(w[bond_assets])
+  if (bond_total >= btc_alloc) {
+    for (asset in bond_assets) {
+      w_bonds[asset] <- w_bonds[asset] - (w_bonds[asset] / bond_total) * btc_alloc
+    }
+    w_bonds["BTC"] <- btc_alloc
+  }
+  name2 <- paste0(label, " (+BTC Bonds Only)")
+  return(setNames(list(w_prorata, w_bonds), c(name1, name2)))
+}
+
+btc_weight <- list(
+  "60/40" = 0.04,
+  "All Weather" = 0.075,
+  "Cockroach" = 0.07
+)
+
+weights_all <- base_weights
+for (name in names(base_weights)) {
+  clean_label <- gsub(" \\(.*", "", name)
+  btc_alloc <- btc_weight[[clean_label]]
+  variants <- add_btc_variants(base_weights[[name]], btc_alloc, clean_label)
+  weights_all <- c(weights_all, variants)
+}
+
+
+portfolio_returns <- lapply(weights_all, function(w) {
+  Return.portfolio(returns, weights = w, rebalance_on = "months")
+})
+
+
+metrics_list <- list()
+for (name in names(portfolio_returns)) {
+  p <- portfolio_returns[[name]]
+  metrics_list[[name]] <- data.frame(
+    Portfolio = name,
+    Annualized_Return = round(Return.annualized(p)[1] * 100, 1),
+    Max_Drawdown = round(maxDrawdown(p)[1] * 100, 1),
+    Volatility = round(sd.annualized(p)[1] * 100, 1),
+    Correlation = round(cor(p, returns$SPY, use = "complete.obs")[1] * 100, 1),
+    Sharpe = round(SharpeRatio.annualized(p, Rf = 0)[1], 2),
+    stringsAsFactors = FALSE
+  )
+}
+metrics_df <- bind_rows(metrics_list)
+
+
+metrics_long <- metrics_df %>%
+  pivot_longer(cols = -Portfolio, names_to = "Metric", values_to = "Value") %>%
+  separate(Portfolio, into = c("Type", "BTC"), sep = " \\(", fill = "right") %>%
+  mutate(BTC = ifelse(is.na(BTC), "Exc. BTC", gsub("\\)", "", BTC)))
+
+metrics_wide <- metrics_long %>%
+  unite("Column", Type, BTC, sep = " - ") %>%
+  pivot_wider(names_from = Column, values_from = Value)
+
+metric_order <- c("Annualized_Return", "Max_Drawdown", "Volatility", "Correlation", "Sharpe")
+metrics_wide <- metrics_wide %>%
+  slice(match(metric_order, Metric)) %>%
+  rename_with(~ gsub("_", " ", .), "Metric")
+
+
+gt(metrics_wide) %>%
+  tab_header(
+    title = "Portfolio Performance Comparison",
+    subtitle = "With and Without Bitcoin (2016–Present) — Pro-rata vs Bonds-Only Allocation"
+  ) %>%
+  tab_spanner(label = "60/40 Portfolio", columns = matches("^60/40")) %>%
+  tab_spanner(label = "All Weather Portfolio", columns = matches("^All Weather")) %>%
+  tab_spanner(label = "Cockroach Portfolio", columns = matches("^Cockroach")) %>%
+  cols_label(.list = setNames(rep(c("Excl. BTC", "Incl. BTC (Pro-rata)", "Incl. BTC (Bonds Only)"), 3),
+                              c(
+                                "60/40 - Exc. BTC", "60/40 - +BTC Pro-rata", "60/40 - +BTC Bonds Only",
+                                "All Weather - Exc. BTC", "All Weather - +BTC Pro-rata", "All Weather - +BTC Bonds Only",
+                                "Cockroach - Exc. BTC", "Cockroach - +BTC Pro-rata", "Cockroach - +BTC Bonds Only"
+                              )
+  )) %>%
+  fmt_number(columns = -Metric, decimals = 1) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = list(
+      cells_column_labels(everything()),
+      cells_row_groups(everything())
+    )
+  )
+
+```
+
+<div style="text-align: left; color: purple"> 
+### Appendix C:  Seasonally Adjusted Log Prices of Bitcoin, S&P 500, TLT, and Raw VIX (not normalized)
+</div>
+
+The following plot, included in the appendix, shows the seasonally adjusted log prices of Bitcoin, the S&P 500, and TLT, along with the raw VIX index, to illustrate their respective behaviors and co-movements over time.  
+
+
+```{r decomposed_but_not_normalized_plot, fig.width=14, fig.height=8, echo=FALSE, message=FALSE, warning=FALSE}
+
+
+plot(combined_df$Date, combined_df$Bitcoin, type = "l", col = "darkorange",
+     ylab = "Log Price (Seasonally Adjusted)", xlab = "Year",
+     main = "BTC, SP500, TLT (Adjusted) + VIX (Raw)",
+     ylim = range(combined_df[, 2:5], na.rm = TRUE))
+lines(combined_df$Date, combined_df$SP500, col = "steelblue")
+lines(combined_df$Date, combined_df$TLT, col = "forestgreen")
+lines(combined_df$Date, combined_df$VIX, col = "red")
+legend("topleft", legend = c("Bitcoin", "S&P 500", "TLT", "VIX"),
+       col = c("darkorange", "steelblue", "forestgreen", "red"), lty = 1, bty = "n")
+grid()
+
+
+```
+
+## Data Sources
+
+The data used in this study were retrieved from the following sources:
+
+- **Bitcoin (BTC-USD)**: Yahoo Finance  
+  [https://finance.yahoo.com/quote/BTC-USD](https://finance.yahoo.com/quote/BTC-USD)
+
+- **S&P 500 Index (^GSPC)**: Yahoo Finance  
+  [https://finance.yahoo.com/quote/%5EGSPC](https://finance.yahoo.com/quote/%5EGSPC)
+
+- **iShares 20+ Year Treasury Bond ETF (TLT)**: Yahoo Finance  
+  [https://finance.yahoo.com/quote/TLT](https://finance.yahoo.com/quote/TLT)
+
+- **CBOE Volatility Index (VIX)**: Yahoo Finance  
+  [https://finance.yahoo.com/quote/%5EVIX](https://finance.yahoo.com/quote/%5EVIX)
+
+- **SPY, GLD, DBC (for portfolio analysis)**: Yahoo Finance

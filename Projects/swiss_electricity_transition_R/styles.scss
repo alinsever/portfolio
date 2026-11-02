@@ -1,0 +1,139 @@
+/*-- scss:defaults --*/
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Georgia|Source+Sans+Pro|Noto+Sans+Mono|Source+Code+Pro');
+
+/*-- Define Colors --*/
+$white:    #fff;
+$black:    #000;
+
+$gray-100: #f8f9fa;  // very light grey
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;  // dark grey
+$gray-900: #212529;
+
+/*-- Requested Color Overrides --*/
+$primary:   $gray-900;   // dark grey
+$secondary: $gray-100;   // very light grey
+$tertiary:  #0D5C63;
+
+
+/*-- Bootstrap Color Variables --*/
+$body-bg:       #ffffff;
+$body-color:    $gray-700;
+
+$link-color:        $primary;
+$link-hover-color:  darken($primary, 10%);
+$link-decoration:   none;
+$link-hover-decoration: underline;
+
+$selection-bg: $secondary;
+
+
+/*-- Typography --*/
+$font-family-sans-serif: "Open Sans", "Cambria", "Georgia", serif;
+$font-family-monospace:  "Noto Sans Mono", "Source Code Pro", "Courier New", monospace;
+
+$font-size-base: 1.05rem;
+$headings-font-family: "Georgia", serif;
+$headings-font-weight: 700;
+$headings-color: $primary;
+
+$code-font-size: 0.9em;
+
+
+/*-- Layout & Spacing --*/
+$spacer: 1rem;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1400px,     // ⬅️ Increased from 1140px
+  xxl: 1600px     // ⬅️ Increased from 1320px
+);
+
+
+/*-- Borders & Radius --*/
+$border-color: $gray-300;
+$border-radius: .5rem;
+$border-radius-sm: .25rem;
+$border-radius-lg: 1rem;
+
+
+/*-- Shadows --*/
+$box-shadow-sm: 0 .125rem .25rem rgba(0, 0, 0, .075);
+$box-shadow:    0 .5rem 1rem rgba(0, 0, 0, .15);
+$box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, .175);
+
+
+/*-- Tables --*/
+$table-bg: transparent;
+$table-border-color: $gray-300;
+$table-striped-bg: $gray-100;
+$table-hover-bg: $gray-200;
+
+
+/*-- Code Blocks --*/
+$code-block-bg: $secondary;
+$code-block-border-radius: 8px;
+$code-block-padding: 1rem;
+
+$code-bg: $secondary;    // inline code background
+$code-color: $tertiary;  // inline code text color
+$code-padding-y: .2rem;
+$code-padding-x: .4rem;
+$code-border-radius: .3rem;
+
+
+/*-- Buttons --*/
+$btn-border-radius: 2rem;
+$btn-padding-y: .5rem;
+$btn-padding-x: 1.2rem;
+$btn-font-weight: 600;
+
+
+/*-- Alerts --*/
+$alert-border-radius: .5rem;
+$alert-color: $white;
+$alert-bg-level: -10;
+
+
+/*-- Force full-width layout in Quarto HTML --*/
+.page-inner, .container {
+  max-width: 1300px !important;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.sidebar {
+  left: 0 !important;           // Stick to the absolute left edge
+  padding-left: 0.5rem !important; // Reduce inner padding
+  padding-right: 0.5rem;
+}
+
+/* Optional: Adjust main content if needed */
+body {
+  padding-left: 0px;   // Match your sidebar width to avoid overlap
+}
+
+.page-columns {
+  margin-left: 0 !important;    // Override default left margin if needed
+}
+
+.figure-caption {
+  text-align: center;
+}
+
+.scroll-box {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 4px;
+}

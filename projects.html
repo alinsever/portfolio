@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects — Alin Sever</title>
+  <meta name="description" content="Data science and AI projects by Alin Sever: RAG systems, agentic AI, NLP and machine learning. Filter by domain or search by keyword.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23040b14'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23149ddd'/%3E%3Ccircle cx='16' cy='18' r='4' fill='%237fd3ff'/%3E%3Ccircle cx='49' cy='20' r='4' fill='%237fd3ff'/%3E%3Ccircle cx='46' cy='48' r='4' fill='%237fd3ff'/%3E%3C/svg%3E">
+
+  <script>document.documentElement.classList.add("js")</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Open+Sans:wght@400;600;700&family=Poppins:wght@400;500;600&family=Raleway:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <link rel="stylesheet" href="css/base.css?v=35">
+  <link rel="stylesheet" href="css/layout.css?v=35">
+  <link rel="stylesheet" href="css/projects.css?v=35">
+</head>
+<body data-page="projects">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="site-sidebar"></div>
+
+  <main id="main">
+
+    <header class="page-head">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li aria-current="page">Projects</li>
+          </ol>
+        </nav>
+        <h1 class="page-head__title">Projects</h1>
+        <p class="page-head__text">
+          Projects from my MSc at HSLU in Lucerne, covering RAG systems, agentic AI, NLP and machine learning.
+          Filter by domain or search by keyword.
+        </p>
+
+        <form class="filters" id="filters" role="search" aria-label="Filter projects">
+          <div class="field">
+            <label for="f-domain">Domain</label>
+            <select id="f-domain"><option value="">All domains</option></select>
+          </div>
+          <div class="field">
+            <label for="f-type">Type</label>
+            <select id="f-type"><option value="">All types</option></select>
+          </div>
+          <div class="field field--search">
+            <label for="f-search">Search</label>
+            <i class="bi bi-search" aria-hidden="true"></i>
+            <input id="f-search" type="search" placeholder="Find a project here" autocomplete="off">
+          </div>
+        </form>
+        <div class="result-row">
+          <p class="result-count" id="result-count" role="status" aria-live="polite"></p>
+          <button class="filters__clear" id="f-clear" type="button" hidden>Clear filters</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="section" style="padding-top:12px" aria-label="Project list">
+      <div class="container">
+        <ul class="project-grid" id="project-grid"></ul>
+        <nav class="pagination" id="pagination" aria-label="Pagination" hidden></nav>
+      </div>
+    </section>
+
+    <section class="cta" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <p class="cta__eyebrow">Contact</p>
+        <h2 class="cta__title" id="contact-title">Would you like to explore how we can work together?</h2>
+        <p class="cta__text">I'm open to data science and AI roles, collaborations and interesting problems. Send a short note about what you have in mind and I'll get back to you.</p>
+        <div class="cta__links">
+          <a class="btn btn--primary" href="mailto:alinsever0@gmail.com"><i class="bi bi-envelope" aria-hidden="true"></i> Email me</a>
+          <a class="btn btn--ghost" href="https://www.linkedin.com/in/alin-sever" target="_blank" rel="noopener"><i class="bi bi-linkedin" aria-hidden="true"></i> LinkedIn</a>
+          <a class="btn btn--ghost" href="https://github.com/alinsever" target="_blank" rel="noopener"><i class="bi bi-github" aria-hidden="true"></i> GitHub</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year">2026</span> Alin Sever. Built with plain HTML, CSS and JavaScript.</p>
+  </footer>
+
+  <script src="js/projects-data.js?v=35" defer></script>
+  <script src="js/layout.js?v=35" defer></script>
+  <script src="js/projects.js?v=35" defer></script>
+  <script>document.getElementById("year").textContent = new Date().getFullYear()</script>
+</body>
+</html>
