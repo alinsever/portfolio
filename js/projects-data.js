@@ -69,9 +69,9 @@ window.PROJECTS = [
     year: "Feb 2026 – Present",
     featured: true,
     image: null,
-    collaborators: ["Meleknur Ozgu", "Filip Plavsic"],
+    collaborators: ["Meleknur Ozgu", "Filip Plavsic", "Mayra Corrales", "Xinmeng Song"],
     note: [
-      "Challenge project from my MSc at HSLU, built around a real use case from a large Swiss insurer, in a team of three. Meleknur Ozgu built the alert agent that sends email and Slack alerts, and Filip Plavsic wrote the standalone RAG pipeline and contributed to the agent configurations.",
+      "Challenge project from my MSc at HSLU, built around a real use case from a large Swiss insurer, in a team of five. Meleknur Ozgu built the alert agent that sends email and Slack alerts, and Filip Plavsic wrote the standalone RAG pipeline and contributed to the agent configurations.",
       "Code and live demo: because of an NDA I cannot share a link yet. The client has agreed that I may share the project as long as their name is removed, so I am cleaning up the repository. The live app ran on IBM Cloud, where my access has ended, so I am moving it to another host such as Render.",
     ],
     role: {
