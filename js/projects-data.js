@@ -66,18 +66,19 @@ window.PROJECTS = [
     status: "In progress",
     domain: "Agentic AI",
     type: "Academic",
-    year: "Feb 2026 – Present",
+    year: "Feb 2026 – June 2026",
     featured: true,
     image: null,
     collaborators: ["Meleknur Ozgu", "Filip Plavsic", "Mayra Corrales", "Xinmeng Song"],
     note: [
-      "Challenge project from my MSc at HSLU, built around a real use case from a large Swiss insurer, in a team of five. Meleknur Ozgu built the alert agent that sends email and Slack alerts, and Filip Plavsic wrote the standalone RAG pipeline and contributed to the agent configurations.",
+      "Challenge project from my MSc at HSLU, built around a real use case from a large Swiss insurer, in a team of five.",
       "Code and live demo: because of an NDA I cannot share a link yet. The client has agreed that I may share the project as long as their name is removed, so I am cleaning up the repository. The live app ran on IBM Cloud, where my access has ended, so I am moving it to another host such as Render.",
     ],
     role: {
-      summary: "I designed and built the platform: about 96% of the code in the repository is mine, counted by line.",
+      summary: "I did most of the work, including the research, and designed and built the platform: about 96% of the code in the repository is mine, counted by line.",
       points: [
         "Designed the data layer in Supabase (Postgres with pgvector): the schema, the embedding pipeline and the search functions that mix 80% semantic similarity with 20% recency.",
+        "Wrote the RAG pipeline that grounds the agents' answers in the stored signals and uploaded documents, retrieving from pgvector with that semantic-plus-recency search.",
         "Built the three scheduled monitors (news, job ads, team pages) and the curator gate behind them: every signal gets an importance score from 0 to 100, uncertain ones go to a human review queue, and saved briefings are de-duplicated.",
         "Designed the Watson Orchestrate setup: one orchestrator, five specialist agents (broker profile, market signal, competitor intel, action playbook and document Q&A) and an internal synthesis composer that merges their answers, all with their API tools.",
         "Built the hybrid runtime: fast helpers grounded in the database answer the common questions, and Watson Orchestrate handles the open-ended ones.",
