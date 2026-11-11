@@ -1,91 +1,79 @@
-# Portfolio
+# Alin Sever · Data Science & AI Portfolio
 
-A static portfolio site: plain HTML, CSS and JavaScript. No build step, no dependencies to install.
+**Live site: [alinsever.github.io/portfolio](https://alinsever.github.io/portfolio/)**
 
-Layout inspired by [patrickstaehli.ch](https://patrickstaehli.ch/) (sidebar, hero, timeline resume)
-and [datascience.ch/projects](https://datascience.ch/projects) (filterable project grid).
+I'm a data scientist with 7+ years of analytics experience in large Canadian federal organisations, now completing an MSc at HSLU in Lucerne, Switzerland. My focus is machine learning, NLP and agentic AI, and this portfolio collects the projects, experience and references behind that work.
 
-## Run it locally
+I'm open to data science and AI roles, collaborations and interesting problems.
 
-Open `index.html` directly, or serve the folder (needed if you later add fetch calls):
+| | |
+|---|---|
+| **Now** | MSc Applied Information & Data Science, HSLU Lucerne (Feb 2025 – Jun 2027) |
+| **Before** | Senior Data Analyst, Immigration, Refugees and Citizenship Canada (2021–2025) |
+| **Focus** | Machine learning, deep learning, NLP, RAG systems, agentic AI |
+| **Languages** | English (C2), German (B1), Romanian |
+| **Tools** | Python, R, SQL, scikit-learn, PyTorch (learning), ChromaDB, Watson Orchestrate, Quarto |
+
+## What's on the site
+
+- **Projects:** nine projects with search and filters. Each page covers the problem, approach and results, and links to the code or a full report where one exists.
+- **Resume:** education, experience and certifications as a timeline.
+- **Skills:** grouped by area: ML & AI, programming, BI, data engineering and workflow.
+- **Recommendations:** five letters from managers and colleagues at PSPC and IRCC, with excerpts and the full PDFs.
+- **Interactive graph:** the home page links my profile and my projects in one network. Each node opens the matching section.
+
+## Selected projects
+
+| Project | What it is | Result | Code |
+|---|---|---|---|
+| **WatsonX IBM Challenge** | Multi-agent platform that tracks 53 Swiss insurance brokers and briefs consultants, built on IBM Watson Orchestrate with a Supabase/pgvector RAG layer. Team of five, around 96% of the code is mine. | The first run on the live app passed 33 of 44 benchmark cases (English and German). After fixing two real bugs and some test-setup problems, all 44 passed. | Under NDA |
+| **Reliable Agentic RAG** | Bilingual RAG system over 7,544 ETH Zurich news articles that scores its own evidence and abstains when it is too weak. | 0.0 contradiction rate on the 24 queries it answered. It abstained on the other 26 instead of guessing. | [GitHub](https://github.com/dhub100/advanced-genai-rag) |
+| **AI Media Trend Mining** | NLP pipeline on 16,317 AI news articles: topic modelling, LoRA fine-tuning of Qwen2.5, and three RAG setups compared. | Fine-tuning lifted topic accuracy from 34% to 79%. A cross-encoder re-ranker raised the RAG judge score from 1.62 to 1.91. | [GitHub](https://github.com/RobinGirardin/ai-media-trend-mining) |
+| **CodeRAG** | RAG assistant that answers questions about course code and PDFs, with source files shown. I built the RAG-Fusion pipeline and the fallback routing. | Evaluated with RAGAS. Runs locally on Llama 3.2 with a Streamlit chat app. | [GitHub](https://github.com/dydy2010/GenAI_RAG_Sys_Code_Navigagor_for_Learning) |
+| **Speed Dating Recommender** | Reciprocal recommender that ranks partners before the first date, with leave-one-wave-out evaluation. I built the feature engineering. | Best model reached NDCG@3 of 0.368 but did not significantly beat a popularity baseline. Reported as an open question. | [GitHub](https://github.com/lerenardrouxx/speed_dating_experiment) |
+| **LLM Performance & Sustainability** | Scraped and analysed the size, benchmark score and CO₂ cost of popular open-source LLMs. | Size and score correlate at r ≈ 0.75, with gains flattening past 20–30B parameters. | [GitHub](https://github.com/dhub100/CIP_HS2025_205) |
+| **NHANES BMI** | R analysis of US health survey data: BMI regression and SVM obesity classification. | Radial SVM reached 76.6% test accuracy. The linear SVM found no obese cases. | [GitHub](https://github.com/alinsever/ml1-nhanes) · [Reports](https://alinsever.github.io/portfolio/project.html?id=nhanes-bmi) |
+| **Bitcoin Portfolio** | Backtest of 60/40, All Weather and Cockroach portfolios with Bitcoin added (2016–2025). | A 4–9% Bitcoin allocation improved risk-adjusted returns. It did not behave as a safe haven. | [Report](https://alinsever.github.io/portfolio/project.html?id=bitcoin-portfolio) |
+| **Swiss Electricity Transition** | Time-series study of whether solar can replace nuclear in Switzerland's electricity mix. | Annual totals can match, but winter deficits of 5–6 TWh remain without storage and imports. | [Report](https://alinsever.github.io/portfolio/project.html?id=swiss-electricity-transition) |
+
+Team projects say plainly which parts are mine and which are the team's. Several also include a "Lessons learned" section, because what didn't work is often the most useful part.
+
+## Professional background
+
+**Senior Data Analyst, IRCC (2021–2025)**
+- Merged 7 data sources into one automated R and Quarto reporting pipeline, cutting delivery from 1 day to under 5 minutes.
+- Built an identity-matching algorithm with a 97% match rate across provincial and federal databases.
+- Reached a 0% error rate on mission-critical reporting through automated data validation on multi-million-row datasets.
+- Designed a processing-time KPI framework that was adopted across the whole department.
+
+**Data Analyst, PSPC (2018–2021)**
+- Replaced hours of manual data compiling with SQL and VBA dashboards used by 90+ stakeholders.
+- Created a performance deck that was adopted as a template across the organisation.
+
+**Planning & Forecasting Analyst, Millennium 1 Solutions (2015–2018)**
+- Cut monthly overtime by about 140 hours with workforce forecasting models, and held billing forecasts to a 2.5% error margin.
+
+**Recognition:** Award of Excellence, PSPC (2019). Award of Excellence, Best Problem Solver, IRCC (2023). IBM SkillsBuild badges in Enterprise Design Thinking and AI solution design.
+
+## How the site is built
+
+The site is plain HTML, CSS and JavaScript, with no framework, no build step and no dependencies to install. It is hosted on GitHub Pages.
+
+- The project cards, filters, search, detail pages and the home page graph are all generated from a single data file, `js/projects-data.js`.
+- Written to be accessible: skip link, keyboard-navigable graph, semantic headings, and reduced-motion support.
+- Responsive from phone to desktop.
+- Long-form analyses are written in R and Quarto and published as self-contained HTML reports under `reports/`.
+
+Layout inspired by [patrickstaehli.ch](https://patrickstaehli.ch/) and [datascience.ch/projects](https://datascience.ch/projects).
+
+To run it locally:
 
 ```
 python -m http.server 8000
 ```
 
-then visit http://localhost:8000.
+then open http://localhost:8000.
 
-## What to edit
+## Contact
 
-| What | Where |
-|---|---|
-| Name, role, sidebar monogram (initials), social links, nav items | `js/layout.js` (the `PROFILE` and `NAV` blocks at the top) |
-| Hero text, About, Skills, Resume, Awards, Contact | `index.html` |
-| Recommendation letters (excerpt cards and PDF links) | `index.html` (the `#recommendations` section) and the PDFs in `assets/letters/`. Quotes are copied word for word from each letter. |
-| Projects (cards, filters, detail pages) | `js/projects-data.js` |
-| Profile photo | replace `assets/img/profile-round.webp` (used at the top of the home page hero; the sidebar shows a monogram instead). Use a square image around 480px or larger; the file should have transparent corners so it is round everywhere. |
-| Colours, fonts, spacing | `:root` variables at the top of `css/base.css` |
-
-Your name also appears in each page's `<title>`, in `meta description` and in the footer. Search for `Alin Sever` to find every spot.
-
-## Add a project
-
-Add an object to `PROJECTS` in `js/projects-data.js` (the file's header comment documents every field).
-The card, the filters, the search, the pagination and the detail page at `project.html?id=<id>` all update on their own.
-
-- `domain` and `type` must match an entry in `DOMAINS` / `TYPES` (edit those lists to add categories).
-- Set `featured: true` to show it in the home page strip (the first four are used).
-- Put a 16:10 image at e.g. `assets/img/projects/my-project.jpg` and set `image: "assets/img/projects/my-project.jpg"`.
-  Without an image, a generated placeholder is used. Add `imagePosition: "50% 35%"` to choose which part stays in frame when it is cropped.
-- For a team project, add `collaborators: ["Name", ...]` (credited on the card and the page) and `role: { summary, points: [...] }`. The "My role" section appears right after the overview, set apart, so it is clear what you did yourself.
-- Add `lessons: { summary, points: [...] }` for a "Lessons learned" section after the results: what went wrong or surprised you, and what you would do differently. It suits projects where the results were disappointing.
-- If an image is not your own, add `imageCredit: { text: "...", href: "https://..." }` and an "Image: ..." credit line appears under the banner on the project page.
-- Use `highlights` for the bullet points on the detail page, and `overview`, `problem`, `approach` for paragraphs. All are optional.
-- The Domain and Type dropdowns only list values your projects use, and a dropdown is hidden while all projects share one value (for example, every project is currently "Academic").
-- Pagination appears once there are more than 8 projects.
-- Add `placeholder: true` to a project to show a "placeholder content" notice on its detail page.
-- Add `short: "Name"` to give the project a shorter label in the hero graph.
-- Add `reports: [{ title, description, format, href }]` to list write-ups on the project page. Each opens in a new tab.
-- Add `diagram: { src, alt, title, caption, width, height }` for a wide figure such as a system architecture. It is shown full width after "Approach" and opens full size on click; on phones it scrolls sideways so the text stays readable. Use a lossless WebP or PNG for diagrams, and put the image's pixel size in `width` / `height`.
-
-### Quarto / R reports
-
-Render each `.qmd` to a single self-contained HTML file and put it under `reports/<project>/`:
-
-```
-quarto render my_report.qmd --to html -M embed-resources:true
-```
-
-then point a `reports` entry at it (see the NHANES BMI project in `js/projects-data.js`). Keep the source `.qmd` files, data and
-the large `*_cache` / `*_files` folders in `projects/`; only the rendered HTML in `reports/` is needed on the site, so leave `projects/` out when you deploy.
-
-## The hero graph
-
-The graph on the home page is inspired by Zachary's Karate Club: two communities joined by a few bridges.
-The cyan side is your profile (resume, skills, education, experience, awards, contact). The orange side is your projects.
-Click a node to jump to that section or page, hover or focus to light up its neighbours, drag a node with the mouse to rearrange.
-
-- **Projects and domains** are read from `js/projects-data.js`, so a new project becomes a new node automatically.
-  It is linked to the Projects hub, to its domain, to HSLU (when `type` is "Academic") and to every skill its `tech` list matches.
-- **The profile side** (nodes, connections, and which tech names map to which skill) is the config block at the top of `js/graph.js`.
-- The layout puts the two communities side by side on wide panels and stacks them on tall, narrow ones. With "reduce motion" turned on in the OS, the graph is still and the pulse animation is off.
-
-## If the browser shows an old version
-
-Browsers cache scripts and styles. After editing a `.js` or `.css` file, press Ctrl+F5 to reload without the cache.
-The HTML files link them as `js/graph.js?v=33`; bump that number (in `index.html`, `projects.html` and `project.html`) to force every visitor to fetch the new file.
-
-## Deploy (free)
-
-- **GitHub Pages:** push the folder to a repository, then Settings → Pages → deploy from the `main` branch root.
-- **Netlify / Cloudflare Pages:** drag the folder in, no build command, publish directory is the root.
-
-## Structure
-
-```
-index.html  projects.html  project.html
-css/   base · layout · home · projects · graph
-js/    layout (sidebar, drawer, scroll-spy, typer) · projects-data · projects (grid + filters) · project-detail · graph (hero graph)
-assets/img/   hero-bg.svg · dots-light.svg · profile-round.webp
-assets/letters/   recommendation letters (PDF)
-```
+[LinkedIn](https://www.linkedin.com/in/alin-sever) · [GitHub](https://github.com/alinsever) · or use the contact section on the [site](https://alinsever.github.io/portfolio/#contact)
